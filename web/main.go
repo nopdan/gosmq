@@ -1,16 +1,16 @@
-package main
+package web
 
 import (
 	_ "embed"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"os/exec"
 	"runtime"
 	"sync"
 
-	smq "github.com/cxcn/gosmq"
+	"github.com/cxcn/gosmq/pkg/smq"
 )
 
 type dictOptions struct {
@@ -107,7 +107,7 @@ func JSHandler(w http.ResponseWriter, r *http.Request) {
 func PostHandler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
 	if r.Method == "POST" {
-		body, _ := ioutil.ReadAll(r.Body)
+		body, _ := io.ReadAll(r.Body)
 		fmt.Println("    post body: ", string(body))
 		rjson := GetResultJson(body)
 		w.Write(rjson)
@@ -115,7 +115,7 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func main() {
+func Run() {
 	http.HandleFunc("/", HTMLHandler)
 	http.HandleFunc("/assets/index.js", JSHandler)
 	http.HandleFunc("/assets/index.css", CSSHandler)

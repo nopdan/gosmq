@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"strings"
 	"testing"
+
+	"github.com/cxcn/gosmq/pkg/transformer"
 )
 
 func TestJisu(t *testing.T) {
@@ -14,11 +16,11 @@ func TestJisu(t *testing.T) {
 骼	gjg_
 `
 	dict := &Dict{
-		reader:     strings.NewReader(src),
-		Transfer:   new(jisu),
-		SelectKeys: "_;'",
+		reader:      strings.NewReader(src),
+		Transformer: new(transformer.Jisu),
+		SelectKeys:  "_;'",
 	}
-	got := dict.Transfer.Read(dict)
+	got := dict.Transformer.Read(toTD(dict))
 	fmt.Println("极速格式转换\n", string(got))
 }
 
@@ -34,12 +36,12 @@ func TestDuoduo(t *testing.T) {
 锐升	aado
 `
 	dict := &Dict{
-		reader:     strings.NewReader(src),
-		Transfer:   new(duoduo),
-		PushStart:  4,
-		SelectKeys: "_;'",
+		reader:      strings.NewReader(src),
+		Transformer: new(transformer.Duoduo),
+		PushStart:   4,
+		SelectKeys:  "_;'",
 	}
-	got := dict.Transfer.Read(dict)
+	got := dict.Transformer.Read(toTD(dict))
 	fmt.Println("多多格式转换\n", string(got))
 }
 
@@ -51,11 +53,11 @@ aad 仍然是
 aadi 瑞士
 `
 	dict := &Dict{
-		reader:     strings.NewReader(src),
-		Transfer:   new(jidian),
-		PushStart:  4,
-		SelectKeys: "_;'",
+		reader:      strings.NewReader(src),
+		Transformer: new(transformer.Jidian),
+		PushStart:   4,
+		SelectKeys:  "_;'",
 	}
-	got := dict.Transfer.Read(dict)
+	got := dict.Transformer.Read(toTD(dict))
 	fmt.Println("极点格式转换\n", string(got))
 }

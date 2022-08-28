@@ -1,4 +1,4 @@
-package smq
+package matcher
 
 type code_order struct {
 	code  string
@@ -19,7 +19,7 @@ func (l *longest) Insert(word, code string, order int) {
 		*l = append(*l, make(map[string]code_order))
 	}
 	// 不替换原有的
-	if co, ok := (*l)[i][word]; !ok || co.code == "" {
+	if co, ok := (*l)[i][word]; !ok || co.code == "" || len(code) < len(co.code) {
 		(*l)[i][word] = code_order{code, order}
 	}
 }

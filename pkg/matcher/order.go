@@ -1,4 +1,4 @@
-package smq
+package matcher
 
 type entry struct {
 	word  string

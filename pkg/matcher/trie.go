@@ -1,4 +1,4 @@
-package smq
+package matcher
 
 // trie 树
 type trie struct {
@@ -21,7 +21,7 @@ func (t *trie) Insert(word, code string, order int) {
 		}
 		t = t.children[v]
 	}
-	if t.code == "" {
+	if t.code == "" || len(code) < len(t.code) {
 		t.code = code
 		t.order = order
 	}

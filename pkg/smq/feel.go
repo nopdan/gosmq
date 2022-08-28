@@ -5,85 +5,92 @@ func (res *Result) feel(codes string, dict *Dict) {
 		return
 	}
 	res.mapKeys[codes[0]]++
-	last, ok := keyData[codes[0]]
+	last, ok := KEY_POS[codes[0]]
 	if !ok {
-		last.key = codes[0]
+		last.Key = codes[0]
 	}
 	for i := 1; i < len(codes); i++ {
-		current := codes[i]
+		currKey := codes[i]
 		// for key
 		// 转小写
-		if 65 <= current && current <= 90 {
-			current += 22
+		if 65 <= currKey && currKey <= 90 {
+			currKey += 22
 		}
-		if current == '_' {
+		if currKey == '_' {
 			switch dict.PressSpaceBy {
 			case "left":
 			case "right":
-				current = '+'
+				currKey = '+'
 			default: // "both"
 				// 如果上一个键是左手
-				if !last.lor {
-					current = '+'
+				if !last.LoR {
+					currKey = '+'
 				}
 			}
 		}
-		res.mapKeys[current]++
+		res.mapKeys[currKey]++
 
-		currentData, ok := keyData[current]
+		current, ok := KEY_POS[currKey]
 		if !ok {
-			last.key = current
+			last.Key = currKey
 			continue
 		}
 
 		// for comb
-		comb := combData[string([]byte{last.key, current})]
-		if comb == nil {
+		comb := string([]byte{last.Key, currKey})
+		dl10, ok := COMB.Dl[comb]
+		if !ok {
 			// log.Printf(`comb nil"%v"%v"%v`, last.key, current, comb)
-			last = currentData
+			last = current
 			continue
 		}
+		res.toTalEq10 += dl10
 		res.Combs.Count++
+
 		// for finger
-		if currentData.fin == last.fin {
+		if current.Fin == last.Fin {
 			res.Fingers.Same.Count++
 		}
 		// for hands
-		if currentData.lor {
-			if last.lor { // RR
+		if current.LoR {
+			if last.LoR { // RR
 				res.Hands.RR.Count++
 			} else { // RL
 				res.Hands.RL.Count++
 			}
 		} else {
-			if last.lor { // LR
+			if last.LoR { // LR
 				res.Hands.LR.Count++
 			} else { // LL
 				res.Hands.LL.Count++
 			}
 		}
-		// for comb
-		if current == last.key {
+
+		// 同键、三连击
+		if currKey == last.Key {
 			res.Combs.DoubleHit.Count++
 			if i < len(codes)-1 {
-				if current == codes[i+1] {
+				if currKey == codes[i+1] {
 					res.Combs.TribleHit.Count++
 				}
 			}
 		}
-		res.toTalEq10 += comb.eq
-		switch comb.sh {
-		case 2: // 小跨排
+		// 小跨排
+		if COMB.Xkp[comb] {
 			res.Combs.SingleSpan.Count++
-		case 3: // 大跨排
+		}
+		// 大跨排
+		if COMB.Dkp[comb] {
 			res.Combs.MultiSpan.Count++
-		case 4: // 错手
+		}
+		// 错手
+		if COMB.Cs[comb] {
 			res.Combs.LongFingersDisturb.Count++
 		}
-		if comb.lfd { // 小拇指干扰
+		// 小拇指干扰
+		if COMB.Xzgr[comb] {
 			res.Combs.LittleFingersDisturb.Count++
 		}
-		last = currentData
+		last = current
 	}
-
 }

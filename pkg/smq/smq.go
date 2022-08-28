@@ -6,7 +6,17 @@ import (
 	"fmt"
 	"io"
 	"log"
+	"strings"
 	"sync"
+	"unicode"
+
+	"github.com/cxcn/gosmq/pkg/data"
+)
+
+var (
+	KEY_POS = data.GetKeyPos()
+	PUNCTS  = data.GetPuncts()
+	COMB    = data.GetComb()
 )
 
 type Smq struct {
@@ -51,29 +61,6 @@ func (smq *Smq) Add(dict *Dict) {
 		smq.Inputs = append(smq.Inputs, dict)
 		fmt.Println("添加了一个码表：", dict.Name)
 	}
-}
-
-func newResult() *Result {
-	res := new(Result)
-	res.mapKeys = make(map[byte]int)
-	res.mapLack = make(map[rune]struct{})
-	res.mapNotHan = make(map[rune]struct{})
-	res.wordsDist = make([]int, 1)
-	res.collDist = make([]int, 1)
-	res.codeDist = make([]int, 1)
-	res.Data.WordSlice = make([]string, 0, 1024)
-	res.Data.CodeSlice = make([]string, 0, 1024)
-	res.Data.Details = make(map[string]*CoC)
-	res.Keys = make(keys)
-	const ALL_KEYS = "1234567890qwertyuiopasdfghjkl;'zxcvbnm,./"
-	for i := 0; i < len(ALL_KEYS); i++ {
-		res.Keys[string(ALL_KEYS[i])] = new(CaR)
-		res.mapKeys[ALL_KEYS[i]] = 0
-	}
-	for i := 0; i < 11; i++ {
-		res.Fingers.Dist[i] = new(CaR)
-	}
-	return res
 }
 
 // 开始计算
@@ -122,13 +109,68 @@ func (smq *Smq) Run() []*Result {
 	return ret
 }
 
-// 输出 json
-func ResToJson(res []*Result) ([]byte, error) {
-	return json.Marshal(res)
+func (res *Result) match(text []rune, dict *Dict) string {
+	var sb strings.Builder
+	sb.Grow(len(text))
+	res.Basic.TextLen += len(text)
+	for p := 0; p < len(text); {
+		// 删掉空白字符
+		switch text[p] {
+		case 65533, '\n', '\r', '\t', ' ', '　':
+			p++
+			res.Basic.TextLen--
+			continue
+		}
+		// 非汉字
+		isHan := unicode.Is(unicode.Han, text[p])
+		if !isHan {
+			res.Basic.NotHanCount++
+			res.mapNotHan[text[p]] = struct{}{}
+		}
+
+		i, code, order := dict.Matcher.Match(text, p)
+		// 缺字
+		if i == 0 {
+			if isHan {
+				res.Basic.LackCount++
+				res.mapLack[text[p]] = struct{}{}
+			}
+			sb.WriteByte(' ')
+			p++
+			continue
+		}
+
+		sb.WriteString(code)
+		AddTo(&res.wordsDist, i) // 词长分布
+		if order != 1 {
+			res.Collision.Chars.Count += i // 选重字数
+		} else if i != 1 {
+			res.Words.FirstCount++ // 首选词
+		}
+		AddTo(&res.collDist, order)     // 选重分布
+		AddTo(&res.codeDist, len(code)) // 码长分布
+
+		if dict.Details {
+			word := string(text[p : p+i])
+			res.Data.WordSlice = append(res.Data.WordSlice, word)
+			res.Data.CodeSlice = append(res.Data.CodeSlice, code)
+			if _, ok := res.Data.Details[word]; !ok {
+				res.Data.Details[word] = &CoC{Code: code, Order: i}
+			}
+			res.Data.Details[word].Count++
+		}
+		p += i
+	}
+	return sb.String()
 }
 
 // 输出 json
 func (smq *Smq) ToJson() ([]byte, error) {
 	res := smq.Run()
 	return ResToJson(res)
+}
+
+// 输出 json
+func ResToJson(res []*Result) ([]byte, error) {
+	return json.Marshal(res)
 }

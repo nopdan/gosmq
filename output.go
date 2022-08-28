@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	smq "github.com/cxcn/gosmq"
+	"github.com/cxcn/gosmq/pkg/smq"
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 

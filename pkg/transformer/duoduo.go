@@ -1,4 +1,4 @@
-package smq
+package transformer
 
 import (
 	"bufio"
@@ -7,23 +7,23 @@ import (
 	"strings"
 )
 
-type duoduo struct {
-	reverse bool
+type Duoduo struct {
+	Reverse bool
 }
 
-func (j *duoduo) Read(dict *Dict) []byte {
+func (d *Duoduo) Read(dict Dict) []byte {
 	var buf bytes.Buffer
 	buf.Grow(1e6)
 	mapOrder := make(map[string]int)
 
-	scan := bufio.NewScanner(dict.reader)
+	scan := bufio.NewScanner(dict.Reader)
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
 		if len(wc) < 2 {
 			continue
 		}
 		var w, c string
-		if j.reverse {
+		if d.Reverse {
 			w, c = wc[1], wc[0]
 		} else {
 			w, c = wc[0], wc[1]

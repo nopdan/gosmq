@@ -1,4 +1,4 @@
-package smq
+package data
 
 import (
 	_ "embed"
@@ -6,15 +6,13 @@ import (
 )
 
 //go:embed assets/puncts.txt
-var punctsData string
+var puncts string
 
-var puncts = genPuncts()
-
-func genPuncts() map[string]string {
+func GetPuncts() map[string]string {
 	ret := make(map[string]string)
-	punctsData = strings.ReplaceAll(punctsData, "\r\n", "\n")
+	puncts = strings.ReplaceAll(puncts, "\r\n", "\n")
 
-	lines := strings.Split(punctsData, "\n")
+	lines := strings.Split(puncts, "\n")
 	for _, line := range lines {
 		wc := strings.Split(line, "\t")
 		if len(wc) != 2 {

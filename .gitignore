@@ -1,14 +1,8 @@
 # .gitignore
-cmd/**/*.txt
-cmd/**/*.yaml
-cmd/**/*.json
-cmd/**/*.exe
-*.zip
-
-cmd/**/result.html
-cmd/test*/
-cmd/cli/build.ps1
-cmd/cli/cli-linux
-cmd/cli/cli-darwin
-
 .vscode*
+
+build/*/
+build/smq*
+build/dev.ps1
+
+cmd/test*/

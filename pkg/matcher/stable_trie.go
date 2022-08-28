@@ -1,32 +1,32 @@
-package smq
+package matcher
 
 import "sort"
 
-// trie 树
-type oTrie struct {
-	children map[rune]*oTrie
+// 稳定 trie 树
+type sTrie struct {
+	children map[rune]*sTrie
 	code     string
 	order    int
 	line     int
 }
 
-func NewOTrie() *oTrie {
-	return new(oTrie)
+func NewSTrie() *sTrie {
+	return new(sTrie)
 }
 
 var orderLine = 0
 
-func (t *oTrie) Insert(word, code string, order int) {
+func (t *sTrie) Insert(word, code string, order int) {
 	for _, v := range word {
 		if t.children == nil {
-			t.children = make(map[rune]*oTrie)
-			t.children[v] = new(oTrie)
+			t.children = make(map[rune]*sTrie)
+			t.children[v] = new(sTrie)
 		} else if t.children[v] == nil {
-			t.children[v] = new(oTrie)
+			t.children[v] = new(sTrie)
 		}
 		t = t.children[v]
 	}
-	if t.code == "" {
+	if t.code == "" || len(code) < len(t.code) {
 		t.code = code
 		t.order = order
 		orderLine++
@@ -34,10 +34,10 @@ func (t *oTrie) Insert(word, code string, order int) {
 	}
 }
 
-func (t *oTrie) Handle() {}
+func (t *sTrie) Handle() {}
 
 // 前缀树按码表序匹配
-func (t *oTrie) Match(text []rune, p int) (int, string, int) {
+func (t *sTrie) Match(text []rune, p int) (int, string, int) {
 	j := 0 // 已匹配的字数
 	i := 0 // 有编码的匹配
 	dict := t

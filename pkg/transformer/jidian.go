@@ -1,4 +1,4 @@
-package smq
+package transformer
 
 import (
 	"bufio"
@@ -7,13 +7,13 @@ import (
 	"strings"
 )
 
-type jidian struct{}
+type Jidian struct{}
 
-func (j *jidian) Read(dict *Dict) []byte {
+func (j *Jidian) Read(dict Dict) []byte {
 	var buf bytes.Buffer
 	buf.Grow(1e6)
 
-	scan := bufio.NewScanner(dict.reader)
+	scan := bufio.NewScanner(dict.Reader)
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), " ")
 		if len(wc) < 2 {

@@ -3,15 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"os"
 	"sort"
 	"strconv"
 	"strings"
 	"time"
 
-	smq "github.com/cxcn/gosmq"
-
+	"github.com/cxcn/gosmq/pkg/smq"
 	"github.com/jessevdk/go-flags"
 )
 
@@ -86,7 +84,7 @@ func cli() {
 		for i := 0; i < len(v.Data.CodeSlice); i++ {
 			buf.WriteString(fmt.Sprintf("%s\t%s\n", v.Data.WordSlice[i], string(v.Data.CodeSlice[i])))
 		}
-		ioutil.WriteFile(fmt.Sprintf("result/%s_%s_分词结果.txt", s.Name, v.Name), []byte(buf.String()), 0666)
+		os.WriteFile(fmt.Sprintf("result/%s_%s_分词结果.txt", s.Name, v.Name), []byte(buf.String()), 0666)
 		// 输出词条数据
 		buf.Reset()
 		buf.WriteString("词条\t编码\t顺序\t次数\n")
@@ -114,12 +112,12 @@ func cli() {
 			buf.WriteString(strconv.Itoa(v.Count))
 			buf.WriteByte('\n')
 		}
-		ioutil.WriteFile(fmt.Sprintf("result/%s_%s_词条数据.txt", s.Name, v.Name), []byte(buf.String()), 0666)
+		os.WriteFile(fmt.Sprintf("result/%s_%s_词条数据.txt", s.Name, v.Name), []byte(buf.String()), 0666)
 		// 输出 json 数据
 		v.Data.CodeSlice = []string{}
 		v.Data.WordSlice = []string{}
 		v.Data.Details = make(map[string]*smq.CoC)
 		tmp2, _ := json.MarshalIndent(v, "", "  ")
-		ioutil.WriteFile(fmt.Sprintf("result/%s_%s.json", s.Name, v.Name), tmp2, 0666)
+		os.WriteFile(fmt.Sprintf("result/%s_%s.json", s.Name, v.Name), tmp2, 0666)
 	}
 }

@@ -4,20 +4,20 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+
+	"github.com/cxcn/gosmq/web"
 )
 
 func main() {
 
 	if len(os.Args) == 1 {
-		printInfo()
-		fmt.Println("\nPress the enter key to exit...")
-		fmt.Scanln()
+		web.Run()
 	} else {
 		cli()
 	}
 }
 
 func printInfo() {
-	fmt.Printf("gosmq-cli v0.25 %s/%s\n", runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("gosmq v0.26 %s/%s\n", runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("https://github.com/cxcn/gosmq/\n")
 }

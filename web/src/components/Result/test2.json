@@ -1,0 +1,384 @@
+{
+  "Name": "小兮码赛码表（落潇版）",
+  "Basic": {
+    "DictLen": 70934,
+    "TextLen": 96168,
+    "NotHan": "%./0123456789AMNP·—‘’“”…℃、。《》！（），：；？",
+    "NotHans": 36,
+    "NotHanCount": 8689,
+    "Lack": "啰",
+    "Lacks": 1,
+    "LackCount": 1,
+    "Commits": 74526
+  },
+  "Words": {
+    "Commits": {
+      "Count": 13706,
+      "Rate": 0.1839
+    },
+    "Chars": {
+      "Count": 35348,
+      "Rate": 0.3676
+    },
+    "Dist": [
+      0,
+      60820,
+      9094,
+      1596,
+      2796,
+      155,
+      48,
+      15,
+      2
+    ],
+    "FirstCount": 11369
+  },
+  "Collision": {
+    "Commits": {
+      "Count": 2337,
+      "Rate": 0.0314
+    },
+    "Chars": {
+      "Count": 6091,
+      "Rate": 0.0633
+    },
+    "Dist": [
+      0,
+      72189,
+      1053,
+      304,
+      263,
+      9,
+      0,
+      1,
+      351,
+      356
+    ]
+  },
+  "CodeLen": {
+    "Total": 173853,
+    "PerChar": 1.8078,
+    "Dist": [
+      0,
+      7418,
+      53202,
+      5292,
+      173,
+      7183,
+      1258
+    ]
+  },
+  "Keys": {
+    " ": {
+      "Count": 4,
+      "Rate": 0
+    },
+    "'": {
+      "Count": 972,
+      "Rate": 0.0056
+    },
+    ",": {
+      "Count": 6829,
+      "Rate": 0.0393
+    },
+    "-": {
+      "Count": 17,
+      "Rate": 0.0001
+    },
+    ".": {
+      "Count": 4029,
+      "Rate": 0.0232
+    },
+    "/": {
+      "Count": 2387,
+      "Rate": 0.0137
+    },
+    "0": {
+      "Count": 106,
+      "Rate": 0.0006
+    },
+    "1": {
+      "Count": 120,
+      "Rate": 0.0007
+    },
+    "2": {
+      "Count": 37,
+      "Rate": 0.0002
+    },
+    "3": {
+      "Count": 1466,
+      "Rate": 0.0084
+    },
+    "4": {
+      "Count": 295,
+      "Rate": 0.0017
+    },
+    "5": {
+      "Count": 40,
+      "Rate": 0.0002
+    },
+    "6": {
+      "Count": 17,
+      "Rate": 0.0001
+    },
+    "7": {
+      "Count": 7,
+      "Rate": 0
+    },
+    "8": {
+      "Count": 3374,
+      "Rate": 0.0194
+    },
+    "9": {
+      "Count": 4448,
+      "Rate": 0.0256
+    },
+    ";": {
+      "Count": 3604,
+      "Rate": 0.0207
+    },
+    "=": {
+      "Count": 1268,
+      "Rate": 0.0073
+    },
+    "`": {
+      "Count": 24,
+      "Rate": 0.0001
+    },
+    "a": {
+      "Count": 4029,
+      "Rate": 0.0232
+    },
+    "b": {
+      "Count": 4930,
+      "Rate": 0.0284
+    },
+    "c": {
+      "Count": 4332,
+      "Rate": 0.0249
+    },
+    "d": {
+      "Count": 7224,
+      "Rate": 0.0416
+    },
+    "e": {
+      "Count": 2328,
+      "Rate": 0.0134
+    },
+    "f": {
+      "Count": 10755,
+      "Rate": 0.0619
+    },
+    "g": {
+      "Count": 7326,
+      "Rate": 0.0421
+    },
+    "h": {
+      "Count": 8120,
+      "Rate": 0.0467
+    },
+    "i": {
+      "Count": 8130,
+      "Rate": 0.0468
+    },
+    "j": {
+      "Count": 7773,
+      "Rate": 0.0447
+    },
+    "k": {
+      "Count": 9545,
+      "Rate": 0.0549
+    },
+    "l": {
+      "Count": 5711,
+      "Rate": 0.0328
+    },
+    "left_space": {
+      "Count": 756,
+      "Rate": 0.0043
+    },
+    "m": {
+      "Count": 5170,
+      "Rate": 0.0297
+    },
+    "n": {
+      "Count": 7339,
+      "Rate": 0.0422
+    },
+    "o": {
+      "Count": 2774,
+      "Rate": 0.016
+    },
+    "p": {
+      "Count": 2168,
+      "Rate": 0.0125
+    },
+    "q": {
+      "Count": 3257,
+      "Rate": 0.0187
+    },
+    "r": {
+      "Count": 7015,
+      "Rate": 0.0404
+    },
+    "right_space": {
+      "Count": 1113,
+      "Rate": 0.0064
+    },
+    "s": {
+      "Count": 6623,
+      "Rate": 0.0381
+    },
+    "t": {
+      "Count": 4546,
+      "Rate": 0.0261
+    },
+    "u": {
+      "Count": 2457,
+      "Rate": 0.0141
+    },
+    "v": {
+      "Count": 4238,
+      "Rate": 0.0244
+    },
+    "w": {
+      "Count": 4488,
+      "Rate": 0.0258
+    },
+    "x": {
+      "Count": 4944,
+      "Rate": 0.0284
+    },
+    "y": {
+      "Count": 6168,
+      "Rate": 0.0355
+    },
+    "z": {
+      "Count": 1554,
+      "Rate": 0.0089
+    }
+  },
+  "Combs": {
+    "Count": 167956,
+    "Equivalent": 1.3636,
+    "DoubleHit": {
+      "Count": 4006,
+      "Rate": 0.0239
+    },
+    "TribleHit": {
+      "Count": 52,
+      "Rate": 0.0003
+    },
+    "SingleSpan": {
+      "Count": 10334,
+      "Rate": 0.0615
+    },
+    "MultiSpan": {
+      "Count": 2536,
+      "Rate": 0.0151
+    },
+    "LongFingersDisturb": {
+      "Count": 3644,
+      "Rate": 0.0217
+    },
+    "LittleFingersDisturb": {
+      "Count": 5268,
+      "Rate": 0.0314
+    }
+  },
+  "Fingers": {
+    "Dist": [
+      {
+        "Count": 9237,
+        "Rate": 0.0531
+      },
+      {
+        "Count": 8960,
+        "Rate": 0.0515
+      },
+      {
+        "Count": 16092,
+        "Rate": 0.0926
+      },
+      {
+        "Count": 15350,
+        "Rate": 0.0883
+      },
+      {
+        "Count": 39145,
+        "Rate": 0.2252
+      },
+      {
+        "Count": 756,
+        "Rate": 0.0043
+      },
+      {
+        "Count": 1113,
+        "Rate": 0.0064
+      },
+      {
+        "Count": 37051,
+        "Rate": 0.2131
+      },
+      {
+        "Count": 27878,
+        "Rate": 0.1604
+      },
+      {
+        "Count": 16962,
+        "Rate": 0.0976
+      },
+      {
+        "Count": 1313,
+        "Rate": 0.0076
+      }
+    ],
+    "Same": {
+      "Count": 19389,
+      "Rate": 0.1154
+    },
+    "Diff": {
+      "Count": 49235,
+      "Rate": 0.2931
+    }
+  },
+  "Hands": {
+    "Left": {
+      "Count": 78851,
+      "Rate": 0.4695
+    },
+    "Right": {
+      "Count": 89105,
+      "Rate": 0.5305
+    },
+    "Same": {
+      "Count": 68624,
+      "Rate": 0.4086
+    },
+    "Diff": {
+      "Count": 99332,
+      "Rate": 0.5914
+    },
+    "LeftToLeft": {
+      "Count": 29186,
+      "Rate": 0.1738
+    },
+    "LeftToRight": {
+      "Count": 49869,
+      "Rate": 0.2969
+    },
+    "RightToLeft": {
+      "Count": 49463,
+      "Rate": 0.2945
+    },
+    "RightToRight": {
+      "Count": 39438,
+      "Rate": 0.2348
+    }
+  },
+  "Data": {
+    "WordSlice": [],
+    "CodeSlice": [],
+    "Details": {}
+  }
+}

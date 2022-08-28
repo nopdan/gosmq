@@ -4,14 +4,12 @@ import (
 	"fmt"
 	"os"
 	"runtime"
-
-	"github.com/cxcn/gosmq/web"
 )
 
 func main() {
 
 	if len(os.Args) == 1 {
-		web.Run()
+		web()
 	} else {
 		cli()
 	}

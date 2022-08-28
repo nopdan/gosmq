@@ -6,3 +6,5 @@ build/smq*
 build/dev.ps1
 
 cmd/test*/
+
+*.zip

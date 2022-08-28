@@ -12,14 +12,33 @@ jobs:
       # 拉取代码
       - name: Checkout
         uses: actions/checkout@v3
+
+      # 装 nodejs
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # 装 pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2.2.2
+        with:
+          version: 7
+          run_install: false
+
       # 安装 go
       - uses: actions/setup-go@v3
         with:
           go-version: ">=1.18.0"
           check-latest: true
+
       # 编译
       - name: Build
         run: |
+          cd web
+          pnpm i
+          pnpm build
+          cd ..
           go mod tidy
           go env -w GOARCH=amd64
           echo "正在编译 linux 版本"
@@ -39,6 +58,7 @@ jobs:
           files: |
             ./bin/*
           args: -fq
+
       # 上传到 Artifact
       - uses: actions/upload-artifact@v3
         with:

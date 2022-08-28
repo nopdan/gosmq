@@ -1,10 +1,11 @@
-package web
+package main
 
 import (
-	_ "embed"
+	"embed"
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/fs"
 	"net/http"
 	"os/exec"
 	"runtime"
@@ -78,31 +79,8 @@ func GetResultJson(src []byte) []byte {
 	return result
 }
 
-//go:embed index.html
-var indexPageFile string
-
-//go:embed assets/index.js
-var jsBundleFile string
-
-//go:embed assets/index.css
-var cssBundleFile string
-
-func HTMLHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/html")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST")
-	fmt.Fprint(w, indexPageFile)
-}
-
-func CSSHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/css")
-	fmt.Fprint(w, cssBundleFile)
-}
-
-func JSHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/javascript")
-	fmt.Fprint(w, jsBundleFile)
-}
+//go:embed web/dist
+var dist embed.FS
 
 func PostHandler(w http.ResponseWriter, r *http.Request) {
 	defer r.Body.Close()
@@ -115,10 +93,9 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Run() {
-	http.HandleFunc("/", HTMLHandler)
-	http.HandleFunc("/assets/index.js", JSHandler)
-	http.HandleFunc("/assets/index.css", CSSHandler)
+func web() {
+	fsys, _ := fs.Sub(dist, "web/dist")
+	http.Handle("/", http.FileServer(http.FS(fsys)))
 	http.HandleFunc("/api", PostHandler)
 	var wg sync.WaitGroup
 	wg.Add(1)

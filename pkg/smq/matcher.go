@@ -15,13 +15,13 @@ type Matcher interface {
 func (dict *Dict) match() {
 	if dict.Matcher == nil {
 		switch dict.Algorithm {
-		case "s":
+		case "strie","s":
 			dict.Matcher = matcher.NewSTrie()
-		case "l":
+		case "longest","l":
 			dict.Matcher = matcher.NewLongest()
-		case "o":
+		case "order","o":
 			dict.Matcher = matcher.NewOrder()
-		case "t":
+		case "trie","t":
 			dict.Matcher = matcher.NewTrie()
 		default: // "trie"
 			dict.Matcher = matcher.NewTrie()

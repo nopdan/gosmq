@@ -2,7 +2,6 @@ package transformer
 
 import (
 	"bufio"
-	"bytes"
 	"regexp"
 	"strconv"
 	"strings"
@@ -10,11 +9,10 @@ import (
 
 type Jisu struct{}
 
-func (j *Jisu) Read(dict Dict) []byte {
-	var buf bytes.Buffer
-	buf.Grow(1e6)
-
+func (j Jisu) Read(dict Dict) []Entry {
+	ret := make([]Entry, 1e5)
 	scan := bufio.NewScanner(dict.Reader)
+
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
 		if len(wc) < 2 {
@@ -40,23 +38,17 @@ func (j *Jisu) Read(dict Dict) []byte {
 			}
 		}
 		// 生成赛码表
-		buf.WriteString(wc[0])
-		buf.WriteByte('\t')
-		buf.WriteString(code)
 		// 自定义选重键
-		if order != 0 {
-			if order <= len(dict.SelectKeys) {
-				buf.WriteByte(dict.SelectKeys[order-1])
-			} else {
-				buf.WriteString(strconv.Itoa(order))
-			}
-		}
-		buf.WriteByte('\t')
 		if order == 0 {
 			order = 1
+		} else {
+			if order <= len(dict.SelectKeys) {
+				code += string(dict.SelectKeys[order-1])
+			} else {
+				code += strconv.Itoa(order)
+			}
 		}
-		buf.WriteString(strconv.Itoa(order))
-		buf.WriteByte('\n')
+		ret = append(ret, Entry{wc[0], c, order})
 	}
-	return buf.Bytes()
+	return ret
 }

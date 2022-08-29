@@ -1,7 +1,6 @@
 package smq
 
 import (
-	"bufio"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -20,24 +19,22 @@ var (
 )
 
 type Smq struct {
-	Name   string    // 文本名
-	Text   io.Reader // 文本
-	Inputs []*Dict   // 码表选项
+	Name   string  // 文本名
+	Text   string  // 文本
+	Inputs []*Dict // 码表选项
 }
 
 // 初始化一个赛码器
 func New(name string, rd io.Reader) Smq {
 	fmt.Println("从字节流初始化赛码器...")
 	nrd := Tranformer(rd)
-	fmt.Println("文本名：", name)
-	return Smq{name, nrd, []*Dict{}}
+	b, _ := io.ReadAll(nrd)
+	return Smq{name, string(b), []*Dict{}}
 }
 
 func NewFromString(name, text string) Smq {
 	fmt.Println("从字符串初始化赛码器...")
-	rd := readFromString(text)
-	fmt.Println("文本名：", name)
-	return Smq{name, rd, []*Dict{}}
+	return Smq{name, text, []*Dict{}}
 }
 
 func NewFromPath(name, path string) Smq {
@@ -49,8 +46,8 @@ func NewFromPath(name, path string) Smq {
 	if name == "" {
 		name = GetFileName(path)
 	}
-	fmt.Println("文本名：", name)
-	return Smq{name, rd, []*Dict{}}
+	b, _ := io.ReadAll(rd)
+	return Smq{name, string(b), []*Dict{}}
 }
 
 // 添加一个码表
@@ -71,41 +68,18 @@ func (smq *Smq) Run() []*Result {
 		ret = append(ret, newResult())
 		// fmt.Println(smq.Inputs[i])
 	}
-	brd := bufio.NewReader(smq.Text)
-	if smqLen == 1 {
-		for {
-			line, err := brd.ReadString('\n')
-			codes := ret[0].match([]rune(line), smq.Inputs[0])
-			ret[0].feel(codes, smq.Inputs[0])
-			if err != nil {
-				break
-			}
-		}
-	} else {
-		var wg sync.WaitGroup
-		// 逐行读取文本文件
-		for {
-			line, err := brd.ReadString('\n')
-			for i, v := range smq.Inputs {
-				wg.Add(1)
-				tmp := ret[i]
-				go func(arg *Dict) {
-					codes := tmp.match([]rune(line), arg)
-					tmp.feel(codes, arg)
-					wg.Done()
-				}(v)
-			}
-			wg.Wait()
-
-			if err != nil {
-				break
-			}
-		}
+	var wg sync.WaitGroup
+	for i := range smq.Inputs {
+		wg.Add(1)
+		go func(j int) {
+			res, dict := ret[j], smq.Inputs[j]
+			codes := res.match([]rune(string(smq.Text)), dict)
+			res.feel(codes, dict)
+			res.stat(dict)
+			wg.Done()
+		}(i)
 	}
-
-	for i, v := range ret {
-		v.stat(smq.Inputs[i])
-	}
+	wg.Wait()
 	return ret
 }
 

@@ -1,11 +1,11 @@
 package smq
 
 import (
-	"bufio"
+	"bytes"
 	"io"
 	"log"
+	"os"
 	"strconv"
-	"strings"
 )
 
 type Dict struct {
@@ -34,6 +34,7 @@ type Dict struct {
 	reader io.Reader // 赛码表 io 流
 	length int       // 词条数
 	legal  bool      // 合法输入
+	trans  bool      // 是否转码表格式
 }
 
 // 从 io 流加载码表
@@ -70,28 +71,21 @@ func (dict *Dict) init() {
 	if dict.PushStart == 0 {
 		dict.PushStart = 4
 	}
-	dict.transform()
-	dict.match()
 	dict.read()
 }
 
 func (dict *Dict) read() {
+	dict.match()
 	m := dict.Matcher
 
-	scan := bufio.NewScanner(dict.reader)
-	for scan.Scan() {
-		wc := strings.Split(scan.Text(), "\t")
-		if len(wc) != 3 {
-			continue
-		}
-		if dict.Single && len([]rune(wc[0])) != 1 {
-			continue
-		}
-		order, err := strconv.Atoi(wc[2])
-		if err != nil {
-			order = 1
-		}
-		m.Insert(wc[0], wc[1], order)
+	dict.transform()
+	d := toTD(dict)
+	t := dict.Transformer.Read(d)
+
+	var buf bytes.Buffer
+	buf.Grow(1e5)
+	for i := 0; i < len(t); i++ {
+		m.Insert(t[i].Word, t[i].Code, t[i].Order)
 		dict.length++
 	}
 	// 添加符号
@@ -99,4 +93,25 @@ func (dict *Dict) read() {
 		m.Insert(k, v, 1)
 	}
 	m.Handle()
+
+	// 输出赛码表
+	if !dict.trans {
+		for i := 0; i < len(t); i++ {
+			buf.WriteString(t[i].Word)
+			buf.WriteByte('\t')
+			buf.WriteString(t[i].Code)
+			buf.WriteByte('\t')
+			buf.WriteString(strconv.Itoa(t[i].Order))
+			buf.WriteByte('\n')
+		}
+		err := os.WriteFile(dict.SavePath, buf.Bytes(), 0666)
+		if err != nil {
+			// SavePath 不对则保存在 dict 目录下
+			os.Mkdir("dict", 0666)
+			err = os.WriteFile("./dict/"+dict.Name+".txt", buf.Bytes(), 0666)
+			if err != nil {
+				log.Println(err)
+			}
+		}
+	}
 }

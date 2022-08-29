@@ -21,7 +21,7 @@ func TestJisu(t *testing.T) {
 		SelectKeys:  "_;'",
 	}
 	got := dict.Transformer.Read(toTD(dict))
-	fmt.Println("极速格式转换\n", string(got))
+	fmt.Println("极速格式转换\n", got)
 }
 
 func TestDuoduo(t *testing.T) {
@@ -42,7 +42,7 @@ func TestDuoduo(t *testing.T) {
 		SelectKeys:  "_;'",
 	}
 	got := dict.Transformer.Read(toTD(dict))
-	fmt.Println("多多格式转换\n", string(got))
+	fmt.Println("多多格式转换\n", got)
 }
 
 func TestJidian(t *testing.T) {
@@ -59,5 +59,5 @@ aadi 瑞士
 		SelectKeys:  "_;'",
 	}
 	got := dict.Transformer.Read(toTD(dict))
-	fmt.Println("极点格式转换\n", string(got))
+	fmt.Println("极点格式转换\n", got)
 }

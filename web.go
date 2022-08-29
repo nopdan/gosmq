@@ -99,13 +99,13 @@ func web() {
 	http.HandleFunc("/api", PostHandler)
 	var wg sync.WaitGroup
 	wg.Add(1)
-	go func(wg sync.WaitGroup) {
+	go func() {
 		err := http.ListenAndServe(":9000", nil)
 		if err != nil {
 			panic("...Server failed.")
 		}
 		wg.Done()
-	}(wg)
+	}()
 	doSomething()
 	wg.Wait()
 }

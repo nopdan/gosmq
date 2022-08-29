@@ -7,7 +7,7 @@ import (
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 
-func output(data []*smq.Result) {
+func output(data []*smq.Result, textName string) {
 	// r, _ := json.MarshalIndent(res, "", "  ")
 	// fmt.Printf(string(r))
 
@@ -15,43 +15,36 @@ func output(data []*smq.Result) {
 	noColor.Color = table.ColorOptions{}
 
 	out := ""
-	out += fmt.Sprintln("----------------------")
 
-	out += fmt.Sprintf("文本字数：%d \n", data[0].Basic.TextLen)
-	if len(data) == 1 {
-		res := data[0]
-		out += fmt.Sprintf("词条数：%d \n", res.Basic.DictLen)
-		if res.Basic.NotHan != "" {
-			out += fmt.Sprintf("非汉字：%s \n", res.Basic.NotHan)
-		}
-		if res.Basic.Lack != "" {
-			out += fmt.Sprintf("缺字：\t%s \n", res.Basic.Lack)
-		}
-		out += "\n"
-	} else {
-		t := table.NewWriter()
-		tmpRow := table.Row{" #"}
-		for _, res := range data {
-			tmpRow = append(tmpRow, res.Name)
-		}
-		t.AppendRow(tmpRow)
-		tmpRow = table.Row{"词条数 "}
-		for _, res := range data {
-			tmpRow = append(tmpRow, res.Basic.DictLen)
-		}
-		t.AppendRow(tmpRow)
-		t.SetStyle(noColor)
-		out += t.Render() + "\n\n"
-
-		for i, res := range data {
-			out += fmt.Sprintf("%d 非汉字：%v \n", i+1, res.Basic.NotHan)
-		}
-		out += "\n"
-		for i, res := range data {
-			out += fmt.Sprintf("%d 缺字：  %s \n", i+1, res.Basic.Lack)
-		}
-		out += "\n"
+	t := table.NewWriter()
+	tmpRow := table.Row{"文本名"}
+	tmpRow = append(tmpRow, textName)
+	tmpRow = append(tmpRow, "|")
+	tmpRow = append(tmpRow, "方案名")
+	for _, res := range data {
+		tmpRow = append(tmpRow, res.Name)
 	}
+	t.AppendRow(tmpRow)
+	tmpRow = table.Row{"字数"}
+	tmpRow = append(tmpRow, data[0].Basic.TextLen)
+	tmpRow = append(tmpRow, "|")
+	tmpRow = append(tmpRow, "词条数 ")
+	for _, res := range data {
+		tmpRow = append(tmpRow, res.Basic.DictLen)
+	}
+	t.AppendRow(tmpRow)
+	t.SetStyle(noColor)
+	out += t.Render() + "\n\n"
+
+	out += fmt.Sprintf("非汉字：%v \n", data[0].Basic.NotHan)
+	for i, res := range data {
+		if i == 0 && len(data) == 1 {
+			out += fmt.Sprintf("缺字：  %s \n", res.Basic.Lack)
+			break
+		}
+		out += fmt.Sprintf("%d 缺字：  %s \n", i+1, res.Basic.Lack)
+	}
+	out += "\n"
 
 	for i, res := range data {
 		if len(data) == 1 {
@@ -89,7 +82,7 @@ func output(data []*smq.Result) {
 		out += "\n\n"
 	}
 
-	t := table.NewWriter()
+	t = table.NewWriter()
 	t.AppendHeader(table.Row{"总键数", "码长", "十击速度", "非汉字数", "计数", "缺字数", "计数"})
 	for _, res := range data {
 		t.AppendRow([]interface{}{

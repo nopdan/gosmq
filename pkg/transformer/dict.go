@@ -10,3 +10,9 @@ type Dict struct {
 	SelectKeys string
 	Single     bool
 }
+
+type Entry struct {
+	Word  string
+	Code  string
+	Order int
+}

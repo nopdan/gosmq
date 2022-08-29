@@ -71,7 +71,8 @@ func cli() {
 	if len(res) == 0 || isEmpty {
 		return
 	}
-	output(res)
+	fmt.Println("----------------------")
+	output(res, s.Name)
 
 	if !opts.Details {
 		return

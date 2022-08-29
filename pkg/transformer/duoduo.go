@@ -2,7 +2,6 @@ package transformer
 
 import (
 	"bufio"
-	"bytes"
 	"strconv"
 	"strings"
 )
@@ -11,12 +10,11 @@ type Duoduo struct {
 	Reverse bool
 }
 
-func (d *Duoduo) Read(dict Dict) []byte {
-	var buf bytes.Buffer
-	buf.Grow(1e6)
+func (d Duoduo) Read(dict Dict) []Entry {
+	ret := make([]Entry, 1e5)
 	mapOrder := make(map[string]int)
-
 	scan := bufio.NewScanner(dict.Reader)
+
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
 		if len(wc) < 2 {
@@ -32,21 +30,15 @@ func (d *Duoduo) Read(dict Dict) []byte {
 		mapOrder[c]++
 		order := mapOrder[c]
 		// 生成赛码表
-		buf.WriteString(w)
-		buf.WriteByte('\t')
-		buf.WriteString(c)
 		if len(c) >= dict.PushStart && order == 1 {
 		} else {
 			if order <= len(dict.SelectKeys) {
-				buf.WriteByte(dict.SelectKeys[order-1])
+				c += string(dict.SelectKeys[order-1])
 			} else {
-				buf.WriteString(strconv.Itoa(order))
+				c += strconv.Itoa(order)
 			}
 		}
-		buf.WriteByte('\t')
-		buf.WriteString(strconv.Itoa(order))
-		buf.WriteByte('\n')
+		ret = append(ret, Entry{w, c, order})
 	}
-	// fmt.Println(string(buf.Bytes()))
-	return buf.Bytes()
+	return ret
 }

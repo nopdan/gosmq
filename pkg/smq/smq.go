@@ -33,7 +33,9 @@ func New(name string, rd io.Reader) Smq {
 }
 
 func NewFromString(name, text string) Smq {
-	fmt.Println("从字符串初始化赛码器...")
+	if text != "" {
+		fmt.Println("从字符串初始化赛码器...")
+	}
 	return Smq{name, text, []*Dict{}}
 }
 

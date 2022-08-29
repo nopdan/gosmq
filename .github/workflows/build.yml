@@ -64,5 +64,5 @@ jobs:
       # 上传到 Artifact
       - uses: actions/upload-artifact@v3
         with:
-          name: gosmq.zip
+          name: gosmq
           path: ./bin/

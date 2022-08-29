@@ -29,7 +29,8 @@ type Dict struct {
 	Matcher   Matcher
 
 	PressSpaceBy string // 空格按键方式 left|right|both
-	Details      bool   // 输出详细数据
+	OutputDict   bool   // 输出转换后的码表
+	OutputDetail bool   // 输出详细数据
 
 	reader io.Reader // 赛码表 io 流
 	length int       // 词条数
@@ -95,7 +96,7 @@ func (dict *Dict) read() {
 	m.Handle()
 
 	// 输出赛码表
-	if !dict.trans {
+	if !dict.trans && dict.OutputDict {
 		for i := 0; i < len(t); i++ {
 			buf.WriteString(t[i].Word)
 			buf.WriteByte('\t')

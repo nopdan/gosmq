@@ -24,7 +24,7 @@ func cli() {
 		PushStart    int      `short:"p" long:"push" description:"int\t普通码表起顶码长，码长大于等于此数，首选不会追加空格"`
 		Algorithm    string   `short:"a" long:"alg" description:"string\t匹配算法 trie,t|order,o|longest,l"`
 		PressSpaceBy string   `short:"k" long:"space" description:"string\t空格按键方式 left|right|both"`
-		Details      bool     `short:"d" long:"details" description:"bool\t详细数据"`
+		OutputDetail bool     `short:"d" long:"detail" description:"bool\t详细数据"`
 
 		Ver bool `short:"v" long:"version" description:"bool\t查看版本信息"`
 	}
@@ -56,7 +56,7 @@ func cli() {
 			PushStart:    opts.PushStart,
 			Algorithm:    opts.Algorithm,
 			PressSpaceBy: opts.PressSpaceBy,
-			Details:      opts.Details,
+			OutputDetail: opts.OutputDetail,
 		}
 		dict.LoadFromPath(v)
 		s.Add(dict)
@@ -74,7 +74,7 @@ func cli() {
 	fmt.Println("----------------------")
 	output(res, s.Name)
 
-	if !opts.Details {
+	if !opts.OutputDetail {
 		return
 	}
 	for _, v := range res {

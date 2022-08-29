@@ -124,7 +124,7 @@ func (res *Result) match(text []rune, dict *Dict) string {
 		AddTo(&res.collDist, order)     // 选重分布
 		AddTo(&res.codeDist, len(code)) // 码长分布
 
-		if dict.Details {
+		if dict.OutputDetail {
 			word := string(text[p : p+i])
 			res.Data.WordSlice = append(res.Data.WordSlice, word)
 			res.Data.CodeSlice = append(res.Data.CodeSlice, code)

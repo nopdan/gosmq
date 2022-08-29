@@ -179,7 +179,7 @@ func output(data []*smq.Result, textName string) {
 		keys3 := "asdfghjkl;" // 单引号单独加
 		keys4 := "zxcvbnm,./"
 		for i := 0; i < 10; i++ {
-			a, b, c, d := string(keys1[i]), string(keys2[i]), string(keys3[i]), string(keys4[i])
+			a, b, c, d := keys1[i], keys2[i], keys3[i], keys4[i]
 			t6_1_header = append(t6_1_header, a)
 			t6_2_header = append(t6_2_header, b)
 			t6_3_header = append(t6_3_header, c)
@@ -190,7 +190,7 @@ func output(data []*smq.Result, textName string) {
 			t6_4_row = append(t6_4_row, fmt.Sprintf("%.2f%%", 100*res.Keys[d].Rate))
 		}
 		t6_3_header = append(t6_3_header, "'")
-		t6_3_row = append(t6_3_row, fmt.Sprintf("%.2f%%", 100*res.Keys["'"].Rate))
+		t6_3_row = append(t6_3_row, fmt.Sprintf("%.2f%%", 100*res.Keys['\''].Rate))
 
 		t6_1 := table.NewWriter()
 		t6_1.AppendHeader(t6_1_header)

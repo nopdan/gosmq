@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"runtime"
+
+	"github.com/cxcn/gosmq/web2"
 )
 
 func main() {
@@ -11,7 +13,7 @@ func main() {
 	if len(os.Args) == 1 {
 		web()
 	} else if len(os.Args) == 2 && os.Args[1] == "serve" {
-		web()
+		web2.Run()
 	} else {
 		cli()
 	}

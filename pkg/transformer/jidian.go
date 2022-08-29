@@ -9,7 +9,7 @@ import (
 type Jidian struct{}
 
 func (j Jidian) Read(dict Dict) []Entry {
-	ret := make([]Entry, 1e5)
+	ret := make([]Entry, 0, 1e5)
 	scan := bufio.NewScanner(dict.Reader)
 
 	for scan.Scan() {

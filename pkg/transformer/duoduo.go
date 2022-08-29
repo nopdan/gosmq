@@ -11,7 +11,7 @@ type Duoduo struct {
 }
 
 func (d Duoduo) Read(dict Dict) []Entry {
-	ret := make([]Entry, 1e5)
+	ret := make([]Entry, 0, 1e5)
 	mapOrder := make(map[string]int)
 	scan := bufio.NewScanner(dict.Reader)
 

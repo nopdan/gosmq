@@ -81,12 +81,12 @@ func (dict *Dict) read() {
 	dict.transform()
 	d := toTD(dict)
 	t := dict.Transformer.Read(d)
+	dict.length += len(t)
 
 	var buf bytes.Buffer
 	buf.Grow(1e5)
 	for i := 0; i < len(t); i++ {
 		m.Insert(t[i].Word, t[i].Code, t[i].Order)
-		dict.length++
 	}
 	// 添加符号
 	for k, v := range PUNCTS {

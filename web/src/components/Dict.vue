@@ -45,7 +45,7 @@
         <n-switch v-model:value="result.single" />
       </n-form-item>
       <n-form-item label="匹配算法">
-        <n-radio-group v-model:value="result.alg" default-value="longest">
+        <n-radio-group v-model:value="result.alg">
           <n-radio v-for="i in algs" :key="i[0]" :value="i[0]">
             {{ i[1] }}</n-radio
           >
@@ -73,7 +73,7 @@ const result = reactive({
   single: false,
   selectKeys: "_;'",
   pushStart: 4,
-  alg: "longest",
+  alg: "trie",
 });
 
 const props = defineProps(["msg", "files", "idx"]);
@@ -88,7 +88,7 @@ const formats = [
 ];
 
 const algs = [
-  ["longest", "最长匹配"],
+  ["trie", "最长匹配"],
   ["stable_trie", "按码表顺序"],
 ];
 

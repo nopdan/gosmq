@@ -57,7 +57,6 @@ func toSmqDict(opt optDict) *smq.Dict {
 		Algorithm:    opt.Alg,
 		PressSpaceBy: "both",
 		OutputDetail: false,
-		OutputDict:   false,
 	}
 	dict.LoadFromPath("./dict/" + opt.Path)
 	return dict

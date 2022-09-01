@@ -1,5 +1,9 @@
 
+cd ../web
+pnpm i
+pnpm build
 cd ..
+
 go mod tidy
 
 Write-Output "正在编译 windows 版本"

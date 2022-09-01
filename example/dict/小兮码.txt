@@ -1,5943 +1,5943 @@
-并	b	1
-重	c	1
-大	d	1
-是	f	1
-一	g	1
-不	h	1
-种	i	1
-有	j	1
-的	k	1
-来	l	1
-们	m	1
-你	n	1
-平	p	1
-起	q	1
-人	r	1
-事	s	1
-他	t	1
-我	w	1
-下	x	1
-以	y	1
-必	b.	1
-办	b/	1
-变	b;	1
-布	ba	1
-避	bb	1
-标	bc	1
-百	bd	1
-展	be	1
-本	bf	1
-表	bg	1
-部	bh	1
-别	bi	1
-便	bj	1
-把	bk	1
-被	bl	1
-八	bm	1
-宝	bn	1
-备	bo	1
-步	bp	1
-般	bq	1
-白	br	1
-比	bs	1
-笔	bt	1
-引	bu	1
-吧	bv	1
-包	bw	1
-编	bx	1
-北	by	1
-边	bz	1
-存	c,	1
-常	c.	1
-程	c/	1
-产	c;	1
-成	ca	1
-层	cb	1
-查	cc	1
-沉	cd	1
-草	ce	1
-才	cf	1
-传	cg	1
-次	ch	1
-吃	ci	1
-从	cj	1
-持	ck	1
-词	cl	1
-差	cm	1
-穿	cn	1
-曾	co	1
-尘	cp	1
-船	cq	1
-春	cr	1
-车	cs	1
-长	ct	1
-城	cu	1
-出	cv	1
-处	cw	1
-纯	cx	1
-此	cy	1
-场	cz	1
-带	d,	1
-单	d.	1
-代	d/	1
-底	d;	1
-达	da	1
-导	db	1
-电	dc	1
-淡	dd	1
-满	de	1
-都	df	1
-动	dg	1
-度	dh	1
-第	di	1
-当	dj	1
-打	dk	1
-对	dl	1
-道	dm	1
-定	dn	1
-但	do	1
-东	dp	1
-断	dq	1
-段	dr	1
-到	ds	1
-答	dt	1
-地	du	1
-队	dv	1
-多	dw	1
-海	dx	1
-点	dy	1
-刀	dz	1
-真	f/	1
-否	fa	1
-费	fb	1
-飞	fc	1
-法	fd	1
-范	fe	1
-整	ff	1
-夫	fg	1
-放	fh	1
-古	fi	1
-份	fj	1
-方	fk	1
-房	fl	1
-父	fm	1
-富	fn	1
-直	fo	1
-反	fq	1
-者	fr	1
-妇	fs	1
-教	ft	1
-复	fu	1
-服	fv	1
-风	fw	1
-纷	fx	1
-非	fy	1
-发	fz	1
-更	g,	1
-光	g.	1
-告	g/	1
-过	g;	1
-感	ga	1
-改	gb	1
-根	gc	1
-工	gd	1
-格	ge	1
-故	gf	1
-干	gg	1
-广	gh	1
-跟	gi	1
-个	gj	1
-高	gk	1
-该	gl	1
-关	gm	1
-官	gn	1
-国	go	1
-归	gp	1
-瓜	gq	1
-果	gr	1
-姑	gs	1
-管	gt	1
-刚	gu	1
-云	gv	1
-各	gw	1
-给	gx	1
-钢	gy	1
-功	gz	1
-或	h,	1
-合	h/	1
-黑	h;	1
-还	ha	1
-候	hb	1
-横	hc	1
-活	hd	1
-花	he	1
-何	hf	1
-环	hg	1
-装	hh	1
-号	hi	1
-会	hj	1
-很	hk	1
-话	hl	1
-火	hm	1
-害	hn	1
-回	ho	1
-后	hq	1
-音	hr	1
-好	hs	1
-和	ht	1
-乎	hu	1
-孩	hv	1
-将	hw	1
-红	hx	1
-站	hy	1
-化	hz	1
-再	i,	1
-怎	i.	1
-住	i/	1
-主	i;	1
-在	ia	1
-张	ib	1
-之	ic	1
-注	id	1
-着	ie	1
-正	if	1
-转	ig	1
-这	ih	1
-只	ii	1
-作	ij	1
-指	ik	1
-证	il	1
-总	im	1
-字	in	1
-中	io	1
-则	ip	1
-质	iq	1
-自	ir	1
-至	is	1
-知	it	1
-走	iu	1
-子	iv	1
-周	iw	1
-组	ix	1
-战	iy	1
-另	iz	1
-极	j,	1
-计	j.	1
-几	j/	1
-交	j;	1
-就	ja	1
-即	jb	1
-机	jc	1
-江	jd	1
-节	je	1
-做	jf	1
-进	jg	1
-决	jh	1
-叫	ji	1
-今	jj	1
-接	jk	1
-记	jl	1
-具	jm	1
-觉	jn	1
-见	jo	1
-尖	jp	1
-近	jq	1
-间	jr	1
-较	js	1
-件	jt	1
-结	ju	1
-己	jv	1
-及	jw	1
-绝	jx	1
-金	jy	1
-加	jz	1
-哭	ka	1
-据	kb	1
-困	kc	1
-可	kd	1
-苦	ke	1
-克	kf	1
-开	kg	1
-刻	kh	1
-口	ki	1
-推	kj	1
-控	kk	1
-课	kl	1
-烤	km	1
-快	kn	1
-看	ko	1
-得	kr	1
-找	ks	1
-科	kt	1
-块	ku	1
-报	kv	1
-客	kw	1
-空	kx	1
-肯	ky	1
-势	kz	1
-六	l/	1
-离	l;	1
-历	la	1
-灵	lb	1
-李	lc	1
-流	ld	1
-落	le	1
-两	lf	1
-理	lg	1
-立	lh	1
-路	li	1
-令	lj	1
-拉	lk	1
-论	ll	1
-类	lm	1
-连	ln	1
-里	lo	1
-劣	lp	1
-诉	lq	1
-量	lr	1
-军	ls	1
-利	lt	1
-老	lu	1
-了	lv	1
-调	lw	1
-练	lx	1
-虑	ly	1
-力	lz	1
-命	m/	1
-母	m;	1
-面	ma	1
-民	mb	1
-模	mc	1
-没	md	1
-么	me	1
-某	mf	1
-精	mg	1
-麻	mh	1
-吗	mi	1
-门	mj	1
-描	mk	1
-公	ml	1
-美	mm	1
-慢	mn	1
-目	mo	1
-明	mr	1
-妈	ms	1
-每	mt	1
-半	mu	1
-前	mv	1
-名	mw	1
-马	mx	1
-铭	my	1
-分	mz	1
-家	na	1
-那	nb	1
-想	nc	1
-深	nd	1
-呢	ne	1
-南	nf	1
-于	ng	1
-应	nh	1
-哪	ni	1
-念	nj	1
-拿	nk	1
-难	nl	1
-受	nm	1
-宁	nn	1
-内	no	1
-早	nr	1
-女	ns	1
-年	nt	1
-举	nu	1
-能	nv	1
-它	nw	1
-经	nx	1
-虐	ny	1
-男	nz	1
-破	pa	1
-屏	pb	1
-棚	pc	1
-派	pd	1
-少	pe	1
-师	pf	1
-璞	pg	1
-旁	ph	1
-品	pi	1
-偏	pj	1
-排	pk	1
-评	pl	1
-普	pm	1
-怕	pn	1
-盼	po	1
-盘	pq	1
-片	pr	1
-匹	ps	1
-篇	pt	1
-培	pu	1
-朋	pv	1
-跑	pw	1
-骗	px	1
-频	py	1
-皮	pz	1
-七	q,	1
-期	q/	1
-求	q;	1
-确	qa	1
-强	qb	1
-权	qc	1
-清	qd	1
-千	qe	1
-取	qf	1
-青	qg	1
-亲	qh	1
-器	qi	1
-全	qj	1
-抢	qk	1
-请	ql	1
-其	qm	1
-情	qn	1
-且	qo	1
-雀	qp	1
-秋	qq	1
-晴	qr	1
-轻	qs	1
-气	qt	1
-去	qu	1
-却	qv	1
-欠	qw	1
-骑	qx	1
-钱	qy	1
-切	qz	1
-入	r/	1
-然	r;	1
-而	ra	1
-弱	rb	1
-榕	rc	1
-融	rd	1
-若	re	1
-最	rf	1
-二	rg	1
-景	rh	1
-啊	ri	1
-仍	rj	1
-热	rk	1
-认	rl	1
-爱	rm	1
-安	rn	1
-容	ro	1
-尔	rp	1
-影	rq	1
-日	rr	1
-软	rs	1
-任	rt	1
-如	ru	1
-阿	rv	1
-儿	rw	1
-绕	rx	1
-让	ry	1
-忍	rz	1
-十	s,	1
-神	s.	1
-算	s/	1
-死	sa	1
-司	sb	1
-术	sc	1
-水	sd	1
-身	se	1
-世	sf	1
-三	sg	1
-商	sh	1
-四	si	1
-使	sj	1
-手	sk	1
-说	sl	1
-数	sm	1
-实	sn	1
-山	so	1
-省	sp	1
-所	sq	1
-时	sr	1
-式	ss	1
-生	st	1
-声	su	1
-随	sv	1
-色	sw	1
-书	sx	1
-上	sy	1
-奶	sz	1
-太	t,	1
-谈	t.	1
-通	t;	1
-态	ta	1
-退	tb	1
-桃	tc	1
-添	td	1
-特	te	1
-团	tf	1
-天	tg	1
-痛	th	1
-听	ti	1
-体	tj	1
-提	tk	1
-台	tl	1
-逃	tm	1
-头	tn	1
-同	to	1
-艇	tq	1
-题	tr	1
-她	ts	1
-笑	tt	1
-等	tu	1
-脱	tv	1
-条	tw	1
-统	tx	1
-铁	ty	1
-图	tz	1
-王	w,	1
-望	w;	1
-威	wa	1
-屋	wb	1
-杂	wc	1
-温	wd	1
-九	we	1
-五	wf	1
-武	wg	1
-文	wh	1
-问	wi	1
-位	wj	1
-往	wk	1
-谓	wl	1
-为	wm	1
-完	wn	1
-网	wo	1
-乐	wp	1
-饭	wq	1
-晚	wr	1
-万	ws	1
-物	wt	1
-无	wu	1
-卫	wv	1
-务	ww	1
-维	wx	1
-外	wy	1
-解	wz	1
-需	x,	1
-心	x.	1
-信	x/	1
-兴	x;	1
-雄	xa	1
-寻	xb	1
-相	xc	1
-消	xd	1
-系	xe	1
-西	xf	1
-形	xg	1
-新	xh	1
-息	xi	1
-像	xj	1
-行	xk	1
-许	xl	1
-希	xm	1
-性	xn	1
-现	xo	1
-小	xp	1
-须	xq	1
-向	xr	1
-写	xs	1
-先	xt	1
-喜	xu	1
-学	xv	1
-象	xw	1
-线	xx	1
-些	xy	1
-终	xz	1
-由	y,	1
-语	y.	1
-月	y/	1
-原	ya	1
-已	yb	1
-样	yc	1
-游	yd	1
-英	ye	1
-要	yf	1
-运	yg	1
-言	yh	1
-意	yi	1
-依	yj	1
-义	yk	1
-又	yl	1
-烟	ym	1
-远	yn	1
-眼	yo	1
-殷	yq	1
-易	yr	1
-与	ys	1
-移	yt	1
-业	yu	1
-也	yv	1
-用	yw	1
-约	yx	1
-银	yy	1
-孕	yz	1
-飙	ba/	1
-磅	ba;	1
-奔	baa	1
-碑	bae	1
-泵	bau	1
-甭	baz	1
-屄	bb;	1
-弼	bba	1
-擘	bbe	1
-壁	bbu	1
-臂	bbv	1
-槟	bc/	1
-榜	bc;	1
-杯	bca	1
-板	bce	1
-柏	bco	1
-棒	bcu	1
-梆	bcv	1
-滨	bd/	1
-逼	bd;	1
-泊	bde	1
-渤	bdu	1
-波	bdz	1
-蔽	be/	1
-薄	be;	1
-苯	bea	1
-葆	bee	1
-币	beo	1
-蔽	beu	1
-芭	bev	1
-苞	bez	1
-丙	bf;	1
-博	bfa	1
-鞭	bfe	1
-贲	bfo	1
-靶	bfv	1
-勃	bfz	1
-班	bg/	1
-斑	bg;	1
-碧	bga	1
-帮	bgo	1
-班	bgu	1
-邦	bgv	1
-辨	bh/	1
-辩	bh;	1
-病	bha	1
-霸	bhe	1
-禀	bho	1
-冰	bhu	1
-辫	bhv	1
-雹	bhz	1
-叭	bi/	1
-啵	bi;	1
-跋	bia	1
-蹦	bio	1
-卟	biu	1
-鄙	biv	1
-跛	biz	1
-伴	bj/	1
-倍	bj;	1
-闭	bja	1
-伯	bje	1
-保	bjo	1
-堡	bju	1
-傍	bjv	1
-播	bk/	1
-摈	bk;	1
-捕	bka	1
-搬	bke	1
-摆	bko	1
-拜	bku	1
-彼	bkv	1
-抱	bkz	1
-遍	bl;	1
-畚	bla	1
-裨	ble	1
-扁	blo	1
-补	blu	1
-迸	bm;	1
-弊	bma	1
-颁	bme	1
-爆	bmo	1
-爸	bmv	1
-豹	bmz	1
-忭	bn;	1
-怖	bna	1
-宾	bne	1
-悖	bnu	1
-愎	bnz	1
-贝	bo/	1
-髌	bo;	1
-败	boe	1
-赑	boo	1
-罢	bou	1
-崩	bov	1
-舶	bqe	1
-舨	bqv	1
-兵	br/	1
-暴	bra	1
-版	bre	1
-鼻	bro	1
-暴	bru	1
-匾	bs;	1
-毙	bsa	1
-婢	bse	1
-毕	bsu	1
-匾	bsv	1
-簿	bt;	1
-笨	bta	1
-稗	bte	1
-秉	bto	1
-拜	btu	1
-笆	btv	1
-埠	bue	1
-坝	buo	1
-膀	bv;	1
-膊	bva	1
-阪	bve	1
-脖	bvu	1
-巴	bvv	1
-胞	bvz	1
-饼	bw/	1
-鲅	bwa	1
-惫	bwo	1
-饽	bwu	1
-匕	bwv	1
-饱	bwz	1
-驳	bx/	1
-缤	bx;	1
-骠	bxa	1
-绑	bxu	1
-绷	bxv	1
-悲	by;	1
-辈	bya	1
-彪	bye	1
-钡	byo	1
-步	byu	1
-背	byv	1
-龅	byz	1
-磁	ca/	1
-厨	caa	1
-厂	cae	1
-盛	cao	1
-残	cau	1
-础	cav	1
-迟	cb;	1
-丑	cba	1
-尺	cbo	1
-弛	cbv	1
-村	cc;	1
-材	cca	1
-槌	cce	1
-椿	ccu	1
-楚	ccv	1
-沧	cd/	1
-澈	cd;	1
-漕	cda	1
-测	cdo	1
-潮	cdu	1
-池	cdv	1
-茶	ce/	1
-萃	ce;	1
-藏	cea	1
-菜	cee	1
-囱	ceo	1
-蔡	ceu	1
-苍	cev	1
-葱	cez	1
-聪	cf/	1
-寸	cf;	1
-臣	cfa	1
-醋	cfe	1
-曹	cfo	1
-刺	cfu	1
-朝	cfv	1
-琮	cg;	1
-蠢	cgo	1
-璨	cgu	1
-琛	cgv	1
-疮	ch/	1
-瘁	ch;	1
-床	cha	1
-充	che	1
-冲	cho	1
-凑	chu	1
-畜	chv	1
-鹑	chz	1
-踩	ci/	1
-逞	ci;	1
-呈	cia	1
-踩	cie	1
-唱	cio	1
-吵	ciu	1
-嘲	civ	1
-吹	ciz	1
-阐	cj/	1
-丛	cja	1
-敞	cje	1
-侧	cjo	1
-创	cju	1
-仓	cjv	1
-仇	cjz	1
-挫	ck/	1
-擦	ck;	1
-操	cka	1
-插	cke	1
-抽	cko	1
-撑	cku	1
-惩	ckv	1
-彻	ckz	1
-禅	cl/	1
-叉	cl;	1
-诚	cla	1
-参	cle	1
-昶	clo	1
-翠	clu	1
-祠	clv	1
-初	clz	1
-糍	cm/	1
-粹	cm;	1
-采	cma	1
-彩	cme	1
-粗	cmo	1
-炒	cmu	1
-慈	cmv	1
-炊	cmz	1
-察	cn/	1
-悴	cn;	1
-宠	cna	1
-窗	cne	1
-窜	cno	1
-恻	cnu	1
-惨	cnv	1
-察	cnz	1
-睬	co/	1
-虫	co;	1
-财	coa	1
-崔	coe	1
-赐	coo	1
-串	cou	1
-眦	cov	1
-畅	coz	1
-舱	cq/	1
-斥	cq;	1
-晁	cr/	1
-臭	cr;	1
-晨	cra	1
-昌	cro	1
-川	cru	1
-婵	cs/	1
-姹	cs;	1
-娼	cso	1
-辍	csv	1
-矬	ct/	1
-辞	ct;	1
-策	cta	1
-掣	cte	1
-乘	ctu	1
-愁	ctv	1
-称	ctz	1
-趁	cu/	1
-赤	cue	1
-超	cuz	1
-除	cv/	1
-承	cv;	1
-陈	cva	1
-陲	cve	1
-蚩	cvo	1
-丑	cvu	1
-肠	cvv	1
-脆	cvz	1
-匆	cw;	1
-册	cwa	1
-雏	cwe	1
-触	cwo	1
-猜	cwu	1
-刍	cwv	1
-馋	cwz	1
-缠	cx;	1
-骢	cxe	1
-巢	cxo	1
-绰	cxu	1
-驰	cxv	1
-绸	cxz	1
-餐	cy/	1
-铲	cy;	1
-柴	cya	1
-错	cye	1
-锄	cyo	1
-钞	cyu	1
-齿	cyv	1
-殚	da/	1
-歹	da;	1
-夺	daa	1
-碟	dae	1
-碘	dao	1
-殆	dav	1
-砀	daz	1
-弹	db/	1
-逮	db;	1
-刁	dba	1
-屌	dbo	1
-刁	dbv	1
-殿	dbz	1
-栋	dca	1
-椴	dce	1
-杜	dcu	1
-棣	dcv	1
-豆	dd/	1
-滴	dd;	1
-沌	dda	1
-洞	ddo	1
-渎	ddu	1
-渡	ddv	1
-涤	ddz	1
-荡	de;	1
-荳	dea	1
-董	dee	1
-丢	dev	1
-荻	dez	1
-颠	df/	1
-鞑	df;	1
-酊	dfa	1
-顶	dfe	1
-戴	dfo	1
-丁	dfu	1
-耽	dfv	1
-靛	dg;	1
-毒	dgv	1
-冻	dha	1
-敦	dhe	1
-端	dho	1
-店	dhu	1
-癜	dhv	1
-凋	dhz	1
-蹲	di/	1
-踱	di;	1
-呆	dia	1
-跌	die	1
-吊	dio	1
-嘟	diu	1
-蹬	div	1
-叨	diz	1
-贷	dj/	1
-袋	dj;	1
-倒	dja	1
-党	dje	1
-贷	djo	1
-傣	dju	1
-低	djz	1
-掸	dk/	1
-抖	dk;	1
-德	dka	1
-搭	dke	1
-担	dko	1
-待	dku	1
-挡	dkv	1
-抵	dkz	1
-登	dl/	1
-谛	dl;	1
-订	dla	1
-诞	dle	1
-叠	dlo	1
-读	dlu	1
-邓	dlv	1
-凳	dlz	1
-籴	dm/	1
-递	dm;	1
-灯	dma	1
-煅	dme	1
-兑	dmo	1
-弟	dmv	1
-爹	dmz	1
-惮	dn/	1
-惦	dn;	1
-惰	dna	1
-懂	dne	1
-恫	dno	1
-斗	dnu	1
-典	do/	1
-迪	do;	1
-盯	doa	1
-蝶	doe	1
-睹	doo	1
-赌	dou	1
-鼎	dov	1
-骶	doz	1
-遁	dq;	1
-盾	dqu	1
-舵	dqz	1
-旦	dra	1
-兜	dre	1
-牍	dru	1
-躲	drz	1
-娣	ds/	1
-嫡	ds;	1
-甙	dsa	1
-顿	dse	1
-岱	dso	1
-妒	dsv	1
-稻	dt/	1
-迭	dt;	1
-短	dta	1
-敌	dte	1
-笛	dto	1
-笃	dtv	1
-氡	dtz	1
-墩	du;	1
-堆	due	1
-堤	duo	1
-堵	duu	1
-埭	duv	1
-垛	duz	1
-蛋	dv;	1
-胆	dvo	1
-肚	dvu	1
-狄	dw/	1
-冬	dw;	1
-朵	dwa	1
-雕	dwe	1
-独	dwo	1
-岛	dwu	1
-邸	dwv	1
-绨	dx/	1
-缔	dx;	1
-驮	dxa	1
-缎	dxe	1
-镀	dy;	1
-钉	dya	1
-锻	dye	1
-督	dyo	1
-铛	dyu	1
-铎	dyv	1
-钓	dyz	1
-奋	fao	1
-砝	fau	1
-矾	faz	1
-弗	fbu	1
-焚	fc/	1
-梵	fc;	1
-樊	fca	1
-枫	fcz	1
-浮	fd/	1
-涪	fd;	1
-沣	fda	1
-泛	fde	1
-副	fdu	1
-沸	fdv	1
-芬	fe/	1
-芳	fe;	1
-菲	fea	1
-芙	feu	1
-乏	fev	1
-酚	ff/	1
-甫	ff;	1
-覆	ffe	1
-奉	fga	1
-璠	fge	1
-丰	fgu	1
-疯	fh/	1
-府	fhe	1
-腐	fho	1
-霏	fhu	1
-冯	fhv	1
-废	fhz	1
-吠	fia	1
-咐	fie	1
-啡	fiu	1
-俘	fj/	1
-仿	fj;	1
-付	fja	1
-阀	fje	1
-仆	fju	1
-佛	fjv	1
-彷	fk;	1
-抚	fka	1
-扶	fku	1
-拂	fkv	1
-访	fl;	1
-福	fla	1
-袱	fle	1
-扉	flu	1
-讽	flz	1
-粉	fm/	1
-釜	fma	1
-烦	fme	1
-番	fmo	1
-釜	fmu	1
-翻	fmv	1
-烽	fmz	1
-愤	fnu	1
-怫	fnv	1
-幡	fo/	1
-帆	fo;	1
-幅	foa	1
-贩	foe	1
-蝠	foo	1
-赋	fou	1
-罚	fov	1
-峰	foz	1
-返	fq;	1
-舫	fqv	1
-鼢	fr/	1
-阜	fru	1
-妨	fs;	1
-辅	fsa	1
-辐	fso	1
-匪	fsu	1
-妃	fsv	1
-氛	ft/	1
-符	fte	1
-缶	ftu	1
-繁	ftv	1
-坟	fu;	1
-封	fua	1
-赴	fuu	1
-坊	fuv	1
-防	fv;	1
-脯	fva	1
-附	fve	1
-肤	fvu	1
-肥	fvv	1
-孵	fw/	1
-凡	fw;	1
-匐	fwa	1
-饭	fwe	1
-负	fwo	1
-犯	fwv	1
-凫	fwz	1
-纺	fx;	1
-缚	fxa	1
-驸	fxe	1
-绯	fxu	1
-缝	fxz	1
-斐	fy;	1
-蜚	fyo	1
-翡	fyv	1
-锋	fyz	1
-尬	ga/	1
-戛	gaa	1
-顾	gae	1
-硅	gau	1
-硌	gaz	1
-艮	gb;	1
-敢	gbe	1
-弓	gbv	1
-桧	gc/	1
-棺	gc;	1
-柜	gca	1
-柑	gce	1
-棍	gco	1
-桂	gcu	1
-概	gcv	1
-构	gcz	1
-淦	gd/	1
-滚	gd;	1
-泔	gda	1
-港	gde	1
-亘	gdo	1
-沽	gdu	1
-溉	gdv	1
-沟	gdz	1
-莞	ge;	1
-鹳	gee	1
-葛	geo	1
-菇	gev	1
-苟	gez	1
-共	gf/	1
-辜	gf;	1
-哥	gfa	1
-攻	gfe	1
-革	gfo	1
-甘	gfu	1
-丐	gfv	1
-歌	gfz	1
-耕	gga	1
-瑰	gge	1
-规	ggo	1
-汞	ggu	1
-疳	gha	1
-裹	gho	1
-郭	ghv	1
-赣	ghz	1
-嘎	gia	1
-呱	gie	1
-呙	gio	1
-咕	giu	1
-哏	giv	1
-跪	giz	1
-倌	gj;	1
-供	gje	1
-估	gju	1
-阁	gjz	1
-搞	gk;	1
-拱	gke	1
-搁	gko	1
-挂	gku	1
-撖	gkv	1
-拐	gkz	1
-雇	gle	1
-观	glo	1
-冠	glu	1
-诡	glz	1
-谷	gm/	1
-糕	gm;	1
-粳	gma	1
-盖	gmo	1
-羔	gmu	1
-宫	gn;	1
-寡	gna	1
-惯	gno	1
-割	gnu	1
-怪	gnv	1
-冈	go/	1
-罡	goa	1
-贵	goo	1
-固	gou	1
-骨	gov	1
-购	goz	1
-躬	gr;	1
-皋	gra	1
-皈	gre	1
-盥	gro	1
-睾	gru	1
-鬼	grv	1
-晷	grz	1
-戈	gs;	1
-媾	gse	1
-辊	gso	1
-轱	gsu	1
-轧	gsv	1
-轨	gsz	1
-稿	gt;	1
-缸	gta	1
-罐	gte	1
-刮	gtu	1
-郜	gtv	1
-乖	gtz	1
-垓	gu;	1
-赶	gua	1
-垢	gue	1
-鼓	guu	1
-毂	guz	1
-隔	gva	1
-孤	gve	1
-胳	gvo	1
-肝	gvu	1
-股	gvz	1
-馆	gw;	1
-鳜	gwa	1
-觚	gwe	1
-狗	gwo	1
-觥	gwu	1
-勾	gwv	1
-够	gwz	1
-纲	gx/	1
-缟	gx;	1
-纥	gxe	1
-贯	gxo	1
-镐	gy;	1
-钙	gya	1
-锆	gye	1
-锅	gyo	1
-钩	gyz	1
-灰	ha/	1
-磺	hae	1
-厚	hao	1
-夯	haz	1
-憨	hb;	1
-弧	hbe	1
-弘	hbv	1
-核	hc;	1
-桓	hca	1
-槐	hce	1
-杭	hcz	1
-洪	hd/	1
-海	hd;	1
-河	hda	1
-浩	hde	1
-画	hdo	1
-湖	hdu	1
-汉	hdv	1
-鸿	hdz	1
-荟	he/	1
-荒	he;	1
-荤	hea	1
-荷	hee	1
-茴	heo	1
-葫	heu	1
-蕙	hev	1
-获	hez	1
-翰	hf/	1
-惠	hf;	1
-卉	hfa	1
-黄	hfo	1
-韩	hfu	1
-胡	hfv	1
-魂	hge	1
-瑚	hgu	1
-慧	hgv	1
-亥	hh/	1
-豪	hha	1
-毫	hhe	1
-肓	hho	1
-痕	hhv	1
-劾	hhz	1
-哈	hi/	1
-哼	hi;	1
-喊	hia	1
-呼	hie	1
-喝	hio	1
-唬	hiu	1
-吼	hiv	1
-唤	hiz	1
-伙	hj/	1
-阂	hj;	1
-辉	hja	1
-颔	hje	1
-货	hjo	1
-华	hju	1
-含	hjv	1
-护	hk;	1
-撼	hka	1
-徨	hke	1
-徽	hko	1
-衡	hku	1
-挥	hkv	1
-换	hkz	1
-谎	hl;	1
-户	hle	1
-祸	hlo	1
-罕	hlu	1
-诨	hlv	1
-欢	hlz	1
-烩	hm/	1
-烘	hma	1
-煌	hme	1
-焊	hmo	1
-糊	hmu	1
-焕	hmz	1
-豁	hn/	1
-寒	hn;	1
-怀	hna	1
-慌	hne	1
-悍	hno	1
-恍	hnu	1
-恨	hnv	1
-惚	hnz	1
-虹	hoa	1
-蝗	hoe	1
-幌	hoo	1
-患	hov	1
-航	hq;	1
-逅	hqv	1
-晗	hr/	1
-遑	hr;	1
-旱	hra	1
-晃	hre	1
-皇	hru	1
-晖	hrv	1
-毁	hrz	1
-惑	hs;	1
-互	hsa	1
-划	hsu	1
-轰	hsv	1
-婚	hsz	1
-禾	ht;	1
-簧	hte	1
-秽	hto	1
-笏	htz	1
-赫	hu/	1
-壕	hu;	1
-坏	hua	1
-壶	huu	1
-郝	huv	1
-隍	hve	1
-函	hvv	1
-忽	hw;	1
-猴	hwe	1
-昏	hwo	1
-凰	hwu	1
-狠	hwv	1
-缓	hx/	1
-骇	hx;	1
-缳	hxo	1
-绘	hxu	1
-幻	hxv	1
-壑	hyu	1
-虎	hyz	1
-贺	hzo	1
-仄	ia/	1
-逐	ia;	1
-左	iaa	1
-斫	iae	1
-丈	iao	1
-砖	iau	1
-粥	ib/	1
-昼	ibo	1
-桩	ic;	1
-植	ica	1
-株	ice	1
-枳	ico	1
-枝	icu	1
-枕	icv	1
-栅	icz	1
-洲	id/	1
-滓	id;	1
-浙	ida	1
-湛	ide	1
-澡	ido	1
-沾	idu	1
-治	idv	1
-沼	idz	1
-芝	ie;	1
-葬	iea	1
-茱	iee	1
-著	ieu	1
-蒸	iev	1
-遭	if;	1
-载	ifa	1
-政	ife	1
-职	ifo	1
-醉	ifu	1
-支	ifv	1
-酌	ifz	1
-珍	ig/	1
-专	ig;	1
-琢	iga	1
-珠	ige	1
-责	igo	1
-奏	igu	1
-座	ih/	1
-遮	ih;	1
-状	iha	1
-准	ihe	1
-资	iho	1
-章	ihu	1
-姿	ihv	1
-唑	ii/	1
-踪	ii;	1
-啄	iia	1
-咱	iie	1
-噪	iio	1
-足	iiu	1
-嘱	iiv	1
-嘴	iiz	1
-众	ij/	1
-伫	ij;	1
-值	ija	1
-掌	ije	1
-仲	ijo	1
-坐	iju	1
-仔	ijv	1
-掷	ik/	1
-摘	ik;	1
-征	ika	1
-抓	ike	1
-捉	iko	1
-振	iku	1
-择	ikv	1
-招	ikz	1
-诊	il/	1
-谆	il;	1
-冢	ila	1
-祝	ile	1
-祖	ilo	1
-诸	ilu	1
-肇	ilv	1
-诏	ilz	1
-遵	im;	1
-尊	ima	1
-炸	ime	1
-烛	imo	1
-州	imu	1
-郑	imv	1
-灼	imz	1
-灾	in/	1
-宰	in;	1
-怔	ina	1
-宅	ine	1
-宙	ino	1
-宗	inu	1
-赚	io/	1
-幢	io;	1
-置	ioa	1
-帐	ioe	1
-帜	ioo	1
-则	iou	1
-忠	iov	1
-助	ioz	1
-舟	iq;	1
-爪	iqo	1
-卮	iqv	1
-照	ir;	1
-皂	ira	1
-昨	ire	1
-追	irv	1
-昭	irz	1
-轸	is/	1
-辙	is;	1
-姊	isa	1
-致	ise	1
-暂	iso	1
-臻	isu	1
-辗	isv	1
-赞	it/	1
-造	it;	1
-筑	ita	1
-竹	ite	1
-智	ito	1
-制	itu	1
-筝	itz	1
-增	iu/	1
-赵	iu;	1
-圳	iue	1
-址	iuu	1
-志	iuv	1
-朕	iv/	1
-障	iv;	1
-阵	iva	1
-胀	ive	1
-阻	ivo	1
-坠	ivu	1
-脂	ivz	1
-炙	iw/	1
-詹	iw;	1
-杂	iwa	1
-旨	iwo	1
-猪	iwu	1
-争	iwv	1
-皱	iwz	1
-纵	ix/	1
-综	ix;	1
-骤	ixa	1
-缴	ixe	1
-织	ixo	1
-纣	ixu	1
-缀	ixv	1
-纸	ixz	1
-镞	iy;	1
-止	iya	1
-锥	iye	1
-钟	iyo	1
-针	iyu	1
-紫	iyv	1
-铮	iyz	1
-召	izo	1
-厥	ja/	1
-碱	jaa	1
-歼	jae	1
-碣	jao	1
-劂	jau	1
-厩	jav	1
-矶	jaz	1
-尽	jb;	1
-既	jba	1
-屐	jbe	1
-局	jbo	1
-居	jbu	1
-建	jbv	1
-检	jc/	1
-杰	jc;	1
-楷	jca	1
-槿	jce	1
-楫	jco	1
-禁	jcu	1
-橘	jcv	1
-济	jd;	1
-渐	jda	1
-激	jde	1
-溅	jdo	1
-洁	jdu	1
-津	jdv	1
-汲	jdz	1
-芥	je/	1
-警	je;	1
-荐	jea	1
-敬	jee	1
-菌	jeo	1
-荆	jeu	1
-茎	jev	1
-菊	jez	1
-柬	jf;	1
-救	jfe	1
-晋	jfo	1
-基	jfu	1
-鞠	jfz	1
-井	jge	1
-靓	jgo	1
-击	jgu	1
-珺	jgv	1
-静	jgz	1
-迹	jh;	1
-减	jha	1
-疾	jhe	1
-竟	jho	1
-京	jhu	1
-郊	jhv	1
-净	jhz	1
-嚼	ji/	1
-跤	ji;	1
-距	jia	1
-啾	jie	1
-旧	jio	1
-践	jiu	1
-唧	jiv	1
-鹃	jiz	1
-价	jj/	1
-仅	jj;	1
-集	jja	1
-介	jje	1
-俱	jjo	1
-剑	jju	1
-假	jjv	1
-隽	jjz	1
-捡	jk/	1
-挤	jk;	1
-拒	jka	1
-揪	jke	1
-揭	jko	1
-技	jku	1
-径	jkv	1
-拘	jkz	1
-矜	jl/	1
-鸡	jle	1
-肩	jlo	1
-讲	jlu	1
-艰	jlv	1
-劲	jlz	1
-兼	jm;	1
-炬	jma	1
-爵	jmo	1
-卷	jmv	1
-剪	jmz	1
-惓	jn/	1
-惊	jn;	1
-寄	jna	1
-窖	jne	1
-惧	jno	1
-寂	jnu	1
-窘	jnv	1
-究	jnz	1
-睑	jo/	1
-蛟	jo;	1
-贱	joa	1
-界	joe	1
-甲	jou	1
-睛	jov	1
-岌	joz	1
-舰	jqo	1
-斤	jqu	1
-炅	jr/	1
-景	jr;	1
-臼	jra	1
-晶	jro	1
-舅	jrz	1
-妗	js/	1
-嫁	js;	1
-戒	jsa	1
-皆	jse	1
-姐	jso	1
-妓	jsu	1
-巨	jsv	1
-积	jt/	1
-稼	jt;	1
-矩	jta	1
-矫	jte	1
-简	jto	1
-籍	jtu	1
-季	jtv	1
-笈	jtz	1
-鉴	ju/	1
-境	ju;	1
-颉	jue	1
-监	juo	1
-坚	juu	1
-紧	juv	1
-均	juz	1
-阶	jv/	1
-胶	jv;	1
-亟	jva	1
-胛	jvo	1
-际	jvu	1
-脚	jvv	1
-降	jvz	1
-灸	jw/	1
-久	jw;	1
-獗	jwa	1
-九	jwe	1
-句	jwo	1
-祭	jwu	1
-急	jwv	1
-角	jwz	1
-继	jx/	1
-绞	jx;	1
-缰	jxa	1
-骄	jxe	1
-绢	jxo	1
-绩	jxu	1
-纪	jxv	1
-级	jxz	1
-镜	jy;	1
-韭	jya	1
-锦	jye	1
-冀	jyo	1
-键	jyv	1
-钧	jyz	1
-迦	jz;	1
-架	jza	1
-驾	jzv	1
-矿	ka;	1
-盔	kao	1
-夸	kau	1
-砍	kaz	1
-垦	kbu	1
-恳	kbv	1
-尻	kbz	1
-框	kca	1
-棵	kco	1
-枯	kcu	1
-浍	kd/	1
-渴	kdo	1
-溘	kdu	1
-蔻	ke;	1
-苛	kea	1
-蒯	keu	1
-葵	kev	1
-考	kfa	1
-酷	kfe	1
-聩	kfo	1
-恐	kfv	1
-勘	kfz	1
-珂	kga	1
-琨	kgo	1
-刊	kgu	1
-亏	kgv	1
-廓	kh;	1
-库	kha	1
-颏	khe	1
-况	kho	1
-堃	khu	1
-康	khv	1
-亢	khz	1
-哙	ki/	1
-咳	ki;	1
-跨	kia	1
-喟	kio	1
-啃	kiu	1
-叩	kiv	1
-侩	kj/	1
-阔	kj;	1
-龛	kja	1
-侃	kjo	1
-阚	kjv	1
-抗	kk;	1
-扛	kka	1
-括	kke	1
-扣	kko	1
-拷	kku	1
-揆	kkv	1
-裤	kl;	1
-诓	kla	1
-癸	klu	1
-诳	klz	1
-炕	km;	1
-慷	kn;	1
-空	kna	1
-愧	kne	1
-宽	kno	1
-寇	knu	1
-慨	knv	1
-恪	knz	1
-髋	ko;	1
-眶	koa	1
-颗	koe	1
-髁	koo	1
-瞌	kou	1
-瞰	kov	1
-凯	koz	1
-旷	kr;	1
-昆	kra	1
-魁	kru	1
-暌	krv	1
-轲	ksa	1
-匮	kso	1
-匡	ksu	1
-筷	kt;	1
-筐	kta	1
-篑	kto	1
-靠	ktu	1
-坑	ku;	1
-堪	kua	1
-坤	kuo	1
-壳	kuv	1
-款	kuz	1
-脍	kv/	1
-胯	kva	1
-隗	kve	1
-孔	kvv	1
-馗	kw/	1
-馈	kwo	1
-狂	kwu	1
-纩	kx;	1
-绔	kxa	1
-骒	kxo	1
-卡	ky;	1
-锴	kya	1
-铠	kyo	1
-铐	kyu	1
-龈	kyv	1
-磷	la/	1
-烈	la;	1
-厉	laa	1
-龙	lao	1
-列	lau	1
-碌	lav	1
-励	laz	1
-屡	lb/	1
-逯	lb;	1
-履	lbe	1
-隶	lbo	1
-录	lbu	1
-楼	lc/	1
-麓	lc;	1
-林	lca	1
-柳	lce	1
-楞	lco	1
-棱	lcu	1
-婪	lcv	1
-榴	lcz	1
-粱	ld/	1
-丽	ld;	1
-梁	lda	1
-涝	lde	1
-泪	ldo	1
-滥	ldu	1
-浪	ldv	1
-洛	ldz	1
-苓	le/	1
-莱	le;	1
-莲	lea	1
-莉	lee	1
-萝	leo	1
-蓝	leu	1
-芦	lev	1
-劳	lez	1
-联	lf/	1
-吏	lf;	1
-栗	lfa	1
-剌	lfu	1
-聊	lfv	1
-赖	lfz	1
-玲	lg/	1
-璃	lg;	1
-琳	lga	1
-璐	lgo	1
-琅	lgv	1
-珞	lgz	1
-冷	lh/	1
-凉	lh;	1
-辣	lha	1
-旅	lhe	1
-露	lho	1
-刘	lhu	1
-率	lhv	1
-亮	lhz	1
-喽	li/	1
-啦	lia	1
-唠	lie	1
-吕	lio	1
-喇	liu	1
-踉	liv	1
-另	liz	1
-伦	lj/	1
-俩	lja	1
-领	lje	1
-侣	ljo	1
-例	lju	1
-邻	ljv	1
-仑	ljz	1
-拦	lk/	1
-掠	lk;	1
-拢	lka	1
-捞	lke	1
-揽	lku	1
-律	lkv	1
-撸	lkz	1
-裣	ll/	1
-谅	ll;	1
-戮	lla	1
-良	llo	1
-垒	llu	1
-礼	llv	1
-烂	lm/	1
-粒	lm;	1
-兰	lma	1
-炉	lme	1
-料	lmu	1
-粮	lmv	1
-烙	lmz	1
-怜	ln/	1
-懔	ln;	1
-懒	lna	1
-牢	lne	1
-帘	lno	1
-寥	lnv	1
-懒	lnz	1
-岭	lo/	1
-逻	lo;	1
-蛎	loa	1
-蜡	loe	1
-略	loo	1
-累	lov	1
-罗	loz	1
-晾	lr;	1
-魉	lra	1
-旯	lrz	1
-轮	ls/	1
-辘	ls;	1
-辆	lsa	1
-娌	lso	1
-姥	lsu	1
-辂	lsz	1
-黎	lt/	1
-笼	lta	1
-犁	lte	1
-箩	lto	1
-篮	ltu	1
-乱	ltv	1
-埒	lu/	1
-临	lue	1
-览	luo	1
-脸	lv/	1
-辽	lv;	1
-胧	lva	1
-腊	lve	1
-陆	lvu	1
-陋	lvv	1
-隆	lvz	1
-鳞	lw/	1
-獠	lwa	1
-猎	lwe	1
-留	lwo	1
-鲈	lwu	1
-狼	lwv	1
-馏	lwz	1
-缕	lx/	1
-缭	lxa	1
-骡	lxo	1
-缆	lxu	1
-绿	lxv	1
-络	lxz	1
-龄	ly/	1
-镰	ly;	1
-链	lya	1
-颅	lye	1
-锣	lyo	1
-铑	lyu	1
-卢	lyv	1
-虏	lyz	1
-冇	mao	1
-码	mav	1
-殁	maz	1
-弥	mbz	1
-买	mc;	1
-梅	mce	1
-木	mco	1
-楣	mcv	1
-梦	mcz	1
-灭	md/	1
-沐	mda	1
-漠	mde	1
-漫	mdo	1
-沫	mdu	1
-泌	mdv	1
-藐	me/	1
-茫	me;	1
-茂	mea	1
-摹	mee	1
-莫	meo	1
-蒙	meu	1
-茅	mev	1
-募	mez	1
-醚	mf/	1
-卖	mf;	1
-酶	mfe	1
-酩	mfz	1
-玟	mg;	1
-玫	mge	1
-末	mgo	1
-玛	mgv	1
-麦	mgz	1
-糜	mh/	1
-磨	mha	1
-摩	mhe	1
-庙	mho	1
-靡	mhu	1
-氓	mhv	1
-咪	mi/	1
-嘛	mi;	1
-喵	mie	1
-黾	mio	1
-呒	miu	1
-骂	miv	1
-鸣	miz	1
-闵	mj;	1
-闽	mjo	1
-闷	mjv	1
-摸	mke	1
-扪	mko	1
-抹	mku	1
-拇	mkv	1
-谜	ml/	1
-谋	mla	1
-谋	mle	1
-冥	mlo	1
-矛	mlv	1
-祢	mlz	1
-迷	mm;	1
-煤	mma	1
-貌	mme	1
-米	mmo	1
-迷	mmv	1
-忙	mn;	1
-寞	mne	1
-蜜	mno	1
-密	mnv	1
-眯	mo/	1
-虻	mo;	1
-默	moa	1
-瞒	moe	1
-冒	moo	1
-墨	mou	1
-眠	mov	1
-冕	moz	1
-旻	mr;	1
-盟	mro	1
-昧	mru	1
-曼	mrv	1
-迈	ms;	1
-媒	msa	1
-妙	mse	1
-嫚	mso	1
-妹	msu	1
-媚	msv	1
-娩	msz	1
-牧	mt/	1
-秘	mt;	1
-敏	mte	1
-篾	mto	1
-秒	mtu	1
-毛	mtv	1
-埋	muo	1
-脉	mv;	1
-陌	mva	1
-膜	mve	1
-眉	mvo	1
-勐	mvz	1
-猫	mwe	1
-免	mwo	1
-猛	mwv	1
-勉	mwz	1
-缅	mxa	1
-绵	mxe	1
-缈	mxo	1
-糸	mxu	1
-缪	mxv	1
-镁	my/	1
-锚	mye	1
-锰	myv	1
-铆	myz	1
-耐	naa	1
-奈	nau	1
-碾	nav	1
-尿	nbu	1
-尼	nbz	1
-柠	nc;	1
-楠	ncu	1
-泞	nd;	1
-涅	ndo	1
-淖	ndu	1
-浓	ndv	1
-泥	ndz	1
-蔫	nea	1
-孽	nev	1
-聍	nf;	1
-廿	nfa	1
-颞	nfe	1
-囊	nfu	1
-酿	nfv	1
-辇	nga	1
-弄	nge	1
-瑙	ngv	1
-疟	nha	1
-霓	nhe	1
-凝	nhv	1
-凝	nhz	1
-咛	ni;	1
-囔	nia	1
-喏	nie	1
-呐	nio	1
-喃	niu	1
-闹	nj;	1
-倪	nje	1
-佞	nju	1
-您	njv	1
-捻	nk/	1
-拧	nk;	1
-挠	nka	1
-捏	nko	1
-拈	nku	1
-拟	nkv	1
-农	nl;	1
-诺	nle	1
-讷	nlo	1
-逆	nm;	1
-粘	nmu	1
-恼	nn;	1
-懦	nna	1
-蛲	noa	1
-睨	noe	1
-嬲	noo	1
-囡	nov	1
-男	noz	1
-暖	nr/	1
-曩	nr;	1
-昵	nrv	1
-娘	ns;	1
-嫩	nsa	1
-匿	nse	1
-怒	nsv	1
-努	nsz	1
-牛	ntu	1
-氖	ntz	1
-埝	nu/	1
-赧	nuv	1
-脑	nv;	1
-腻	nva	1
-脓	nvv	1
-鲶	nw/	1
-袅	nw;	1
-鸟	nwa	1
-馁	nwe	1
-鲇	nwu	1
-猱	nwv	1
-纳	nxo	1
-纽	nxv	1
-镊	nya	1
-镍	nye	1
-钠	nyo	1
-钮	nyv	1
-鼐	nzo	1
-乃	nzz	1
-碰	pa/	1
-砰	pa;	1
-丕	paa	1
-硼	pav	1
-匏	paz	1
-辟	pb;	1
-屁	pba	1
-譬	pbo	1
-劈	pbz	1
-攀	pca	1
-朴	pcu	1
-杷	pcv	1
-潘	pd/	1
-沛	pd;	1
-漂	pda	1
-湃	pde	1
-瀑	pdo	1
-澎	pdu	1
-婆	pdv	1
-泼	pdz	1
-萍	pe;	1
-苹	pea	1
-葩	pee	1
-蓬	pez	1
-瓢	pfe	1
-聘	pfo	1
-票	pfu	1
-配	pfv	1
-飘	pfz	1
-耪	pg;	1
-珀	pge	1
-琶	pgv	1
-珮	pgz	1
-烹	ph;	1
-庞	pha	1
-剖	phu	1
-霹	phv	1
-疲	phz	1
-趴	pi/	1
-呯	pi;	1
-啪	pia	1
-啤	pie	1
-喷	piu	1
-噼	piv	1
-跑	piz	1
-凭	pje	1
-仆	pju	1
-僻	pjv	1
-佩	pjz	1
-拼	pk/	1
-批	pka	1
-拍	pke	1
-扑	pku	1
-拚	pkv	1
-抛	pkz	1
-谱	pl/	1
-谝	plv	1
-袍	plz	1
-瓶	pma	1
-叛	pme	1
-贫	pmo	1
-判	pmu	1
-鄱	pmv	1
-炮	pmz	1
-怦	pn;	1
-畔	po/	1
-赔	po;	1
-圃	poa	1
-帕	poe	1
-帔	pov	1
-磐	pqa	1
-爬	pqv	1
-皤	pr/	1
-迫	pr;	1
-牌	pre	1
-魄	prv	1
-姘	ps/	1
-嫔	ps;	1
-嫖	psa	1
-媲	pse	1
-叵	pso	1
-筢	pta	1
-犏	ptv	1
-篷	ptz	1
-坪	pu;	1
-埔	pua	1
-彭	pue	1
-坡	puz	1
-胖	pv/	1
-陪	pv;	1
-脯	pva	1
-脾	pve	1
-膨	pvu	1
-鹏	pvv	1
-鹏	pvz	1
-逄	pw;	1
-匍	pwa	1
-刨	pwu	1
-骈	px/	1
-辔	pxo	1
-裴	py;	1
-铺	pya	1
-颦	pye	1
-钋	pyu	1
-颇	pze	1
-犬	qa;	1
-奇	qaa	1
-牵	qae	1
-戚	qau	1
-砌	qaz	1
-群	qb/	1
-屈	qbv	1
-枪	qc/	1
-棋	qca	1
-桥	qce	1
-樯	qcu	1
-杞	qcv	1
-洽	qd/	1
-泣	qd;	1
-漆	qda	1
-汽	qde	1
-潜	qdo	1
-浅	qdu	1
-沁	qdv	1
-沏	qdz	1
-荃	qe/	1
-茜	qea	1
-擎	qee	1
-苘	qeo	1
-蔷	qeu	1
-茕	qev	1
-茄	qez	1
-欺	qf/	1
-裘	qf;	1
-巧	qfa	1
-乾	qfe	1
-覃	qfo	1
-鞘	qfu	1
-娶	qfv	1
-勤	qfz	1
-琴	qg/	1
-琼	qg;	1
-球	qga	1
-秦	qge	1
-璩	qgu	1
-玘	qgv	1
-痊	qh/	1
-庆	qha	1
-齐	qhe	1
-癯	qho	1
-敲	qhu	1
-妾	qhv	1
-瘸	qhz	1
-呛	qi/	1
-跷	qia	1
-吣	qiv	1
-阙	qj/	1
-衾	qj;	1
-倾	qja	1
-侨	qje	1
-禽	qjo	1
-企	qju	1
-侵	qjv	1
-阕	qjz	1
-擒	qk/	1
-撬	qke	1
-衢	qko	1
-掮	qkv	1
-掐	qkz	1
-谦	ql/	1
-谴	ql;	1
-祺	qla	1
-祈	qle	1
-启	qlo	1
-祛	qlu	1
-裙	qlv	1
-劝	qlz	1
-遒	qm;	1
-酋	qma	1
-拳	qme	1
-羌	qmv	1
-歉	qmz	1
-恰	qn/	1
-寝	qn;	1
-窃	qna	1
-憔	qne	1
-悄	qnu	1
-穹	qnv	1
-穷	qnz	1
-圈	qo/	1
-遣	qo;	1
-曲	qoa	1
-瞧	qoe	1
-峭	qou	1
-岂	qov	1
-颀	qqe	1
-躯	qr/	1
-丘	qra	1
-泉	qru	1
-邱	qrv	1
-区	qs/	1
-顷	qse	1
-堑	qsu	1
-妻	qsv	1
-秋	qt/	1
-迁	qt;	1
-签	qta	1
-乔	qte	1
-氰	qtu	1
-缺	qtv	1
-趣	qua	1
-罄	que	1
-墙	quu	1
-趋	quz	1
-腔	qv;	1
-戕	qva	1
-阡	qve	1
-朐	qvz	1
-鳅	qwe	1
-鳍	qwu	1
-卿	qwv	1
-绻	qx/	1
-驱	qxa	1
-纤	qxe	1
-缱	qxo	1
-铨	qy/	1
-虔	qy;	1
-钳	qya	1
-铅	qye	1
-觑	qyo	1
-歧	qyu	1
-镪	qyv	1
-钦	qyz	1
-辱	raa	1
-碍	rao	1
-厄	rav	1
-屙	rbv	1
-桉	rc;	1
-溶	rd;	1
-染	rda	1
-澳	rde	1
-润	rdo	1
-汝	rdv	1
-艾	re/	1
-蓉	re;	1
-荣	rea	1
-荏	ree	1
-芮	reo	1
-藕	reu	1
-惹	rev	1
-鞍	rf;	1
-耳	rfa	1
-噩	rfo	1
-垩	rfu	1
-恶	rfv	1
-鏊	rg/	1
-熬	rg;	1
-獒	rga	1
-敖	rge	1
-瑞	rgo	1
-遨	rgv	1
-韧	rgz	1
-鏖	rh/	1
-霭	rh;	1
-庵	rha	1
-哀	rhe	1
-癌	rho	1
-霭	rhv	1
-哎	ri/	1
-嚷	ri;	1
-呕	ria	1
-哦	rie	1
-嗯	rio	1
-嗷	riu	1
-唉	riv	1
-儒	rj;	1
-仁	rja	1
-俄	rje	1
-偶	rjo	1
-傲	rju	1
-仞	rjz	1
-按	rk;	1
-扰	rka	1
-摁	rko	1
-挨	rkv	1
-扔	rkz	1
-谙	rl;	1
-柔	rla	1
-袄	rle	1
-谔	rlo	1
-诶	rlv	1
-冗	rlz	1
-熔	rm;	1
-乳	rmv	1
-燃	rmz	1
-怄	rna	1
-额	rne	1
-案	rnv	1
-肉	ro/	1
-黯	ro;	1
-岸	roa	1
-盎	roo	1
-恩	rov	1
-暧	rr/	1
-暗	rr;	1
-奥	rra	1
-皑	rro	1
-翱	rrv	1
-昂	rrz	1
-戎	rsa	1
-娥	rse	1
-贰	rsu	1
-欧	rsz	1
-氨	rt;	1
-壬	rta	1
-矮	rte	1
-鹅	rtz	1
-壤	ru;	1
-埃	ruv	1
-坳	ruz	1
-隘	rv/	1
-孺	rv;	1
-孺	rva	1
-腭	rvo	1
-阮	rvu	1
-迩	rw;	1
-饶	rwa	1
-饿	rwe	1
-鳄	rwo	1
-尔	rwu	1
-绒	rxa	1
-纫	rxz	1
-锐	ry/	1
-镕	ry;	1
-睿	ryo	1
-刃	rz;	1
-爽	sa/	1
-碎	sa;	1
-厦	saa	1
-殊	sae	1
-石	sao	1
-奢	sau	1
-耍	sav	1
-屎	sb/	1
-肃	sb;	1
-尸	sbe	1
-属	sbo	1
-刷	sbu	1
-巳	sbv	1
-松	sc/	1
-述	sc;	1
-森	sca	1
-杉	sce	1
-梢	scu	1
-树	scv	1
-溯	sd/	1
-裟	sd;	1
-洒	sda	1
-沈	sde	1
-湿	sdo	1
-沙	sdu	1
-沈	sdv	1
-涩	sdz	1
-莎	se;	1
-菘	sea	1
-薯	seo	1
-蒜	seu	1
-萨	sev	1
-苏	sez	1
-甚	sf/	1
-速	sf;	1
-丧	sfa	1
-散	sfe	1
-束	sfo	1
-索	sfu	1
-酸	sfv	1
-琐	sg/	1
-寿	sga	1
-示	sgu	1
-素	sgv	1
-珊	sgz	1
-熟	sh;	1
-霜	sha	1
-施	she	1
-市	sho	1
-率	shu	1
-瘦	shv	1
-孰	shz	1
-啥	si/	1
-噻	si;	1
-嘶	sia	1
-噬	sie	1
-虽	sio	1
-哨	siu	1
-嗓	siv	1
-跚	siz	1
-闪	sj/	1
-食	sj;	1
-耸	sja	1
-伤	sje	1
-尚	sjo	1
-什	sju	1
-似	sjv	1
-倏	sjz	1
-授	sk/	1
-誓	sk;	1
-摄	ska	1
-搜	ske	1
-损	sko	1
-捎	sku	1
-扫	skv	1
-势	skz	1
-识	sl/	1
-诗	sl;	1
-试	sla	1
-谁	sle	1
-视	slo	1
-社	slu	1
-双	slv	1
-设	slz	1
-燧	sm/	1
-送	sm;	1
-杀	sma	1
-首	sme	1
-善	smo	1
-塑	smu	1
-释	smv	1
-烁	smz	1
-赛	sn/	1
-邃	sn;	1
-守	sna	1
-宿	sne	1
-审	sno	1
-室	snu	1
-瞬	so/	1
-蛇	so;	1
-髓	soa	1
-睡	soe	1
-史	soo	1
-申	sou	1
-思	sov	1
-岁	soz	1
-帅	spo	1
-艘	sqe	1
-射	sra	1
-顺	sre	1
-曙	sro	1
-暑	sru	1
-鼠	srv	1
-匙	srz	1
-输	ss/	1
-婶	ss;	1
-轼	ssa	1
-嫂	sse	1
-始	ssv	1
-姗	ssz	1
-税	st/	1
-适	st;	1
-穗	sta	1
-牲	ste	1
-失	sto	1
-升	stu	1
-私	stv	1
-舐	stz	1
-竖	su;	1
-寺	sua	1
-赦	sue	1
-螫	suo	1
-士	suu	1
-肾	suv	1
-隧	sv/	1
-胜	sv;	1
-隋	sva	1
-收	sve	1
-腮	svo	1
-孙	svu	1
-鳝	sw/	1
-煞	sw;	1
-夙	swa	1
-饰	swe	1
-蚀	swo	1
-狮	swu	1
-氏	swv	1
-缮	sx/	1
-缩	sx;	1
-丝	sxa	1
-驶	sxo	1
-纱	sxu	1
-骚	sxv	1
-绍	sxz	1
-铈	sy;	1
-锼	sye	1
-锁	syu	1
-叔	syv	1
-铯	syz	1
-邵	szv	1
-劭	szz	1
-砼	ta/	1
-砣	ta;	1
-厅	taa	1
-碳	tao	1
-套	tav	1
-弹	tb/	1
-屉	tba	1
-屉	tbe	1
-屠	tbu	1
-臀	tbv	1
-梯	tc/	1
-檀	tc;	1
-柝	tce	1
-桐	tco	1
-桶	tcv	1
-涂	td/	1
-潼	td;	1
-潭	tda	1
-淘	tde	1
-湍	tdo	1
-涛	tdu	1
-滩	tdv	1
-汤	tdz	1
-荼	te/	1
-葶	te;	1
-荑	tea	1
-茼	teo	1
-藤	tev	1
-萄	tez	1
-酡	tf;	1
-酞	tfa	1
-酮	tfo	1
-忑	tfv	1
-韬	tg/	1
-焘	tg;	1
-替	tgo	1
-泰	tgu	1
-痰	th/	1
-亭	tha	1
-庭	the	1
-童	tho	1
-唐	thv	1
-疼	thz	1
-跳	ti/	1
-啼	ti;	1
-呔	tia	1
-唾	tie	1
-踢	tio	1
-吐	tiu	1
-叹	tiv	1
-啕	tiz	1
-偷	tj/	1
-停	tj;	1
-仝	tja	1
-贪	tjo	1
-堂	tju	1
-途	tjv	1
-佟	tjz	1
-挑	tk/	1
-推	tk;	1
-探	tka	1
-托	tke	1
-徒	tku	1
-抬	tkv	1
-投	tkz	1
-讨	tla	1
-袒	tlo	1
-褪	tlv	1
-糖	tm;	1
-誊	tmo	1
-剃	tmu	1
-妥	tmv	1
-鹈	tmz	1
-悌	tn/	1
-突	tna	1
-恬	tne	1
-惕	tno	1
-恸	tnu	1
-眺	to/	1
-瞳	to;	1
-田	toa	1
-蜓	toe	1
-峒	too	1
-贴	tou	1
-暾	tr;	1
-躺	tru	1
-婷	ts;	1
-屯	tsv	1
-毯	tt/	1
-透	tt;	1
-甜	tta	1
-颓	tte	1
-筒	tto	1
-舔	ttu	1
-廷	ttv	1
-秃	ttz	1
-填	tu/	1
-塘	tu;	1
-土	tua	1
-塔	tue	1
-坦	tuo	1
-趟	tuu	1
-坛	tuv	1
-坍	tuz	1
-腾	tv/	1
-腿	tv;	1
-豚	tva	1
-胴	tvo	1
-膛	tvu	1
-胎	tvv	1
-陶	tvz	1
-鸵	tw;	1
-饨	twa	1
-彤	twe	1
-兔	two	1
-獭	twz	1
-驼	tx;	1
-缇	txo	1
-绦	txz	1
-锑	ty/	1
-铊	ty;	1
-钛	tya	1
-铜	tyo	1
-镗	tyu	1
-龆	tyz	1
-迢	tz;	1
-帑	tzo	1
-碗	wa;	1
-歪	waa	1
-戊	wae	1
-兀	wav	1
-尉	wba	1
-尾	wbe	1
-慰	wbv	1
-梧	wca	1
-枉	wcu	1
-桅	wcz	1
-湾	wd;	1
-汪	wda	1
-沃	wde	1
-涡	wdo	1
-污	wdu	1
-渥	wdv	1
-蕹	we;	1
-葳	wea	1
-薇	wee	1
-苇	weu	1
-蔚	wev	1
-斡	wf/	1
-巫	wfa	1
-吾	wfo	1
-卧	wfu	1
-恶	wfv	1
-违	wg;	1
-玩	wga	1
-顽	wge	1
-未	wgo	1
-韦	wgu	1
-鹉	wgz	1
-忘	wh;	1
-弯	wha	1
-痿	whe	1
-瘟	who	1
-紊	whu	1
-亡	whv	1
-雾	whz	1
-嗡	wi/	1
-吴	wia	1
-唯	wie	1
-喂	wio	1
-味	wiu	1
-喔	wiv	1
-吻	wiz	1
-伪	wj/	1
-伪	wj;	1
-闻	wja	1
-侮	wje	1
-偎	wjo	1
-伟	wju	1
-挖	wk;	1
-捂	wka	1
-微	wko	1
-握	wkv	1
-挽	wkz	1
-诬	wla	1
-诿	wle	1
-误	wlo	1
-袜	wlu	1
-骛	wlv	1
-鹜	wlz	1
-烷	wm;	1
-瓮	wma	1
-煨	wmo	1
-炜	wmu	1
-翁	wmv	1
-惋	wn;	1
-悟	wna	1
-惟	wne	1
-窝	wno	1
-剜	wnu	1
-寤	wnv	1
-宛	wnz	1
-罔	wo/	1
-蚊	wo;	1
-畏	woa	1
-巍	woe	1
-蜗	woo	1
-围	wou	1
-胃	wov	1
-皖	wr;	1
-晤	wra	1
-魍	wro	1
-旺	wru	1
-瓦	ws;	1
-娲	wso	1
-娃	wsu	1
-娓	wsv	1
-婉	wsz	1
-舞	wt;	1
-牾	wta	1
-魏	wte	1
-午	wtu	1
-委	wtv	1
-稳	wtz	1
-圩	wuu	1
-坞	wuz	1
-腕	wv;	1
-阢	wva	1
-丸	ww;	1
-乌	wwa	1
-勿	wwe	1
-猥	wwo	1
-刎	wwu	1
-危	wwv	1
-纹	wx;	1
-毋	wxe	1
-纬	wxu	1
-纨	wxz	1
-钨	wye	1
-袭	xa;	1
-厢	xaa	1
-夏	xao	1
-硝	xau	1
-殉	xaz	1
-迅	xb;	1
-犀	xbe	1
-痫	xbo	1
-屑	xbu	1
-校	xc;	1
-械	xca	1
-析	xce	1
-杏	xco	1
-楔	xcu	1
-栩	xcv	1
-橡	xcz	1
-溪	xd/	1
-渲	xd;	1
-湘	xda	1
-洗	xde	1
-瀣	xdu	1
-泻	xdv	1
-洵	xdz	1
-蓄	xe;	1
-蕈	xea	1
-薛	xee	1
-血	xeo	1
-荥	xeu	1
-萧	xev	1
-荀	xez	1
-熙	xf;	1
-献	xfa	1
-项	xfe	1
-醒	xfo	1
-鞋	xfu	1
-孝	xfv	1
-协	xfz	1
-璇	xg;	1
-顼	xge	1
-型	xgu	1
-邢	xgv	1
-庠	xh/	1
-序	xh;	1
-需	xha	1
-效	xhe	1
-席	xho	1
-辛	xhu	1
-雪	xhv	1
-癣	xhz	1
-喧	xi;	1
-吓	xia	1
-响	xie	1
-嚣	xio	1
-吁	xiu	1
-啸	xiv	1
-吸	xiz	1
-斜	xj;	1
-休	xja	1
-仙	xjo	1
-削	xju	1
-叙	xjv	1
-修	xjz	1
-徐	xk/	1
-挟	xk;	1
-循	xke	1
-踅	xko	1
-徙	xku	1
-徇	xkz	1
-详	xl/	1
-戏	xl;	1
-习	xla	1
-谢	xle	1
-袖	xlo	1
-训	xlu	1
-讯	xlv	1
-询	xlz	1
-烯	xm/	1
-兮	xma	1
-熄	xme	1
-籼	xmo	1
-凶	xmv	1
-穴	xn/	1
-宣	xna	1
-惜	xne	1
-惺	xno	1
-宵	xnu	1
-懈	xnz	1
-峡	xo;	1
-兄	xoe	1
-蝎	xoo	1
-黠	xou	1
-县	xov	1
-峋	xoz	1
-舷	xq;	1
-欣	xqz	1
-衅	xr/	1
-暄	xr;	1
-晓	xra	1
-星	xre	1
-显	xru	1
-暇	xrv	1
-歇	xrz	1
-嫌	xs/	1
-辖	xs;	1
-姓	xse	1
-匣	xso	1
-轩	xsu	1
-邪	xsv	1
-稀	xt/	1
-选	xt;	1
-箱	xta	1
-香	xto	1
-卸	xtv	1
-秀	xtz	1
-幸	xu/	1
-熹	xu;	1
-馨	xue	1
-贤	xuo	1
-墟	xuu	1
-险	xv/	1
-逊	xv;	1
-膝	xva	1
-陷	xve	1
-腥	xvo	1
-隙	xvu	1
-限	xvv	1
-胸	xvz	1
-鲜	xw/	1
-夕	xw;	1
-枭	xwa	1
-饷	xwe	1
-旬	xwo	1
-玺	xwu	1
-匈	xwv	1
-馅	xwz	1
-飨	xx/	1
-巡	xx;	1
-骁	xxa	1
-乡	xxe	1
-细	xxo	1
-续	xxu	1
-绚	xxz	1
-鑫	xy/	1
-镶	xy;	1
-虚	xya	1
-锈	xye	1
-锡	xyo	1
-销	xyu	1
-勰	xzo	1
-尤	ya;	1
-硬	yaa	1
-愿	yae	1
-右	yao	1
-研	yau	1
-友	yav	1
-熨	yb/	1
-异	yba	1
-尹	ybe	1
-聿	ybu	1
-痈	ybz	1
-榆	yc/	1
-椅	yca	1
-樱	yco	1
-樾	ycu	1
-乙	ycv	1
-杨	ycz	1
-洋	yd/	1
-演	yd;	1
-源	yda	1
-渊	yde	1
-油	ydo	1
-沅	ydu	1
-泳	ydv	1
-沿	ydz	1
-荧	ye/	1
-页	ye;	1
-芽	yea	1
-莠	yee	1
-营	yeo	1
-莹	yeu	1
-艺	yev	1
-药	yez	1
-雨	yf;	1
-亚	yfa	1
-严	yfe	1
-燕	yfo	1
-酝	yfu	1
-耶	yfv	1
-瑶	yg/	1
-迂	yg;	1
-琊	yga	1
-元	yge	1
-玉	ygo	1
-耘	ygu	1
-云	ygv	1
-艳	ygz	1
-痒	yh/	1
-亦	yh;	1
-弈	yha	1
-夜	yhe	1
-衣	yho	1
-育	yhv	1
-韵	yhz	1
-吟	yi/	1
-咬	yi;	1
-呀	yia	1
-跃	yie	1
-员	yio	1
-叶	yiu	1
-咏	yiv	1
-阅	yj/	1
-仪	yj;	1
-优	yja	1
-攸	yje	1
-仪	yjo	1
-余	yju	1
-愈	yjv	1
-仰	yjz	1
-摇	yk/	1
-衍	yk;	1
-掩	yka	1
-御	yke	1
-押	yko	1
-拥	ykv	1
-扬	ykz	1
-议	yl/	1
-永	yl;	1
-讶	yla	1
-预	yle	1
-翼	ylo	1
-予	ylu	1
-译	ylv	1
-勇	ylz	1
-炎	ym/	1
-遥	ym;	1
-肴	yma	1
-养	yme	1
-益	ymo	1
-羊	ymu	1
-爷	ymv	1
-欲	ymz	1
-悦	yn/	1
-誉	yn;	1
-忧	yna	1
-窑	yne	1
-宜	yno	1
-宇	ynu	1
-忆	ynv	1
-蚁	yo/	1
-遇	yo;	1
-因	yoa	1
-屹	yoe	1
-圆	yoo	1
-园	you	1
-野	yov	1
-鸭	yoz	1
-舆	yr/	1
-邀	yr;	1
-晕	yra	1
-映	yro	1
-曰	yru	1
-延	yrv	1
-昀	yrz	1
-姚	ys/	1
-雅	ys;	1
-姨	ysa	1
-医	yse	1
-姻	yso	1
-妍	ysu	1
-郾	ysv	1
-鸦	ysz	1
-氧	yt/	1
-夭	yt;	1
-氩	yta	1
-筵	yte	1
-秧	yto	1
-竽	ytu	1
-懿	yu;	1
-越	yua	1
-袁	yuo	1
-垠	yuv	1
-院	yv;	1
-腰	yva	1
-腴	yve	1
-阳	yvo	1
-阴	yvv	1
-隐	yvz	1
-馀	yw/	1
-迎	yw;	1
-犹	ywa	1
-颖	ywe	1
-鱼	ywo	1
-猿	ywu	1
-印	ywv	1
-饮	ywz	1
-验	yx/	1
-幺	yx;	1
-绮	yxa	1
-缨	yxo	1
-纭	yxu	1
-缘	yxv	1
-幼	yxz	1
-镒	yy/	1
-铱	yy;	1
-虞	yyo	1
-钰	yyu	1
-钥	yyv	1
-盈	yzo	1
-因为	y;	1
-殡	ba;e	1
-礴	bae;	1
-砭	baev	1
-飙	baz/	1
-璧	bbu;	1
-剥	bbuu	1
-槟	bc;e	1
-彬	bcae	1
-柄	bcau	1
-彬	bcee	1
-柏	bceu	1
-梆	bcuv	1
-滨	bd;/	1
-灞	bd;e	1
-汴	bd;u	1
-滗	bdea	1
-浜	bdeu	1
-濒	bdue	1
-蕃	be/o	1
-蒡	be;;	1
-菠	be;z	1
-荜	beav	1
-蓓	bee;	1
-蓖	beeu	1
-荸	beuv	1
-鬓	bf;e	1
-逋	bf;v	1
-髟	bfee	1
-孛	bfva	1
-邴	bfvv	1
-耙	bgvu	1
-斌	bhaa	1
-庇	bhav	1
-瘪	bhe/	1
-瓣	bhe;	1
-亳	bhea	1
-褒	bheu	1
-痹	bhoa	1
-卞	bhu;	1
-斌	bhua	1
-癍	bhuu	1
-疤	bhvu	1
-哺	biau	1
-哔	biav	1
-呗	bio/	1
-趵	biz;	1
-煲	bj/o	1
-傍	bj;;	1
-傧	bj;e	1
-佰	bjao	1
-俾	bjeu	1
-卜	bjoo	1
-俵	bjue	1
-扒	bk//	1
-掰	bk/e	1
-拌	bk/u	1
-揄	bk/v	1
-扮	bk/z	1
-搏	bkaa	1
-搏	bkau	1
-拔	bkav	1
-扳	bkee	1
-捭	bkeu	1
-捌	bkou	1
-摒	bkv/	1
-拨	bkz;	1
-彼	bkzv	1
-谤	bl;;	1
-祊	bl;v	1
-褓	bleo	1
-裱	blue	1
-焙	bm;o	1
-炳	bmau	1
-敝	bmea	1
-蹩	bmou	1
-憋	bmv;	1
-煸	bmvo	1
-粑	bmvu	1
-鳖	bmzo	1
-愎	bnea	1
-贬	boe;	1
-睥	boeo	1
-髀	boeu	1
-蚌	bouu	1
-舨	bqee	1
-晡	brau	1
-魃	brav	1
-曝	broe	1
-帛	brou	1
-卑	bruu	1
-妣	bsav	1
-婊	bsue	1
-箔	bt;e	1
-簸	btau	1
-筚	btav	1
-犇	btea	1
-篦	bteo	1
-坂	buee	1
-膑	bv;e	1
-膘	bvau	1
-陛	bvav	1
-飚	bw//	1
-鳔	bwau	1
-狈	bwo/	1
-鳊	bwvo	1
-鸨	bwza	1
-鲍	bwzv	1
-绊	bx/u	1
-骉	bxvv	1
-镑	by;;	1
-镔	by;e	1
-钚	bya;	1
-锛	byaa	1
-镖	byau	1
-钹	byav	1
-钣	byee	1
-铂	byeu	1
-悲	byv;	1
-铋	byve	1
-钯	byvv	1
-磋	ca/u	1
-碴	caao	1
-蹙	cao;	1
-殂	caoa	1
-厕	caou	1
-辰	cau;	1
-唇	cauo	1
-碜	cava	1
-孱	cbvv	1
-村	cca;	1
-橱	ccaa	1
-楂	ccao	1
-槽	ccau	1
-郴	ccav	1
-杵	ccea	1
-橙	ccv/	1
-杈	ccv;	1
-椽	ccvv	1
-澶	cd;o	1
-淬	cd;u	1
-淳	cd;v	1
-涔	cdo/	1
-豉	cduv	1
-滁	cdv/	1
-潺	cdva	1
-澄	cdvo	1
-菜	ce/a	1
-苍	ce/v	1
-茨	ce;z	1
-茬	ceau	1
-菖	ceoo	1
-蔡	cezu	1
-酬	cf/u	1
-裁	cf;;	1
-醇	cf;v	1
-敕	cfea	1
-耻	cfua	1
-矗	cfuo	1
-矗	cfuu	1
-翅	cfvv	1
-蚕	cgo;	1
-瓷	cha;	1
-瓷	chav	1
-颤	che/	1
-痴	cheo	1
-畜	choo	1
-疵	chuv	1
-蹭	ci/o	1
-蹴	ci;a	1
-蹿	ci;o	1
-啐	ci;u	1
-嚓	ci;z	1
-嘈	ciao	1
-喳	ciau	1
-躇	cieu	1
-喘	cioa	1
-嗤	cioo	1
-呈	ciua	1
-哧	ciue	1
-嗔	ciuo	1
-嘲	ciuv	1
-呲	ciuz	1
-啜	civv	1
-叱	cizz	1
-氅	cjea	1
-伥	cjeu	1
-催	cjoe	1
-倡	cjoo	1
-促	cjou	1
-俦	cjua	1
-倘	cjuo	1
-偿	cjuu	1
-尝	cjuv	1
-伺	cjvo	1
-储	cjvu	1
-闯	cjvv	1
-侈	cjzz	1
-搓	ck/a	1
-撤	ck;e	1
-搐	ck;o	1
-撺	ck;u	1
-搽	cke/	1
-捶	ckea	1
-拆	ckee	1
-措	ckeo	1
-揣	ckoa	1
-摧	ckoe	1
-操	ckoo	1
-抻	ckou	1
-撮	ckov	1
-扯	ckua	1
-抄	ckue	1
-掺	ckva	1
-搀	ckz;	1
-谶	cl/a	1
-诧	cl;e	1
-翠	cl;u	1
-衬	clau	1
-戳	clav	1
-谌	cle/	1
-褚	cluo	1
-衩	clv;	1
-谗	clz;	1
-谄	clze	1
-皴	clzv	1
-豺	cmau	1
-糙	cme;	1
-炽	cmo/	1
-肏	cmo;	1
-灿	cmoo	1
-岔	cmou	1
-刹	cmuu	1
-兹	cmvv	1
-岔	cmzo	1
-怆	cn/v	1
-悰	cn;u	1
-怵	cna;	1
-宸	cnaa	1
-惭	cnae	1
-慒	cnao	1
-忖	cnau	1
-怅	cnea	1
-忏	cneu	1
-忡	cnou	1
-忱	cnve	1
-蝉	co/o	1
-蜍	co/u	1
-岑	co/v	1
-贮	co;a	1
-幢	co;o	1
-崇	co;u	1
-瞅	coea	1
-黜	coou	1
-畴	coua	1
-瞠	couo	1
-艟	cq;o	1
-侪	cr;e	1
-魑	cr;o	1
-臭	cra;	1
-虿	cso;	1
-邨	csvu	1
-簇	ct;e	1
-秤	ct;u	1
-垂	ctaa	1
-氚	cteu	1
-篡	ctoa	1
-筹	ctua	1
-䅟	ctva	1
-笞	ctvo	1
-稠	ctzu	1
-丞	cvaa	1
-肠	cvze	1
-猝	cw;u	1
-馇	cwau	1
-舛	cwav	1
-饬	cwea	1
-鲳	cwoa	1
-猖	cwoo	1
-删	cwuu	1
-骋	cxoa	1
-粲	cy/;	1
-锉	cy/u	1
-齿	cy/v	1
-铳	cy;e	1
-雌	cye;	1
-锤	cyea	1
-钏	cyeu	1
-龊	cyou	1
-钗	cyv;	1
-碇	da;a	1
-礅	da;e	1
-碟	daaa	1
-耷	daau	1
-碓	daeu	1
-砥	daz;	1
-碉	dazu	1
-椟	dcu;	1
-档	dcuv	1
-淀	dd;a	1
-渡	dd;e	1
-逗	dd;v	1
-沓	ddoo	1
-滇	dduo	1
-蒂	de;o	1
-耵	dfau	1
-耋	dfav	1
-颠	dfe/	1
-聃	dfo;	1
-靼	dfoa	1
-蠹	dfoo	1
-痘	dhao	1
-疔	dhau	1
-瘩	dhe/	1
-疸	dhoa	1
-盗	dhoo	1
-帝	dhou	1
-癫	dhue	1
-啖	di//	1
-蹈	di/e	1
-嗲	di/z	1
-嘀	di;o	1
-踮	di;u	1
-哒	dia;	1
-叮	diau	1
-吨	diav	1
-嗒	die/	1
-嘚	dieo	1
-噔	div/	1
-叼	diva	1
-咚	diz;	1
-跺	diza	1
-哆	dizz	1
-仃	djau	1
-黛	djo;	1
-佃	djoa	1
-侗	djoo	1
-掂	dk;u	1
-掉	dkua	1
-垫	dkuu	1
-挡	dkuv	1
-掇	dkvv	1
-捣	dkzo	1
-褡	dle/	1
-谍	dlea	1
-怠	dlov	1
-祷	dlua	1
-裆	dluv	1
-怼	dlv;	1
-裰	dlvv	1
-诋	dlz;	1
-奠	dmao	1
-炖	dmav	1
-兑	dmee	1
-郸	dmvu	1
-羝	dmz;	1
-貂	dmzo	1
-惇	dn;o	1
-宕	dnao	1
-窦	dnu;	1
-悼	dnua	1
-睇	do/v	1
-瞪	do;a	1
-蚪	do;u	1
-盹	doav	1
-黩	dou;	1
-巅	doue	1
-睹	douo	1
-瞪	dov/	1
-眈	dovv	1
-舵	dq;z	1
-牒	drea	1
-妲	dsoa	1
-氮	dt//	1
-氘	dteu	1
-犊	dtu;	1
-丢	dtv;	1
-坫	duua	1
-腚	dv;u	1
-蛋	dvo;	1
-堕	dvua	1
-陡	dvuu	1
-氐	dw;;	1
-丹	dw;a	1
-甸	dwoo	1
-岛	dwou	1
-剁	dwuu	1
-锭	dy;a	1
-镝	dy;o	1
-钝	dyav	1
-铤	dyea	1
-钿	dyoa	1
-镫	dyv/	1
-梵	fcz;	1
-汾	fd/z	1
-淝	fdvv	1
-藩	fe;e	1
-芾	fe;o	1
-菲	feua	1
-敷	ffea	1
-麸	fgu;	1
-奉	fguu	1
-珐	fguv	1
-痱	fhua	1
-疯	fhz/	1
-呋	fiu;	1
-俯	fj;e	1
-伏	fja;	1
-俸	fjaa	1
-阈	fjao	1
-傅	fjau	1
-伐	fjav	1
-抚	fkuv	1
-讣	flu;	1
-粪	fme/	1
-斧	fmee	1
-忿	fmv;	1
-孚	fmvu	1
-乏	fmvv	1
-分	fmzz	1
-悱	fnua	1
-罘	foa;	1
-蝠	foao	1
-帆	foz;	1
-蜂	fozu	1
-舫	fq;v	1
-辐	fsao	1
-馥	ftea	1
-筏	fteu	1
-氟	ftvu	1
-坊	fu;v	1
-腑	fv;e	1
-肺	fv;o	1
-肪	fv;v	1
-腹	fvea	1
-腹	fveo	1
-腓	fvua	1
-逢	fw;v	1
-鲱	fwua	1
-凤	fwv;	1
-狒	fwvu	1
-龚	gae/	1
-槁	gc;o	1
-梗	gca;	1
-杠	gcau	1
-梏	gcea	1
-杆	gcuu	1
-枸	gczo	1
-灌	gdeo	1
-汩	gdoo	1
-洸	gdue	1
-耿	gf//	1
-甘	gfaa	1
-聒	gfea	1
-贡	gfo/	1
-瞽	gfoo	1
-恭	gfu;	1
-巩	gfz;	1
-鸪	gfza	1
-珙	gge/	1
-耕	ggue	1
-珪	gguu	1
-衮	gheu	1
-赓	gho/	1
-痼	ghou	1
-膏	ghov	1
-庚	ghv;	1
-庚	ghva	1
-膏	ghvv	1
-嗝	giao	1
-哽	giau	1
-啯	giou	1
-咣	giue	1
-剐	giuu	1
-咯	gizo	1
-仡	gjea	1
-刽	gju;	1
-闺	gjuu	1
-鸽	gjza	1
-伽	gjzo	1
-掼	gkoo	1
-掴	gkou	1
-拐	gkoz	1
-擀	gku/	1
-诰	glea	1
-诟	glee	1
-诂	gluo	1
-褂	gluu	1
-糕	gm/;	1
-羹	gm/u	1
-虢	gmuz	1
-炔	gmv;	1
-宫	gnoo	1
-蚣	go/v	1
-赅	go;/	1
-岗	goo/	1
-帼	goo;	1
-蛊	gooa	1
-崮	gooo	1
-刿	gouu	1
-鹘	goza	1
-骼	gozo	1
-躬	grvv	1
-臵	gszo	1
-篙	gt;o	1
-箍	gtau	1
-篝	gteo	1
-牯	gtuo	1
-竿	gtuu	1
-乖	gtuz	1
-鹄	gtza	1
-埂	guau	1
-圪	guea	1
-卦	guu;	1
-圭	guua	1
-膈	gvao	1
-肛	gvau	1
-肱	gvav	1
-胱	gvue	1
-胳	gvzo	1
-犷	gw;e	1
-逛	gw;v	1
-鳏	gwou	1
-龟	gwov	1
-鲑	gwuu	1
-狗	gwzo	1
-纲	gxo/	1
-锢	gyou	1
-铬	gyzo	1
-憨	hbv;	1
-杭	hc;z	1
-桦	hceu	1
-濠	hd;a	1
-浒	hd;e	1
-浣	hd;u	1
-汇	hdav	1
-洪	hde/	1
-淮	hde;	1
-海	hdea	1
-潢	hdeo	1
-混	hdoa	1
-灏	hdoe	1
-涸	hdou	1
-滑	hdov	1
-瀚	hdu/	1
-汗	hduu	1
-浑	hdva	1
-沪	hdve	1
-涵	hdvu	1
-泓	hdvv	1
-涣	hdzo	1
-藿	he;e	1
-蒿	he;o	1
-蕙	heav	1
-蘅	heez	1
-薨	heoa	1
-菡	hevv	1
-酣	hfaa	1
-鬟	hfoo	1
-惠	hfv;	1
-邯	hfvu	1
-耗	hgea	1
-璜	hgeo	1
-琥	hgua	1
-珲	hgv;	1
-彗	hgva	1
-霍	hhe;	1
-麾	hhea	1
-瘊	hhev	1
-肓	hhva	1
-亨	hhvv	1
-痪	hhzo	1
-呼	hi/u	1
-嚯	hi;;	1
-嚎	hi;a	1
-嗨	hi;e	1
-呵	hiau	1
-哄	hie/	1
-嗬	hiee	1
-嗥	hieo	1
-哗	hieu	1
-喉	hiev	1
-嘿	hio;	1
-踝	hioo	1
-喙	hivv	1
-颌	hje/	1
-盒	hjoo	1
-阖	hjuo	1
-辉	hjva	1
-侯	hjve	1
-捍	hkoa	1
-徊	hkoo	1
-护	hkve	1
-衡	hkzu	1
-诃	hlao	1
-讧	hlau	1
-谎	hle;	1
-诲	hlea	1
-扈	hlov	1
-褐	hloz	1
-祜	hluo	1
-讳	hluu	1
-鹤	hlza	1
-豢	hma;	1
-烘	hme/	1
-煳	hmuv	1
-恢	hna/	1
-憾	hna;	1
-恒	hnao	1
-宦	hnau	1
-宏	hnav	1
-悔	hnea	1
-惶	hneo	1
-寰	hnoe	1
-怙	hnuo	1
-骸	ho;/	1
-虾	hoau	1
-贿	hoav	1
-蚶	hoea	1
-骺	hoee	1
-圜	hooa	1
-蛔	hooo	1
-逅	hq;v	1
-颢	hre;	1
-晦	hrea	1
-皓	hreo	1
-昊	hru;	1
-晃	hrue	1
-鼾	hruu	1
-曷	hrz/	1
-齁	hrzo	1
-馄	hsoa	1
-嬛	hsoo	1
-惑	hsv;	1
-氦	ht;e	1
-赫	huu/	1
-恚	huv;	1
-斛	hw;u	1
-狐	hwee	1
-獾	hweo	1
-凰	hweu	1
-奂	hwo;	1
-猾	hwov	1
-猢	hwuv	1
-绘	hx/u	1
-砸	iaao	1
-臧	iaau	1
-砧	iaua	1
-殖	iauo	1
-咫	ibo/	1
-帚	ibou	1
-梓	ic;/	1
-柱	ic;a	1
-榨	ic;e	1
-樟	ic;o	1
-棕	ic;u	1
-杖	ica;	1
-柘	icao	1
-桎	icau	1
-椎	ice;	1
-栀	icee	1
-栉	icev	1
-栈	icu;	1
-桢	icua	1
-榛	icue	1
-植	icuo	1
-杼	icv;	1
-札	icvv	1
-滋	id/v	1
-漳	id;o	1
-湛	ida/	1
-涿	ida;	1
-渣	idao	1
-滞	idau	1
-洙	idea	1
-浊	ido;	1
-渍	idu/	1
-渚	iduo	1
-汁	iduu	1
-濯	idv;	1
-涨	idva	1
-淄	idvo	1
-泽	idvu	1
-潴	idzu	1
-蔗	ie;;	1
-藻	ie;o	1
-蘸	ieau	1
-芷	ieua	1
-茁	ievv	1
-枣	if;;	1
-鬃	if;a	1
-醉	if;u	1
-甄	ifa;	1
-栽	ifau	1
-酢	ifea	1
-煮	ifo;	1
-哉	ifoo	1
-酯	ifzo	1
-璋	ig;o	1
-瓒	igea	1
-赘	igo/	1
-盏	igoo	1
-瑱	iguo	1
-疹	ih/e	1
-卒	ih/u	1
-瘴	ih;o	1
-震	ihaa	1
-斋	ihao	1
-症	ihau	1
-族	ihea	1
-彰	ihee	1
-衷	ihoe	1
-咨	ihoo	1
-章	ihou	1
-庄	ihua	1
-壮	ihuu	1
-痣	ihuv	1
-恣	ihv;	1
-妆	ihve	1
-咤	ii;e	1
-跖	iiao	1
-咂	iiav	1
-咋	iiea	1
-唣	iieo	1
-吒	iiev	1
-咀	iioa	1
-躁	iioo	1
-嘬	iiov	1
-啧	iiu/	1
-趾	iiua	1
-吱	iiuv	1
-啁	iizu	1
-咒	iizz	1
-僮	ij;o	1
-仗	ija;	1
-佐	ijaa	1
-侄	ijau	1
-俎	ijoa	1
-闸	ijou	1
-帧	iju/	1
-侦	ijua	1
-债	ijuo	1
-拄	ik;a	1
-撞	ik;o	1
-挝	ika;	1
-振	ikau	1
-挚	ikea	1
-折	ikee	1
-攒	ikeo	1
-攥	ikeu	1
-蛰	iko;	1
-徵	ikoe	1
-哲	ikoo	1
-拽	ikov	1
-揍	ikuu	1
-擢	ikv;	1
-拯	ikva	1
-撰	ikve	1
-摺	ikvo	1
-拙	ikvu	1
-扎	ikvv	1
-执	ikz;	1
-鸷	ikza	1
-挣	ikzv	1
-谪	il;o	1
-翟	ile;	1
-诛	ilea	1
-诈	ileu	1
-蚤	ilo;	1
-诅	iloa	1
-祝	iloe	1
-祉	ilua	1
-褶	ilve	1
-祗	ilz;	1
-鸩	ilza	1
-诤	ilzu	1
-诌	ilzv	1
-兆	im;;	1
-炷	im;a	1
-粽	im;u	1
-糟	imao	1
-繇	imev	1
-炽	imo/	1
-燥	imoa	1
-燥	imoo	1
-粘	imuo	1
-灶	imuu	1
-兹	imv;	1
-孳	imvu	1
-籽	imvv	1
-憎	in/o	1
-寨	inau	1
-窒	inav	1
-窄	inea	1
-惴	inoa	1
-祯	inua	1
-赠	io/o	1
-眨	io/v	1
-贮	io;a	1
-赃	io;u	1
-贼	ioa;	1
-赈	ioaa	1
-蛭	ioau	1
-崭	ioav	1
-颛	ioe/	1
-蛛	ioe;	1
-账	ioea	1
-蚱	ioeu	1
-眨	ioev	1
-盅	iooa	1
-崽	ioov	1
-峙	iou;	1
-罪	ioua	1
-罩	iouo	1
-胄	iova	1
-瞩	iove	1
-瞻	ioz;	1
-睁	iozv	1
-追	ir;v	1
-侏	ireu	1
-錾	is/a	1
-辄	isau	1
-斩	isee	1
-轴	isoa	1
-轴	isoo	1
-匝	isou	1
-辎	isvo	1
-郅	isvu	1
-朱	it;;	1
-箴	ita;	1
-乍	itaa	1
-簪	itao	1
-稚	ite;	1
-秩	itea	1
-笊	itee	1
-雉	iteu	1
-秭	itev	1
-赞	ito/	1
-租	itoa	1
-纂	itov	1
-稹	itu/	1
-毡	itua	1
-箸	ituo	1
-竺	ituu	1
-篆	itv;	1
-赵	iu/;	1
-凿	iu/v	1
-赭	iuue	1
-喆	iuuo	1
-胗	iv/e	1
-膣	iv;a	1
-脏	iv;u	1
-奘	iva;	1
-肘	ivau	1
-孜	ivea	1
-肿	ivou	1
-肢	ivuv	1
-鳟	iw/a	1
-兆	iw;;	1
-獐	iw;u	1
-猹	iwau	1
-昝	iwoo	1
-鲭	iwuv	1
-馔	iwve	1
-邹	iwvv	1
-缯	ix/o	1
-绽	ix;a	1
-驻	ix;u	1
-骓	ixe;	1
-缜	ixuo	1
-绰	ixuu	1
-缁	ixvo	1
-绌	ixvu	1
-绉	ixzv	1
-镇	iyao	1
-桌	iyau	1
-铢	iyea	1
-贞	iyo/	1
-占	iyoo	1
-铡	iyou	1
-镯	iyoz	1
-铸	iyua	1
-钻	iyuo	1
-卓	iyuu	1
-龇	iyuv	1
-硷	ja/a	1
-礓	jaao	1
-礁	jae;	1
-疆	jbao	1
-犟	jbea	1
-届	jboa	1
-君	jboo	1
-剧	jbuu	1
-忌	jbv;	1
-郡	jbvu	1
-橛	jca/	1
-柩	jcav	1
-桔	jcuo	1
-椒	jcuv	1
-枷	jczo	1
-浃	jd;;	1
-酒	jdau	1
-浇	jdav	1
-湫	jdea	1
-沮	jdoa	1
-涧	jdou	1
-涓	jdov	1
-泾	jdva	1
-浸	jdvv	1
-浚	jdvz	1
-茭	je;/	1
-荚	je;;	1
-荠	je;e	1
-菅	je;v	1
-蒋	je;z	1
-蕨	jea/	1
-菁	jeaa	1
-苣	jeav	1
-蕉	jee;	1
-茧	jeo;	1
-苋	jeoe	1
-莒	jeoo	1
-藉	jeue	1
-葭	jevv	1
-芨	jez;	1
-茄	jezo	1
-蓟	jezu	1
-棘	jfau	1
-戟	jfav	1
-截	jfe;	1
-靳	jfee	1
-聚	jfeu	1
-贾	jfo/	1
-觐	jfoe	1
-兢	jfue	1
-髻	jfuo	1
-酵	jfuv	1
-瑾	jgeo	1
-珏	jgu;	1
-井	jguu	1
-玖	jgz;	1
-珈	jgzo	1
-玑	jgzv	1
-疥	jh/e	1
-瘠	jh/v	1
-夹	jh;;	1
-霁	jh;e	1
-奖	jha;	1
-酱	jhao	1
-桨	jhau	1
-颊	jhe/	1
-旌	jhea	1
-齑	jheu	1
-疽	jhoa	1
-竞	jhoe	1
-竭	jhoz	1
-浆	jhu;	1
-剂	jhuu	1
-靖	jhuv	1
-痉	jhva	1
-疖	jhvu	1
-脊	jhvv	1
-竣	jhvz	1
-疚	jhz;	1
-鹫	jhza	1
-痂	jhzo	1
-嗟	ji/a	1
-跻	ji;e	1
-蹶	jia/	1
-噘	jia;	1
-噤	jiau	1
-喈	jiav	1
-噱	jiua	1
-咭	jiuo	1
-踞	jivu	1
-叽	jizz	1
-俭	jj/a	1
-倦	jj/v	1
-佼	jj;/	1
-焦	jj;;	1
-侥	jjaa	1
-僵	jjao	1
-僭	jjav	1
-牮	jjea	1
-儆	jjee	1
-借	jjeo	1
-觎	jjoe	1
-偈	jjoz	1
-佶	jjuo	1
-佳	jjuu	1
-伎	jjuv	1
-仅	jjv;	1
-倨	jjvo	1
-倔	jjvu	1
-健	jjvv	1
-俊	jjvz	1
-阄	jjzo	1
-挟	jk;;	1
-搅	jk;o	1
-撅	jka/	1
-拣	jka;	1
-捷	jkav	1
-攫	jko;	1
-捐	jkov	1
-拮	jkuo	1
-街	jkuu	1
-抉	jkv;	1
-掘	jkvv	1
-掬	jkz/	1
-衿	jl/v	1
-谏	jla;	1
-诫	jlaa	1
-襟	jlau	1
-诫	jlav	1
-颈	jle/	1
-谨	jleo	1
-诘	jluo	1
-讦	jluu	1
-诀	jlv;	1
-诀	jlva	1
-谲	jlvo	1
-裾	jlvu	1
-肩	jlvv	1
-鸡	jlza	1
-皲	jlzv	1
-讥	jlzz	1
-煎	jm;;	1
-桀	jmau	1
-眷	jmoa	1
-炯	jmoo	1
-羯	jmoz	1
-烬	jmv;	1
-焗	jmva	1
-姜	jmve	1
-翦	jmvv	1
-悸	jnea	1
-憬	jno;	1
-蹇	jnou	1
-囧	jo/v	1
-迥	jo;v	1
-畸	joaa	1
-睫	joav	1
-瞿	joe;	1
-羁	joev	1
-贱	jou;	1
-巾	jouu	1
-睛	jouv	1
-囝	jova	1
-崛	jovv	1
-峻	jovz	1
-皎	jr;/	1
-舅	jroz	1
-姣	js;/	1
-嫉	js;e	1
-姬	jsau	1
-婕	jsav	1
-娇	jsea	1
-匠	jsee	1
-轿	jseu	1
-辑	jsoa	1
-娟	jsov	1
-奸	jsuu	1
-婧	jsuv	1
-箭	jt/v	1
-榘	jta;	1
-犄	jtaa	1
-嵇	jtao	1
-箕	jtau	1
-稽	jtaz	1
-积	jto/	1
-笕	jtoe	1
-稷	jtoz	1
-笺	jtu;	1
-秸	jtuo	1
-筠	jtuz	1
-毽	jtva	1
-犍	jtvv	1
-筋	jtvz	1
-笳	jtzo	1
-吉	juoo	1
-赳	juvu	1
-圾	juz;	1
-嘉	juzo	1
-劫	juzz	1
-孓	jv;;	1
-阱	jvuu	1
-脚	jvuv	1
-腱	jvv;	1
-胫	jvva	1
-肌	jvzz	1
-饺	jw;/	1
-狡	jw;;	1
-鲸	jw;u	1
-飓	jwo/	1
-狙	jwoa	1
-咎	jwoo	1
-狷	jwov	1
-饯	jwu;	1
-鲫	jwvv	1
-鸠	jwza	1
-饥	jwzz	1
-缄	jxao	1
-缙	jxau	1
-缴	jxee	1
-缉	jxoa	1
-骥	jxua	1
-剿	jxuu	1
-纠	jxvv	1
-骏	jxvz	1
-驹	jxzo	1
-绛	jxzv	1
-铰	jy;/	1
-镓	jy;a	1
-遽	jy;v	1
-镢	jya/	1
-钜	jyav	1
-镌	jyeu	1
-锏	jyoo	1
-钾	jyou	1
-锔	jyvo	1
-锯	jyvu	1
-乩	jyvv	1
-磕	kauo	1
-奎	kauu	1
-柯	kcau	1
-槛	kcuo	1
-溃	kdoo	1
-髡	kfav	1
-疴	khau	1
-邝	khvu	1
-喀	ki;o	1
-吭	ki;z	1
-哐	kiav	1
-咔	kiua	1
-嗑	kiuo	1
-跬	kiuu	1
-侉	kjau	1
-郐	kjvu	1
-扩	kk;e	1
-抠	kka/	1
-挎	kkau	1
-揩	kkav	1
-捆	kkoa	1
-糠	km;v	1
-忾	knea	1
-宽	kneo	1
-窠	kno;	1
-悝	knoa	1
-愦	knoo	1
-恺	knov	1
-窥	knuo	1
-窟	knvv	1
-困	koa;	1
-蝰	koau	1
-骷	kouo	1
-岿	kouv	1
-睽	kovu	1
-魁	kr;u	1
-犒	kt;o	1
-稞	kto;	1
-氪	ktuo	1
-逵	ku;v	1
-坷	kuao	1
-垮	kuau	1
-坎	kuz/	1
-壳	kuzz	1
-狯	kw/u	1
-鲲	kwoa	1
-钶	kyau	1
-锞	kyo;	1
-铿	kyuu	1
-殓	la/a	1
-砬	la;a	1
-硫	la;e	1
-裂	la;o	1
-磊	laaa	1
-聋	laau	1
-砺	laav	1
-厘	laoa	1
-垄	lauu	1
-砾	laz;	1
-鹩	laza	1
-尥	lazo	1
-栏	lc/a	1
-榈	lcoo	1
-榄	lcuo	1
-棂	lcv/	1
-榔	lcvv	1
-橹	lczo	1
-柳	lczv	1
-鎏	ld/a	1
-潋	ld/e	1
-泠	ld/v	1
-沦	ld/z	1
-濂	ld;/	1
-涞	ld;;	1
-漉	ld;a	1
-漓	ld;o	1
-浏	ld;u	1
-逦	ld;v	1
-涟	lda;	1
-淋	ldaa	1
-潦	ldao	1
-沥	ldaz	1
-丽	ldo;	1
-澜	ldoa	1
-泸	ldua	1
-滤	lduv	1
-漏	ldva	1
-郦	ldvu	1
-泺	ldz;	1
-鹂	ldza	1
-溜	ldzo	1
-蕾	le;o	1
-藜	lee/	1
-莅	lee;	1
-荦	leea	1
-蔺	leoe	1
-菱	leuz	1
-蓼	lev/	1
-荔	lezz	1
-酹	lf/a	1
-聆	lf/v	1
-酪	lfzo	1
-聊	lfzv	1
-勒	lfzz	1
-耧	lg/v	1
-耒	lg;;	1
-琉	lg;e	1
-琅	lg;v	1
-珑	lga;	1
-琏	lgav	1
-六	lh//	1
-廉	lh/;	1
-銮	lh/a	1
-廖	lh/e	1
-零	lh/v	1
-麟	lh/z	1
-凛	lh;o	1
-癞	lha/	1
-霖	lhaa	1
-栾	lhau	1
-鹿	lhav	1
-雳	lhaz	1
-挛	lhea	1
-痢	lheu	1
-痨	lhez	1
-赉	lho/	1
-脔	lho;	1
-斓	lhoa	1
-雷	lhoo	1
-峦	lhou	1
-羸	lhov	1
-冽	lhuu	1
-凌	lhuz	1
-廖	lhv/	1
-恋	lhv;	1
-孪	lhva	1
-庐	lhve	1
-疗	lhvu	1
-廊	lhvv	1
-癃	lhvz	1
-鸾	lhza	1
-瘤	lhzo	1
-呤	li/v	1
-咙	lia;	1
-嘹	liao	1
-咧	liau	1
-躏	lieo	1
-嘞	liez	1
-哩	lioa	1
-啰	lioz	1
-唳	liva	1
-啷	livv	1
-鹭	liza	1
-噜	lizo	1
-伶	lj/v	1
-阑	lja;	1
-俪	ljao	1
-僚	ljau	1
-敛	ljea	1
-俐	ljeu	1
-赁	ljo/	1
-儡	ljo;	1
-俚	ljoa	1
-闾	ljoo	1
-佬	ljuv	1
-翎	ljvv	1
-绺	ljzo	1
-拎	lk/;	1
-捋	lk/a	1
-搂	lk/v	1
-抡	lk/z	1
-擂	lk;o	1
-撩	lkao	1
-摞	lkou	1
-撂	lkoz	1
-掳	lkuz	1
-捩	lkva	1
-戾	llao	1
-裢	llav	1
-裸	llo;	1
-谰	lloa	1
-褛	llov	1
-褴	lluo	1
-禄	llv;	1
-郎	llvu	1
-朗	llvv	1
-羚	lm/v	1
-遴	lm;v	1
-燎	lmao	1
-炼	lmav	1
-娄	lmva	1
-炉	lmve	1
-粼	lmvv	1
-熘	lmzo	1
-寥	ln/e	1
-寮	lnao	1
-愣	lno;	1
-窿	lnvz	1
-蛉	lo/;	1
-髅	lo/v	1
-嶙	lo/z	1
-睐	lo;;	1
-詈	lo;o	1
-瞭	loao	1
-崂	loez	1
-螺	loov	1
-螂	lovv	1
-岚	loz/	1
-赂	lozo	1
-辚	ls/z	1
-轳	lsua	1
-篓	lt/v	1
-笠	lt;a	1
-梨	ltau	1
-籁	ltaz	1
-黧	lto;	1
-箓	ltva	1
-氯	ltvu	1
-坜	luaz	1
-陇	lva;	1
-陋	lvav	1
-胪	lvua	1
-陵	lvuz	1
-肋	lvzz	1
-遛	lw;v	1
-鲢	lwa;	1
-鲡	lwao	1
-雒	lwe;	1
-猁	lweu	1
-鲤	lwoa	1
-鲁	lwoo	1
-狸	lwou	1
-猡	lwoz	1
-卵	lwv;	1
-纶	lx/z	1
-骊	lxao	1
-绫	lxuz	1
-驴	lxve	1
-骆	lxzo	1
-锊	ly/a	1
-铃	ly/v	1
-镭	ly;o	1
-镣	lyao	1
-镏	lye;	1
-卤	lyo/	1
-镧	lyo;	1
-锂	lyoa	1
-铝	lyoo	1
-锒	lyv;	1
-鸬	lyza	1
-枚	mcea	1
-棉	mceu	1
-懋	mcv;	1
-湎	mdao	1
-漭	mdea	1
-濛	mdeu	1
-汨	mdoa	1
-渑	mdoo	1
-渺	mdou	1
-淼	mduu	1
-溟	mdv;	1
-泯	mdva	1
-湄	mdvo	1
-蘑	me;a	1
-芒	me;v	1
-蔑	mea;	1
-莽	meaa	1
-暮	meao	1
-墓	meau	1
-莓	meea	1
-苗	meoa	1
-蔓	meoo	1
-幕	meou	1
-萌	meov	1
-慕	meu;	1
-茉	meuo	1
-蓦	meva	1
-茗	mezo	1
-髦	mfev	1
-瑁	mgoo	1
-珉	mgva	1
-麋	mh/;	1
-霾	mh/o	1
-霉	mhea	1
-瘼	mheo	1
-魔	mheu	1
-麽	mhev	1
-蛮	mho;	1
-亩	mhoa	1
-盲	mhoo	1
-袤	mhve	1
-邙	mhvu	1
-哞	miv;	1
-抿	mkva	1
-牟	mlea	1
-谟	mleo	1
-蝥	mlo;	1
-幂	mloa	1
-谩	mloo	1
-谬	mlv/	1
-袂	mlva	1
-谧	mlvo	1
-邈	mm;v	1
-貘	mmeo	1
-觅	mmoe	1
-熳	mmoo	1
-焖	mmov	1
-懵	mneo	1
-悯	mno;	1
-密	mnou	1
-宓	mnv;	1
-寐	mnvu	1
-皿	moaa	1
-蟒	moea	1
-瞄	moeo	1
-蠓	moeu	1
-帽	mooo	1
-幔	moov	1
-眇	moue	1
-睦	mouu	1
-瞑	mov;	1
-蜢	mova	1
-岷	mova	1
-眸	move	1
-嵋	movo	1
-蚂	movv	1
-魅	mru;	1
-暝	mrvo	1
-嬷	ms;a	1
-嫫	mseo	1
-妙	msue	1
-姆	msv;	1
-牧	mtea	1
-穆	mteu	1
-秣	mtu;	1
-牡	mtuu	1
-秘	mtv;	1
-朦	mveu	1
-孟	mvoo	1
-馍	mweo	1
-贸	mwo/	1
-馒	mwoo	1
-鳗	mwov	1
-猕	mwva	1
-卯	mwvu	1
-乜	mxvv	1
-孬	navv	1
-溺	ndv;	1
-泥	ndvz	1
-聂	nfvv	1
-耨	ngau	1
-旎	nhea	1
-蹑	niau	1
-啮	niua	1
-哝	niv;	1
-呶	nive	1
-恁	njv;	1
-傩	njve	1
-侬	njvo	1
-伲	njvz	1
-捺	nkau	1
-撵	nkua	1
-搦	nkv;	1
-扭	nkva	1
-挪	nkvv	1
-衲	nlo;	1
-糯	nm;a	1
-懦	nn;a	1
-怩	nnva	1
-奴	nsv;	1
-弩	nsva	1
-妞	nsvu	1
-娜	nsvv	1
-妮	nsvz	1
-妳	nszu	1
-奶	nszz	1
-黏	ntua	1
-狞	nw;a	1
-馕	nwau	1
-猊	nweu	1
-狃	nwvu	1
-铙	nyav	1
-钕	nyve	1
-殍	pa/v	1
-砒	paav	1
-邳	pavv	1
-譬	pb;o	1
-溥	pda;	1
-浦	pdau	1
-濮	pdeu	1
-泡	pdzv	1
-蒲	pe;a	1
-菩	pe;o	1
-苹	pe;u	1
-苤	peaa	1
-莆	peau	1
-剽	pfuu	1
-霈	ph;;	1
-痞	phao	1
-疱	phzv	1
-叭	pi//	1
-呸	piaa	1
-哌	piee	1
-噗	piu/	1
-嘭	piue	1
-蹁	pivo	1
-咆	pizv	1
-凭	pjzz	1
-扒	pk//	1
-撇	pk/e	1
-抨	pk;u	1
-撇	pkue	1
-捧	pkuu	1
-披	pkzv	1
-翩	plvv	1
-粕	pmeo	1
-盆	pmoa	1
-瞥	pmoo	1
-蟠	po/o	1
-螃	po;;	1
-瞟	poau	1
-毗	poav	1
-蜱	poeu	1
-乓	pr;;	1
-魄	preu	1
-娉	psoa	1
-牝	ptzv	1
-坯	puaa	1
-胼	pv/u	1
-脬	pv/v	1
-膀	pv;;	1
-胚	pvaa	1
-爿	pvee	1
-纰	pxav	1
-槭	qca;	1
-栖	qcau	1
-楸	qce/	1
-樵	qce;	1
-橇	qcea	1
-榷	qcve	1
-淇	qda/	1
-渠	qdau	1
-沏	qdav	1
-汔	qdea	1
-泅	qdo/	1
-潜	qduo	1
-芩	qe/v	1
-萋	qeav	1
-颧	qee/	1
-荞	qeea	1
-芹	qeee	1
-芊	qeeu	1
-荨	qeva	1
-芪	qezv	1
-鬈	qf/v	1
-逑	qf;v	1
-醛	qfe/	1
-蛩	qfo;	1
-綦	qfvu	1
-欺	qfz/	1
-鹊	qfza	1
-契	qga;	1
-琦	qgaa	1
-契	qgao	1
-琪	qgau	1
-麒	qha/	1
-弃	qhau	1
-凄	qhav	1
-旗	qhea	1
-噙	qi/;	1
-跄	qi/v	1
-嘁	qiau	1
-佥	qja;	1
-俅	qjau	1
-戗	qjav	1
-仟	qjea	1
-倩	qjuo	1
-劁	qjuu	1
-俏	qjuv	1
-俟	qjve	1
-揿	qkea	1
-诠	ql/u	1
-巯	ql;e	1
-逡	ql;v	1
-讫	qlea	1
-诮	qluv	1
-祁	qlvu	1
-诎	qlvv	1
-糗	qmeu	1
-羟	qmva	1
-郄	qmvv	1
-券	qmzz	1
-惬	qna;	1
-窍	qnau	1
-愀	qnea	1
-褰	qnu;	1
-搴	qnue	1
-悭	qnuu	1
-怯	qnuv	1
-骞	qnva	1
-囚	qo/;	1
-蜣	qo/u	1
-黔	qo/v	1
-髂	qo;z	1
-嵌	qoau	1
-岖	qoav	1
-蛆	qooa	1
-岐	qou;	1
-畦	qouu	1
-蜻	qouv	1
-虬	qovv	1
-黢	qovz	1
-躯	qra/	1
-辁	qs/u	1
-嫱	qsuo	1
-翘	qsvv	1
-签	qt/a	1
-筌	qt/u	1
-迄	qt;v	1
-箝	qtau	1
-筇	qtav	1
-箐	qtuo	1
-憩	qtv;	1
-氢	qtva	1
-乞	qtvv	1
-磬	quao	1
-脐	qv;e	1
-绮	qxaa	1
-锵	qy;z	1
-锹	qye/	1
-钎	qyea	1
-龋	qyeo	1
-锲	qyua	1
-铅	qyzo	1
-濡	rd;a	1
-沤	rda/	1
-溽	rdaa	1
-洱	rdau	1
-蔼	re;o	1
-茸	reau	1
-苒	reoa	1
-萼	reou	1
-蕊	rev;	1
-茹	revo	1
-髯	rfoa	1
-鞣	rfva	1
-遨	rg;v	1
-珥	rgau	1
-螯	rgo;	1
-耦	rgoo	1
-鳌	rgza	1
-瓤	rhee	1
-嗌	ri/o	1
-嗳	ri/v	1
-嚅	ri;a	1
-唔	riao	1
-呃	riav	1
-哎	rie/	1
-颚	rie;	1
-噢	rieu	1
-蹂	riva	1
-鄂	rivu	1
-俺	rjao	1
-偌	rjea	1
-仁	rjua	1
-闰	rjuu	1
-攘	rk;a	1
-挠	rkaa	1
-捱	rkau	1
-扼	rkav	1
-揉	rkva	1
-拗	rkvv	1
-褥	rlau	1
-讴	rlav	1
-冗	rlee	1
-讹	rleu	1
-糅	rmva	1
-懊	rneu	1
-愕	rnou	1
-蠕	ro;a	1
-冉	roa;	1
-凹	roaa	1
-蛾	roea	1
-蚋	roo;	1
-遏	rr;v	1
-娆	rsav	1
-妊	rsea	1
-媪	rsoo	1
-轫	rsz;	1
-鸥	rsza	1
-殴	rszv	1
-胺	rv;v	1
-狨	rwaa	1
-饵	rwau	1
-饪	rweu	1
-缛	rxaa	1
-锷	ryou	1
-戍	sa;;	1
-厮	saau	1
-硕	sae/	1
-殇	saea	1
-蜃	sao;	1
-盛	saoa	1
-豕	saoo	1
-砷	saou	1
-砂	saue	1
-卅	sauu	1
-属	sbeo	1
-栓	sc/u	1
-梳	sc;e	1
-柿	sc;o	1
-枢	sca/	1
-椹	scau	1
-枢	scav	1
-虱	sceo	1
-梭	scv/	1
-淞	sda/	1
-沭	sda;	1
-涑	sdao	1
-漱	sdau	1
-潸	sdav	1
-挲	sdea	1
-溲	sdeu	1
-泗	sdoa	1
-汕	sdou	1
-涉	sduu	1
-淑	sduv	1
-渗	sdve	1
-涮	sdvu	1
-汜	sdvv	1
-鲨	sdzo	1
-蓑	se;o	1
-莘	se;u	1
-苫	seuo	1
-菽	seuv	1
-蔬	sev;	1
-荪	sevu	1
-芍	sez;	1
-苕	sezo	1
-芟	sezv	1
-粟	sf/o	1
-酥	sfea	1
-斯	sfee	1
-啬	sfoo	1
-丧	sfu;	1
-丧	sfv;	1
-肆	sfvu	1
-琐	sguo	1
-瑟	sgv;	1
-庶	sh;;	1
-痧	sh;u	1
-霎	sh;v	1
-竦	shau	1
-庶	she;	1
-霰	shee	1
-麝	sheu	1
-衰	shoe	1
-疝	shoo	1
-塾	shuu	1
-癖	shv;	1
-瘆	shve	1
-瘙	shvo	1
-煽	shvv	1
-飒	shz/	1
-韶	shzo	1
-嗽	siau	1
-嗖	sieu	1
-嗜	siuo	1
-嗦	siuv	1
-唆	siv/	1
-咝	siva	1
-吮	sive	1
-嗣	sivo	1
-唰	sivu	1
-俗	sj//	1
-僧	sj/o	1
-伞	sj/u	1
-裳	sj;;	1
-闩	sjaa	1
-傻	sjeo	1
-赏	sjo/	1
-裳	sjo;	1
-售	sjoo	1
-伸	sjou	1
-佘	sju;	1
-侍	sjua	1
-舍	sjuo	1
-隼	sjuu	1
-怂	sjv;	1
-伺	sjva	1
-俞	sjvu	1
-舒	sjvv	1
-擞	sk/e	1
-拾	sk/o	1
-拴	sk/u	1
-擅	sk;o	1
-摔	sk;u	1
-逝	sk;v	1
-撕	skau	1
-拭	skav	1
-撒	skee	1
-搡	skva	1
-搔	skvo	1
-抒	skvv	1
-谥	sl/o	1
-讼	sl/v	1
-桑	slau	1
-衫	slee	1
-讪	sloo	1
-谡	sloz	1
-叁	slua	1
-圣	sluu	1
-诵	slv;	1
-祀	slva	1
-诵	slvo	1
-扇	slvv	1
-熵	sm;o	1
-遂	sm;v	1
-弑	sma;	1
-槊	smau	1
-烧	smav	1
-颂	sme/	1
-兽	smoo	1
-刹	smuu	1
-糁	smve	1
-鄯	smvu	1
-朔	smvv	1
-舜	smza	1
-忪	sn/v	1
-窣	sn;u	1
-悚	snao	1
-宋	snau	1
-慑	snav	1
-恃	snua	1
-慎	snuo	1
-塞	snuu	1
-愫	snuv	1
-蟮	so/o	1
-赊	so/u	1
-嵩	so;o	1
-蟀	so;u	1
-崧	soau	1
-睢	soe;	1
-赎	sou;	1
-蛳	soue	1
-署	souo	1
-墅	souu	1
-赡	soz;	1
-蜀	sozo	1
-艄	sqev	1
-晟	sra;	1
-晒	srau	1
-叟	srv;	1
-孀	ss;a	1
-嬗	ss;o	1
-姝	ssea	1
-恕	ssv;	1
-黍	st/u	1
-矢	st;;	1
-筮	sta/	1
-秫	sta;	1
-簌	stau	1
-笙	stea	1
-筲	stev	1
-舌	stoo	1
-甥	stoz	1
-筛	stua	1
-穑	stuo	1
-剩	stuu	1
-稍	stuv	1
-笋	stve	1
-歃	stz/	1
-膳	sv/o	1
-腧	sv/v	1
-膻	sv;a	1
-疏	sv;e	1
-陕	sv;o	1
-胜	sveu	1
-臊	svoa	1
-祟	svuu	1
-飧	sw/v	1
-勺	sw;;	1
-狩	sw;a	1
-觞	swea	1
-馓	swee	1
-稣	sweo	1
-飕	sweu	1
-馊	swev	1
-鳃	swov	1
-删	swuu	1
-殳	swv;	1
-饲	swvo	1
-狲	swvu	1
-甩	swvv	1
-绶	sx/v	1
-驷	sxoa	1
-绳	sxoo	1
-绅	sxou	1
-纾	sxv;	1
-缫	sxvo	1
-骟	sxvv	1
-鸶	sxza	1
-铄	syzu	1
-殄	ta/e	1
-套	taau	1
-榻	tcov	1
-椭	tcva	1
-烫	td//	1
-滔	td/e	1
-涕	td/v	1
-溏	td;v	1
-沱	td;z	1
-汰	tda;	1
-汀	tdau	1
-溻	tdov	1
-淌	tduo	1
-澹	tdz;	1
-淘	tdze	1
-苔	tevo	1
-菟	tezo	1
-醣	tf;v	1
-醍	tfoa	1
-瑭	tg;v	1
-吞	tgoo	1
-霆	thev	1
-瘫	thv;	1
-饕	ti/v	1
-蹄	ti;o	1
-跎	ti;z	1
-蹋	tiov	1
-踏	tiuo	1
-蹚	tiuu	1
-嚏	tiuv	1
-嗵	tiv;	1
-跆	tivo	1
-趿	tiz;	1
-僮	tj;o	1
-途	tj;v	1
-佗	tj;z	1
-棠	tjoa	1
-傥	tjue	1
-氽	tjuu	1
-倜	tjzu	1
-搪	tk;v	1
-挞	tka;	1
-拓	tkao	1
-挺	tkea	1
-拖	tkev	1
-摊	tkv;	1
-探	tkva	1
-捅	tkvo	1
-掏	tkze	1
-谭	tlau	1
-邰	tlvu	1
-煺	tmv;	1
-烃	tmva	1
-郯	tmvu	1
-窕	tnz;	1
-蜕	to/z	1
-疃	to;o	1
-炭	toa/	1
-凸	toaa	1
-町	toau	1
-囤	toav	1
-畋	toea	1
-螳	toeo	1
-帖	touo	1
-骰	tozv	1
-剔	truu	1
-昙	truv	1
-忒	tsv;	1
-笤	ttzo	1
-坨	tu;z	1
-塌	tuov	1
-填	tuuo	1
-坛	tuuv	1
-粜	tv/;	1
-滕	tv/u	1
-陀	tv;z	1
-肽	tva;	1
-腆	tvo/	1
-逖	tw;v	1
-钽	tyoa	1
-杌	wcav	1
-汶	wd;/	1
-豌	wd;z	1
-渭	wdov	1
-洼	wduu	1
-潍	wdvv	1
-莞	we;u	1
-萎	weev	1
-芜	weuv	1
-琬	wg;z	1
-玮	wguu	1
-雯	wh;/	1
-痦	whau	1
-忘	whv;	1
-弯	whva	1
-妄	whvv	1
-吴	wiu;	1
-哇	wiuu	1
-呜	wiza	1
-伍	wjau	1
-佤	wjav	1
-倭	wjea	1
-仵	wjeu	1
-讳	wluu	1
-婺	wlva	1
-焐	wmau	1
-忤	wnea	1
-惘	wno/	1
-愠	wnoo	1
-怃	wnuv	1
-崴	woav	1
-帷	woe;	1
-嵬	woev	1
-蛙	wouu	1
-帏	wouv	1
-幄	wovu	1
-韪	wruu	1
-婉	ws;z	1
-妩	wsuv	1
-舞	wtz;	1
-圬	wuuv	1
-脘	wv;u	1
-鲔	wwav	1
-猬	wwov	1
-邬	wwvu	1
-绾	wx;v	1
-戌	xaa;	1
-咸	xaao	1
-硒	xaau	1
-咸	xao;	1
-矽	xaz;	1
-弦	xb;;	1
-遐	xb;v	1
-巽	xbe/	1
-迅	xc;v	1
-栖	xcau	1
-朽	xcav	1
-檄	xcee	1
-皙	xceo	1
-榭	xceu	1
-樨	xcvu	1
-淆	xd/a	1
-汹	xd/v	1
-漩	xd;e	1
-泫	xd;v	1
-淅	xdae	1
-泄	xdav	1
-潇	xde;	1
-溴	xdeo	1
-涎	xdeu	1
-泄	xdev	1
-沁	xdv;	1
-浔	xdva	1
-汛	xdvu	1
-汐	xdz;	1
-萱	xe;a	1
-薪	xe;e	1
-薰	xee;	1
-芯	xev;	1
-醺	xfe;	1
-靴	xfez	1
-昔	xfoo	1
-巷	xfvv	1
-瑄	xg;a	1
-刑	xguu	1
-瑕	xgvv	1
-痃	xh;v	1
-亵	xhe;	1
-冼	xhea	1
-襄	xhee	1
-席	xheo	1
-庥	xheu	1
-旋	xhev	1
-痫	xhoa	1
-畜	xhoo	1
-襄	xhue	1
-霄	xhuv	1
-玄	xhv;	1
-畜	xhvo	1
-享	xhvu	1
-霞	xhvv	1
-嚣	xiao	1
-跣	xiea	1
-兄	xiee	1
-嗅	xieo	1
-咻	xieu	1
-呷	xiou	1
-嘻	xiuo	1
-嘘	xiuu	1
-哮	xiuv	1
-勋	xizz	1
-侠	xj;;	1
-闲	xjau	1
-偕	xjav	1
-肖	xjvv	1
-掀	xkee	1
-擤	xkeo	1
-衔	xkeu	1
-携	xkez	1
-撷	xkue	1
-祥	xl/u	1
-熊	xl;;	1
-戏	xla;	1
-谐	xlav	1
-训	xleu	1
-裼	xloz	1
-谑	xlua	1
-禧	xluo	1
-诩	xlvv	1
-煊	xm;a	1
-炫	xm;v	1
-奚	xma;	1
-羲	xmea	1
-悉	xmv;	1
-羞	xmva	1
-郗	xmvu	1
-翔	xmvv	1
-宪	xnea	1
-忻	xnee	1
-恤	xneo	1
-悻	xnu/	1
-窸	xnv;	1
-恂	xnzo	1
-崤	xo/a	1
-瞎	xo;u	1
-眩	xo;v	1
-岫	xoou	1
-悬	xov;	1
-蟓	xozo	1
-勖	xozz	1
-歆	xqz/	1
-晞	xr/a	1
-曦	xr/e	1
-煦	xr;;	1
-晰	xrae	1
-曛	xre;	1
-昕	xree	1
-晌	xreo	1
-魈	xruv	1
-媳	xseu	1
-娴	xsoa	1
-嬉	xsuo	1
-絮	xsvu	1
-婿	xsvv	1
-熏	xt;;	1
-筱	xteu	1
-氙	xtoo	1
-箫	xtv;	1
-埙	xuoo	1
-腺	xveu	1
-胥	xvvv	1
-胁	xvz;	1
-降	xvza	1
-陷	xvze	1
-鳕	xw;;	1
-狭	xw;o	1
-蟹	xwo;	1
-猩	xwoe	1
-旭	xwoo	1
-狎	xwou	1
-郇	xwvv	1
-骧	xx;o	1
-纤	xxea	1
-驯	xxeu	1
-绣	xxez	1
-绪	xxuo	1
-绡	xxuv	1
-锌	xy;u	1
-铉	xy;v	1
-锨	xyee	1
-铣	xyeu	1
-虚	xyua	1
-厌	yaa;	1
-靥	yaaa	1
-雁	yae;	1
-赝	yaeo	1
-魇	yaev	1
-殃	yao;	1
-砚	yaoe	1
-殒	yaoo	1
-奄	yaov	1
-压	yau;	1
-尢	yav;	1
-郁	yavv	1
-椰	ycau	1
-杳	ycoo	1
-柚	ycou	1
-橼	ycvv	1
-檐	ycz;	1
-楹	yczo	1
-浴	yd//	1
-漾	yd/;	1
-淫	yd/e	1
-溢	yd/o	1
-渝	yd/v	1
-淤	yd;/	1
-夷	yd;;	1
-液	yd;e	1
-瀛	yd;v	1
-淹	ydao	1
-涯	ydau	1
-沂	ydee	1
-滢	ydeu	1
-潆	ydev	1
-泱	ydo;	1
-洇	ydoa	1
-滟	yduz	1
-涌	ydvo	1
-漪	ydza	1
-渔	ydzo	1
-薏	ye;v	1
-莜	yeeu	1
-萤	yeo;	1
-茵	yeoa	1
-茔	yeua	1
-芋	yeuu	1
-芸	yeuv	1
-蕴	yevo	1
-萦	yevu	1
-荫	yevv	1
-药	yevz	1
-莺	yeza	1
-苑	yezv	1
-焉	yfa;	1
-酉	yfaa	1
-颐	yfe/	1
-鞅	yfo;	1
-鄢	yfvv	1
-琰	yg//	1
-瑜	yg/v	1
-瑛	ygeo	1
-膺	ygev	1
-盂	ygoa	1
-韫	ygoo	1
-璎	ygov	1
-玥	ygvv	1
-於	yh/;	1
-瘀	yh;/	1
-霪	yh;e	1
-疣	yha;	1
-奕	yhaa	1
-痍	yhav	1
-颜	yhe/	1
-彦	yhee	1
-庾	yheu	1
-鹰	yhez	1
-裔	yho/	1
-赢	yhov	1
-雍	yhv;	1
-兖	yhve	1
-冶	yhvo	1
-庸	yhvu	1
-翊	yhvv	1
-瘾	yhvz	1
-疫	yhz;	1
-鹰	yhza	1
-疡	yhze	1
-毅	yhzv	1
-喻	yi/v	1
-噫	yi;o	1
-唷	yi;v	1
-哑	yiau	1
-咦	yiav	1
-咿	yieu	1
-呓	yiev	1
-咽	yioa	1
-喁	yioo	1
-嘤	yiov	1
-噎	yiua	1
-吆	yiv;	1
-踊	yivo	1
-邑	yivv	1
-哟	yivz	1
-仪	yj/;	1
-佯	yj/u	1
-阏	yj;/	1
-逾	yj;v	1
-倚	yjaa	1
-佑	yjao	1
-俨	yjau	1
-偃	yjav	1
-佚	yjea	1
-闫	yjua	1
-悠	yjv;	1
-伊	yjva	1
-耀	yjve	1
-俑	yjvo	1
-亿	yjvv	1
-阎	yjze	1
-佣	yjzu	1
-徭	yk/e	1
-徉	yk/u	1
-援	yk/v	1
-掖	yk;e	1
-喑	yk;o	1
-唁	yk;u	1
-衙	ykau	1
-揖	ykoa	1
-役	ykz;	1
-拥	ykzu	1
-抑	ykzv	1
-裕	yl//	1
-谣	yl/e	1
-裕	yl/o	1
-谕	yl/v	1
-翌	yl;a	1
-谚	yl;e	1
-谊	yl;o	1
-祐	ylao	1
-羿	ylau	1
-矣	yle;	1
-诱	ylea	1
-允	ylee	1
-谀	yleu	1
-甬	ylou	1
-恿	ylov	1
-谒	yloz	1
-刭	yluu	1
-羽	ylv;	1
-诒	ylvo	1
-郓	ylvv	1
-冤	ylz;	1
-鹬	ylza	1
-豫	ylze	1
-诣	ylzo	1
-爻	ym//	1
-焱	ym/;	1
-烊	ym/u	1
-舀	ymeu	1
-煜	ymo;	1
-丫	ymuu	1
-恙	ymv;	1
-熠	ymve	1
-鹞	ymza	1
-焰	ymze	1
-愉	yn/v	1
-慵	yn;v	1
-寅	yna/	1
-恹	ynaa	1
-宥	ynav	1
-怏	yno;	1
-寓	ynoo	1
-宴	ynov	1
-恽	ynva	1
-怡	ynvo	1
-峪	yo/o	1
-央	yo;;	1
-遗	yo;v	1
-螈	yoae	1
-岩	yoao	1
-崖	yoau	1
-屿	yoav	1
-罂	yoea	1
-曳	yoee	1
-蜒	yoeu	1
-禺	yoo;	1
-蝇	yooo	1
-蜴	yooz	1
-愚	yov;	1
-蚓	yova	1
-婴	yove	1
-贻	yovo	1
-邮	yovu	1
-幽	yovv	1
-黝	yovz	1
-鹦	yoza	1
-禹	yr;;	1
-昱	yr;a	1
-晏	yr;v	1
-曰	yraa	1
-粤	yrav	1
-晔	yreu	1
-鼹	yro;	1
-臾	yroo	1
-岳	yrou	1
-劓	yruu	1
-媛	ys/v	1
-弋	ys;;	1
-迓	ys;v	1
-妪	ysa/	1
-嫣	ysa;	1
-娅	ysau	1
-尧	ysav	1
-轶	yse;	1
-妖	ysea	1
-牙	ysee	1
-彧	yso;	1
-娱	ysou	1
-辕	ysuo	1
-妤	ysvv	1
-欤	ysz/	1
-鸢	ysza	1
-毓	yt;e	1
-迤	yt;v	1
-墉	yu;v	1
-壹	yua/	1
-域	yua;	1
-垣	yuao	1
-堙	yuau	1
-堰	yuav	1
-盐	yuoa	1
-邺	yuvv	1
-腋	yv;e	1
-臆	yv;o	1
-臃	yv;v	1
-腌	yvao	1
-胰	yvav	1
-隅	yvo;	1
-胭	yvoa	1
-陨	yvoo	1
-匀	yw;a	1
-逸	yw;v	1
-鱿	ywa;	1
-颍	ywe/	1
-怨	ywv;	1
-狱	ywva	1
-饴	ywvo	1
-肄	ywvu	1
-疑	ywvv	1
-缢	yx/o	1
-彝	yxau	1
-邕	yxov	1
-驿	yxv;	1
-绎	yxvu	1
-驭	yxvv	1
-龉	yyau	1
-铘	yyav	1
-铀	yyoa	1
-玻璃	bgz	1
-嫦娥	csu	1
-玳瑁	dge	1
-玷污	dgu	1
-吩咐	fi/	1
-疙瘩	ghe	1
-旮旯	gzo	1
-诙谐	hla	1
-蛤蟆	ho/	1
-蝴蝶	hou	1
-囫囵	hoz	1
-鹧鸪	ihz	1
-觊觎	joo	1
-咖啡	kiz	1
-傀儡	kje	1
-篱笆	lt;	1
-垃圾	lu;	1
-趔趄	lua	1
-邋遢	lx;	1
-忸怩	nnv	1
-琵琶	pga	1
-彷徨	pk;	1
-缥缈	pxa	1
-蛐蛐	qoo	1
-鹌鹑	raz	1
-峨嵋	roe	1
-婀娜	rsv	1
-忐忑	tyv	1
-龌龊	wyv	1
-唏嘘	xi/	1
-羡慕	xm;	1
-蟋蟀	xo/	1
-蜥蜴	xoa	1
-卜	bj;;;	1
-钵	byau;	1
-噌	ci/o;	1
-踹	cioa;	1
-跶	dia;;	1
-蛄	gouo;	1
-秆	gtuu;	1
-鸹	gtza;	1
-喉	hiev;	1
-痔	ihua;	1
-踵	iiea;	1
-蜇	iko;;	1
-祚	ileu;	1
-蛀	io;a;	1
-嶂	io;o;	1
-幛	io;u;	1
-锃	iyou;	1
-钊	iyuu;	1
-暨	jboa;	1
-豇	jdau;	1
-醮	jfe;;	1
-刳	kauu;	1
-瘘	lh/v;	1
-冽	lhau;	1
-膂	lhva;	1
-娈	lhve;	1
-偻	lj/v;	1
-镂	ly/v;	1
-檬	mcea;	1
-苜	meou;	1
-螨	moea;	1
-蟆	moeo;	1
-螟	movo;	1
-驽	nsvv;	1
-庖	phzv;	1
-蹼	piu/;	1
-蜷	qo/v;	1
-哂	siau;	1
-仕	sjua;	1
-绥	sx/v;	1
-序	xhv;;	1
-湮	ydau;	1
-胤	yevv;	1
-嬴	yhov;	1
-呦	yivz;	1
-阉	yjao;	1
-烨	ymeu;	1
-炀	ymze;	1
-愠	ynoo;	1
-蜮	yoav;	1
-蛹	yovo;	1
-鸯	yoza;	1
-驿	yxvu;	1
-鹁鸪	bfza	1
-蝙蝠	bovo	1
-璀璨	cgoe	1
-痤疮	ch/u	1
-蹉跎	ci/a	1
-踟躇	ciea	1
-徜徉	ckuo	1
-憧憬	cn;o	1
-惭愧	cnav	1
-惆怅	cnzu	1
-蟾蜍	coz;	1
-伧促	cr/v	1
-喋喋	diea	1
-咄咄	divu	1
-诽谤	flua	1
-尴尬	gauo	1
-橄榄	gcve	1
-蝈蝈	goou	1
-旮旯	gwoo	1
-斟酌	ifu;	1
-踯躅	ii/v	1
-蟑螂	io;o	1
-蜘蛛	ioeo	1
-狰狞	iwzv	1
-矍铄	jov;	1
-孑孓	jva;	1
-袈裟	jz;e	1
-咳嗽	ki;;	1
-崆峒	ko;a	1
-蝌蚪	koe;	1
-萝卜	leoz	1
-囹圄	lo/v	1
-耄耋	mfea	1
-腼腆	mvao	1
-磅礴	pa;;	1
-滂沱	pd;;	1
-葡萄	peza	1
-嘌呤	piau	1
-蹒跚	piea	1
-徘徊	pkua	1
-乒乓	pree	1
-蹊跷	qi/a	1
-襁褓	qlvo	1
-崎岖	qoaa	1
-蚯蚓	qoeu	1
-肮脏	rv;z	1
-呻吟	siou	1
-唢呐	siu/	1
-蜿蜒	wo;z	1
-蜈蚣	woou	1
-逶迤	wt;v	1
-逍遥	xj;v	1
-螅蟀	xoeo	1
-牺牲	xtau	1
-邂逅	xw;v	1
-旖旎	yhea	1
-揶揄	ykav	1
-窈窕	ynvz	1
-氤氲	ytoa	1
-鸳鸯	ywza	1
-钥匙	yyvv	1
-踌躇	ciua;	1
-佝偻	gjzo;	1
-峥嵘	iozv;	1
-妯娌	isoa;	1
-吝啬	lhoo;	1
-蝼蚁	lo/v;	1
-不	ba;;	1
-有	yava	1
-一	ydaa	1
-半	bmu	1
-办	bz;	1
-程	cto	1
-等	dtu	1
-复	fto	1
-公	gmv	1
-果	go;	1
-告	gto	1
-化	hjz	1
-黑	ho;	1
-或	hso	1
-展	ibe	1
-真	if/	1
-早	iru	1
-怎	itv	1
-极	jcz	1
-交	jh/	1
-军	jla	1
-精	jmu	1
-乐	lw;	1
-母	mx;	1
-呢	niv	1
-拿	njo	1
-能	nlz	1
-其	qf/	1
-七	qsa	1
-切	qsz	1
-却	quv	1
-让	rlu	1
-入	rm/	1
-容	rno	1
-如	rso	1
-师	spa	1
-少	spe	1
-谈	tl/	1
-通	tl;	1
-调	tlz	1
-它	tnz	1
-图	toz	1
-无	wgv	1
-现	xgo	1
-学	xnv	1
-笑	xte	1
-影	yre	1
-变	bhvv	1
-吧	bivv	1
-报	bkvv	1
-必	blee	1
-备	bwoo	1
-步	byee	1
-存	cava	1
-产	chee	1
-常	cjoo	1
-传	cju;	1
-曾	cmoa	1
-场	cuzz	1
-带	dfou	1
-底	dhz;	1
-代	djav	1
-但	djoo	1
-得	dkoa	1
-调	dlzu	1
-断	dmee	1
-单	dmou	1
-东	ds;;	1
-第	dtvv	1
-方	fhvv	1
-格	gcz;	1
-更	gf;;	1
-过	gf;v	1
-古	gfoa	1
-功	gfzz	1
-高	ghoo	1
-刚	gouu	1
-何	hjao	1
-合	hjoo	1
-候	hjva	1
-乎	hmuu	1
-再	ifaa	1
-整	ifaa	1
-者	ifoa	1
-直	ifoa	1
-装	ih;;	1
-主	ihaa	1
-站	ihuo	1
-住	ij;a	1
-做	ijue	1
-找	ikav	1
-之	ilvv	1
-着	imoo	1
-最	irav	1
-转	isu;	1
-终	ixz;	1
-己	jbvv	1
-教	jfea	1
-就	jhav	1
-将	jhz;	1
-间	jjoo	1
-据	jkvu	1
-计	jluu	1
-家	jna;	1
-举	jnuu	1
-具	jo//	1
-几	jwvv	1
-解	jwze	1
-结	jxuo	1
-可	kfoo	1
-哭	kia;	1
-看	kkoo	1
-客	knzo	1
-老	lfzz	1
-离	lhov	1
-满	mde;	1
-命	mjov	1
-求	qf;;	1
-期	qfvv	1
-前	qmvu	1
-千	qtuu	1
-任	rjea	1
-然	rw;;	1
-深	sdv/	1
-十	sfuu	1
-诉	slee	1
-神	slou	1
-受	smvv	1
-四	soev	1
-身	sree	1
-算	stoa	1
-特	ttuu	1
-王	wgaa	1
-望	whua	1
-问	wjoo	1
-外	wwu;	1
-信	xj;o	1
-心	xl;;	1
-写	xlav	1
-兴	xn//	1
-息	xrv;	1
-引	ybuu	1
-远	yg;v	1
-应	yh;a	1
-音	yhoo	1
-意	yhov	1
-语	ylao	1
-义	ym;;	1
-由	yoaa	1
-月	yvvv	1
-乐	yw;;	1
-团	toau;	1
-春	cgoo	1
-旱	hruu	1
-忽	hwv;	1
-嘴	iiuz	1
-略	lozo	1
-识	slo/	1
-腿	tvv;	1
-汪	wdua	1
+并	b
+重	c
+大	d
+是	f
+一	g
+不	h
+种	i
+有	j
+的	k
+来	l
+们	m
+你	n
+平	p
+起	q
+人	r
+事	s
+他	t
+我	w
+下	x
+以	y
+必	b.
+办	b/
+变	b;
+布	ba
+避	bb
+标	bc
+百	bd
+展	be
+本	bf
+表	bg
+部	bh
+别	bi
+便	bj
+把	bk
+被	bl
+八	bm
+宝	bn
+备	bo
+步	bp
+般	bq
+白	br
+比	bs
+笔	bt
+引	bu
+吧	bv
+包	bw
+编	bx
+北	by
+边	bz
+存	c,
+常	c.
+程	c/
+产	c;
+成	ca
+层	cb
+查	cc
+沉	cd
+草	ce
+才	cf
+传	cg
+次	ch
+吃	ci
+从	cj
+持	ck
+词	cl
+差	cm
+穿	cn
+曾	co
+尘	cp
+船	cq
+春	cr
+车	cs
+长	ct
+城	cu
+出	cv
+处	cw
+纯	cx
+此	cy
+场	cz
+带	d,
+单	d.
+代	d/
+底	d;
+达	da
+导	db
+电	dc
+淡	dd
+满	de
+都	df
+动	dg
+度	dh
+第	di
+当	dj
+打	dk
+对	dl
+道	dm
+定	dn
+但	do
+东	dp
+断	dq
+段	dr
+到	ds
+答	dt
+地	du
+队	dv
+多	dw
+海	dx
+点	dy
+刀	dz
+真	f/
+否	fa
+费	fb
+飞	fc
+法	fd
+范	fe
+整	ff
+夫	fg
+放	fh
+古	fi
+份	fj
+方	fk
+房	fl
+父	fm
+富	fn
+直	fo
+反	fq
+者	fr
+妇	fs
+教	ft
+复	fu
+服	fv
+风	fw
+纷	fx
+非	fy
+发	fz
+更	g,
+光	g.
+告	g/
+过	g;
+感	ga
+改	gb
+根	gc
+工	gd
+格	ge
+故	gf
+干	gg
+广	gh
+跟	gi
+个	gj
+高	gk
+该	gl
+关	gm
+官	gn
+国	go
+归	gp
+瓜	gq
+果	gr
+姑	gs
+管	gt
+刚	gu
+云	gv
+各	gw
+给	gx
+钢	gy
+功	gz
+或	h,
+合	h/
+黑	h;
+还	ha
+候	hb
+横	hc
+活	hd
+花	he
+何	hf
+环	hg
+装	hh
+号	hi
+会	hj
+很	hk
+话	hl
+火	hm
+害	hn
+回	ho
+后	hq
+音	hr
+好	hs
+和	ht
+乎	hu
+孩	hv
+将	hw
+红	hx
+站	hy
+化	hz
+再	i,
+怎	i.
+住	i/
+主	i;
+在	ia
+张	ib
+之	ic
+注	id
+着	ie
+正	if
+转	ig
+这	ih
+只	ii
+作	ij
+指	ik
+证	il
+总	im
+字	in
+中	io
+则	ip
+质	iq
+自	ir
+至	is
+知	it
+走	iu
+子	iv
+周	iw
+组	ix
+战	iy
+另	iz
+极	j,
+计	j.
+几	j/
+交	j;
+就	ja
+即	jb
+机	jc
+江	jd
+节	je
+做	jf
+进	jg
+决	jh
+叫	ji
+今	jj
+接	jk
+记	jl
+具	jm
+觉	jn
+见	jo
+尖	jp
+近	jq
+间	jr
+较	js
+件	jt
+结	ju
+己	jv
+及	jw
+绝	jx
+金	jy
+加	jz
+哭	ka
+据	kb
+困	kc
+可	kd
+苦	ke
+克	kf
+开	kg
+刻	kh
+口	ki
+推	kj
+控	kk
+课	kl
+烤	km
+快	kn
+看	ko
+得	kr
+找	ks
+科	kt
+块	ku
+报	kv
+客	kw
+空	kx
+肯	ky
+势	kz
+六	l/
+离	l;
+历	la
+灵	lb
+李	lc
+流	ld
+落	le
+两	lf
+理	lg
+立	lh
+路	li
+令	lj
+拉	lk
+论	ll
+类	lm
+连	ln
+里	lo
+劣	lp
+诉	lq
+量	lr
+军	ls
+利	lt
+老	lu
+了	lv
+调	lw
+练	lx
+虑	ly
+力	lz
+命	m/
+母	m;
+面	ma
+民	mb
+模	mc
+没	md
+么	me
+某	mf
+精	mg
+麻	mh
+吗	mi
+门	mj
+描	mk
+公	ml
+美	mm
+慢	mn
+目	mo
+明	mr
+妈	ms
+每	mt
+半	mu
+前	mv
+名	mw
+马	mx
+铭	my
+分	mz
+家	na
+那	nb
+想	nc
+深	nd
+呢	ne
+南	nf
+于	ng
+应	nh
+哪	ni
+念	nj
+拿	nk
+难	nl
+受	nm
+宁	nn
+内	no
+早	nr
+女	ns
+年	nt
+举	nu
+能	nv
+它	nw
+经	nx
+虐	ny
+男	nz
+破	pa
+屏	pb
+棚	pc
+派	pd
+少	pe
+师	pf
+璞	pg
+旁	ph
+品	pi
+偏	pj
+排	pk
+评	pl
+普	pm
+怕	pn
+盼	po
+盘	pq
+片	pr
+匹	ps
+篇	pt
+培	pu
+朋	pv
+跑	pw
+骗	px
+频	py
+皮	pz
+七	q,
+期	q/
+求	q;
+确	qa
+强	qb
+权	qc
+清	qd
+千	qe
+取	qf
+青	qg
+亲	qh
+器	qi
+全	qj
+抢	qk
+请	ql
+其	qm
+情	qn
+且	qo
+雀	qp
+秋	qq
+晴	qr
+轻	qs
+气	qt
+去	qu
+却	qv
+欠	qw
+骑	qx
+钱	qy
+切	qz
+入	r/
+然	r;
+而	ra
+弱	rb
+榕	rc
+融	rd
+若	re
+最	rf
+二	rg
+景	rh
+啊	ri
+仍	rj
+热	rk
+认	rl
+爱	rm
+安	rn
+容	ro
+尔	rp
+影	rq
+日	rr
+软	rs
+任	rt
+如	ru
+阿	rv
+儿	rw
+绕	rx
+让	ry
+忍	rz
+十	s,
+神	s.
+算	s/
+死	sa
+司	sb
+术	sc
+水	sd
+身	se
+世	sf
+三	sg
+商	sh
+四	si
+使	sj
+手	sk
+说	sl
+数	sm
+实	sn
+山	so
+省	sp
+所	sq
+时	sr
+式	ss
+生	st
+声	su
+随	sv
+色	sw
+书	sx
+上	sy
+奶	sz
+太	t,
+谈	t.
+通	t;
+态	ta
+退	tb
+桃	tc
+添	td
+特	te
+团	tf
+天	tg
+痛	th
+听	ti
+体	tj
+提	tk
+台	tl
+逃	tm
+头	tn
+同	to
+艇	tq
+题	tr
+她	ts
+笑	tt
+等	tu
+脱	tv
+条	tw
+统	tx
+铁	ty
+图	tz
+王	w,
+望	w;
+威	wa
+屋	wb
+杂	wc
+温	wd
+九	we
+五	wf
+武	wg
+文	wh
+问	wi
+位	wj
+往	wk
+谓	wl
+为	wm
+完	wn
+网	wo
+乐	wp
+饭	wq
+晚	wr
+万	ws
+物	wt
+无	wu
+卫	wv
+务	ww
+维	wx
+外	wy
+解	wz
+需	x,
+心	x.
+信	x/
+兴	x;
+雄	xa
+寻	xb
+相	xc
+消	xd
+系	xe
+西	xf
+形	xg
+新	xh
+息	xi
+像	xj
+行	xk
+许	xl
+希	xm
+性	xn
+现	xo
+小	xp
+须	xq
+向	xr
+写	xs
+先	xt
+喜	xu
+学	xv
+象	xw
+线	xx
+些	xy
+终	xz
+由	y,
+语	y.
+月	y/
+原	ya
+已	yb
+样	yc
+游	yd
+英	ye
+要	yf
+运	yg
+言	yh
+意	yi
+依	yj
+义	yk
+又	yl
+烟	ym
+远	yn
+眼	yo
+殷	yq
+易	yr
+与	ys
+移	yt
+业	yu
+也	yv
+用	yw
+约	yx
+银	yy
+孕	yz
+飙	ba/
+磅	ba;
+奔	baa
+碑	bae
+泵	bau
+甭	baz
+屄	bb;
+弼	bba
+擘	bbe
+壁	bbu
+臂	bbv
+槟	bc/
+榜	bc;
+杯	bca
+板	bce
+柏	bco
+棒	bcu
+梆	bcv
+滨	bd/
+逼	bd;
+泊	bde
+渤	bdu
+波	bdz
+蔽	be/
+薄	be;
+苯	bea
+葆	bee
+币	beo
+蔽	beu
+芭	bev
+苞	bez
+丙	bf;
+博	bfa
+鞭	bfe
+贲	bfo
+靶	bfv
+勃	bfz
+班	bg/
+斑	bg;
+碧	bga
+帮	bgo
+班	bgu
+邦	bgv
+辨	bh/
+辩	bh;
+病	bha
+霸	bhe
+禀	bho
+冰	bhu
+辫	bhv
+雹	bhz
+叭	bi/
+啵	bi;
+跋	bia
+蹦	bio
+卟	biu
+鄙	biv
+跛	biz
+伴	bj/
+倍	bj;
+闭	bja
+伯	bje
+保	bjo
+堡	bju
+傍	bjv
+播	bk/
+摈	bk;
+捕	bka
+搬	bke
+摆	bko
+拜	bku
+彼	bkv
+抱	bkz
+遍	bl;
+畚	bla
+裨	ble
+扁	blo
+补	blu
+迸	bm;
+弊	bma
+颁	bme
+爆	bmo
+爸	bmv
+豹	bmz
+忭	bn;
+怖	bna
+宾	bne
+悖	bnu
+愎	bnz
+贝	bo/
+髌	bo;
+败	boe
+赑	boo
+罢	bou
+崩	bov
+舶	bqe
+舨	bqv
+兵	br/
+暴	bra
+版	bre
+鼻	bro
+暴	bru
+匾	bs;
+毙	bsa
+婢	bse
+毕	bsu
+匾	bsv
+簿	bt;
+笨	bta
+稗	bte
+秉	bto
+拜	btu
+笆	btv
+埠	bue
+坝	buo
+膀	bv;
+膊	bva
+阪	bve
+脖	bvu
+巴	bvv
+胞	bvz
+饼	bw/
+鲅	bwa
+惫	bwo
+饽	bwu
+匕	bwv
+饱	bwz
+驳	bx/
+缤	bx;
+骠	bxa
+绑	bxu
+绷	bxv
+悲	by;
+辈	bya
+彪	bye
+钡	byo
+步	byu
+背	byv
+龅	byz
+磁	ca/
+厨	caa
+厂	cae
+盛	cao
+残	cau
+础	cav
+迟	cb;
+丑	cba
+尺	cbo
+弛	cbv
+村	cc;
+材	cca
+槌	cce
+椿	ccu
+楚	ccv
+沧	cd/
+澈	cd;
+漕	cda
+测	cdo
+潮	cdu
+池	cdv
+茶	ce/
+萃	ce;
+藏	cea
+菜	cee
+囱	ceo
+蔡	ceu
+苍	cev
+葱	cez
+聪	cf/
+寸	cf;
+臣	cfa
+醋	cfe
+曹	cfo
+刺	cfu
+朝	cfv
+琮	cg;
+蠢	cgo
+璨	cgu
+琛	cgv
+疮	ch/
+瘁	ch;
+床	cha
+充	che
+冲	cho
+凑	chu
+畜	chv
+鹑	chz
+踩	ci/
+逞	ci;
+呈	cia
+踩	cie
+唱	cio
+吵	ciu
+嘲	civ
+吹	ciz
+阐	cj/
+丛	cja
+敞	cje
+侧	cjo
+创	cju
+仓	cjv
+仇	cjz
+挫	ck/
+擦	ck;
+操	cka
+插	cke
+抽	cko
+撑	cku
+惩	ckv
+彻	ckz
+禅	cl/
+叉	cl;
+诚	cla
+参	cle
+昶	clo
+翠	clu
+祠	clv
+初	clz
+糍	cm/
+粹	cm;
+采	cma
+彩	cme
+粗	cmo
+炒	cmu
+慈	cmv
+炊	cmz
+察	cn/
+悴	cn;
+宠	cna
+窗	cne
+窜	cno
+恻	cnu
+惨	cnv
+察	cnz
+睬	co/
+虫	co;
+财	coa
+崔	coe
+赐	coo
+串	cou
+眦	cov
+畅	coz
+舱	cq/
+斥	cq;
+晁	cr/
+臭	cr;
+晨	cra
+昌	cro
+川	cru
+婵	cs/
+姹	cs;
+娼	cso
+辍	csv
+矬	ct/
+辞	ct;
+策	cta
+掣	cte
+乘	ctu
+愁	ctv
+称	ctz
+趁	cu/
+赤	cue
+超	cuz
+除	cv/
+承	cv;
+陈	cva
+陲	cve
+蚩	cvo
+丑	cvu
+肠	cvv
+脆	cvz
+匆	cw;
+册	cwa
+雏	cwe
+触	cwo
+猜	cwu
+刍	cwv
+馋	cwz
+缠	cx;
+骢	cxe
+巢	cxo
+绰	cxu
+驰	cxv
+绸	cxz
+餐	cy/
+铲	cy;
+柴	cya
+错	cye
+锄	cyo
+钞	cyu
+齿	cyv
+殚	da/
+歹	da;
+夺	daa
+碟	dae
+碘	dao
+殆	dav
+砀	daz
+弹	db/
+逮	db;
+刁	dba
+屌	dbo
+刁	dbv
+殿	dbz
+栋	dca
+椴	dce
+杜	dcu
+棣	dcv
+豆	dd/
+滴	dd;
+沌	dda
+洞	ddo
+渎	ddu
+渡	ddv
+涤	ddz
+荡	de;
+荳	dea
+董	dee
+丢	dev
+荻	dez
+颠	df/
+鞑	df;
+酊	dfa
+顶	dfe
+戴	dfo
+丁	dfu
+耽	dfv
+靛	dg;
+毒	dgv
+冻	dha
+敦	dhe
+端	dho
+店	dhu
+癜	dhv
+凋	dhz
+蹲	di/
+踱	di;
+呆	dia
+跌	die
+吊	dio
+嘟	diu
+蹬	div
+叨	diz
+贷	dj/
+袋	dj;
+倒	dja
+党	dje
+贷	djo
+傣	dju
+低	djz
+掸	dk/
+抖	dk;
+德	dka
+搭	dke
+担	dko
+待	dku
+挡	dkv
+抵	dkz
+登	dl/
+谛	dl;
+订	dla
+诞	dle
+叠	dlo
+读	dlu
+邓	dlv
+凳	dlz
+籴	dm/
+递	dm;
+灯	dma
+煅	dme
+兑	dmo
+弟	dmv
+爹	dmz
+惮	dn/
+惦	dn;
+惰	dna
+懂	dne
+恫	dno
+斗	dnu
+典	do/
+迪	do;
+盯	doa
+蝶	doe
+睹	doo
+赌	dou
+鼎	dov
+骶	doz
+遁	dq;
+盾	dqu
+舵	dqz
+旦	dra
+兜	dre
+牍	dru
+躲	drz
+娣	ds/
+嫡	ds;
+甙	dsa
+顿	dse
+岱	dso
+妒	dsv
+稻	dt/
+迭	dt;
+短	dta
+敌	dte
+笛	dto
+笃	dtv
+氡	dtz
+墩	du;
+堆	due
+堤	duo
+堵	duu
+埭	duv
+垛	duz
+蛋	dv;
+胆	dvo
+肚	dvu
+狄	dw/
+冬	dw;
+朵	dwa
+雕	dwe
+独	dwo
+岛	dwu
+邸	dwv
+绨	dx/
+缔	dx;
+驮	dxa
+缎	dxe
+镀	dy;
+钉	dya
+锻	dye
+督	dyo
+铛	dyu
+铎	dyv
+钓	dyz
+奋	fao
+砝	fau
+矾	faz
+弗	fbu
+焚	fc/
+梵	fc;
+樊	fca
+枫	fcz
+浮	fd/
+涪	fd;
+沣	fda
+泛	fde
+副	fdu
+沸	fdv
+芬	fe/
+芳	fe;
+菲	fea
+芙	feu
+乏	fev
+酚	ff/
+甫	ff;
+覆	ffe
+奉	fga
+璠	fge
+丰	fgu
+疯	fh/
+府	fhe
+腐	fho
+霏	fhu
+冯	fhv
+废	fhz
+吠	fia
+咐	fie
+啡	fiu
+俘	fj/
+仿	fj;
+付	fja
+阀	fje
+仆	fju
+佛	fjv
+彷	fk;
+抚	fka
+扶	fku
+拂	fkv
+访	fl;
+福	fla
+袱	fle
+扉	flu
+讽	flz
+粉	fm/
+釜	fma
+烦	fme
+番	fmo
+釜	fmu
+翻	fmv
+烽	fmz
+愤	fnu
+怫	fnv
+幡	fo/
+帆	fo;
+幅	foa
+贩	foe
+蝠	foo
+赋	fou
+罚	fov
+峰	foz
+返	fq;
+舫	fqv
+鼢	fr/
+阜	fru
+妨	fs;
+辅	fsa
+辐	fso
+匪	fsu
+妃	fsv
+氛	ft/
+符	fte
+缶	ftu
+繁	ftv
+坟	fu;
+封	fua
+赴	fuu
+坊	fuv
+防	fv;
+脯	fva
+附	fve
+肤	fvu
+肥	fvv
+孵	fw/
+凡	fw;
+匐	fwa
+饭	fwe
+负	fwo
+犯	fwv
+凫	fwz
+纺	fx;
+缚	fxa
+驸	fxe
+绯	fxu
+缝	fxz
+斐	fy;
+蜚	fyo
+翡	fyv
+锋	fyz
+尬	ga/
+戛	gaa
+顾	gae
+硅	gau
+硌	gaz
+艮	gb;
+敢	gbe
+弓	gbv
+桧	gc/
+棺	gc;
+柜	gca
+柑	gce
+棍	gco
+桂	gcu
+概	gcv
+构	gcz
+淦	gd/
+滚	gd;
+泔	gda
+港	gde
+亘	gdo
+沽	gdu
+溉	gdv
+沟	gdz
+莞	ge;
+鹳	gee
+葛	geo
+菇	gev
+苟	gez
+共	gf/
+辜	gf;
+哥	gfa
+攻	gfe
+革	gfo
+甘	gfu
+丐	gfv
+歌	gfz
+耕	gga
+瑰	gge
+规	ggo
+汞	ggu
+疳	gha
+裹	gho
+郭	ghv
+赣	ghz
+嘎	gia
+呱	gie
+呙	gio
+咕	giu
+哏	giv
+跪	giz
+倌	gj;
+供	gje
+估	gju
+阁	gjz
+搞	gk;
+拱	gke
+搁	gko
+挂	gku
+撖	gkv
+拐	gkz
+雇	gle
+观	glo
+冠	glu
+诡	glz
+谷	gm/
+糕	gm;
+粳	gma
+盖	gmo
+羔	gmu
+宫	gn;
+寡	gna
+惯	gno
+割	gnu
+怪	gnv
+冈	go/
+罡	goa
+贵	goo
+固	gou
+骨	gov
+购	goz
+躬	gr;
+皋	gra
+皈	gre
+盥	gro
+睾	gru
+鬼	grv
+晷	grz
+戈	gs;
+媾	gse
+辊	gso
+轱	gsu
+轧	gsv
+轨	gsz
+稿	gt;
+缸	gta
+罐	gte
+刮	gtu
+郜	gtv
+乖	gtz
+垓	gu;
+赶	gua
+垢	gue
+鼓	guu
+毂	guz
+隔	gva
+孤	gve
+胳	gvo
+肝	gvu
+股	gvz
+馆	gw;
+鳜	gwa
+觚	gwe
+狗	gwo
+觥	gwu
+勾	gwv
+够	gwz
+纲	gx/
+缟	gx;
+纥	gxe
+贯	gxo
+镐	gy;
+钙	gya
+锆	gye
+锅	gyo
+钩	gyz
+灰	ha/
+磺	hae
+厚	hao
+夯	haz
+憨	hb;
+弧	hbe
+弘	hbv
+核	hc;
+桓	hca
+槐	hce
+杭	hcz
+洪	hd/
+海	hd;
+河	hda
+浩	hde
+画	hdo
+湖	hdu
+汉	hdv
+鸿	hdz
+荟	he/
+荒	he;
+荤	hea
+荷	hee
+茴	heo
+葫	heu
+蕙	hev
+获	hez
+翰	hf/
+惠	hf;
+卉	hfa
+黄	hfo
+韩	hfu
+胡	hfv
+魂	hge
+瑚	hgu
+慧	hgv
+亥	hh/
+豪	hha
+毫	hhe
+肓	hho
+痕	hhv
+劾	hhz
+哈	hi/
+哼	hi;
+喊	hia
+呼	hie
+喝	hio
+唬	hiu
+吼	hiv
+唤	hiz
+伙	hj/
+阂	hj;
+辉	hja
+颔	hje
+货	hjo
+华	hju
+含	hjv
+护	hk;
+撼	hka
+徨	hke
+徽	hko
+衡	hku
+挥	hkv
+换	hkz
+谎	hl;
+户	hle
+祸	hlo
+罕	hlu
+诨	hlv
+欢	hlz
+烩	hm/
+烘	hma
+煌	hme
+焊	hmo
+糊	hmu
+焕	hmz
+豁	hn/
+寒	hn;
+怀	hna
+慌	hne
+悍	hno
+恍	hnu
+恨	hnv
+惚	hnz
+虹	hoa
+蝗	hoe
+幌	hoo
+患	hov
+航	hq;
+逅	hqv
+晗	hr/
+遑	hr;
+旱	hra
+晃	hre
+皇	hru
+晖	hrv
+毁	hrz
+惑	hs;
+互	hsa
+划	hsu
+轰	hsv
+婚	hsz
+禾	ht;
+簧	hte
+秽	hto
+笏	htz
+赫	hu/
+壕	hu;
+坏	hua
+壶	huu
+郝	huv
+隍	hve
+函	hvv
+忽	hw;
+猴	hwe
+昏	hwo
+凰	hwu
+狠	hwv
+缓	hx/
+骇	hx;
+缳	hxo
+绘	hxu
+幻	hxv
+壑	hyu
+虎	hyz
+贺	hzo
+仄	ia/
+逐	ia;
+左	iaa
+斫	iae
+丈	iao
+砖	iau
+粥	ib/
+昼	ibo
+桩	ic;
+植	ica
+株	ice
+枳	ico
+枝	icu
+枕	icv
+栅	icz
+洲	id/
+滓	id;
+浙	ida
+湛	ide
+澡	ido
+沾	idu
+治	idv
+沼	idz
+芝	ie;
+葬	iea
+茱	iee
+著	ieu
+蒸	iev
+遭	if;
+载	ifa
+政	ife
+职	ifo
+醉	ifu
+支	ifv
+酌	ifz
+珍	ig/
+专	ig;
+琢	iga
+珠	ige
+责	igo
+奏	igu
+座	ih/
+遮	ih;
+状	iha
+准	ihe
+资	iho
+章	ihu
+姿	ihv
+唑	ii/
+踪	ii;
+啄	iia
+咱	iie
+噪	iio
+足	iiu
+嘱	iiv
+嘴	iiz
+众	ij/
+伫	ij;
+值	ija
+掌	ije
+仲	ijo
+坐	iju
+仔	ijv
+掷	ik/
+摘	ik;
+征	ika
+抓	ike
+捉	iko
+振	iku
+择	ikv
+招	ikz
+诊	il/
+谆	il;
+冢	ila
+祝	ile
+祖	ilo
+诸	ilu
+肇	ilv
+诏	ilz
+遵	im;
+尊	ima
+炸	ime
+烛	imo
+州	imu
+郑	imv
+灼	imz
+灾	in/
+宰	in;
+怔	ina
+宅	ine
+宙	ino
+宗	inu
+赚	io/
+幢	io;
+置	ioa
+帐	ioe
+帜	ioo
+则	iou
+忠	iov
+助	ioz
+舟	iq;
+爪	iqo
+卮	iqv
+照	ir;
+皂	ira
+昨	ire
+追	irv
+昭	irz
+轸	is/
+辙	is;
+姊	isa
+致	ise
+暂	iso
+臻	isu
+辗	isv
+赞	it/
+造	it;
+筑	ita
+竹	ite
+智	ito
+制	itu
+筝	itz
+增	iu/
+赵	iu;
+圳	iue
+址	iuu
+志	iuv
+朕	iv/
+障	iv;
+阵	iva
+胀	ive
+阻	ivo
+坠	ivu
+脂	ivz
+炙	iw/
+詹	iw;
+杂	iwa
+旨	iwo
+猪	iwu
+争	iwv
+皱	iwz
+纵	ix/
+综	ix;
+骤	ixa
+缴	ixe
+织	ixo
+纣	ixu
+缀	ixv
+纸	ixz
+镞	iy;
+止	iya
+锥	iye
+钟	iyo
+针	iyu
+紫	iyv
+铮	iyz
+召	izo
+厥	ja/
+碱	jaa
+歼	jae
+碣	jao
+劂	jau
+厩	jav
+矶	jaz
+尽	jb;
+既	jba
+屐	jbe
+局	jbo
+居	jbu
+建	jbv
+检	jc/
+杰	jc;
+楷	jca
+槿	jce
+楫	jco
+禁	jcu
+橘	jcv
+济	jd;
+渐	jda
+激	jde
+溅	jdo
+洁	jdu
+津	jdv
+汲	jdz
+芥	je/
+警	je;
+荐	jea
+敬	jee
+菌	jeo
+荆	jeu
+茎	jev
+菊	jez
+柬	jf;
+救	jfe
+晋	jfo
+基	jfu
+鞠	jfz
+井	jge
+靓	jgo
+击	jgu
+珺	jgv
+静	jgz
+迹	jh;
+减	jha
+疾	jhe
+竟	jho
+京	jhu
+郊	jhv
+净	jhz
+嚼	ji/
+跤	ji;
+距	jia
+啾	jie
+旧	jio
+践	jiu
+唧	jiv
+鹃	jiz
+价	jj/
+仅	jj;
+集	jja
+介	jje
+俱	jjo
+剑	jju
+假	jjv
+隽	jjz
+捡	jk/
+挤	jk;
+拒	jka
+揪	jke
+揭	jko
+技	jku
+径	jkv
+拘	jkz
+矜	jl/
+鸡	jle
+肩	jlo
+讲	jlu
+艰	jlv
+劲	jlz
+兼	jm;
+炬	jma
+爵	jmo
+卷	jmv
+剪	jmz
+惓	jn/
+惊	jn;
+寄	jna
+窖	jne
+惧	jno
+寂	jnu
+窘	jnv
+究	jnz
+睑	jo/
+蛟	jo;
+贱	joa
+界	joe
+甲	jou
+睛	jov
+岌	joz
+舰	jqo
+斤	jqu
+炅	jr/
+景	jr;
+臼	jra
+晶	jro
+舅	jrz
+妗	js/
+嫁	js;
+戒	jsa
+皆	jse
+姐	jso
+妓	jsu
+巨	jsv
+积	jt/
+稼	jt;
+矩	jta
+矫	jte
+简	jto
+籍	jtu
+季	jtv
+笈	jtz
+鉴	ju/
+境	ju;
+颉	jue
+监	juo
+坚	juu
+紧	juv
+均	juz
+阶	jv/
+胶	jv;
+亟	jva
+胛	jvo
+际	jvu
+脚	jvv
+降	jvz
+灸	jw/
+久	jw;
+獗	jwa
+九	jwe
+句	jwo
+祭	jwu
+急	jwv
+角	jwz
+继	jx/
+绞	jx;
+缰	jxa
+骄	jxe
+绢	jxo
+绩	jxu
+纪	jxv
+级	jxz
+镜	jy;
+韭	jya
+锦	jye
+冀	jyo
+键	jyv
+钧	jyz
+迦	jz;
+架	jza
+驾	jzv
+矿	ka;
+盔	kao
+夸	kau
+砍	kaz
+垦	kbu
+恳	kbv
+尻	kbz
+框	kca
+棵	kco
+枯	kcu
+浍	kd/
+渴	kdo
+溘	kdu
+蔻	ke;
+苛	kea
+蒯	keu
+葵	kev
+考	kfa
+酷	kfe
+聩	kfo
+恐	kfv
+勘	kfz
+珂	kga
+琨	kgo
+刊	kgu
+亏	kgv
+廓	kh;
+库	kha
+颏	khe
+况	kho
+堃	khu
+康	khv
+亢	khz
+哙	ki/
+咳	ki;
+跨	kia
+喟	kio
+啃	kiu
+叩	kiv
+侩	kj/
+阔	kj;
+龛	kja
+侃	kjo
+阚	kjv
+抗	kk;
+扛	kka
+括	kke
+扣	kko
+拷	kku
+揆	kkv
+裤	kl;
+诓	kla
+癸	klu
+诳	klz
+炕	km;
+慷	kn;
+空	kna
+愧	kne
+宽	kno
+寇	knu
+慨	knv
+恪	knz
+髋	ko;
+眶	koa
+颗	koe
+髁	koo
+瞌	kou
+瞰	kov
+凯	koz
+旷	kr;
+昆	kra
+魁	kru
+暌	krv
+轲	ksa
+匮	kso
+匡	ksu
+筷	kt;
+筐	kta
+篑	kto
+靠	ktu
+坑	ku;
+堪	kua
+坤	kuo
+壳	kuv
+款	kuz
+脍	kv/
+胯	kva
+隗	kve
+孔	kvv
+馗	kw/
+馈	kwo
+狂	kwu
+纩	kx;
+绔	kxa
+骒	kxo
+卡	ky;
+锴	kya
+铠	kyo
+铐	kyu
+龈	kyv
+磷	la/
+烈	la;
+厉	laa
+龙	lao
+列	lau
+碌	lav
+励	laz
+屡	lb/
+逯	lb;
+履	lbe
+隶	lbo
+录	lbu
+楼	lc/
+麓	lc;
+林	lca
+柳	lce
+楞	lco
+棱	lcu
+婪	lcv
+榴	lcz
+粱	ld/
+丽	ld;
+梁	lda
+涝	lde
+泪	ldo
+滥	ldu
+浪	ldv
+洛	ldz
+苓	le/
+莱	le;
+莲	lea
+莉	lee
+萝	leo
+蓝	leu
+芦	lev
+劳	lez
+联	lf/
+吏	lf;
+栗	lfa
+剌	lfu
+聊	lfv
+赖	lfz
+玲	lg/
+璃	lg;
+琳	lga
+璐	lgo
+琅	lgv
+珞	lgz
+冷	lh/
+凉	lh;
+辣	lha
+旅	lhe
+露	lho
+刘	lhu
+率	lhv
+亮	lhz
+喽	li/
+啦	lia
+唠	lie
+吕	lio
+喇	liu
+踉	liv
+另	liz
+伦	lj/
+俩	lja
+领	lje
+侣	ljo
+例	lju
+邻	ljv
+仑	ljz
+拦	lk/
+掠	lk;
+拢	lka
+捞	lke
+揽	lku
+律	lkv
+撸	lkz
+裣	ll/
+谅	ll;
+戮	lla
+良	llo
+垒	llu
+礼	llv
+烂	lm/
+粒	lm;
+兰	lma
+炉	lme
+料	lmu
+粮	lmv
+烙	lmz
+怜	ln/
+懔	ln;
+懒	lna
+牢	lne
+帘	lno
+寥	lnv
+懒	lnz
+岭	lo/
+逻	lo;
+蛎	loa
+蜡	loe
+略	loo
+累	lov
+罗	loz
+晾	lr;
+魉	lra
+旯	lrz
+轮	ls/
+辘	ls;
+辆	lsa
+娌	lso
+姥	lsu
+辂	lsz
+黎	lt/
+笼	lta
+犁	lte
+箩	lto
+篮	ltu
+乱	ltv
+埒	lu/
+临	lue
+览	luo
+脸	lv/
+辽	lv;
+胧	lva
+腊	lve
+陆	lvu
+陋	lvv
+隆	lvz
+鳞	lw/
+獠	lwa
+猎	lwe
+留	lwo
+鲈	lwu
+狼	lwv
+馏	lwz
+缕	lx/
+缭	lxa
+骡	lxo
+缆	lxu
+绿	lxv
+络	lxz
+龄	ly/
+镰	ly;
+链	lya
+颅	lye
+锣	lyo
+铑	lyu
+卢	lyv
+虏	lyz
+冇	mao
+码	mav
+殁	maz
+弥	mbz
+买	mc;
+梅	mce
+木	mco
+楣	mcv
+梦	mcz
+灭	md/
+沐	mda
+漠	mde
+漫	mdo
+沫	mdu
+泌	mdv
+藐	me/
+茫	me;
+茂	mea
+摹	mee
+莫	meo
+蒙	meu
+茅	mev
+募	mez
+醚	mf/
+卖	mf;
+酶	mfe
+酩	mfz
+玟	mg;
+玫	mge
+末	mgo
+玛	mgv
+麦	mgz
+糜	mh/
+磨	mha
+摩	mhe
+庙	mho
+靡	mhu
+氓	mhv
+咪	mi/
+嘛	mi;
+喵	mie
+黾	mio
+呒	miu
+骂	miv
+鸣	miz
+闵	mj;
+闽	mjo
+闷	mjv
+摸	mke
+扪	mko
+抹	mku
+拇	mkv
+谜	ml/
+谋	mla
+谋	mle
+冥	mlo
+矛	mlv
+祢	mlz
+迷	mm;
+煤	mma
+貌	mme
+米	mmo
+迷	mmv
+忙	mn;
+寞	mne
+蜜	mno
+密	mnv
+眯	mo/
+虻	mo;
+默	moa
+瞒	moe
+冒	moo
+墨	mou
+眠	mov
+冕	moz
+旻	mr;
+盟	mro
+昧	mru
+曼	mrv
+迈	ms;
+媒	msa
+妙	mse
+嫚	mso
+妹	msu
+媚	msv
+娩	msz
+牧	mt/
+秘	mt;
+敏	mte
+篾	mto
+秒	mtu
+毛	mtv
+埋	muo
+脉	mv;
+陌	mva
+膜	mve
+眉	mvo
+勐	mvz
+猫	mwe
+免	mwo
+猛	mwv
+勉	mwz
+缅	mxa
+绵	mxe
+缈	mxo
+糸	mxu
+缪	mxv
+镁	my/
+锚	mye
+锰	myv
+铆	myz
+耐	naa
+奈	nau
+碾	nav
+尿	nbu
+尼	nbz
+柠	nc;
+楠	ncu
+泞	nd;
+涅	ndo
+淖	ndu
+浓	ndv
+泥	ndz
+蔫	nea
+孽	nev
+聍	nf;
+廿	nfa
+颞	nfe
+囊	nfu
+酿	nfv
+辇	nga
+弄	nge
+瑙	ngv
+疟	nha
+霓	nhe
+凝	nhv
+凝	nhz
+咛	ni;
+囔	nia
+喏	nie
+呐	nio
+喃	niu
+闹	nj;
+倪	nje
+佞	nju
+您	njv
+捻	nk/
+拧	nk;
+挠	nka
+捏	nko
+拈	nku
+拟	nkv
+农	nl;
+诺	nle
+讷	nlo
+逆	nm;
+粘	nmu
+恼	nn;
+懦	nna
+蛲	noa
+睨	noe
+嬲	noo
+囡	nov
+男	noz
+暖	nr/
+曩	nr;
+昵	nrv
+娘	ns;
+嫩	nsa
+匿	nse
+怒	nsv
+努	nsz
+牛	ntu
+氖	ntz
+埝	nu/
+赧	nuv
+脑	nv;
+腻	nva
+脓	nvv
+鲶	nw/
+袅	nw;
+鸟	nwa
+馁	nwe
+鲇	nwu
+猱	nwv
+纳	nxo
+纽	nxv
+镊	nya
+镍	nye
+钠	nyo
+钮	nyv
+鼐	nzo
+乃	nzz
+碰	pa/
+砰	pa;
+丕	paa
+硼	pav
+匏	paz
+辟	pb;
+屁	pba
+譬	pbo
+劈	pbz
+攀	pca
+朴	pcu
+杷	pcv
+潘	pd/
+沛	pd;
+漂	pda
+湃	pde
+瀑	pdo
+澎	pdu
+婆	pdv
+泼	pdz
+萍	pe;
+苹	pea
+葩	pee
+蓬	pez
+瓢	pfe
+聘	pfo
+票	pfu
+配	pfv
+飘	pfz
+耪	pg;
+珀	pge
+琶	pgv
+珮	pgz
+烹	ph;
+庞	pha
+剖	phu
+霹	phv
+疲	phz
+趴	pi/
+呯	pi;
+啪	pia
+啤	pie
+喷	piu
+噼	piv
+跑	piz
+凭	pje
+仆	pju
+僻	pjv
+佩	pjz
+拼	pk/
+批	pka
+拍	pke
+扑	pku
+拚	pkv
+抛	pkz
+谱	pl/
+谝	plv
+袍	plz
+瓶	pma
+叛	pme
+贫	pmo
+判	pmu
+鄱	pmv
+炮	pmz
+怦	pn;
+畔	po/
+赔	po;
+圃	poa
+帕	poe
+帔	pov
+磐	pqa
+爬	pqv
+皤	pr/
+迫	pr;
+牌	pre
+魄	prv
+姘	ps/
+嫔	ps;
+嫖	psa
+媲	pse
+叵	pso
+筢	pta
+犏	ptv
+篷	ptz
+坪	pu;
+埔	pua
+彭	pue
+坡	puz
+胖	pv/
+陪	pv;
+脯	pva
+脾	pve
+膨	pvu
+鹏	pvv
+鹏	pvz
+逄	pw;
+匍	pwa
+刨	pwu
+骈	px/
+辔	pxo
+裴	py;
+铺	pya
+颦	pye
+钋	pyu
+颇	pze
+犬	qa;
+奇	qaa
+牵	qae
+戚	qau
+砌	qaz
+群	qb/
+屈	qbv
+枪	qc/
+棋	qca
+桥	qce
+樯	qcu
+杞	qcv
+洽	qd/
+泣	qd;
+漆	qda
+汽	qde
+潜	qdo
+浅	qdu
+沁	qdv
+沏	qdz
+荃	qe/
+茜	qea
+擎	qee
+苘	qeo
+蔷	qeu
+茕	qev
+茄	qez
+欺	qf/
+裘	qf;
+巧	qfa
+乾	qfe
+覃	qfo
+鞘	qfu
+娶	qfv
+勤	qfz
+琴	qg/
+琼	qg;
+球	qga
+秦	qge
+璩	qgu
+玘	qgv
+痊	qh/
+庆	qha
+齐	qhe
+癯	qho
+敲	qhu
+妾	qhv
+瘸	qhz
+呛	qi/
+跷	qia
+吣	qiv
+阙	qj/
+衾	qj;
+倾	qja
+侨	qje
+禽	qjo
+企	qju
+侵	qjv
+阕	qjz
+擒	qk/
+撬	qke
+衢	qko
+掮	qkv
+掐	qkz
+谦	ql/
+谴	ql;
+祺	qla
+祈	qle
+启	qlo
+祛	qlu
+裙	qlv
+劝	qlz
+遒	qm;
+酋	qma
+拳	qme
+羌	qmv
+歉	qmz
+恰	qn/
+寝	qn;
+窃	qna
+憔	qne
+悄	qnu
+穹	qnv
+穷	qnz
+圈	qo/
+遣	qo;
+曲	qoa
+瞧	qoe
+峭	qou
+岂	qov
+颀	qqe
+躯	qr/
+丘	qra
+泉	qru
+邱	qrv
+区	qs/
+顷	qse
+堑	qsu
+妻	qsv
+秋	qt/
+迁	qt;
+签	qta
+乔	qte
+氰	qtu
+缺	qtv
+趣	qua
+罄	que
+墙	quu
+趋	quz
+腔	qv;
+戕	qva
+阡	qve
+朐	qvz
+鳅	qwe
+鳍	qwu
+卿	qwv
+绻	qx/
+驱	qxa
+纤	qxe
+缱	qxo
+铨	qy/
+虔	qy;
+钳	qya
+铅	qye
+觑	qyo
+歧	qyu
+镪	qyv
+钦	qyz
+辱	raa
+碍	rao
+厄	rav
+屙	rbv
+桉	rc;
+溶	rd;
+染	rda
+澳	rde
+润	rdo
+汝	rdv
+艾	re/
+蓉	re;
+荣	rea
+荏	ree
+芮	reo
+藕	reu
+惹	rev
+鞍	rf;
+耳	rfa
+噩	rfo
+垩	rfu
+恶	rfv
+鏊	rg/
+熬	rg;
+獒	rga
+敖	rge
+瑞	rgo
+遨	rgv
+韧	rgz
+鏖	rh/
+霭	rh;
+庵	rha
+哀	rhe
+癌	rho
+霭	rhv
+哎	ri/
+嚷	ri;
+呕	ria
+哦	rie
+嗯	rio
+嗷	riu
+唉	riv
+儒	rj;
+仁	rja
+俄	rje
+偶	rjo
+傲	rju
+仞	rjz
+按	rk;
+扰	rka
+摁	rko
+挨	rkv
+扔	rkz
+谙	rl;
+柔	rla
+袄	rle
+谔	rlo
+诶	rlv
+冗	rlz
+熔	rm;
+乳	rmv
+燃	rmz
+怄	rna
+额	rne
+案	rnv
+肉	ro/
+黯	ro;
+岸	roa
+盎	roo
+恩	rov
+暧	rr/
+暗	rr;
+奥	rra
+皑	rro
+翱	rrv
+昂	rrz
+戎	rsa
+娥	rse
+贰	rsu
+欧	rsz
+氨	rt;
+壬	rta
+矮	rte
+鹅	rtz
+壤	ru;
+埃	ruv
+坳	ruz
+隘	rv/
+孺	rv;
+孺	rva
+腭	rvo
+阮	rvu
+迩	rw;
+饶	rwa
+饿	rwe
+鳄	rwo
+尔	rwu
+绒	rxa
+纫	rxz
+锐	ry/
+镕	ry;
+睿	ryo
+刃	rz;
+爽	sa/
+碎	sa;
+厦	saa
+殊	sae
+石	sao
+奢	sau
+耍	sav
+屎	sb/
+肃	sb;
+尸	sbe
+属	sbo
+刷	sbu
+巳	sbv
+松	sc/
+述	sc;
+森	sca
+杉	sce
+梢	scu
+树	scv
+溯	sd/
+裟	sd;
+洒	sda
+沈	sde
+湿	sdo
+沙	sdu
+沈	sdv
+涩	sdz
+莎	se;
+菘	sea
+薯	seo
+蒜	seu
+萨	sev
+苏	sez
+甚	sf/
+速	sf;
+丧	sfa
+散	sfe
+束	sfo
+索	sfu
+酸	sfv
+琐	sg/
+寿	sga
+示	sgu
+素	sgv
+珊	sgz
+熟	sh;
+霜	sha
+施	she
+市	sho
+率	shu
+瘦	shv
+孰	shz
+啥	si/
+噻	si;
+嘶	sia
+噬	sie
+虽	sio
+哨	siu
+嗓	siv
+跚	siz
+闪	sj/
+食	sj;
+耸	sja
+伤	sje
+尚	sjo
+什	sju
+似	sjv
+倏	sjz
+授	sk/
+誓	sk;
+摄	ska
+搜	ske
+损	sko
+捎	sku
+扫	skv
+势	skz
+识	sl/
+诗	sl;
+试	sla
+谁	sle
+视	slo
+社	slu
+双	slv
+设	slz
+燧	sm/
+送	sm;
+杀	sma
+首	sme
+善	smo
+塑	smu
+释	smv
+烁	smz
+赛	sn/
+邃	sn;
+守	sna
+宿	sne
+审	sno
+室	snu
+瞬	so/
+蛇	so;
+髓	soa
+睡	soe
+史	soo
+申	sou
+思	sov
+岁	soz
+帅	spo
+艘	sqe
+射	sra
+顺	sre
+曙	sro
+暑	sru
+鼠	srv
+匙	srz
+输	ss/
+婶	ss;
+轼	ssa
+嫂	sse
+始	ssv
+姗	ssz
+税	st/
+适	st;
+穗	sta
+牲	ste
+失	sto
+升	stu
+私	stv
+舐	stz
+竖	su;
+寺	sua
+赦	sue
+螫	suo
+士	suu
+肾	suv
+隧	sv/
+胜	sv;
+隋	sva
+收	sve
+腮	svo
+孙	svu
+鳝	sw/
+煞	sw;
+夙	swa
+饰	swe
+蚀	swo
+狮	swu
+氏	swv
+缮	sx/
+缩	sx;
+丝	sxa
+驶	sxo
+纱	sxu
+骚	sxv
+绍	sxz
+铈	sy;
+锼	sye
+锁	syu
+叔	syv
+铯	syz
+邵	szv
+劭	szz
+砼	ta/
+砣	ta;
+厅	taa
+碳	tao
+套	tav
+弹	tb/
+屉	tba
+屉	tbe
+屠	tbu
+臀	tbv
+梯	tc/
+檀	tc;
+柝	tce
+桐	tco
+桶	tcv
+涂	td/
+潼	td;
+潭	tda
+淘	tde
+湍	tdo
+涛	tdu
+滩	tdv
+汤	tdz
+荼	te/
+葶	te;
+荑	tea
+茼	teo
+藤	tev
+萄	tez
+酡	tf;
+酞	tfa
+酮	tfo
+忑	tfv
+韬	tg/
+焘	tg;
+替	tgo
+泰	tgu
+痰	th/
+亭	tha
+庭	the
+童	tho
+唐	thv
+疼	thz
+跳	ti/
+啼	ti;
+呔	tia
+唾	tie
+踢	tio
+吐	tiu
+叹	tiv
+啕	tiz
+偷	tj/
+停	tj;
+仝	tja
+贪	tjo
+堂	tju
+途	tjv
+佟	tjz
+挑	tk/
+推	tk;
+探	tka
+托	tke
+徒	tku
+抬	tkv
+投	tkz
+讨	tla
+袒	tlo
+褪	tlv
+糖	tm;
+誊	tmo
+剃	tmu
+妥	tmv
+鹈	tmz
+悌	tn/
+突	tna
+恬	tne
+惕	tno
+恸	tnu
+眺	to/
+瞳	to;
+田	toa
+蜓	toe
+峒	too
+贴	tou
+暾	tr;
+躺	tru
+婷	ts;
+屯	tsv
+毯	tt/
+透	tt;
+甜	tta
+颓	tte
+筒	tto
+舔	ttu
+廷	ttv
+秃	ttz
+填	tu/
+塘	tu;
+土	tua
+塔	tue
+坦	tuo
+趟	tuu
+坛	tuv
+坍	tuz
+腾	tv/
+腿	tv;
+豚	tva
+胴	tvo
+膛	tvu
+胎	tvv
+陶	tvz
+鸵	tw;
+饨	twa
+彤	twe
+兔	two
+獭	twz
+驼	tx;
+缇	txo
+绦	txz
+锑	ty/
+铊	ty;
+钛	tya
+铜	tyo
+镗	tyu
+龆	tyz
+迢	tz;
+帑	tzo
+碗	wa;
+歪	waa
+戊	wae
+兀	wav
+尉	wba
+尾	wbe
+慰	wbv
+梧	wca
+枉	wcu
+桅	wcz
+湾	wd;
+汪	wda
+沃	wde
+涡	wdo
+污	wdu
+渥	wdv
+蕹	we;
+葳	wea
+薇	wee
+苇	weu
+蔚	wev
+斡	wf/
+巫	wfa
+吾	wfo
+卧	wfu
+恶	wfv
+违	wg;
+玩	wga
+顽	wge
+未	wgo
+韦	wgu
+鹉	wgz
+忘	wh;
+弯	wha
+痿	whe
+瘟	who
+紊	whu
+亡	whv
+雾	whz
+嗡	wi/
+吴	wia
+唯	wie
+喂	wio
+味	wiu
+喔	wiv
+吻	wiz
+伪	wj/
+伪	wj;
+闻	wja
+侮	wje
+偎	wjo
+伟	wju
+挖	wk;
+捂	wka
+微	wko
+握	wkv
+挽	wkz
+诬	wla
+诿	wle
+误	wlo
+袜	wlu
+骛	wlv
+鹜	wlz
+烷	wm;
+瓮	wma
+煨	wmo
+炜	wmu
+翁	wmv
+惋	wn;
+悟	wna
+惟	wne
+窝	wno
+剜	wnu
+寤	wnv
+宛	wnz
+罔	wo/
+蚊	wo;
+畏	woa
+巍	woe
+蜗	woo
+围	wou
+胃	wov
+皖	wr;
+晤	wra
+魍	wro
+旺	wru
+瓦	ws;
+娲	wso
+娃	wsu
+娓	wsv
+婉	wsz
+舞	wt;
+牾	wta
+魏	wte
+午	wtu
+委	wtv
+稳	wtz
+圩	wuu
+坞	wuz
+腕	wv;
+阢	wva
+丸	ww;
+乌	wwa
+勿	wwe
+猥	wwo
+刎	wwu
+危	wwv
+纹	wx;
+毋	wxe
+纬	wxu
+纨	wxz
+钨	wye
+袭	xa;
+厢	xaa
+夏	xao
+硝	xau
+殉	xaz
+迅	xb;
+犀	xbe
+痫	xbo
+屑	xbu
+校	xc;
+械	xca
+析	xce
+杏	xco
+楔	xcu
+栩	xcv
+橡	xcz
+溪	xd/
+渲	xd;
+湘	xda
+洗	xde
+瀣	xdu
+泻	xdv
+洵	xdz
+蓄	xe;
+蕈	xea
+薛	xee
+血	xeo
+荥	xeu
+萧	xev
+荀	xez
+熙	xf;
+献	xfa
+项	xfe
+醒	xfo
+鞋	xfu
+孝	xfv
+协	xfz
+璇	xg;
+顼	xge
+型	xgu
+邢	xgv
+庠	xh/
+序	xh;
+需	xha
+效	xhe
+席	xho
+辛	xhu
+雪	xhv
+癣	xhz
+喧	xi;
+吓	xia
+响	xie
+嚣	xio
+吁	xiu
+啸	xiv
+吸	xiz
+斜	xj;
+休	xja
+仙	xjo
+削	xju
+叙	xjv
+修	xjz
+徐	xk/
+挟	xk;
+循	xke
+踅	xko
+徙	xku
+徇	xkz
+详	xl/
+戏	xl;
+习	xla
+谢	xle
+袖	xlo
+训	xlu
+讯	xlv
+询	xlz
+烯	xm/
+兮	xma
+熄	xme
+籼	xmo
+凶	xmv
+穴	xn/
+宣	xna
+惜	xne
+惺	xno
+宵	xnu
+懈	xnz
+峡	xo;
+兄	xoe
+蝎	xoo
+黠	xou
+县	xov
+峋	xoz
+舷	xq;
+欣	xqz
+衅	xr/
+暄	xr;
+晓	xra
+星	xre
+显	xru
+暇	xrv
+歇	xrz
+嫌	xs/
+辖	xs;
+姓	xse
+匣	xso
+轩	xsu
+邪	xsv
+稀	xt/
+选	xt;
+箱	xta
+香	xto
+卸	xtv
+秀	xtz
+幸	xu/
+熹	xu;
+馨	xue
+贤	xuo
+墟	xuu
+险	xv/
+逊	xv;
+膝	xva
+陷	xve
+腥	xvo
+隙	xvu
+限	xvv
+胸	xvz
+鲜	xw/
+夕	xw;
+枭	xwa
+饷	xwe
+旬	xwo
+玺	xwu
+匈	xwv
+馅	xwz
+飨	xx/
+巡	xx;
+骁	xxa
+乡	xxe
+细	xxo
+续	xxu
+绚	xxz
+鑫	xy/
+镶	xy;
+虚	xya
+锈	xye
+锡	xyo
+销	xyu
+勰	xzo
+尤	ya;
+硬	yaa
+愿	yae
+右	yao
+研	yau
+友	yav
+熨	yb/
+异	yba
+尹	ybe
+聿	ybu
+痈	ybz
+榆	yc/
+椅	yca
+樱	yco
+樾	ycu
+乙	ycv
+杨	ycz
+洋	yd/
+演	yd;
+源	yda
+渊	yde
+油	ydo
+沅	ydu
+泳	ydv
+沿	ydz
+荧	ye/
+页	ye;
+芽	yea
+莠	yee
+营	yeo
+莹	yeu
+艺	yev
+药	yez
+雨	yf;
+亚	yfa
+严	yfe
+燕	yfo
+酝	yfu
+耶	yfv
+瑶	yg/
+迂	yg;
+琊	yga
+元	yge
+玉	ygo
+耘	ygu
+云	ygv
+艳	ygz
+痒	yh/
+亦	yh;
+弈	yha
+夜	yhe
+衣	yho
+育	yhv
+韵	yhz
+吟	yi/
+咬	yi;
+呀	yia
+跃	yie
+员	yio
+叶	yiu
+咏	yiv
+阅	yj/
+仪	yj;
+优	yja
+攸	yje
+仪	yjo
+余	yju
+愈	yjv
+仰	yjz
+摇	yk/
+衍	yk;
+掩	yka
+御	yke
+押	yko
+拥	ykv
+扬	ykz
+议	yl/
+永	yl;
+讶	yla
+预	yle
+翼	ylo
+予	ylu
+译	ylv
+勇	ylz
+炎	ym/
+遥	ym;
+肴	yma
+养	yme
+益	ymo
+羊	ymu
+爷	ymv
+欲	ymz
+悦	yn/
+誉	yn;
+忧	yna
+窑	yne
+宜	yno
+宇	ynu
+忆	ynv
+蚁	yo/
+遇	yo;
+因	yoa
+屹	yoe
+圆	yoo
+园	you
+野	yov
+鸭	yoz
+舆	yr/
+邀	yr;
+晕	yra
+映	yro
+曰	yru
+延	yrv
+昀	yrz
+姚	ys/
+雅	ys;
+姨	ysa
+医	yse
+姻	yso
+妍	ysu
+郾	ysv
+鸦	ysz
+氧	yt/
+夭	yt;
+氩	yta
+筵	yte
+秧	yto
+竽	ytu
+懿	yu;
+越	yua
+袁	yuo
+垠	yuv
+院	yv;
+腰	yva
+腴	yve
+阳	yvo
+阴	yvv
+隐	yvz
+馀	yw/
+迎	yw;
+犹	ywa
+颖	ywe
+鱼	ywo
+猿	ywu
+印	ywv
+饮	ywz
+验	yx/
+幺	yx;
+绮	yxa
+缨	yxo
+纭	yxu
+缘	yxv
+幼	yxz
+镒	yy/
+铱	yy;
+虞	yyo
+钰	yyu
+钥	yyv
+盈	yzo
+因为	y;
+殡	ba;e
+礴	bae;
+砭	baev
+飙	baz/
+璧	bbu;
+剥	bbuu
+槟	bc;e
+彬	bcae
+柄	bcau
+彬	bcee
+柏	bceu
+梆	bcuv
+滨	bd;/
+灞	bd;e
+汴	bd;u
+滗	bdea
+浜	bdeu
+濒	bdue
+蕃	be/o
+蒡	be;;
+菠	be;z
+荜	beav
+蓓	bee;
+蓖	beeu
+荸	beuv
+鬓	bf;e
+逋	bf;v
+髟	bfee
+孛	bfva
+邴	bfvv
+耙	bgvu
+斌	bhaa
+庇	bhav
+瘪	bhe/
+瓣	bhe;
+亳	bhea
+褒	bheu
+痹	bhoa
+卞	bhu;
+斌	bhua
+癍	bhuu
+疤	bhvu
+哺	biau
+哔	biav
+呗	bio/
+趵	biz;
+煲	bj/o
+傍	bj;;
+傧	bj;e
+佰	bjao
+俾	bjeu
+卜	bjoo
+俵	bjue
+扒	bk//
+掰	bk/e
+拌	bk/u
+揄	bk/v
+扮	bk/z
+搏	bkaa
+搏	bkau
+拔	bkav
+扳	bkee
+捭	bkeu
+捌	bkou
+摒	bkv/
+拨	bkz;
+彼	bkzv
+谤	bl;;
+祊	bl;v
+褓	bleo
+裱	blue
+焙	bm;o
+炳	bmau
+敝	bmea
+蹩	bmou
+憋	bmv;
+煸	bmvo
+粑	bmvu
+鳖	bmzo
+愎	bnea
+贬	boe;
+睥	boeo
+髀	boeu
+蚌	bouu
+舨	bqee
+晡	brau
+魃	brav
+曝	broe
+帛	brou
+卑	bruu
+妣	bsav
+婊	bsue
+箔	bt;e
+簸	btau
+筚	btav
+犇	btea
+篦	bteo
+坂	buee
+膑	bv;e
+膘	bvau
+陛	bvav
+飚	bw//
+鳔	bwau
+狈	bwo/
+鳊	bwvo
+鸨	bwza
+鲍	bwzv
+绊	bx/u
+骉	bxvv
+镑	by;;
+镔	by;e
+钚	bya;
+锛	byaa
+镖	byau
+钹	byav
+钣	byee
+铂	byeu
+悲	byv;
+铋	byve
+钯	byvv
+磋	ca/u
+碴	caao
+蹙	cao;
+殂	caoa
+厕	caou
+辰	cau;
+唇	cauo
+碜	cava
+孱	cbvv
+村	cca;
+橱	ccaa
+楂	ccao
+槽	ccau
+郴	ccav
+杵	ccea
+橙	ccv/
+杈	ccv;
+椽	ccvv
+澶	cd;o
+淬	cd;u
+淳	cd;v
+涔	cdo/
+豉	cduv
+滁	cdv/
+潺	cdva
+澄	cdvo
+菜	ce/a
+苍	ce/v
+茨	ce;z
+茬	ceau
+菖	ceoo
+蔡	cezu
+酬	cf/u
+裁	cf;;
+醇	cf;v
+敕	cfea
+耻	cfua
+矗	cfuo
+矗	cfuu
+翅	cfvv
+蚕	cgo;
+瓷	cha;
+瓷	chav
+颤	che/
+痴	cheo
+畜	choo
+疵	chuv
+蹭	ci/o
+蹴	ci;a
+蹿	ci;o
+啐	ci;u
+嚓	ci;z
+嘈	ciao
+喳	ciau
+躇	cieu
+喘	cioa
+嗤	cioo
+呈	ciua
+哧	ciue
+嗔	ciuo
+嘲	ciuv
+呲	ciuz
+啜	civv
+叱	cizz
+氅	cjea
+伥	cjeu
+催	cjoe
+倡	cjoo
+促	cjou
+俦	cjua
+倘	cjuo
+偿	cjuu
+尝	cjuv
+伺	cjvo
+储	cjvu
+闯	cjvv
+侈	cjzz
+搓	ck/a
+撤	ck;e
+搐	ck;o
+撺	ck;u
+搽	cke/
+捶	ckea
+拆	ckee
+措	ckeo
+揣	ckoa
+摧	ckoe
+操	ckoo
+抻	ckou
+撮	ckov
+扯	ckua
+抄	ckue
+掺	ckva
+搀	ckz;
+谶	cl/a
+诧	cl;e
+翠	cl;u
+衬	clau
+戳	clav
+谌	cle/
+褚	cluo
+衩	clv;
+谗	clz;
+谄	clze
+皴	clzv
+豺	cmau
+糙	cme;
+炽	cmo/
+肏	cmo;
+灿	cmoo
+岔	cmou
+刹	cmuu
+兹	cmvv
+岔	cmzo
+怆	cn/v
+悰	cn;u
+怵	cna;
+宸	cnaa
+惭	cnae
+慒	cnao
+忖	cnau
+怅	cnea
+忏	cneu
+忡	cnou
+忱	cnve
+蝉	co/o
+蜍	co/u
+岑	co/v
+贮	co;a
+幢	co;o
+崇	co;u
+瞅	coea
+黜	coou
+畴	coua
+瞠	couo
+艟	cq;o
+侪	cr;e
+魑	cr;o
+臭	cra;
+虿	cso;
+邨	csvu
+簇	ct;e
+秤	ct;u
+垂	ctaa
+氚	cteu
+篡	ctoa
+筹	ctua
+䅟	ctva
+笞	ctvo
+稠	ctzu
+丞	cvaa
+肠	cvze
+猝	cw;u
+馇	cwau
+舛	cwav
+饬	cwea
+鲳	cwoa
+猖	cwoo
+删	cwuu
+骋	cxoa
+粲	cy/;
+锉	cy/u
+齿	cy/v
+铳	cy;e
+雌	cye;
+锤	cyea
+钏	cyeu
+龊	cyou
+钗	cyv;
+碇	da;a
+礅	da;e
+碟	daaa
+耷	daau
+碓	daeu
+砥	daz;
+碉	dazu
+椟	dcu;
+档	dcuv
+淀	dd;a
+渡	dd;e
+逗	dd;v
+沓	ddoo
+滇	dduo
+蒂	de;o
+耵	dfau
+耋	dfav
+颠	dfe/
+聃	dfo;
+靼	dfoa
+蠹	dfoo
+痘	dhao
+疔	dhau
+瘩	dhe/
+疸	dhoa
+盗	dhoo
+帝	dhou
+癫	dhue
+啖	di//
+蹈	di/e
+嗲	di/z
+嘀	di;o
+踮	di;u
+哒	dia;
+叮	diau
+吨	diav
+嗒	die/
+嘚	dieo
+噔	div/
+叼	diva
+咚	diz;
+跺	diza
+哆	dizz
+仃	djau
+黛	djo;
+佃	djoa
+侗	djoo
+掂	dk;u
+掉	dkua
+垫	dkuu
+挡	dkuv
+掇	dkvv
+捣	dkzo
+褡	dle/
+谍	dlea
+怠	dlov
+祷	dlua
+裆	dluv
+怼	dlv;
+裰	dlvv
+诋	dlz;
+奠	dmao
+炖	dmav
+兑	dmee
+郸	dmvu
+羝	dmz;
+貂	dmzo
+惇	dn;o
+宕	dnao
+窦	dnu;
+悼	dnua
+睇	do/v
+瞪	do;a
+蚪	do;u
+盹	doav
+黩	dou;
+巅	doue
+睹	douo
+瞪	dov/
+眈	dovv
+舵	dq;z
+牒	drea
+妲	dsoa
+氮	dt//
+氘	dteu
+犊	dtu;
+丢	dtv;
+坫	duua
+腚	dv;u
+蛋	dvo;
+堕	dvua
+陡	dvuu
+氐	dw;;
+丹	dw;a
+甸	dwoo
+岛	dwou
+剁	dwuu
+锭	dy;a
+镝	dy;o
+钝	dyav
+铤	dyea
+钿	dyoa
+镫	dyv/
+梵	fcz;
+汾	fd/z
+淝	fdvv
+藩	fe;e
+芾	fe;o
+菲	feua
+敷	ffea
+麸	fgu;
+奉	fguu
+珐	fguv
+痱	fhua
+疯	fhz/
+呋	fiu;
+俯	fj;e
+伏	fja;
+俸	fjaa
+阈	fjao
+傅	fjau
+伐	fjav
+抚	fkuv
+讣	flu;
+粪	fme/
+斧	fmee
+忿	fmv;
+孚	fmvu
+乏	fmvv
+分	fmzz
+悱	fnua
+罘	foa;
+蝠	foao
+帆	foz;
+蜂	fozu
+舫	fq;v
+辐	fsao
+馥	ftea
+筏	fteu
+氟	ftvu
+坊	fu;v
+腑	fv;e
+肺	fv;o
+肪	fv;v
+腹	fvea
+腹	fveo
+腓	fvua
+逢	fw;v
+鲱	fwua
+凤	fwv;
+狒	fwvu
+龚	gae/
+槁	gc;o
+梗	gca;
+杠	gcau
+梏	gcea
+杆	gcuu
+枸	gczo
+灌	gdeo
+汩	gdoo
+洸	gdue
+耿	gf//
+甘	gfaa
+聒	gfea
+贡	gfo/
+瞽	gfoo
+恭	gfu;
+巩	gfz;
+鸪	gfza
+珙	gge/
+耕	ggue
+珪	gguu
+衮	gheu
+赓	gho/
+痼	ghou
+膏	ghov
+庚	ghv;
+庚	ghva
+膏	ghvv
+嗝	giao
+哽	giau
+啯	giou
+咣	giue
+剐	giuu
+咯	gizo
+仡	gjea
+刽	gju;
+闺	gjuu
+鸽	gjza
+伽	gjzo
+掼	gkoo
+掴	gkou
+拐	gkoz
+擀	gku/
+诰	glea
+诟	glee
+诂	gluo
+褂	gluu
+糕	gm/;
+羹	gm/u
+虢	gmuz
+炔	gmv;
+宫	gnoo
+蚣	go/v
+赅	go;/
+岗	goo/
+帼	goo;
+蛊	gooa
+崮	gooo
+刿	gouu
+鹘	goza
+骼	gozo
+躬	grvv
+臵	gszo
+篙	gt;o
+箍	gtau
+篝	gteo
+牯	gtuo
+竿	gtuu
+乖	gtuz
+鹄	gtza
+埂	guau
+圪	guea
+卦	guu;
+圭	guua
+膈	gvao
+肛	gvau
+肱	gvav
+胱	gvue
+胳	gvzo
+犷	gw;e
+逛	gw;v
+鳏	gwou
+龟	gwov
+鲑	gwuu
+狗	gwzo
+纲	gxo/
+锢	gyou
+铬	gyzo
+憨	hbv;
+杭	hc;z
+桦	hceu
+濠	hd;a
+浒	hd;e
+浣	hd;u
+汇	hdav
+洪	hde/
+淮	hde;
+海	hdea
+潢	hdeo
+混	hdoa
+灏	hdoe
+涸	hdou
+滑	hdov
+瀚	hdu/
+汗	hduu
+浑	hdva
+沪	hdve
+涵	hdvu
+泓	hdvv
+涣	hdzo
+藿	he;e
+蒿	he;o
+蕙	heav
+蘅	heez
+薨	heoa
+菡	hevv
+酣	hfaa
+鬟	hfoo
+惠	hfv;
+邯	hfvu
+耗	hgea
+璜	hgeo
+琥	hgua
+珲	hgv;
+彗	hgva
+霍	hhe;
+麾	hhea
+瘊	hhev
+肓	hhva
+亨	hhvv
+痪	hhzo
+呼	hi/u
+嚯	hi;;
+嚎	hi;a
+嗨	hi;e
+呵	hiau
+哄	hie/
+嗬	hiee
+嗥	hieo
+哗	hieu
+喉	hiev
+嘿	hio;
+踝	hioo
+喙	hivv
+颌	hje/
+盒	hjoo
+阖	hjuo
+辉	hjva
+侯	hjve
+捍	hkoa
+徊	hkoo
+护	hkve
+衡	hkzu
+诃	hlao
+讧	hlau
+谎	hle;
+诲	hlea
+扈	hlov
+褐	hloz
+祜	hluo
+讳	hluu
+鹤	hlza
+豢	hma;
+烘	hme/
+煳	hmuv
+恢	hna/
+憾	hna;
+恒	hnao
+宦	hnau
+宏	hnav
+悔	hnea
+惶	hneo
+寰	hnoe
+怙	hnuo
+骸	ho;/
+虾	hoau
+贿	hoav
+蚶	hoea
+骺	hoee
+圜	hooa
+蛔	hooo
+逅	hq;v
+颢	hre;
+晦	hrea
+皓	hreo
+昊	hru;
+晃	hrue
+鼾	hruu
+曷	hrz/
+齁	hrzo
+馄	hsoa
+嬛	hsoo
+惑	hsv;
+氦	ht;e
+赫	huu/
+恚	huv;
+斛	hw;u
+狐	hwee
+獾	hweo
+凰	hweu
+奂	hwo;
+猾	hwov
+猢	hwuv
+绘	hx/u
+砸	iaao
+臧	iaau
+砧	iaua
+殖	iauo
+咫	ibo/
+帚	ibou
+梓	ic;/
+柱	ic;a
+榨	ic;e
+樟	ic;o
+棕	ic;u
+杖	ica;
+柘	icao
+桎	icau
+椎	ice;
+栀	icee
+栉	icev
+栈	icu;
+桢	icua
+榛	icue
+植	icuo
+杼	icv;
+札	icvv
+滋	id/v
+漳	id;o
+湛	ida/
+涿	ida;
+渣	idao
+滞	idau
+洙	idea
+浊	ido;
+渍	idu/
+渚	iduo
+汁	iduu
+濯	idv;
+涨	idva
+淄	idvo
+泽	idvu
+潴	idzu
+蔗	ie;;
+藻	ie;o
+蘸	ieau
+芷	ieua
+茁	ievv
+枣	if;;
+鬃	if;a
+醉	if;u
+甄	ifa;
+栽	ifau
+酢	ifea
+煮	ifo;
+哉	ifoo
+酯	ifzo
+璋	ig;o
+瓒	igea
+赘	igo/
+盏	igoo
+瑱	iguo
+疹	ih/e
+卒	ih/u
+瘴	ih;o
+震	ihaa
+斋	ihao
+症	ihau
+族	ihea
+彰	ihee
+衷	ihoe
+咨	ihoo
+章	ihou
+庄	ihua
+壮	ihuu
+痣	ihuv
+恣	ihv;
+妆	ihve
+咤	ii;e
+跖	iiao
+咂	iiav
+咋	iiea
+唣	iieo
+吒	iiev
+咀	iioa
+躁	iioo
+嘬	iiov
+啧	iiu/
+趾	iiua
+吱	iiuv
+啁	iizu
+咒	iizz
+僮	ij;o
+仗	ija;
+佐	ijaa
+侄	ijau
+俎	ijoa
+闸	ijou
+帧	iju/
+侦	ijua
+债	ijuo
+拄	ik;a
+撞	ik;o
+挝	ika;
+振	ikau
+挚	ikea
+折	ikee
+攒	ikeo
+攥	ikeu
+蛰	iko;
+徵	ikoe
+哲	ikoo
+拽	ikov
+揍	ikuu
+擢	ikv;
+拯	ikva
+撰	ikve
+摺	ikvo
+拙	ikvu
+扎	ikvv
+执	ikz;
+鸷	ikza
+挣	ikzv
+谪	il;o
+翟	ile;
+诛	ilea
+诈	ileu
+蚤	ilo;
+诅	iloa
+祝	iloe
+祉	ilua
+褶	ilve
+祗	ilz;
+鸩	ilza
+诤	ilzu
+诌	ilzv
+兆	im;;
+炷	im;a
+粽	im;u
+糟	imao
+繇	imev
+炽	imo/
+燥	imoa
+燥	imoo
+粘	imuo
+灶	imuu
+兹	imv;
+孳	imvu
+籽	imvv
+憎	in/o
+寨	inau
+窒	inav
+窄	inea
+惴	inoa
+祯	inua
+赠	io/o
+眨	io/v
+贮	io;a
+赃	io;u
+贼	ioa;
+赈	ioaa
+蛭	ioau
+崭	ioav
+颛	ioe/
+蛛	ioe;
+账	ioea
+蚱	ioeu
+眨	ioev
+盅	iooa
+崽	ioov
+峙	iou;
+罪	ioua
+罩	iouo
+胄	iova
+瞩	iove
+瞻	ioz;
+睁	iozv
+追	ir;v
+侏	ireu
+錾	is/a
+辄	isau
+斩	isee
+轴	isoa
+轴	isoo
+匝	isou
+辎	isvo
+郅	isvu
+朱	it;;
+箴	ita;
+乍	itaa
+簪	itao
+稚	ite;
+秩	itea
+笊	itee
+雉	iteu
+秭	itev
+赞	ito/
+租	itoa
+纂	itov
+稹	itu/
+毡	itua
+箸	ituo
+竺	ituu
+篆	itv;
+赵	iu/;
+凿	iu/v
+赭	iuue
+喆	iuuo
+胗	iv/e
+膣	iv;a
+脏	iv;u
+奘	iva;
+肘	ivau
+孜	ivea
+肿	ivou
+肢	ivuv
+鳟	iw/a
+兆	iw;;
+獐	iw;u
+猹	iwau
+昝	iwoo
+鲭	iwuv
+馔	iwve
+邹	iwvv
+缯	ix/o
+绽	ix;a
+驻	ix;u
+骓	ixe;
+缜	ixuo
+绰	ixuu
+缁	ixvo
+绌	ixvu
+绉	ixzv
+镇	iyao
+桌	iyau
+铢	iyea
+贞	iyo/
+占	iyoo
+铡	iyou
+镯	iyoz
+铸	iyua
+钻	iyuo
+卓	iyuu
+龇	iyuv
+硷	ja/a
+礓	jaao
+礁	jae;
+疆	jbao
+犟	jbea
+届	jboa
+君	jboo
+剧	jbuu
+忌	jbv;
+郡	jbvu
+橛	jca/
+柩	jcav
+桔	jcuo
+椒	jcuv
+枷	jczo
+浃	jd;;
+酒	jdau
+浇	jdav
+湫	jdea
+沮	jdoa
+涧	jdou
+涓	jdov
+泾	jdva
+浸	jdvv
+浚	jdvz
+茭	je;/
+荚	je;;
+荠	je;e
+菅	je;v
+蒋	je;z
+蕨	jea/
+菁	jeaa
+苣	jeav
+蕉	jee;
+茧	jeo;
+苋	jeoe
+莒	jeoo
+藉	jeue
+葭	jevv
+芨	jez;
+茄	jezo
+蓟	jezu
+棘	jfau
+戟	jfav
+截	jfe;
+靳	jfee
+聚	jfeu
+贾	jfo/
+觐	jfoe
+兢	jfue
+髻	jfuo
+酵	jfuv
+瑾	jgeo
+珏	jgu;
+井	jguu
+玖	jgz;
+珈	jgzo
+玑	jgzv
+疥	jh/e
+瘠	jh/v
+夹	jh;;
+霁	jh;e
+奖	jha;
+酱	jhao
+桨	jhau
+颊	jhe/
+旌	jhea
+齑	jheu
+疽	jhoa
+竞	jhoe
+竭	jhoz
+浆	jhu;
+剂	jhuu
+靖	jhuv
+痉	jhva
+疖	jhvu
+脊	jhvv
+竣	jhvz
+疚	jhz;
+鹫	jhza
+痂	jhzo
+嗟	ji/a
+跻	ji;e
+蹶	jia/
+噘	jia;
+噤	jiau
+喈	jiav
+噱	jiua
+咭	jiuo
+踞	jivu
+叽	jizz
+俭	jj/a
+倦	jj/v
+佼	jj;/
+焦	jj;;
+侥	jjaa
+僵	jjao
+僭	jjav
+牮	jjea
+儆	jjee
+借	jjeo
+觎	jjoe
+偈	jjoz
+佶	jjuo
+佳	jjuu
+伎	jjuv
+仅	jjv;
+倨	jjvo
+倔	jjvu
+健	jjvv
+俊	jjvz
+阄	jjzo
+挟	jk;;
+搅	jk;o
+撅	jka/
+拣	jka;
+捷	jkav
+攫	jko;
+捐	jkov
+拮	jkuo
+街	jkuu
+抉	jkv;
+掘	jkvv
+掬	jkz/
+衿	jl/v
+谏	jla;
+诫	jlaa
+襟	jlau
+诫	jlav
+颈	jle/
+谨	jleo
+诘	jluo
+讦	jluu
+诀	jlv;
+诀	jlva
+谲	jlvo
+裾	jlvu
+肩	jlvv
+鸡	jlza
+皲	jlzv
+讥	jlzz
+煎	jm;;
+桀	jmau
+眷	jmoa
+炯	jmoo
+羯	jmoz
+烬	jmv;
+焗	jmva
+姜	jmve
+翦	jmvv
+悸	jnea
+憬	jno;
+蹇	jnou
+囧	jo/v
+迥	jo;v
+畸	joaa
+睫	joav
+瞿	joe;
+羁	joev
+贱	jou;
+巾	jouu
+睛	jouv
+囝	jova
+崛	jovv
+峻	jovz
+皎	jr;/
+舅	jroz
+姣	js;/
+嫉	js;e
+姬	jsau
+婕	jsav
+娇	jsea
+匠	jsee
+轿	jseu
+辑	jsoa
+娟	jsov
+奸	jsuu
+婧	jsuv
+箭	jt/v
+榘	jta;
+犄	jtaa
+嵇	jtao
+箕	jtau
+稽	jtaz
+积	jto/
+笕	jtoe
+稷	jtoz
+笺	jtu;
+秸	jtuo
+筠	jtuz
+毽	jtva
+犍	jtvv
+筋	jtvz
+笳	jtzo
+吉	juoo
+赳	juvu
+圾	juz;
+嘉	juzo
+劫	juzz
+孓	jv;;
+阱	jvuu
+脚	jvuv
+腱	jvv;
+胫	jvva
+肌	jvzz
+饺	jw;/
+狡	jw;;
+鲸	jw;u
+飓	jwo/
+狙	jwoa
+咎	jwoo
+狷	jwov
+饯	jwu;
+鲫	jwvv
+鸠	jwza
+饥	jwzz
+缄	jxao
+缙	jxau
+缴	jxee
+缉	jxoa
+骥	jxua
+剿	jxuu
+纠	jxvv
+骏	jxvz
+驹	jxzo
+绛	jxzv
+铰	jy;/
+镓	jy;a
+遽	jy;v
+镢	jya/
+钜	jyav
+镌	jyeu
+锏	jyoo
+钾	jyou
+锔	jyvo
+锯	jyvu
+乩	jyvv
+磕	kauo
+奎	kauu
+柯	kcau
+槛	kcuo
+溃	kdoo
+髡	kfav
+疴	khau
+邝	khvu
+喀	ki;o
+吭	ki;z
+哐	kiav
+咔	kiua
+嗑	kiuo
+跬	kiuu
+侉	kjau
+郐	kjvu
+扩	kk;e
+抠	kka/
+挎	kkau
+揩	kkav
+捆	kkoa
+糠	km;v
+忾	knea
+宽	kneo
+窠	kno;
+悝	knoa
+愦	knoo
+恺	knov
+窥	knuo
+窟	knvv
+困	koa;
+蝰	koau
+骷	kouo
+岿	kouv
+睽	kovu
+魁	kr;u
+犒	kt;o
+稞	kto;
+氪	ktuo
+逵	ku;v
+坷	kuao
+垮	kuau
+坎	kuz/
+壳	kuzz
+狯	kw/u
+鲲	kwoa
+钶	kyau
+锞	kyo;
+铿	kyuu
+殓	la/a
+砬	la;a
+硫	la;e
+裂	la;o
+磊	laaa
+聋	laau
+砺	laav
+厘	laoa
+垄	lauu
+砾	laz;
+鹩	laza
+尥	lazo
+栏	lc/a
+榈	lcoo
+榄	lcuo
+棂	lcv/
+榔	lcvv
+橹	lczo
+柳	lczv
+鎏	ld/a
+潋	ld/e
+泠	ld/v
+沦	ld/z
+濂	ld;/
+涞	ld;;
+漉	ld;a
+漓	ld;o
+浏	ld;u
+逦	ld;v
+涟	lda;
+淋	ldaa
+潦	ldao
+沥	ldaz
+丽	ldo;
+澜	ldoa
+泸	ldua
+滤	lduv
+漏	ldva
+郦	ldvu
+泺	ldz;
+鹂	ldza
+溜	ldzo
+蕾	le;o
+藜	lee/
+莅	lee;
+荦	leea
+蔺	leoe
+菱	leuz
+蓼	lev/
+荔	lezz
+酹	lf/a
+聆	lf/v
+酪	lfzo
+聊	lfzv
+勒	lfzz
+耧	lg/v
+耒	lg;;
+琉	lg;e
+琅	lg;v
+珑	lga;
+琏	lgav
+六	lh//
+廉	lh/;
+銮	lh/a
+廖	lh/e
+零	lh/v
+麟	lh/z
+凛	lh;o
+癞	lha/
+霖	lhaa
+栾	lhau
+鹿	lhav
+雳	lhaz
+挛	lhea
+痢	lheu
+痨	lhez
+赉	lho/
+脔	lho;
+斓	lhoa
+雷	lhoo
+峦	lhou
+羸	lhov
+冽	lhuu
+凌	lhuz
+廖	lhv/
+恋	lhv;
+孪	lhva
+庐	lhve
+疗	lhvu
+廊	lhvv
+癃	lhvz
+鸾	lhza
+瘤	lhzo
+呤	li/v
+咙	lia;
+嘹	liao
+咧	liau
+躏	lieo
+嘞	liez
+哩	lioa
+啰	lioz
+唳	liva
+啷	livv
+鹭	liza
+噜	lizo
+伶	lj/v
+阑	lja;
+俪	ljao
+僚	ljau
+敛	ljea
+俐	ljeu
+赁	ljo/
+儡	ljo;
+俚	ljoa
+闾	ljoo
+佬	ljuv
+翎	ljvv
+绺	ljzo
+拎	lk/;
+捋	lk/a
+搂	lk/v
+抡	lk/z
+擂	lk;o
+撩	lkao
+摞	lkou
+撂	lkoz
+掳	lkuz
+捩	lkva
+戾	llao
+裢	llav
+裸	llo;
+谰	lloa
+褛	llov
+褴	lluo
+禄	llv;
+郎	llvu
+朗	llvv
+羚	lm/v
+遴	lm;v
+燎	lmao
+炼	lmav
+娄	lmva
+炉	lmve
+粼	lmvv
+熘	lmzo
+寥	ln/e
+寮	lnao
+愣	lno;
+窿	lnvz
+蛉	lo/;
+髅	lo/v
+嶙	lo/z
+睐	lo;;
+詈	lo;o
+瞭	loao
+崂	loez
+螺	loov
+螂	lovv
+岚	loz/
+赂	lozo
+辚	ls/z
+轳	lsua
+篓	lt/v
+笠	lt;a
+梨	ltau
+籁	ltaz
+黧	lto;
+箓	ltva
+氯	ltvu
+坜	luaz
+陇	lva;
+陋	lvav
+胪	lvua
+陵	lvuz
+肋	lvzz
+遛	lw;v
+鲢	lwa;
+鲡	lwao
+雒	lwe;
+猁	lweu
+鲤	lwoa
+鲁	lwoo
+狸	lwou
+猡	lwoz
+卵	lwv;
+纶	lx/z
+骊	lxao
+绫	lxuz
+驴	lxve
+骆	lxzo
+锊	ly/a
+铃	ly/v
+镭	ly;o
+镣	lyao
+镏	lye;
+卤	lyo/
+镧	lyo;
+锂	lyoa
+铝	lyoo
+锒	lyv;
+鸬	lyza
+枚	mcea
+棉	mceu
+懋	mcv;
+湎	mdao
+漭	mdea
+濛	mdeu
+汨	mdoa
+渑	mdoo
+渺	mdou
+淼	mduu
+溟	mdv;
+泯	mdva
+湄	mdvo
+蘑	me;a
+芒	me;v
+蔑	mea;
+莽	meaa
+暮	meao
+墓	meau
+莓	meea
+苗	meoa
+蔓	meoo
+幕	meou
+萌	meov
+慕	meu;
+茉	meuo
+蓦	meva
+茗	mezo
+髦	mfev
+瑁	mgoo
+珉	mgva
+麋	mh/;
+霾	mh/o
+霉	mhea
+瘼	mheo
+魔	mheu
+麽	mhev
+蛮	mho;
+亩	mhoa
+盲	mhoo
+袤	mhve
+邙	mhvu
+哞	miv;
+抿	mkva
+牟	mlea
+谟	mleo
+蝥	mlo;
+幂	mloa
+谩	mloo
+谬	mlv/
+袂	mlva
+谧	mlvo
+邈	mm;v
+貘	mmeo
+觅	mmoe
+熳	mmoo
+焖	mmov
+懵	mneo
+悯	mno;
+密	mnou
+宓	mnv;
+寐	mnvu
+皿	moaa
+蟒	moea
+瞄	moeo
+蠓	moeu
+帽	mooo
+幔	moov
+眇	moue
+睦	mouu
+瞑	mov;
+蜢	mova
+岷	mova
+眸	move
+嵋	movo
+蚂	movv
+魅	mru;
+暝	mrvo
+嬷	ms;a
+嫫	mseo
+妙	msue
+姆	msv;
+牧	mtea
+穆	mteu
+秣	mtu;
+牡	mtuu
+秘	mtv;
+朦	mveu
+孟	mvoo
+馍	mweo
+贸	mwo/
+馒	mwoo
+鳗	mwov
+猕	mwva
+卯	mwvu
+乜	mxvv
+孬	navv
+溺	ndv;
+泥	ndvz
+聂	nfvv
+耨	ngau
+旎	nhea
+蹑	niau
+啮	niua
+哝	niv;
+呶	nive
+恁	njv;
+傩	njve
+侬	njvo
+伲	njvz
+捺	nkau
+撵	nkua
+搦	nkv;
+扭	nkva
+挪	nkvv
+衲	nlo;
+糯	nm;a
+懦	nn;a
+怩	nnva
+奴	nsv;
+弩	nsva
+妞	nsvu
+娜	nsvv
+妮	nsvz
+妳	nszu
+奶	nszz
+黏	ntua
+狞	nw;a
+馕	nwau
+猊	nweu
+狃	nwvu
+铙	nyav
+钕	nyve
+殍	pa/v
+砒	paav
+邳	pavv
+譬	pb;o
+溥	pda;
+浦	pdau
+濮	pdeu
+泡	pdzv
+蒲	pe;a
+菩	pe;o
+苹	pe;u
+苤	peaa
+莆	peau
+剽	pfuu
+霈	ph;;
+痞	phao
+疱	phzv
+叭	pi//
+呸	piaa
+哌	piee
+噗	piu/
+嘭	piue
+蹁	pivo
+咆	pizv
+凭	pjzz
+扒	pk//
+撇	pk/e
+抨	pk;u
+撇	pkue
+捧	pkuu
+披	pkzv
+翩	plvv
+粕	pmeo
+盆	pmoa
+瞥	pmoo
+蟠	po/o
+螃	po;;
+瞟	poau
+毗	poav
+蜱	poeu
+乓	pr;;
+魄	preu
+娉	psoa
+牝	ptzv
+坯	puaa
+胼	pv/u
+脬	pv/v
+膀	pv;;
+胚	pvaa
+爿	pvee
+纰	pxav
+槭	qca;
+栖	qcau
+楸	qce/
+樵	qce;
+橇	qcea
+榷	qcve
+淇	qda/
+渠	qdau
+沏	qdav
+汔	qdea
+泅	qdo/
+潜	qduo
+芩	qe/v
+萋	qeav
+颧	qee/
+荞	qeea
+芹	qeee
+芊	qeeu
+荨	qeva
+芪	qezv
+鬈	qf/v
+逑	qf;v
+醛	qfe/
+蛩	qfo;
+綦	qfvu
+欺	qfz/
+鹊	qfza
+契	qga;
+琦	qgaa
+契	qgao
+琪	qgau
+麒	qha/
+弃	qhau
+凄	qhav
+旗	qhea
+噙	qi/;
+跄	qi/v
+嘁	qiau
+佥	qja;
+俅	qjau
+戗	qjav
+仟	qjea
+倩	qjuo
+劁	qjuu
+俏	qjuv
+俟	qjve
+揿	qkea
+诠	ql/u
+巯	ql;e
+逡	ql;v
+讫	qlea
+诮	qluv
+祁	qlvu
+诎	qlvv
+糗	qmeu
+羟	qmva
+郄	qmvv
+券	qmzz
+惬	qna;
+窍	qnau
+愀	qnea
+褰	qnu;
+搴	qnue
+悭	qnuu
+怯	qnuv
+骞	qnva
+囚	qo/;
+蜣	qo/u
+黔	qo/v
+髂	qo;z
+嵌	qoau
+岖	qoav
+蛆	qooa
+岐	qou;
+畦	qouu
+蜻	qouv
+虬	qovv
+黢	qovz
+躯	qra/
+辁	qs/u
+嫱	qsuo
+翘	qsvv
+签	qt/a
+筌	qt/u
+迄	qt;v
+箝	qtau
+筇	qtav
+箐	qtuo
+憩	qtv;
+氢	qtva
+乞	qtvv
+磬	quao
+脐	qv;e
+绮	qxaa
+锵	qy;z
+锹	qye/
+钎	qyea
+龋	qyeo
+锲	qyua
+铅	qyzo
+濡	rd;a
+沤	rda/
+溽	rdaa
+洱	rdau
+蔼	re;o
+茸	reau
+苒	reoa
+萼	reou
+蕊	rev;
+茹	revo
+髯	rfoa
+鞣	rfva
+遨	rg;v
+珥	rgau
+螯	rgo;
+耦	rgoo
+鳌	rgza
+瓤	rhee
+嗌	ri/o
+嗳	ri/v
+嚅	ri;a
+唔	riao
+呃	riav
+哎	rie/
+颚	rie;
+噢	rieu
+蹂	riva
+鄂	rivu
+俺	rjao
+偌	rjea
+仁	rjua
+闰	rjuu
+攘	rk;a
+挠	rkaa
+捱	rkau
+扼	rkav
+揉	rkva
+拗	rkvv
+褥	rlau
+讴	rlav
+冗	rlee
+讹	rleu
+糅	rmva
+懊	rneu
+愕	rnou
+蠕	ro;a
+冉	roa;
+凹	roaa
+蛾	roea
+蚋	roo;
+遏	rr;v
+娆	rsav
+妊	rsea
+媪	rsoo
+轫	rsz;
+鸥	rsza
+殴	rszv
+胺	rv;v
+狨	rwaa
+饵	rwau
+饪	rweu
+缛	rxaa
+锷	ryou
+戍	sa;;
+厮	saau
+硕	sae/
+殇	saea
+蜃	sao;
+盛	saoa
+豕	saoo
+砷	saou
+砂	saue
+卅	sauu
+属	sbeo
+栓	sc/u
+梳	sc;e
+柿	sc;o
+枢	sca/
+椹	scau
+枢	scav
+虱	sceo
+梭	scv/
+淞	sda/
+沭	sda;
+涑	sdao
+漱	sdau
+潸	sdav
+挲	sdea
+溲	sdeu
+泗	sdoa
+汕	sdou
+涉	sduu
+淑	sduv
+渗	sdve
+涮	sdvu
+汜	sdvv
+鲨	sdzo
+蓑	se;o
+莘	se;u
+苫	seuo
+菽	seuv
+蔬	sev;
+荪	sevu
+芍	sez;
+苕	sezo
+芟	sezv
+粟	sf/o
+酥	sfea
+斯	sfee
+啬	sfoo
+丧	sfu;
+丧	sfv;
+肆	sfvu
+琐	sguo
+瑟	sgv;
+庶	sh;;
+痧	sh;u
+霎	sh;v
+竦	shau
+庶	she;
+霰	shee
+麝	sheu
+衰	shoe
+疝	shoo
+塾	shuu
+癖	shv;
+瘆	shve
+瘙	shvo
+煽	shvv
+飒	shz/
+韶	shzo
+嗽	siau
+嗖	sieu
+嗜	siuo
+嗦	siuv
+唆	siv/
+咝	siva
+吮	sive
+嗣	sivo
+唰	sivu
+俗	sj//
+僧	sj/o
+伞	sj/u
+裳	sj;;
+闩	sjaa
+傻	sjeo
+赏	sjo/
+裳	sjo;
+售	sjoo
+伸	sjou
+佘	sju;
+侍	sjua
+舍	sjuo
+隼	sjuu
+怂	sjv;
+伺	sjva
+俞	sjvu
+舒	sjvv
+擞	sk/e
+拾	sk/o
+拴	sk/u
+擅	sk;o
+摔	sk;u
+逝	sk;v
+撕	skau
+拭	skav
+撒	skee
+搡	skva
+搔	skvo
+抒	skvv
+谥	sl/o
+讼	sl/v
+桑	slau
+衫	slee
+讪	sloo
+谡	sloz
+叁	slua
+圣	sluu
+诵	slv;
+祀	slva
+诵	slvo
+扇	slvv
+熵	sm;o
+遂	sm;v
+弑	sma;
+槊	smau
+烧	smav
+颂	sme/
+兽	smoo
+刹	smuu
+糁	smve
+鄯	smvu
+朔	smvv
+舜	smza
+忪	sn/v
+窣	sn;u
+悚	snao
+宋	snau
+慑	snav
+恃	snua
+慎	snuo
+塞	snuu
+愫	snuv
+蟮	so/o
+赊	so/u
+嵩	so;o
+蟀	so;u
+崧	soau
+睢	soe;
+赎	sou;
+蛳	soue
+署	souo
+墅	souu
+赡	soz;
+蜀	sozo
+艄	sqev
+晟	sra;
+晒	srau
+叟	srv;
+孀	ss;a
+嬗	ss;o
+姝	ssea
+恕	ssv;
+黍	st/u
+矢	st;;
+筮	sta/
+秫	sta;
+簌	stau
+笙	stea
+筲	stev
+舌	stoo
+甥	stoz
+筛	stua
+穑	stuo
+剩	stuu
+稍	stuv
+笋	stve
+歃	stz/
+膳	sv/o
+腧	sv/v
+膻	sv;a
+疏	sv;e
+陕	sv;o
+胜	sveu
+臊	svoa
+祟	svuu
+飧	sw/v
+勺	sw;;
+狩	sw;a
+觞	swea
+馓	swee
+稣	sweo
+飕	sweu
+馊	swev
+鳃	swov
+删	swuu
+殳	swv;
+饲	swvo
+狲	swvu
+甩	swvv
+绶	sx/v
+驷	sxoa
+绳	sxoo
+绅	sxou
+纾	sxv;
+缫	sxvo
+骟	sxvv
+鸶	sxza
+铄	syzu
+殄	ta/e
+套	taau
+榻	tcov
+椭	tcva
+烫	td//
+滔	td/e
+涕	td/v
+溏	td;v
+沱	td;z
+汰	tda;
+汀	tdau
+溻	tdov
+淌	tduo
+澹	tdz;
+淘	tdze
+苔	tevo
+菟	tezo
+醣	tf;v
+醍	tfoa
+瑭	tg;v
+吞	tgoo
+霆	thev
+瘫	thv;
+饕	ti/v
+蹄	ti;o
+跎	ti;z
+蹋	tiov
+踏	tiuo
+蹚	tiuu
+嚏	tiuv
+嗵	tiv;
+跆	tivo
+趿	tiz;
+僮	tj;o
+途	tj;v
+佗	tj;z
+棠	tjoa
+傥	tjue
+氽	tjuu
+倜	tjzu
+搪	tk;v
+挞	tka;
+拓	tkao
+挺	tkea
+拖	tkev
+摊	tkv;
+探	tkva
+捅	tkvo
+掏	tkze
+谭	tlau
+邰	tlvu
+煺	tmv;
+烃	tmva
+郯	tmvu
+窕	tnz;
+蜕	to/z
+疃	to;o
+炭	toa/
+凸	toaa
+町	toau
+囤	toav
+畋	toea
+螳	toeo
+帖	touo
+骰	tozv
+剔	truu
+昙	truv
+忒	tsv;
+笤	ttzo
+坨	tu;z
+塌	tuov
+填	tuuo
+坛	tuuv
+粜	tv/;
+滕	tv/u
+陀	tv;z
+肽	tva;
+腆	tvo/
+逖	tw;v
+钽	tyoa
+杌	wcav
+汶	wd;/
+豌	wd;z
+渭	wdov
+洼	wduu
+潍	wdvv
+莞	we;u
+萎	weev
+芜	weuv
+琬	wg;z
+玮	wguu
+雯	wh;/
+痦	whau
+忘	whv;
+弯	whva
+妄	whvv
+吴	wiu;
+哇	wiuu
+呜	wiza
+伍	wjau
+佤	wjav
+倭	wjea
+仵	wjeu
+讳	wluu
+婺	wlva
+焐	wmau
+忤	wnea
+惘	wno/
+愠	wnoo
+怃	wnuv
+崴	woav
+帷	woe;
+嵬	woev
+蛙	wouu
+帏	wouv
+幄	wovu
+韪	wruu
+婉	ws;z
+妩	wsuv
+舞	wtz;
+圬	wuuv
+脘	wv;u
+鲔	wwav
+猬	wwov
+邬	wwvu
+绾	wx;v
+戌	xaa;
+咸	xaao
+硒	xaau
+咸	xao;
+矽	xaz;
+弦	xb;;
+遐	xb;v
+巽	xbe/
+迅	xc;v
+栖	xcau
+朽	xcav
+檄	xcee
+皙	xceo
+榭	xceu
+樨	xcvu
+淆	xd/a
+汹	xd/v
+漩	xd;e
+泫	xd;v
+淅	xdae
+泄	xdav
+潇	xde;
+溴	xdeo
+涎	xdeu
+泄	xdev
+沁	xdv;
+浔	xdva
+汛	xdvu
+汐	xdz;
+萱	xe;a
+薪	xe;e
+薰	xee;
+芯	xev;
+醺	xfe;
+靴	xfez
+昔	xfoo
+巷	xfvv
+瑄	xg;a
+刑	xguu
+瑕	xgvv
+痃	xh;v
+亵	xhe;
+冼	xhea
+襄	xhee
+席	xheo
+庥	xheu
+旋	xhev
+痫	xhoa
+畜	xhoo
+襄	xhue
+霄	xhuv
+玄	xhv;
+畜	xhvo
+享	xhvu
+霞	xhvv
+嚣	xiao
+跣	xiea
+兄	xiee
+嗅	xieo
+咻	xieu
+呷	xiou
+嘻	xiuo
+嘘	xiuu
+哮	xiuv
+勋	xizz
+侠	xj;;
+闲	xjau
+偕	xjav
+肖	xjvv
+掀	xkee
+擤	xkeo
+衔	xkeu
+携	xkez
+撷	xkue
+祥	xl/u
+熊	xl;;
+戏	xla;
+谐	xlav
+训	xleu
+裼	xloz
+谑	xlua
+禧	xluo
+诩	xlvv
+煊	xm;a
+炫	xm;v
+奚	xma;
+羲	xmea
+悉	xmv;
+羞	xmva
+郗	xmvu
+翔	xmvv
+宪	xnea
+忻	xnee
+恤	xneo
+悻	xnu/
+窸	xnv;
+恂	xnzo
+崤	xo/a
+瞎	xo;u
+眩	xo;v
+岫	xoou
+悬	xov;
+蟓	xozo
+勖	xozz
+歆	xqz/
+晞	xr/a
+曦	xr/e
+煦	xr;;
+晰	xrae
+曛	xre;
+昕	xree
+晌	xreo
+魈	xruv
+媳	xseu
+娴	xsoa
+嬉	xsuo
+絮	xsvu
+婿	xsvv
+熏	xt;;
+筱	xteu
+氙	xtoo
+箫	xtv;
+埙	xuoo
+腺	xveu
+胥	xvvv
+胁	xvz;
+降	xvza
+陷	xvze
+鳕	xw;;
+狭	xw;o
+蟹	xwo;
+猩	xwoe
+旭	xwoo
+狎	xwou
+郇	xwvv
+骧	xx;o
+纤	xxea
+驯	xxeu
+绣	xxez
+绪	xxuo
+绡	xxuv
+锌	xy;u
+铉	xy;v
+锨	xyee
+铣	xyeu
+虚	xyua
+厌	yaa;
+靥	yaaa
+雁	yae;
+赝	yaeo
+魇	yaev
+殃	yao;
+砚	yaoe
+殒	yaoo
+奄	yaov
+压	yau;
+尢	yav;
+郁	yavv
+椰	ycau
+杳	ycoo
+柚	ycou
+橼	ycvv
+檐	ycz;
+楹	yczo
+浴	yd//
+漾	yd/;
+淫	yd/e
+溢	yd/o
+渝	yd/v
+淤	yd;/
+夷	yd;;
+液	yd;e
+瀛	yd;v
+淹	ydao
+涯	ydau
+沂	ydee
+滢	ydeu
+潆	ydev
+泱	ydo;
+洇	ydoa
+滟	yduz
+涌	ydvo
+漪	ydza
+渔	ydzo
+薏	ye;v
+莜	yeeu
+萤	yeo;
+茵	yeoa
+茔	yeua
+芋	yeuu
+芸	yeuv
+蕴	yevo
+萦	yevu
+荫	yevv
+药	yevz
+莺	yeza
+苑	yezv
+焉	yfa;
+酉	yfaa
+颐	yfe/
+鞅	yfo;
+鄢	yfvv
+琰	yg//
+瑜	yg/v
+瑛	ygeo
+膺	ygev
+盂	ygoa
+韫	ygoo
+璎	ygov
+玥	ygvv
+於	yh/;
+瘀	yh;/
+霪	yh;e
+疣	yha;
+奕	yhaa
+痍	yhav
+颜	yhe/
+彦	yhee
+庾	yheu
+鹰	yhez
+裔	yho/
+赢	yhov
+雍	yhv;
+兖	yhve
+冶	yhvo
+庸	yhvu
+翊	yhvv
+瘾	yhvz
+疫	yhz;
+鹰	yhza
+疡	yhze
+毅	yhzv
+喻	yi/v
+噫	yi;o
+唷	yi;v
+哑	yiau
+咦	yiav
+咿	yieu
+呓	yiev
+咽	yioa
+喁	yioo
+嘤	yiov
+噎	yiua
+吆	yiv;
+踊	yivo
+邑	yivv
+哟	yivz
+仪	yj/;
+佯	yj/u
+阏	yj;/
+逾	yj;v
+倚	yjaa
+佑	yjao
+俨	yjau
+偃	yjav
+佚	yjea
+闫	yjua
+悠	yjv;
+伊	yjva
+耀	yjve
+俑	yjvo
+亿	yjvv
+阎	yjze
+佣	yjzu
+徭	yk/e
+徉	yk/u
+援	yk/v
+掖	yk;e
+喑	yk;o
+唁	yk;u
+衙	ykau
+揖	ykoa
+役	ykz;
+拥	ykzu
+抑	ykzv
+裕	yl//
+谣	yl/e
+裕	yl/o
+谕	yl/v
+翌	yl;a
+谚	yl;e
+谊	yl;o
+祐	ylao
+羿	ylau
+矣	yle;
+诱	ylea
+允	ylee
+谀	yleu
+甬	ylou
+恿	ylov
+谒	yloz
+刭	yluu
+羽	ylv;
+诒	ylvo
+郓	ylvv
+冤	ylz;
+鹬	ylza
+豫	ylze
+诣	ylzo
+爻	ym//
+焱	ym/;
+烊	ym/u
+舀	ymeu
+煜	ymo;
+丫	ymuu
+恙	ymv;
+熠	ymve
+鹞	ymza
+焰	ymze
+愉	yn/v
+慵	yn;v
+寅	yna/
+恹	ynaa
+宥	ynav
+怏	yno;
+寓	ynoo
+宴	ynov
+恽	ynva
+怡	ynvo
+峪	yo/o
+央	yo;;
+遗	yo;v
+螈	yoae
+岩	yoao
+崖	yoau
+屿	yoav
+罂	yoea
+曳	yoee
+蜒	yoeu
+禺	yoo;
+蝇	yooo
+蜴	yooz
+愚	yov;
+蚓	yova
+婴	yove
+贻	yovo
+邮	yovu
+幽	yovv
+黝	yovz
+鹦	yoza
+禹	yr;;
+昱	yr;a
+晏	yr;v
+曰	yraa
+粤	yrav
+晔	yreu
+鼹	yro;
+臾	yroo
+岳	yrou
+劓	yruu
+媛	ys/v
+弋	ys;;
+迓	ys;v
+妪	ysa/
+嫣	ysa;
+娅	ysau
+尧	ysav
+轶	yse;
+妖	ysea
+牙	ysee
+彧	yso;
+娱	ysou
+辕	ysuo
+妤	ysvv
+欤	ysz/
+鸢	ysza
+毓	yt;e
+迤	yt;v
+墉	yu;v
+壹	yua/
+域	yua;
+垣	yuao
+堙	yuau
+堰	yuav
+盐	yuoa
+邺	yuvv
+腋	yv;e
+臆	yv;o
+臃	yv;v
+腌	yvao
+胰	yvav
+隅	yvo;
+胭	yvoa
+陨	yvoo
+匀	yw;a
+逸	yw;v
+鱿	ywa;
+颍	ywe/
+怨	ywv;
+狱	ywva
+饴	ywvo
+肄	ywvu
+疑	ywvv
+缢	yx/o
+彝	yxau
+邕	yxov
+驿	yxv;
+绎	yxvu
+驭	yxvv
+龉	yyau
+铘	yyav
+铀	yyoa
+玻璃	bgz
+嫦娥	csu
+玳瑁	dge
+玷污	dgu
+吩咐	fi/
+疙瘩	ghe
+旮旯	gzo
+诙谐	hla
+蛤蟆	ho/
+蝴蝶	hou
+囫囵	hoz
+鹧鸪	ihz
+觊觎	joo
+咖啡	kiz
+傀儡	kje
+篱笆	lt;
+垃圾	lu;
+趔趄	lua
+邋遢	lx;
+忸怩	nnv
+琵琶	pga
+彷徨	pk;
+缥缈	pxa
+蛐蛐	qoo
+鹌鹑	raz
+峨嵋	roe
+婀娜	rsv
+忐忑	tyv
+龌龊	wyv
+唏嘘	xi/
+羡慕	xm;
+蟋蟀	xo/
+蜥蜴	xoa
+卜	bj;;;
+钵	byau;
+噌	ci/o;
+踹	cioa;
+跶	dia;;
+蛄	gouo;
+秆	gtuu;
+鸹	gtza;
+喉	hiev;
+痔	ihua;
+踵	iiea;
+蜇	iko;;
+祚	ileu;
+蛀	io;a;
+嶂	io;o;
+幛	io;u;
+锃	iyou;
+钊	iyuu;
+暨	jboa;
+豇	jdau;
+醮	jfe;;
+刳	kauu;
+瘘	lh/v;
+冽	lhau;
+膂	lhva;
+娈	lhve;
+偻	lj/v;
+镂	ly/v;
+檬	mcea;
+苜	meou;
+螨	moea;
+蟆	moeo;
+螟	movo;
+驽	nsvv;
+庖	phzv;
+蹼	piu/;
+蜷	qo/v;
+哂	siau;
+仕	sjua;
+绥	sx/v;
+序	xhv;;
+湮	ydau;
+胤	yevv;
+嬴	yhov;
+呦	yivz;
+阉	yjao;
+烨	ymeu;
+炀	ymze;
+愠	ynoo;
+蜮	yoav;
+蛹	yovo;
+鸯	yoza;
+驿	yxvu;
+鹁鸪	bfza
+蝙蝠	bovo
+璀璨	cgoe
+痤疮	ch/u
+蹉跎	ci/a
+踟躇	ciea
+徜徉	ckuo
+憧憬	cn;o
+惭愧	cnav
+惆怅	cnzu
+蟾蜍	coz;
+伧促	cr/v
+喋喋	diea
+咄咄	divu
+诽谤	flua
+尴尬	gauo
+橄榄	gcve
+蝈蝈	goou
+旮旯	gwoo
+斟酌	ifu;
+踯躅	ii/v
+蟑螂	io;o
+蜘蛛	ioeo
+狰狞	iwzv
+矍铄	jov;
+孑孓	jva;
+袈裟	jz;e
+咳嗽	ki;;
+崆峒	ko;a
+蝌蚪	koe;
+萝卜	leoz
+囹圄	lo/v
+耄耋	mfea
+腼腆	mvao
+磅礴	pa;;
+滂沱	pd;;
+葡萄	peza
+嘌呤	piau
+蹒跚	piea
+徘徊	pkua
+乒乓	pree
+蹊跷	qi/a
+襁褓	qlvo
+崎岖	qoaa
+蚯蚓	qoeu
+肮脏	rv;z
+呻吟	siou
+唢呐	siu/
+蜿蜒	wo;z
+蜈蚣	woou
+逶迤	wt;v
+逍遥	xj;v
+螅蟀	xoeo
+牺牲	xtau
+邂逅	xw;v
+旖旎	yhea
+揶揄	ykav
+窈窕	ynvz
+氤氲	ytoa
+鸳鸯	ywza
+钥匙	yyvv
+踌躇	ciua;
+佝偻	gjzo;
+峥嵘	iozv;
+妯娌	isoa;
+吝啬	lhoo;
+蝼蚁	lo/v;
+不	ba;;
+有	yava
+一	ydaa
+半	bmu
+办	bz;
+程	cto
+等	dtu
+复	fto
+公	gmv
+果	go;
+告	gto
+化	hjz
+黑	ho;
+或	hso
+展	ibe
+真	if/
+早	iru
+怎	itv
+极	jcz
+交	jh/
+军	jla
+精	jmu
+乐	lw;
+母	mx;
+呢	niv
+拿	njo
+能	nlz
+其	qf/
+七	qsa
+切	qsz
+却	quv
+让	rlu
+入	rm/
+容	rno
+如	rso
+师	spa
+少	spe
+谈	tl/
+通	tl;
+调	tlz
+它	tnz
+图	toz
+无	wgv
+现	xgo
+学	xnv
+笑	xte
+影	yre
+变	bhvv
+吧	bivv
+报	bkvv
+必	blee
+备	bwoo
+步	byee
+存	cava
+产	chee
+常	cjoo
+传	cju;
+曾	cmoa
+场	cuzz
+带	dfou
+底	dhz;
+代	djav
+但	djoo
+得	dkoa
+调	dlzu
+断	dmee
+单	dmou
+东	ds;;
+第	dtvv
+方	fhvv
+格	gcz;
+更	gf;;
+过	gf;v
+古	gfoa
+功	gfzz
+高	ghoo
+刚	gouu
+何	hjao
+合	hjoo
+候	hjva
+乎	hmuu
+再	ifaa
+整	ifaa
+者	ifoa
+直	ifoa
+装	ih;;
+主	ihaa
+站	ihuo
+住	ij;a
+做	ijue
+找	ikav
+之	ilvv
+着	imoo
+最	irav
+转	isu;
+终	ixz;
+己	jbvv
+教	jfea
+就	jhav
+将	jhz;
+间	jjoo
+据	jkvu
+计	jluu
+家	jna;
+举	jnuu
+具	jo//
+几	jwvv
+解	jwze
+结	jxuo
+可	kfoo
+哭	kia;
+看	kkoo
+客	knzo
+老	lfzz
+离	lhov
+满	mde;
+命	mjov
+求	qf;;
+期	qfvv
+前	qmvu
+千	qtuu
+任	rjea
+然	rw;;
+深	sdv/
+十	sfuu
+诉	slee
+神	slou
+受	smvv
+四	soev
+身	sree
+算	stoa
+特	ttuu
+王	wgaa
+望	whua
+问	wjoo
+外	wwu;
+信	xj;o
+心	xl;;
+写	xlav
+兴	xn//
+息	xrv;
+引	ybuu
+远	yg;v
+应	yh;a
+音	yhoo
+意	yhov
+语	ylao
+义	ym;;
+由	yoaa
+月	yvvv
+乐	yw;;
+团	toau;
+春	cgoo
+旱	hruu
+忽	hwv;
+嘴	iiuz
+略	lozo
+识	slo/
+腿	tvv;
+汪	wdua

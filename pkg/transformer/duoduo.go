@@ -27,8 +27,7 @@ func (d Duoduo) Read(dict Dict) []Entry {
 		}
 
 		mapOrder[c]++
-		order := mapOrder[c]
-		ret = append(ret, Entry{w, c, order})
+		ret = append(ret, Entry{w, c, mapOrder[c]})
 	}
 	return ret
 }

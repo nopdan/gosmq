@@ -37,6 +37,9 @@ func (j Jisu) Read(dict Dict) []Entry {
 				order = 1
 			}
 		}
+		if order == 0 {
+			order = 1
+		}
 		ret = append(ret, Entry{wc[0], code, order})
 	}
 	return ret

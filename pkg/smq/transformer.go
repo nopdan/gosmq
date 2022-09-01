@@ -21,8 +21,7 @@ func (dict *Dict) transform() {
 		case "bingling", "bl":
 			dict.Transformer = transformer.Duoduo{true}
 		default:
-			dict.Transformer = transformer.Smb{}
-			dict.trans = true
+			dict.Transformer = transformer.Duoduo{}
 		}
 	}
 
@@ -30,9 +29,8 @@ func (dict *Dict) transform() {
 
 func toTD(dict *Dict) transformer.Dict {
 	d := transformer.Dict{
-		SavePath: dict.SavePath,
-		Name:     dict.Name,
-		Reader:   dict.reader,
+		Name:   dict.Name,
+		Reader: dict.reader,
 	}
 	return d
 }

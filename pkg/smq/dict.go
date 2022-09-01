@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"io"
 	"log"
-	"os"
 	"strconv"
 )
 
@@ -13,14 +12,12 @@ type Dict struct {
 	Single bool   // 单字模式
 
 	Format string /* 码表格式
-	default: 默认 本程序赛码表 词\t编码选重\t选重
 	jisu:js 极速赛码表 词\t编码选重
 	duoduo:dd 多多格式码表 词\t编码
 	jidian:jd 极点格式 编码\t词1 词2 词3
 	bingling:bl 冰凌格式码表 编码\t词
 	*/
 	Transformer Transformer // 自定义码表格式转换
-	SavePath    string      // 读取非默认码表格式时自动转换并保存的路径，默认保存在 dict 目录下
 	SelectKeys  string      // 普通码表自定义选重键(默认为_;')
 	PushStart   int         // 普通码表起顶码长(码长大于等于此数，首选不会追加空格)
 
@@ -29,13 +26,11 @@ type Dict struct {
 	Matcher   Matcher
 
 	PressSpaceBy string // 空格按键方式 left|right|both
-	OutputDict   bool   // 输出转换后的码表
 	OutputDetail bool   // 输出详细数据
 
 	reader io.Reader // 赛码表 io 流
 	length int       // 词条数
 	legal  bool      // 合法输入
-	trans  bool      // 是否转码表格式
 }
 
 // 从 io 流加载码表
@@ -99,27 +94,6 @@ func (dict *Dict) read() {
 		m.Insert(k, v, 1)
 	}
 	m.Handle()
-
-	// 输出赛码表
-	if !dict.trans && dict.OutputDict {
-		for i := 0; i < len(t); i++ {
-			buf.WriteString(t[i].Word)
-			buf.WriteByte('\t')
-			buf.WriteString(t[i].Code)
-			buf.WriteByte('\t')
-			buf.WriteString(strconv.Itoa(t[i].Order))
-			buf.WriteByte('\n')
-		}
-		err := os.WriteFile(dict.SavePath, buf.Bytes(), 0666)
-		if err != nil {
-			// SavePath 不对则保存在 dict 目录下
-			os.Mkdir("dict", 0666)
-			err = os.WriteFile("./dict/"+dict.Name+".txt", buf.Bytes(), 0666)
-			if err != nil {
-				log.Println(err)
-			}
-		}
-	}
 }
 
 // 加上选重键

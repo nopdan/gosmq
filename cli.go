@@ -1,12 +1,7 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
-	"os"
-	"sort"
-	"strconv"
-	"strings"
 	"time"
 
 	"github.com/cxcn/gosmq/pkg/smq"
@@ -57,7 +52,6 @@ func cli() {
 			Algorithm:    opts.Algorithm,
 			PressSpaceBy: opts.PressSpaceBy,
 			OutputDetail: opts.OutputDetail,
-			OutputDict:   true,
 		}
 		dict.LoadFromPath(v)
 		s.Add(dict)
@@ -77,52 +71,4 @@ func cli() {
 	}
 	fmt.Println("----------------------")
 	output(res, s.Name)
-
-	if !opts.OutputDetail {
-		return
-	}
-	for _, v := range res {
-		// 创建文件夹
-		os.Mkdir("result", 0666)
-		// 输出分词结果
-		var buf strings.Builder
-		for i := 0; i < len(v.Data.CodeSlice); i++ {
-			buf.WriteString(fmt.Sprintf("%s\t%s\n", v.Data.WordSlice[i], string(v.Data.CodeSlice[i])))
-		}
-		os.WriteFile(fmt.Sprintf("result/%s_%s_分词结果.txt", s.Name, v.Name), []byte(buf.String()), 0666)
-		// 输出词条数据
-		buf.Reset()
-		buf.WriteString("词条\t编码\t顺序\t次数\n")
-		type details struct {
-			smq.CoC
-			word string
-		}
-		tmp := make([]details, 0, len(v.Data.Details))
-		for k, v := range v.Data.Details {
-			tmp = append(tmp, details{
-				*v,
-				k,
-			})
-		}
-		sort.Slice(tmp, func(i, j int) bool {
-			return tmp[i].Count > tmp[j].Count
-		})
-		for _, v := range tmp {
-			buf.WriteString(v.word)
-			buf.WriteByte('\t')
-			buf.WriteString(v.Code)
-			buf.WriteByte('\t')
-			buf.WriteString(strconv.Itoa(v.Order))
-			buf.WriteByte('\t')
-			buf.WriteString(strconv.Itoa(v.Count))
-			buf.WriteByte('\n')
-		}
-		os.WriteFile(fmt.Sprintf("result/%s_%s_词条数据.txt", s.Name, v.Name), []byte(buf.String()), 0666)
-		// 输出 json 数据
-		v.Data.CodeSlice = []string{}
-		v.Data.WordSlice = []string{}
-		v.Data.Details = make(map[string]*smq.CoC)
-		tmp2, _ := json.MarshalIndent(v, "", "  ")
-		os.WriteFile(fmt.Sprintf("result/%s_%s.json", s.Name, v.Name), tmp2, 0666)
-	}
 }

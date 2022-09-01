@@ -82,12 +82,17 @@ func (dict *Dict) read() {
 	dict.transform()
 	d := toTD(dict)
 	t := dict.Transformer.Read(d)
-	dict.length += len(t)
+	dict.length = len(t)
 
 	var buf bytes.Buffer
 	buf.Grow(1e5)
 	for i := 0; i < len(t); i++ {
-		m.Insert(t[i].Word, t[i].Code, t[i].Order)
+		if dict.Single && len([]rune(t[i].Word)) > 1 {
+			dict.length--
+			continue
+		}
+		code := dict.getRealCode(t[i].Code, t[i].Order)
+		m.Insert(t[i].Word, code, t[i].Order)
 	}
 	// 添加符号
 	for k, v := range PUNCTS {
@@ -115,4 +120,16 @@ func (dict *Dict) read() {
 			}
 		}
 	}
+}
+
+// 加上选重键
+func (dict *Dict) getRealCode(c string, order int) string {
+	if order != 1 || len(c) < dict.PushStart {
+		if order <= len(dict.SelectKeys) {
+			c += string(dict.SelectKeys[order-1])
+		} else {
+			c += strconv.Itoa(order)
+		}
+	}
+	return c
 }

@@ -15,7 +15,7 @@ func (j Jisu) Read(dict Dict) []Entry {
 
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
-		if len(wc) < 2 {
+		if len(wc) != 2 {
 			continue
 		}
 		c := wc[1]
@@ -34,21 +34,10 @@ func (j Jisu) Read(dict Dict) []Entry {
 				order, _ = strconv.Atoi(match)
 			} else { // akdb ksdw
 				code = c
-				order = 0 // 和前面区分开
+				order = 1
 			}
 		}
-		// 生成赛码表
-		// 自定义选重键
-		if order == 0 {
-			order = 1
-		} else {
-			if order <= len(dict.SelectKeys) {
-				code += string(dict.SelectKeys[order-1])
-			} else {
-				code += strconv.Itoa(order)
-			}
-		}
-		ret = append(ret, Entry{wc[0], c, order})
+		ret = append(ret, Entry{wc[0], code, order})
 	}
 	return ret
 }

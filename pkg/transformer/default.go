@@ -14,13 +14,10 @@ func (s Smb) Read(dict Dict) []Entry {
 
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
-		if len(wc) < 3 {
+		if len(wc) != 3 {
 			continue
 		}
 		order, _ := strconv.Atoi(wc[2])
-		if order == 0 {
-			order = 1
-		}
 		ret = append(ret, Entry{wc[0], wc[1], order})
 	}
 	return ret

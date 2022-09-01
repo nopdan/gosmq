@@ -69,7 +69,7 @@ export interface Dict {
 const formRef = ref<FormInst | null>();
 const result = reactive({
   path: null,
-  format: "js",
+  format: "default",
   single: false,
   selectKeys: "_;'",
   pushStart: 4,
@@ -80,6 +80,7 @@ const props = defineProps(["msg", "files", "idx"]);
 props.msg.dicts[props.idx] = result;
 
 const formats = [
+  ["default", "默认"],
   ["js", "极速"],
   ["dd", "多多"],
   ["jd", "极点"],

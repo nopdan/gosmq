@@ -30,12 +30,9 @@ func (dict *Dict) transform() {
 
 func toTD(dict *Dict) transformer.Dict {
 	d := transformer.Dict{
-		SavePath:   dict.SavePath,
-		Name:       dict.Name,
-		PushStart:  dict.PushStart,
-		SelectKeys: dict.SelectKeys,
-		Single:     dict.Single,
-		Reader:     dict.reader,
+		SavePath: dict.SavePath,
+		Name:     dict.Name,
+		Reader:   dict.reader,
 	}
 	return d
 }

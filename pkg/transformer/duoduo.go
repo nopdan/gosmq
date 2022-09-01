@@ -2,7 +2,6 @@ package transformer
 
 import (
 	"bufio"
-	"strconv"
 	"strings"
 )
 
@@ -29,15 +28,6 @@ func (d Duoduo) Read(dict Dict) []Entry {
 
 		mapOrder[c]++
 		order := mapOrder[c]
-		// 生成赛码表
-		if len(c) >= dict.PushStart && order == 1 {
-		} else {
-			if order <= len(dict.SelectKeys) {
-				c += string(dict.SelectKeys[order-1])
-			} else {
-				c += strconv.Itoa(order)
-			}
-		}
 		ret = append(ret, Entry{w, c, order})
 	}
 	return ret

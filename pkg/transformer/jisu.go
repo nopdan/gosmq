@@ -48,6 +48,9 @@ func (j Jisu) Read(dict Dict) []Entry {
 			fmt.Println(match, err)
 			order = 1
 		}
+		if order == 0 {
+			order = 10
+		}
 		if len(dict.SelectKeys) >= order {
 			code += string(dict.SelectKeys[order-1])
 		}

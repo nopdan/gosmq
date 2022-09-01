@@ -26,7 +26,7 @@ func (t *sTrie) Insert(word, code string, order int) {
 		}
 		t = t.children[v]
 	}
-	if t.code == "" || len(code) < len(t.code) {
+	if t.code == "" {
 		t.code = code
 		t.order = order
 		orderLine++

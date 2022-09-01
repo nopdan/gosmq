@@ -33,7 +33,7 @@
           "
         />
       </n-form-item>
-      <n-form-item label="顶屏码长" title="多长编码后不自动添加空格键？">
+      <n-form-item v-if="result.format!=='js'" label="顶屏码长" title="多长编码后不自动添加空格键？">
         <n-input-number
           v-model:value="result.pushStart"
           :min="0"
@@ -88,7 +88,7 @@ const formats = [
 
 const algs = [
   ["trie", "最长匹配"],
-  ["stable_trie", "按码表顺序"],
+  ["strie", "按码表顺序"],
 ];
 
 const rules = {

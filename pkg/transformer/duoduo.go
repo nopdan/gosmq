@@ -25,9 +25,9 @@ func (d Duoduo) Read(dict Dict) []Entry {
 		} else {
 			w, c = wc[0], wc[1]
 		}
-
 		mapOrder[c]++
-		ret = append(ret, Entry{w, c, mapOrder[c]})
+		code := dict.getRealCode(c, mapOrder[c])
+		ret = append(ret, Entry{w, code, mapOrder[c]})
 	}
 	return ret
 }

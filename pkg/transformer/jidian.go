@@ -18,6 +18,7 @@ func (j Jidian) Read(dict Dict) []Entry {
 		}
 		code := wc[0]
 		for i := 1; i < len(wc); i++ {
+			code = dict.getRealCode(code, i)
 			ret = append(ret, Entry{wc[i], code, i})
 		}
 	}

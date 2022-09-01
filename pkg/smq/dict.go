@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"io"
 	"log"
-	"strconv"
 )
 
 type Dict struct {
@@ -86,24 +85,11 @@ func (dict *Dict) read() {
 			dict.length--
 			continue
 		}
-		code := dict.getRealCode(t[i].Code, t[i].Order)
-		m.Insert(t[i].Word, code, t[i].Order)
+		m.Insert(t[i].Word, t[i].Code, t[i].Order)
 	}
 	// 添加符号
 	for k, v := range PUNCTS {
 		m.Insert(k, v, 1)
 	}
 	m.Handle()
-}
-
-// 加上选重键
-func (dict *Dict) getRealCode(c string, order int) string {
-	if order != 1 || len(c) < dict.PushStart {
-		if order <= len(dict.SelectKeys) {
-			c += string(dict.SelectKeys[order-1])
-		} else {
-			c += strconv.Itoa(order)
-		}
-	}
-	return c
 }

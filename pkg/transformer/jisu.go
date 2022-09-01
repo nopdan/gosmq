@@ -2,6 +2,7 @@ package transformer
 
 import (
 	"bufio"
+	"fmt"
 	"regexp"
 	"strconv"
 	"strings"
@@ -19,26 +20,36 @@ func (j Jisu) Read(dict Dict) []Entry {
 			continue
 		}
 		c := wc[1]
-		code := ""
-		order := 0
+		var code, match string
+		var order int
 		// a_ aa_
 		if len(c)-1 > 0 && c[len(c)-1] == '_' {
-			code = c[:len(c)-1]
 			order = 1
-		} else {
-			re := regexp.MustCompile(`\d+$`)
-			match := re.FindString(c)
-			// a1 aa3
-			if match != "" {
-				code = c[:len(c)-len(match)]
-				order, _ = strconv.Atoi(match)
-			} else { // akdb ksdw
-				code = c
-				order = 1
+			code = c
+			if len(dict.SelectKeys) >= 1 && dict.SelectKeys[0] != '_' {
+				code = c[:len(c)-1] + string(dict.SelectKeys[0])
 			}
+			ret = append(ret, Entry{wc[0], code, order})
+			continue
 		}
-		if order == 0 {
+
+		re := regexp.MustCompile(`\d+$`)
+		match = re.FindString(c)
+		// akdb ksdw
+		if match == "" {
+			ret = append(ret, Entry{wc[0], c, 1})
+			continue
+		}
+
+		// a1 aa3
+		code = c[:len(c)-len(match)]
+		order, err := strconv.Atoi(match)
+		if err != nil {
+			fmt.Println(match, err)
 			order = 1
+		}
+		if len(dict.SelectKeys) >= order {
+			code += string(dict.SelectKeys[order-1])
 		}
 		ret = append(ret, Entry{wc[0], code, order})
 	}

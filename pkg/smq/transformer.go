@@ -24,13 +24,14 @@ func (dict *Dict) transform() {
 			dict.Transformer = transformer.Duoduo{}
 		}
 	}
-
 }
 
 func toTD(dict *Dict) transformer.Dict {
 	d := transformer.Dict{
-		Name:   dict.Name,
-		Reader: dict.reader,
+		Name:       dict.Name,
+		Reader:     dict.reader,
+		PushStart:  dict.PushStart,
+		SelectKeys: dict.SelectKeys,
 	}
 	return d
 }

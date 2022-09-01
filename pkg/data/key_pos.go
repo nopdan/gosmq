@@ -19,10 +19,10 @@ func GetKeyPos() map[byte]KeyPos {
 	}
 	// 手指
 	keys := "1qaz2wsx3edc4rfv5tgb_+6yhn7ujm8ik,9ol.0p;/'"
-	fin := "1111222233334444444456777777778888999900000"
+	fins := "1111222233334444444456777777778888999900000"
 	for i := range keys {
 		tmp := ret[keys[i]]
-		tmp.Fin = int(fin[i] - 48)
+		tmp.Fin = int(fins[i] - 48)
 		ret[keys[i]] = tmp
 	}
 	return ret

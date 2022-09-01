@@ -116,19 +116,15 @@ func genKeyHeatCode(sk *smq.CaR, max float64, key byte) template.HTML {
 func (res *Result) genFinHeatMap() {
 	src := res.Fingers.Dist
 	max := 0.25
-	fins := []string{"左小", "左无", "左中", "左食", "大拇指", "右食", "右中", "右无", "右小"}
+	fins := []string{"左小", "左无", "左中", "左食", "左拇指", "右拇指", "右食", "右中", "右无", "右小"}
 	for i := 0; i < 9; i++ {
-		res.FinHeatMap[i] = genFinHeatCode(src[i+1].Rate, max, i, fins[i])
+		res.FinHeatMap[i] = genFinHeatCode(src[i+1].Rate, max, fins[i])
 	}
+	res.FinHeatMap[9] = genFinHeatCode(src[0].Rate, max, fins[9])
 }
 
 // 手指颜色代码片段
-func genFinHeatCode(freq, max float64, id int, fin string) template.HTML {
-	if id == 4 {
-		return template.HTML(fmt.Sprintf(
-			`<td class="key fin" colspan="2" style="background-color: rgba(0,0,255,%.4f);">%s <div class="heatMapRate">%.2f</div></td>`,
-			freq/max*0.6, fin, freq*100))
-	}
+func genFinHeatCode(freq, max float64, fin string) template.HTML {
 	return template.HTML(fmt.Sprintf(
 		`<td class="key fin" style="background-color: rgba(0,0,255,%.4f);">%s <div class="heatMapRate">%.2f</div></td>`,
 		freq/max*0.6, fin, freq*100))

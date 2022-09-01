@@ -184,13 +184,13 @@ func output(data []*smq.Result, textName string) {
 			t6_2_header = append(t6_2_header, b)
 			t6_3_header = append(t6_3_header, c)
 			t6_4_header = append(t6_4_header, d)
-			t6_1_row = append(t6_1_row, fmt.Sprintf("%.2f%%", 100*res.Keys[a].Rate))
-			t6_2_row = append(t6_2_row, fmt.Sprintf("%.2f%%", 100*res.Keys[b].Rate))
-			t6_3_row = append(t6_3_row, fmt.Sprintf("%.2f%%", 100*res.Keys[c].Rate))
-			t6_4_row = append(t6_4_row, fmt.Sprintf("%.2f%%", 100*res.Keys[d].Rate))
+			t6_1_row = append(t6_1_row, fmt.Sprintf("%.2f%%", 100*res.Keys[string(a)].Rate))
+			t6_2_row = append(t6_2_row, fmt.Sprintf("%.2f%%", 100*res.Keys[string(b)].Rate))
+			t6_3_row = append(t6_3_row, fmt.Sprintf("%.2f%%", 100*res.Keys[string(c)].Rate))
+			t6_4_row = append(t6_4_row, fmt.Sprintf("%.2f%%", 100*res.Keys[string(d)].Rate))
 		}
 		t6_3_header = append(t6_3_header, "'")
-		t6_3_row = append(t6_3_row, fmt.Sprintf("%.2f%%", 100*res.Keys['\''].Rate))
+		t6_3_row = append(t6_3_row, fmt.Sprintf("%.2f%%", 100*res.Keys["'"].Rate))
 
 		t6_1 := table.NewWriter()
 		t6_1.AppendHeader(t6_1_header)

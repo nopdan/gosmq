@@ -13,7 +13,6 @@ import { CanvasRenderer } from "echarts/renderers";
 import { PieChart } from "echarts/charts";
 import { TooltipComponent } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
-import { ref, provide, watch, reactive, computed } from "vue";
 
 use([CanvasRenderer, PieChart, TooltipComponent]);
 

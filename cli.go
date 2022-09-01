@@ -31,7 +31,7 @@ func cli() {
 
 	flags.Parse(&opts)
 	if opts.Ver {
-		printInfo()
+		info()
 		return
 	}
 	if len(opts.Dict) == 0 {

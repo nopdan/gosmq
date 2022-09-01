@@ -1,4 +1,4 @@
-package web2
+package main
 
 import (
 	"fmt"
@@ -12,7 +12,7 @@ import (
 	"github.com/cxcn/gosmq/pkg/smq"
 )
 
-//go:embed tmpl.html
+//go:embed assets/tmpl.html
 var tmpl string
 
 // 赛码结果
@@ -81,13 +81,6 @@ func toPercentage(src float64) string {
 	return fmt.Sprintf("%.2f%%", src*100.0)
 }
 
-// func toMap(sli []int) map[int]int {
-// 	ret := make(map[int]int)
-// 	for i,v := range sli {
-// 		if
-// 	}
-// }
-
 // 生成按键热力图
 func (res *Result) genKeyHeatMap() {
 	keys := res.Keys
@@ -98,17 +91,21 @@ func (res *Result) genKeyHeatMap() {
 	line3 := "asdfghjkl;'"
 	line4 := "zxcvbnm,./ "
 	for j := 0; j < 11; j++ {
-		res.KeyHeatMap[0] = append(res.KeyHeatMap[0], genKeyHeatCode(keys[line1[j]].Rate, max, line1[j]))
-		res.KeyHeatMap[1] = append(res.KeyHeatMap[1], genKeyHeatCode(keys[line2[j]].Rate, max, line2[j]))
-		res.KeyHeatMap[2] = append(res.KeyHeatMap[2], genKeyHeatCode(keys[line3[j]].Rate, max, line3[j]))
-		res.KeyHeatMap[3] = append(res.KeyHeatMap[3], genKeyHeatCode(keys[line4[j]].Rate, max, line4[j]))
+		res.KeyHeatMap[0] = append(res.KeyHeatMap[0], genKeyHeatCode(keys[string(line1[j])], max, line1[j]))
+		res.KeyHeatMap[1] = append(res.KeyHeatMap[1], genKeyHeatCode(keys[string(line2[j])], max, line2[j]))
+		res.KeyHeatMap[2] = append(res.KeyHeatMap[2], genKeyHeatCode(keys[string(line3[j])], max, line3[j]))
+		res.KeyHeatMap[3] = append(res.KeyHeatMap[3], genKeyHeatCode(keys[string(line4[j])], max, line4[j]))
 	}
 }
 
 // 按键颜色代码片段
-func genKeyHeatCode(freq, max float64, key byte) template.HTML {
+func genKeyHeatCode(sk *smq.CaR, max float64, key byte) template.HTML {
 	if key == ' ' {
 		return template.HTML("")
+	}
+	var freq float64
+	if sk != nil {
+		freq = sk.Rate
 	}
 	return template.HTML(fmt.Sprintf(
 		`<td class="key" style="background-color: rgba(255,0,0,%.4f);">%s <div class="heatMapRate">%.2f</div></td>`,

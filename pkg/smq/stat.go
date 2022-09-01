@@ -53,10 +53,10 @@ func (res *Result) stat(dict *Dict) {
 
 	// keys
 	for k, v := range res.mapKeys {
-		if res.Keys[k] == nil {
-			res.Keys[k] = new(CaR)
+		if res.Keys[string(k)] == nil {
+			res.Keys[string(k)] = new(CaR)
 		}
-		res.Keys[k].Count += v
+		res.Keys[string(k)].Count += v
 	}
 	for _, v := range res.Keys {
 		v.Rate = div(v.Count, res.CodeLen.Total)

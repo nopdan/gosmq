@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import AutoSortLine from "./AutoSortLine.vue";
-import { NSwitch } from "naive-ui";
-import { inject, ref, computed, watch, onMounted } from "vue";
 
 const sortByAnother = ref(true);
 const schema1: any = inject("schema1");

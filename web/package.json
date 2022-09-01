@@ -1,24 +1,26 @@
 {
-  "name": "gosmq-web",
+  "name": "web3",
   "private": true,
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vueuse/core": "^8.9.4",
     "echarts": "^5.3.3",
-    "vue": "^3.2.37",
+    "vue": "^3.2.38",
     "vue-echarts": "^6.2.3"
   },
   "devDependencies": {
-    "@vicons/tabler": "^0.12.0",
-    "@vitejs/plugin-vue": "^2.3.4",
-    "naive-ui": "^2.32.2",
+    "@vicons/ionicons5": "^0.12.0",
+    "@vitejs/plugin-vue": "^3.0.3",
+    "naive-ui": "^2.33.2",
     "typescript": "^4.8.2",
-    "vite": "^2.9.15",
-    "vue-tsc": "^0.40.2"
+    "unplugin-auto-import": "^0.11.2",
+    "unplugin-vue-components": "^0.22.4",
+    "vite": "^3.0.9",
+    "vue-tsc": "^0.39.5"
   }
 }

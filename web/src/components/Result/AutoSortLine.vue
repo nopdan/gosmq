@@ -15,7 +15,6 @@ import { CanvasRenderer } from "echarts/renderers";
 import { LineChart } from "echarts/charts";
 import { TooltipComponent, GridComponent } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
-import { reactive, provide, inject, computed } from "vue";
 
 use([CanvasRenderer, LineChart, TooltipComponent, GridComponent]);
 provide(THEME_KEY, "light");

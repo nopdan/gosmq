@@ -1,18 +1,30 @@
 <script setup lang="ts">
-import Racer from "./components/Racer.vue";
+import Input from "./components/Input.vue";
+// This starter template is using Vue 3 <script setup> SFCs
+// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
 </script>
 
 <template>
-  <Racer />
+  <div class="title">
+    <a href="https://github.com/cxcn/gosmq">赛码器 GO!</a>
+  </div>
+  <n-message-provider>
+    <Input />
+  </n-message-provider>
 </template>
 
-<style>
-#app {
-  font-family:MiSans,'等距更纱黑体 SC','思源黑体' Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin: auto;
+<style scoped>
+.title {
+  display: flex;
+  justify-content: center;
+}
+.title a {
+  font-size: 2em;
+  color: black;
+  margin: 0.5em 0 0.2em;
+  text-decoration: none;
+}
+body {
+  background-color: rgb(240, 244, 245);
 }
 </style>

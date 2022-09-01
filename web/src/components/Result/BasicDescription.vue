@@ -31,7 +31,6 @@
   </n-descriptions>
 </template>
 <script setup lang="ts">
-import { NDescriptions, NDescriptionsItem } from "naive-ui";
 const p = defineProps(["data"]);
 </script>
 

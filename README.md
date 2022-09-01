@@ -1,7 +1,6 @@
 # go 赛码器
 
-> 不指定参数或双击运行新 web 前端。  
->`.\smq.exe serve` 运行旧 web 前端
+不指定参数或双击运行新 web 前端。
 
 在 [example](./example) 文件夹下查看预览图。
 

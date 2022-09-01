@@ -80,7 +80,7 @@ type codeLen struct {
 }
 
 // 按键 左空格_，右空格+
-type keys map[byte]*CaR
+type keys map[string]*CaR
 
 // 按键组合
 type combs struct {
@@ -128,7 +128,7 @@ func newResult() *Result {
 	res.Keys = make(keys)
 	const ALL_KEYS = "1234567890qwertyuiopasdfghjkl;'zxcvbnm,./_+"
 	for i := 0; i < len(ALL_KEYS); i++ {
-		res.Keys[ALL_KEYS[i]] = new(CaR)
+		res.Keys[string(ALL_KEYS[i])] = new(CaR)
 		res.mapKeys[ALL_KEYS[i]] = 0
 	}
 	for i := 0; i < 11; i++ {

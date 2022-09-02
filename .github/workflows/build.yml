@@ -49,9 +49,6 @@ jobs:
           echo "正在编译 mac 版本"
           go env -w GOOS=darwin
           go build -ldflags="-s -w" -o ./bin/smq-darwin
-          mv ./example/text ./bin/text
-          mv ./example/dict ./bin/dict
-          mv README.md ./bin/README.md
 
       # 使用 upx 压缩可执行文件
       - name: Run UPX
@@ -61,6 +58,12 @@ jobs:
           files: |
             ./bin/*
           args: -fq
+      
+      - name: Move Files
+        run: |
+          mv ./example/text ./bin/text
+          mv ./example/dict ./bin/dict
+          mv README.md ./bin/README.md
 
       # 上传到 Artifact
       - uses: actions/upload-artifact@v3

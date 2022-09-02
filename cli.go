@@ -20,6 +20,7 @@ func cli() {
 		Algorithm    string   `short:"a" long:"alg" description:"string\t匹配算法 trie,t|order,o|longest,l"`
 		PressSpaceBy string   `short:"k" long:"space" description:"string\t空格按键方式 left|right|both"`
 		OutputDetail bool     `short:"d" long:"detail" description:"bool\t详细数据"`
+		OutputDict   bool     `short:"o" long:"output" description:"bool\t输出转换后的码表"`
 
 		Ver bool `short:"v" long:"version" description:"bool\t查看版本信息"`
 	}
@@ -52,7 +53,7 @@ func cli() {
 			Algorithm:    opts.Algorithm,
 			PressSpaceBy: opts.PressSpaceBy,
 			OutputDetail: opts.OutputDetail,
-			OutputDict:   true,
+			OutputDict:   opts.OutputDict,
 		}
 		dict.LoadFromPath(v)
 		s.Add(dict)

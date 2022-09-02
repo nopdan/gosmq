@@ -24,7 +24,4 @@ import Input from "./components/Input.vue";
   margin: 0.5em 0 0.2em;
   text-decoration: none;
 }
-body {
-  background-color: rgb(240, 244, 245);
-}
 </style>

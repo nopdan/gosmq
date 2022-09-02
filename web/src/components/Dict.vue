@@ -23,7 +23,7 @@
           >
         </n-radio-group>
       </n-form-item>
-      <n-form-item label="选重键" title="从首选开始，不限选重按键数量。">
+      <n-form-item label="选重键" v-show="result.format!=='default'" title="从首选开始，不限选重按键数量。">
         <n-input
           v-model:value="result.selectKeys"
           style="
@@ -33,7 +33,7 @@
           "
         />
       </n-form-item>
-      <n-form-item v-if="result.format!=='js'" label="顶屏码长" title="多长编码后不自动添加空格键？">
+      <n-form-item v-show="result.format!=='js' && result.format!=='default'" label="顶屏码长" title="多长编码后不自动添加空格键？">
         <n-input-number
           v-model:value="result.pushStart"
           :min="0"
@@ -69,7 +69,7 @@ export interface Dict {
 const formRef = ref<FormInst | null>();
 const result = reactive({
   path: null,
-  format: "js",
+  format: "default",
   single: false,
   selectKeys: "_;'",
   pushStart: 4,
@@ -80,6 +80,7 @@ const props = defineProps(["msg", "files", "idx"]);
 props.msg.dicts[props.idx] = result;
 
 const formats = [
+  ["default", "默认"],
   ["js", "极速"],
   ["dd", "多多"],
   ["jd", "极点"],

@@ -20,8 +20,10 @@ func (dict *Dict) transform() {
 			dict.Transformer = transformer.Jidian{}
 		case "bingling", "bl":
 			dict.Transformer = transformer.Duoduo{true}
+		case "default":
+			dict.Transformer = transformer.Smb{}
 		default:
-			dict.Transformer = transformer.Duoduo{}
+			dict.Transformer = transformer.Smb{}
 		}
 	}
 }

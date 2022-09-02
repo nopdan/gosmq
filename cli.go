@@ -52,6 +52,7 @@ func cli() {
 			Algorithm:    opts.Algorithm,
 			PressSpaceBy: opts.PressSpaceBy,
 			OutputDetail: opts.OutputDetail,
+			OutputDict:   true,
 		}
 		dict.LoadFromPath(v)
 		s.Add(dict)

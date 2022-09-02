@@ -1,8 +1,14 @@
 package smq
 
 import (
+	"bytes"
+	"fmt"
 	"io"
 	"log"
+	"os"
+	"strconv"
+
+	"github.com/cxcn/gosmq/pkg/transformer"
 )
 
 type Dict struct {
@@ -10,6 +16,7 @@ type Dict struct {
 	Single bool   // 单字模式
 
 	Format string /* 码表格式
+	default: 默认 本程序赛码表 词\t编码选重\t选重
 	jisu:js 极速赛码表 词\t编码选重
 	duoduo:dd 多多格式码表 词\t编码
 	jidian:jd 极点格式 编码\t词1 词2 词3
@@ -24,6 +31,7 @@ type Dict struct {
 	Matcher   Matcher
 
 	PressSpaceBy string // 空格按键方式 left|right|both
+	OutputDict   bool   // 输出转换后的码表
 	OutputDetail bool   // 输出详细数据
 
 	reader io.Reader // 赛码表 io 流
@@ -77,25 +85,39 @@ func (dict *Dict) read() {
 	t := dict.Transformer.Read(d)
 	dict.length = len(t)
 
-	// var buf bytes.Buffer
-	// buf.Grow(1e5)
 	for i := range t {
 		if dict.Single && len([]rune(t[i].Word)) > 1 {
 			dict.length--
 			continue
 		}
-		// buf.WriteString(t[i].Word)
-		// buf.WriteByte('\t')
-		// buf.WriteString(t[i].Code)
-		// buf.WriteByte('\t')
-		// buf.WriteString(strconv.Itoa(t[i].Order))
-		// buf.WriteByte('\n')
 		m.Insert(t[i].Word, t[i].Code, t[i].Order)
 	}
 	// 添加符号
 	for k, v := range PUNCTS {
 		m.Insert(k, v, 1)
 	}
-	// os.WriteFile("dict/test.txt", buf.Bytes(), 0777)
+	if dict.OutputDict && dict.Format != "default" && dict.Format != "" {
+		outputDict(t, dict.Name)
+	}
 	m.Handle()
+}
+
+func outputDict(t []transformer.Entry, name string) {
+	var buf bytes.Buffer
+	buf.Grow(1e5)
+	for i := range t {
+		buf.WriteString(t[i].Word)
+		buf.WriteByte('\t')
+		buf.WriteString(t[i].Code)
+		buf.WriteByte('\t')
+		buf.WriteString(strconv.Itoa(t[i].Order))
+		buf.WriteByte('\n')
+	}
+	path := "dict/" + name + "_赛码表.txt"
+	err := os.WriteFile(path, buf.Bytes(), 0777)
+	if err != nil {
+		fmt.Println("输出赛码表失败！", err)
+		return
+	}
+	fmt.Println("输出赛码表成功：", path)
 }

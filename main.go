@@ -7,8 +7,10 @@ import (
 )
 
 func main() {
-	if len(os.Args) == 1 {
-		serve()
+	if len(os.Args) <= 1 {
+		serve(false)
+	} else if os.Args[1] == "serve" {
+		serve(true)
 	} else {
 		cli()
 	}

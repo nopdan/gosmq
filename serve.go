@@ -119,7 +119,7 @@ func setHeader(w *http.ResponseWriter) {
 	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
 }
 
-func serve() {
+func serve(silent bool) {
 	fsys, _ := fs.Sub(dist, "web/dist")
 	http.Handle("/", http.FileServer(http.FS(fsys)))
 	http.HandleFunc("/api", PostHandler)
@@ -146,23 +146,26 @@ func serve() {
 		h.OutputHTML(w)
 	})
 
+	port := ":7172"
+	url := "http://localhost" + port
 	var wg sync.WaitGroup
 	wg.Add(1)
-	port := ":7172"
 	go func() {
+		fmt.Println("Listen and serve: ", url)
 		err := http.ListenAndServe(port, nil)
 		if err != nil {
 			panic("...Server failed.")
 		}
 		wg.Done()
 	}()
-	doSomething(port)
+	if !silent {
+		openBrowser(url)
+	}
 	wg.Wait()
 }
 
-func doSomething(port string) {
+func openBrowser(url string) {
 	var name string
-	url := "http://localhost" + port
 	switch runtime.GOOS {
 	case "windows":
 		name = "explorer"
@@ -173,5 +176,4 @@ func doSomething(port string) {
 	}
 	cmd := exec.Command(name, url)
 	cmd.Start()
-	fmt.Println("Listen and serve: ", url)
 }

@@ -101,7 +101,7 @@ func main() {
 ```go
 // 需要从 dict 生成本赛码器格式码表的字节数组
 type Transformer interface {
-    Read(transformer.Dict) []byte
+    Read(transformer.Dict) []transformer.Entry
 }
 ```
 
@@ -110,17 +110,16 @@ type Transformer interface {
 ```go
 type newFormat struct {}
 
-func (n *newFormat) Read(dict transformer.Dict) []byte {
-    // 推荐使用 bytes.Buffer
-    var buf bytes.Buffer
-    buf.Grow(1e6)
+func (n newFormat) Read(dict transformer.Dict) []transformer.Entry {
+	ret := make([]Entry, 0, 1e5)
     // 逐行读取
     scan := bufio.NewScanner(dict.Reader)
     for scan.Scan() {
-        // 把每一行的格式转为
-        // 本赛码器格式 word\tcode\torder
+        // 转格式为
+        // 本赛码器格式 word code order
+		ret = append(ret, transformer.Entry{word, code, order})
     }
-    return buf.Bytes()
+    return ret
 }
 ```
 

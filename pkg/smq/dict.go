@@ -1,7 +1,6 @@
 package smq
 
 import (
-	"bytes"
 	"io"
 	"log"
 )
@@ -78,18 +77,25 @@ func (dict *Dict) read() {
 	t := dict.Transformer.Read(d)
 	dict.length = len(t)
 
-	var buf bytes.Buffer
-	buf.Grow(1e5)
-	for i := 0; i < len(t); i++ {
+	// var buf bytes.Buffer
+	// buf.Grow(1e5)
+	for i := range t {
 		if dict.Single && len([]rune(t[i].Word)) > 1 {
 			dict.length--
 			continue
 		}
+		// buf.WriteString(t[i].Word)
+		// buf.WriteByte('\t')
+		// buf.WriteString(t[i].Code)
+		// buf.WriteByte('\t')
+		// buf.WriteString(strconv.Itoa(t[i].Order))
+		// buf.WriteByte('\n')
 		m.Insert(t[i].Word, t[i].Code, t[i].Order)
 	}
 	// 添加符号
 	for k, v := range PUNCTS {
 		m.Insert(k, v, 1)
 	}
+	// os.WriteFile("dict/test.txt", buf.Bytes(), 0777)
 	m.Handle()
 }

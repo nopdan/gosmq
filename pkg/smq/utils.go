@@ -2,6 +2,7 @@ package smq
 
 import (
 	"bufio"
+	"bytes"
 	"fmt"
 	"io"
 	"os"
@@ -26,11 +27,14 @@ func Tranformer(f io.Reader) io.Reader {
 	if cs.Confidence != 100 && cs.Charset != "UTF-8" {
 		cs.Charset = "GB18030"
 	}
-	// 删除 UTF-8 BOM 文件头
-	if cs.Charset == "UTF-8" {
-		bom, _ := brd.Peek(3)
-		if string(bom) == string(rune(65279)) {
-			brd.ReadRune()
+	// 删除 BOM 文件头
+	boms := make(map[string][]byte)
+	boms["UTF-16BE"] = []byte{0xfe, 0xff}
+	boms["UTF-16LE"] = []byte{0xff, 0xfe}
+	boms["UTF-8"] = []byte{0xef, 0xbb, 0xbf}
+	if b, ok := boms[cs.Charset]; ok {
+		if bytes.HasPrefix(buf, b) {
+			brd.Read(b)
 		}
 	}
 	rd, _ := charset.NewReaderLabel(cs.Charset, brd) // 转换字节流

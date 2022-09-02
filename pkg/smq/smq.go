@@ -2,6 +2,7 @@ package smq
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -23,23 +24,24 @@ var (
 )
 
 type Smq struct {
-	Name   string    // 文本名
-	Text   io.Reader // 文本
-	Inputs []*Dict   // 码表选项
+	Name   string  // 文本名
+	Text   []byte  // 文本
+	Inputs []*Dict // 码表选项
 }
 
 // 初始化一个赛码器
 func New(name string, rd io.Reader) Smq {
 	fmt.Println("从字节流初始化赛码器...")
 	nrd := Tranformer(rd)
-	return Smq{name, nrd, []*Dict{}}
+	text, _ := io.ReadAll(nrd)
+	return Smq{name, text, []*Dict{}}
 }
 
 func NewFromString(name, text string) Smq {
 	if text != "" {
 		fmt.Println("从字符串初始化赛码器...")
 	}
-	return Smq{name, strings.NewReader(text), []*Dict{}}
+	return Smq{name, []byte(text), []*Dict{}}
 }
 
 func NewFromPath(name, path string) Smq {
@@ -51,7 +53,8 @@ func NewFromPath(name, path string) Smq {
 	if name == "" {
 		name = GetFileName(path)
 	}
-	return Smq{name, rd, []*Dict{}}
+	text, _ := io.ReadAll(rd)
+	return Smq{name, text, []*Dict{}}
 }
 
 // 添加一个码表
@@ -78,7 +81,7 @@ func (smq *Smq) Run() []*Result {
 		wg.Add(1)
 		go func(j int) {
 			res, dict := ret[j], smq.Inputs[j]
-			brd := bufio.NewReader(smq.Text)
+			brd := bufio.NewReader(bytes.NewReader(smq.Text))
 			for {
 				line, err := brd.ReadString('\n')
 				codes := res.match([]rune(line), dict)

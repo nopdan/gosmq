@@ -1,17 +1,11 @@
-# go 赛码器
 
-一个高性能的赛码器库，多码表支持，多种码表格式支持，多匹配算法支持，可自定义码表格式和匹配算法。
+支持多码表一起赛，支持多种码表格式，支持多种匹配算法，可自定义码表格式和匹配算法。
 
 ## 开始之前
 
 下载：`go get -u github.com/cxcn/gosmq/pkg/smq`  
-导入：
 
-```go
-import (
-    smq "github.com/cxcn/gosmq/pkg/smq"
-)
-```
+导入：`import "github.com/cxcn/gosmq/pkg/smq"`
 
 ## 使用
 
@@ -52,7 +46,7 @@ func main(){
         Transfer   Transfer // 自定义码表格式转换
         SelectKeys:   "", // 普通码表自定义选重键(默认为_;')
         PushStart:    4, // 普通码表起顶码长(码长大于等于此数，首选不会追加空格)
-        Algorithm:    "longest", // 匹配算法 trie:前缀树 order:顺序匹配（极速跟打器） longest:最长匹配
+        Algorithm:    "trie", // 匹配算法 trie:前缀树 order:顺序匹配（极速跟打器） longest:最长匹配
         Matcher:      nil, // 自定义匹配算法
         PressSpaceBy: "both", // 空格按键方式 left|right|both
         Details      bool,   // 输出详细数据
@@ -69,12 +63,6 @@ func main(){
 }
 ```
 
-### 仅转换码表
-
-`dict.Transform()` 这会将其它格式转换为本编码格式，并输出保存
-
-> 如果你还要进行后续操作，则不需要手动转换
-
 ### 添加码表到赛码器
 
 `s.Add(dict)`
@@ -87,7 +75,7 @@ func main() {
     dict := &smq.Dict{...}
     dict.Load(...)
     s.Add(dict)
-    res := s.Run() // 他返回一个 []*smq.Result 结构体指针数组，具体定义可查看 struct.go 文件
+    res := s.Run() // 他返回一个 []*smq.Result 结构体指针数组，具体定义可查看 result.go 文件
     // 你可以输出为 json
     s.ResToJson(res)
     // 如果你不需要结构体

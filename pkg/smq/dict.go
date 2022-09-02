@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"strconv"
 
@@ -55,7 +54,7 @@ func (dict *Dict) LoadFromString(s string) {
 func (dict *Dict) LoadFromPath(path string) {
 	rd, err := readFromPath(path)
 	if err != nil {
-		log.Println("Warning! 从文件读取码表失败，路径：", path)
+		fmt.Println("Warning! 读取文件失败：", path)
 		return
 	}
 	if dict.Name == "" {
@@ -113,10 +112,10 @@ func outputDict(t []transformer.Entry, name string) {
 		buf.WriteString(strconv.Itoa(t[i].Order))
 		buf.WriteByte('\n')
 	}
-	path := "dict/" + name + "_赛码表.txt"
-	err := os.WriteFile(path, buf.Bytes(), 0777)
+	path := "dict/_" + name + ".txt"
+	err := os.WriteFile(path, buf.Bytes(), 0666)
 	if err != nil {
-		fmt.Println("输出赛码表失败！", err)
+		fmt.Println("Warning! 输出赛码表失败：", err)
 		return
 	}
 	fmt.Println("输出赛码表成功：", path)

@@ -17,10 +17,10 @@ func cli() {
 		Format       string   `short:"f" long:"format" description:"string\t码表格式 default|jisu,js|duoduo,dd|jidian,jd|bingling,bl"`
 		SelectKeys   string   `long:"select" description:"string\t自定义选重键"`
 		PushStart    int      `short:"p" long:"push" description:"int\t普通码表起顶码长，码长大于等于此数，首选不会追加空格"`
-		Algorithm    string   `short:"a" long:"alg" description:"string\t匹配算法 trie,t|order,o|longest,l"`
+		Algorithm    string   `short:"a" long:"alg" description:"string\t匹配算法 trie,t|strie,s|longest,l"`
 		PressSpaceBy string   `short:"k" long:"space" description:"string\t空格按键方式 left|right|both"`
-		OutputDetail bool     `short:"d" long:"detail" description:"bool\t详细数据"`
-		OutputDict   bool     `short:"o" long:"output" description:"bool\t输出转换后的码表"`
+		OutputDetail bool     `short:"d" long:"detail" description:"bool\t输出详细数据"`
+		OutputDict   bool     `long:"no" description:"bool\t不输出转换后的码表"`
 
 		Ver bool `short:"v" long:"version" description:"bool\t查看版本信息"`
 	}
@@ -53,7 +53,7 @@ func cli() {
 			Algorithm:    opts.Algorithm,
 			PressSpaceBy: opts.PressSpaceBy,
 			OutputDetail: opts.OutputDetail,
-			OutputDict:   opts.OutputDict,
+			OutputDict:   !opts.OutputDict,
 		}
 		dict.LoadFromPath(v)
 		s.Add(dict)

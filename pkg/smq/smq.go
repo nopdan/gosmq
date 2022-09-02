@@ -6,7 +6,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"os"
 	"sort"
 	"strconv"
@@ -31,29 +30,29 @@ type Smq struct {
 
 // 初始化一个赛码器
 func New(name string, rd io.Reader) Smq {
-	fmt.Println("从字节流初始化赛码器...")
 	nrd := Tranformer(rd)
 	text, _ := io.ReadAll(nrd)
+	fmt.Println("从字节流初始化赛码器...", name)
 	return Smq{name, text, []*Dict{}}
 }
 
 func NewFromString(name, text string) Smq {
 	if text != "" {
-		fmt.Println("从字符串初始化赛码器...")
+		fmt.Println("从字符串初始化赛码器...", name)
 	}
 	return Smq{name, []byte(text), []*Dict{}}
 }
 
 func NewFromPath(name, path string) Smq {
-	fmt.Println("从文件初始化赛码器...")
 	rd, err := readFromPath(path)
 	if err != nil {
-		log.Panicln("Error! 从文件初始化赛码器，路径：", path)
+		panic("Error! 读取文件失败：" + path)
 	}
 	if name == "" {
 		name = GetFileName(path)
 	}
 	text, _ := io.ReadAll(rd)
+	fmt.Println("从文件初始化赛码器...", name)
 	return Smq{name, text, []*Dict{}}
 }
 
@@ -207,4 +206,5 @@ func OutputDetail(textName string, res *Result) {
 	res.Data.Details = make(map[string]*CoC)
 	tmp2, _ := json.MarshalIndent(res, "", "  ")
 	os.WriteFile(fmt.Sprintf("result/%s_%s.json", textName, res.Name), tmp2, 0666)
+	fmt.Println("已输出详细数据，请查看 result 文件夹")
 }

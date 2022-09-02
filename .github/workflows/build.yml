@@ -51,6 +51,7 @@ jobs:
           go build -ldflags="-s -w" -o ./bin/smq-darwin
           mv ./example/text ./bin/text
           mv ./example/dict ./bin/dict
+          mv README.md ./bin/README.md
 
       # 使用 upx 压缩可执行文件
       - name: Run UPX

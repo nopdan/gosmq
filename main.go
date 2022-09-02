@@ -17,6 +17,6 @@ func main() {
 }
 
 func info() {
-	fmt.Printf("gosmq v0.30 %s/%s\n", runtime.GOOS, runtime.GOARCH)
+	fmt.Printf("gosmq v1.0.0 %s/%s\n", runtime.GOOS, runtime.GOARCH)
 	fmt.Printf("https://github.com/cxcn/gosmq/\n")
 }

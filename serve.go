@@ -12,7 +12,9 @@ import (
 	"runtime"
 	"sync"
 
+	"github.com/cxcn/gosmq/pkg/dict"
 	"github.com/cxcn/gosmq/pkg/smq"
+	"github.com/cxcn/gosmq/pkg/util"
 )
 
 //go:embed web/dist
@@ -48,8 +50,8 @@ func parseOptions(src []byte) Options {
 	return opt
 }
 
-func toSmqDict(opt optDict) *smq.Dict {
-	dict := &smq.Dict{
+func toSmqDict(opt optDict) *dict.Dict {
+	dict := &dict.Dict{
 		Single:       opt.Single,
 		Format:       opt.Format,
 		SelectKeys:   opt.SelectKeys,
@@ -58,7 +60,7 @@ func toSmqDict(opt optDict) *smq.Dict {
 		PressSpaceBy: "both",
 		OutputDetail: false,
 	}
-	dict.LoadFromPath("./dict/" + opt.Path)
+	dict.Load("./dict/" + opt.Path)
 	return dict
 }
 
@@ -74,8 +76,8 @@ func GetResultJson(src []byte) []byte {
 		}
 		s = smq.NewFromString(opts.Text.Name, opts.Text.Plain)
 	} else {
-		opts.Text.Name = smq.GetFileName(opts.Text.Path)
-		s = smq.NewFromPath(opts.Text.Name, "./text/"+opts.Text.Path)
+		opts.Text.Name = util.GetFileName(opts.Text.Path)
+		s = smq.New(opts.Text.Name, "./text/"+opts.Text.Path)
 	}
 	textName = opts.Text.Name
 	for _, v := range opts.Dicts {
@@ -83,7 +85,7 @@ func GetResultJson(src []byte) []byte {
 		s.Add(opt)
 	}
 	smqRes = s.Run()
-	result, _ := smq.ResToJson(smqRes)
+	result, _ := json.Marshal(smqRes)
 	return result
 }
 

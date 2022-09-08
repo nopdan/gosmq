@@ -27,8 +27,6 @@ func (t *trie) Insert(word, code string, order int) {
 	}
 }
 
-func (t *trie) Handle() {}
-
 // 前缀树最长匹配
 func (t *trie) Match(text []rune, p int) (int, string, int) {
 	j := 0 // 已匹配的字数

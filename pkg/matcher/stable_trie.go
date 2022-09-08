@@ -34,8 +34,6 @@ func (t *sTrie) Insert(word, code string, order int) {
 	}
 }
 
-func (t *sTrie) Handle() {}
-
 // 前缀树按码表序匹配
 func (t *sTrie) Match(text []rune, p int) (int, string, int) {
 	j := 0 // 已匹配的字数

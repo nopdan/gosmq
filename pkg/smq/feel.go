@@ -1,6 +1,16 @@
 package smq
 
-func (res *Result) feel(codes string, dict *Dict) {
+import (
+	"github.com/cxcn/gosmq/pkg/data"
+	"github.com/cxcn/gosmq/pkg/dict"
+)
+
+var (
+	KEY_POS = data.GetKeyPos()
+	COMB    = data.GetComb()
+)
+
+func (res *Result) feel(codes string, dict *dict.Dict) {
 	if len(codes) == 0 {
 		return
 	}

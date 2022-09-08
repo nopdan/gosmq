@@ -1,4 +1,4 @@
-package transformer
+package dict
 
 import (
 	"bufio"
@@ -8,9 +8,9 @@ import (
 	"strings"
 )
 
-type Jisu struct{}
+type jisu struct{}
 
-func (j Jisu) Read(dict Dict) []Entry {
+func (j jisu) Read(dict *Dict) []Entry {
 	ret := make([]Entry, 0, 1e5)
 	scan := bufio.NewScanner(dict.Reader)
 

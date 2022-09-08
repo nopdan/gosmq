@@ -11,18 +11,15 @@
 
 ### 创建赛码器
 
-你可以从字节流、字符串、文件路径创建赛码器
+你可以从字符串、文件路径创建赛码器
 
 ```go
 func main(){
-    // 从字节流
-    f := os.Open(`filepath`) // 实现了 io.Reader 的方法
-    s1 := smq.New("文本名",f)
-    // 从字符串
-    s2:= smq.NewFromString("文本名","这里是文本内容")
     // 从文件路径
     // 第一个参数可以填空，这时的文本名从路径推断
-    s3 := smq.NewFromPath("","这里填写路径")
+    s1 := smq.New("","这里填写路径")
+    // 从字符串
+    s2:= smq.NewFromString("文本名","这里是文本内容")
 }
 ```
 
@@ -31,35 +28,15 @@ func main(){
 ```go
 func main(){
     // 先定义一些基本参数
-    dict := &smq.Dict{
-        Name:         "", // 码表名
-        Single:       false, /* 单字模式
-        注意单字模式最好用多多格式的码表，
-        因为其他码表带有 order 信息，转换后可以用本格式码表
-        */
-        Format:       "", /* 码表格式
-        jisu:js 极速赛码表 词\t编码选重
-        duoduo:dd 多多格式码表 词\t编码
-        jidian:jd 极点格式 编码\t词1 词2 词3
-        bingling:bl 冰凌格式码表 编码\t词
-        */
-        Transfer   Transfer // 自定义码表格式转换
-        SelectKeys:   "", // 普通码表自定义选重键(默认为_;')
-        PushStart:    4, // 普通码表起顶码长(码长大于等于此数，首选不会追加空格)
-        Algorithm:    "trie", // 匹配算法 trie:前缀树 order:顺序匹配（极速跟打器） longest:最长匹配
-        Matcher:      nil, // 自定义匹配算法
-        PressSpaceBy: "both", // 空格按键方式 left|right|both
-        Details      bool,   // 输出详细数据
+    dict := &dict.Dict{
+        // 具体定义在 dict/struct.go 里
     }
 
-    // 载入码表，同样提供 3 种方式
-    // 从字节流
-    f := os.Open(`filepath`) // 实现了 io.Reader 的方法
-    dict.Load(f)
+    // 载入码表
+    // 从文件路径
+    dict.Load("这里填写路径")
     // 从字符串
     dict.LoadFromString("这里是码表内容")
-    // 从文件路径
-    dict.LoadFromPath("这里填写路径")
 }
 ```
 
@@ -77,9 +54,7 @@ func main() {
     s.Add(dict)
     res := s.Run() // 他返回一个 []*smq.Result 结构体指针数组，具体定义可查看 result.go 文件
     // 你可以输出为 json
-    s.ResToJson(res)
-    // 如果你不需要结构体
-    s.ToJson()
+    j,_ := json.Marshal(res)
 }
 
 ```
@@ -89,7 +64,7 @@ func main() {
 ```go
 // 需要从 dict 生成本赛码器格式码表的字节数组
 type Transformer interface {
-    Read(transformer.Dict) []transformer.Entry
+    Read(*dict.Dict) []dict.Entry
 }
 ```
 
@@ -98,14 +73,14 @@ type Transformer interface {
 ```go
 type newFormat struct {}
 
-func (n newFormat) Read(dict transformer.Dict) []transformer.Entry {
-	ret := make([]Entry, 0, 1e5)
+func (n newFormat) Read(dict *dict.Dict) []dict.Entry {
+	ret := make([]dict.Entry, 0, 1e5)
     // 逐行读取
     scan := bufio.NewScanner(dict.Reader)
     for scan.Scan() {
         // 转格式为
         // 本赛码器格式 word code order
-		ret = append(ret, transformer.Entry{word, code, order})
+		ret = append(ret, dict.Entry{word, code, order})
     }
     return ret
 }
@@ -113,14 +88,12 @@ func (n newFormat) Read(dict transformer.Dict) []transformer.Entry {
 
 ## 自定义匹配算法
 
-程序定义了一个接口，在创建 `smq.Dict` 时传入 `Matcher`，这时 `Algorithm` 失效
+程序定义了一个接口，在创建 `dict.Dict` 时传入 `Matcher`，这时 `Algorithm` 失效
 
 ```go
 type Matcher interface {
     // 插入一个词条 word code order
     Insert(string, string, int)
-    // 读取完码表后的操作
-    Handle()
     // 匹配下一个词 text point -> 匹配到的词长，code，order
     Match([]rune, int) (int, string, int)
 }

@@ -1,11 +1,9 @@
-package smq
+package dict
 
 import (
 	"fmt"
 	"strings"
 	"testing"
-
-	"github.com/cxcn/gosmq/pkg/transformer"
 )
 
 func TestJisu(t *testing.T) {
@@ -16,11 +14,11 @@ func TestJisu(t *testing.T) {
 骼	gjg_
 `
 	dict := &Dict{
-		reader:      strings.NewReader(src),
-		Transformer: new(transformer.Jisu),
+		Reader:      strings.NewReader(src),
+		Transformer: new(jisu),
 		SelectKeys:  "_;'",
 	}
-	got := dict.Transformer.Read(toTD(dict))
+	got := dict.Transformer.Read(dict)
 	fmt.Println("极速格式转换\n", got)
 }
 
@@ -36,12 +34,12 @@ func TestDuoduo(t *testing.T) {
 锐升	aado
 `
 	dict := &Dict{
-		reader:      strings.NewReader(src),
-		Transformer: new(transformer.Duoduo),
+		Reader:      strings.NewReader(src),
+		Transformer: new(duoduo),
 		PushStart:   4,
 		SelectKeys:  "_;'",
 	}
-	got := dict.Transformer.Read(toTD(dict))
+	got := dict.Transformer.Read(dict)
 	fmt.Println("多多格式转换\n", got)
 }
 
@@ -53,11 +51,11 @@ aad 仍然是
 aadi 瑞士
 `
 	dict := &Dict{
-		reader:      strings.NewReader(src),
-		Transformer: new(transformer.Jidian),
+		Reader:      strings.NewReader(src),
+		Transformer: new(jidian),
 		PushStart:   4,
 		SelectKeys:  "_;'",
 	}
-	got := dict.Transformer.Read(toTD(dict))
+	got := dict.Transformer.Read(dict)
 	fmt.Println("极点格式转换\n", got)
 }

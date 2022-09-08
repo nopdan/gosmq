@@ -1,13 +1,11 @@
-package smq
+package util
 
 import (
 	"bufio"
 	"bytes"
-	"fmt"
 	"io"
 	"os"
 	"path/filepath"
-	"strconv"
 	"strings"
 
 	"github.com/gogs/chardet"
@@ -15,9 +13,8 @@ import (
 )
 
 // 将 io流 转换为 utf-8
-func Tranformer(f io.Reader) io.Reader {
-
-	brd := bufio.NewReader(f)
+func NewReader(input io.Reader) io.Reader {
+	brd := bufio.NewReader(input)
 	buf, _ := brd.Peek(1024)
 	detector := chardet.NewTextDetector()
 	cs, err := detector.DetectBest(buf) // 检测编码格式
@@ -41,33 +38,18 @@ func Tranformer(f io.Reader) io.Reader {
 	return rd
 }
 
-func readFromString(s string) io.Reader {
-	rd := strings.NewReader(s)
-	return rd
-}
-
-func readFromPath(path string) (io.Reader, error) {
+// 读取文件
+func Read(path string) (io.Reader, error) {
 	f, err := os.Open(path)
 	if err != nil {
 		return f, err
 	}
-	return Tranformer(f), nil
+	return NewReader(f), nil
 }
 
+// 获取文件名，不含路径和后缀
 func GetFileName(fp string) string {
 	name := filepath.Base(fp)
 	ext := filepath.Ext(fp)
 	return strings.TrimSuffix(name, ext)
-}
-
-func div(x, y int) float64 {
-	value, _ := strconv.ParseFloat(fmt.Sprintf("%.4f", float64(x)/float64(y)), 64)
-	return value
-}
-
-func AddTo(sli *[]int, pos int) {
-	for pos > len(*sli)-1 {
-		*sli = append(*sli, 0)
-	}
-	(*sli)[pos]++
 }

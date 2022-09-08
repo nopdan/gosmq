@@ -24,9 +24,6 @@ func (l *longest) Insert(word, code string, order int) {
 	}
 }
 
-func (l longest) Handle() {
-}
-
 // 最长匹配
 func (l longest) Match(text []rune, p int) (int, string, int) {
 	max := len(l) - 1

@@ -1,15 +1,15 @@
-package transformer
+package dict
 
 import (
 	"bufio"
 	"strings"
 )
 
-type Duoduo struct {
+type duoduo struct {
 	Reverse bool
 }
 
-func (d Duoduo) Read(dict Dict) []Entry {
+func (d duoduo) Read(dict *Dict) []Entry {
 	ret := make([]Entry, 0, 1e5)
 	mapOrder := make(map[string]int)
 	scan := bufio.NewScanner(dict.Reader)

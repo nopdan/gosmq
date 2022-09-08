@@ -1,13 +1,13 @@
-package transformer
+package dict
 
 import (
 	"bufio"
 	"strings"
 )
 
-type Jidian struct{}
+type jidian struct{}
 
-func (j Jidian) Read(dict Dict) []Entry {
+func (j jidian) Read(dict *Dict) []Entry {
 	ret := make([]Entry, 0, 1e5)
 	scan := bufio.NewScanner(dict.Reader)
 

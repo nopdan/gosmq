@@ -1,4 +1,4 @@
-package transformer
+package dict
 
 import (
 	"bufio"
@@ -6,9 +6,9 @@ import (
 	"strings"
 )
 
-type Smb struct{}
+type smb struct{}
 
-func (s Smb) Read(dict Dict) []Entry {
+func (s smb) Read(dict *Dict) []Entry {
 	ret := make([]Entry, 0, 1e5)
 	scan := bufio.NewScanner(dict.Reader)
 

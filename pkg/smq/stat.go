@@ -2,12 +2,14 @@ package smq
 
 import (
 	"sort"
+
+	"github.com/cxcn/gosmq/pkg/dict"
 )
 
-func (res *Result) stat(dict *Dict) {
+func (res *Result) stat(dict *dict.Dict) {
 	// 内部数据
 	res.Name = dict.Name
-	res.Basic.DictLen = dict.length
+	res.Basic.DictLen = dict.Length
 	res.Words.Dist = res.wordsDist
 	res.Collision.Dist = res.collDist
 	res.CodeLen.Dist = res.codeDist

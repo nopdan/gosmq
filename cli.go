@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/cxcn/gosmq/pkg/dict"
 	"github.com/cxcn/gosmq/pkg/smq"
 	"github.com/jessevdk/go-flags"
 )
@@ -42,10 +43,10 @@ func cli() {
 		s = smq.NewFromString("没有输入文本，仅转换码表", "")
 		isEmpty = true
 	} else {
-		s = smq.NewFromPath("", opts.Text)
+		s = smq.New("", opts.Text)
 	}
 	for _, v := range opts.Dict {
-		dict := &smq.Dict{
+		dict := &dict.Dict{
 			Single:       opts.Single,
 			Format:       opts.Format,
 			SelectKeys:   opts.SelectKeys,
@@ -55,7 +56,7 @@ func cli() {
 			OutputDetail: opts.OutputDetail,
 			OutputDict:   !opts.OutputDict,
 		}
-		dict.LoadFromPath(v)
+		dict.Load(v)
 		s.Add(dict)
 	}
 	fmt.Printf("耗时：%v\n", time.Since(start))

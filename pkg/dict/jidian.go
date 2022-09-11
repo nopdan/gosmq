@@ -7,7 +7,7 @@ import (
 
 type jidian struct{}
 
-func (j jidian) Read(dict *Dict) []Entry {
+func (jidian) Read(dict *Dict) []Entry {
 	ret := make([]Entry, 0, 1e5)
 	scan := bufio.NewScanner(dict.Reader)
 

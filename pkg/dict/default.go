@@ -8,7 +8,7 @@ import (
 
 type smb struct{}
 
-func (s smb) Read(dict *Dict) []Entry {
+func (smb) Read(dict *Dict) []Entry {
 	ret := make([]Entry, 0, 1e5)
 	scan := bufio.NewScanner(dict.Reader)
 

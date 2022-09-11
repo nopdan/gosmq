@@ -74,17 +74,14 @@ async function getFiles(url: string, li: any[]) {
   }
 }
 
-onMounted(() => {
-  getFiles("/texts", textList);
-  getFiles("/dicts", dictList);
-  // getFiles("http://localhost:7172/texts", textList);
-  // getFiles("http://localhost:7172/dicts", dictList);
-});
+const dev = false;
+const url_api = dev ? "http://localhost:7172/api" : "/api";
+const url_result = dev ? "http://localhost:7172/result" : "/result";
 
-const url_api = "/api"
-const url_result = "/result";
-// const url_api = "http://localhost:7172/api";
-// const url_result = "http://localhost:7172/result";
+onBeforeMount(() => {
+  getFiles(dev ? "http://localhost:7172/texts" : "/texts", textList);
+  getFiles(dev ? "http://localhost:7172/dicts" : "/dicts", dictList);
+});
 
 async function start1() {
   loading1.value = true;

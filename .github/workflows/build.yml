@@ -26,19 +26,45 @@ jobs:
           version: 7
           run_install: false
 
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: |
+          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
       # 安装 go
       - uses: actions/setup-go@v3
         with:
           go-version: ">=1.18.0"
           check-latest: true
 
-      # 编译
-      - name: Build
+      - name: Setup go cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/go/pkg/mod
+            ~/.cache/go-build
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+
+      - name: Build frontend
         run: |
           cd web
           pnpm i
           pnpm build
           cd ..
+
+      # 编译
+      - name: Build
+        run: |
           go mod tidy
           go env -w GOARCH=amd64
           echo "正在编译 linux 版本"
@@ -58,7 +84,7 @@ jobs:
           files: |
             ./bin/*
           args: -fq
-      
+
       - name: Move Files
         run: |
           mv ./example/text ./bin/text

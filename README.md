@@ -2,6 +2,15 @@
 
 ![](example/preview-serve.png)
 
+
+[![GitHub Repo stars](https://img.shields.io/github/stars/cxcn/gosmq)](https://github.com/cxcn/gosmq/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/cxcn/gosmq)](https://github.com/cxcn/gosmq/network/members)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/cxcn/gosmq)](https://github.com/cxcn/gosmq/releases)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/cxcn/gosmq/Build)](https://github.com/cxcn/gosmq/actions/workflows/build.yml)
+![GitHub repo size](https://img.shields.io/github/repo-size/cxcn/gosmq)
+![GitHub](https://img.shields.io/github/license/cxcn/gosmq)
+
+
 在 [example](./example) 文件夹下查看更多预览图。
 
 ## web 用法

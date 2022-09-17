@@ -1,4 +1,4 @@
-name: Build gosmq
+name: Build
 
 on:
   push:

@@ -11,6 +11,7 @@ import (
 	"os/exec"
 	"runtime"
 	"sync"
+	"time"
 
 	"github.com/imetool/gosmq/internal/dict"
 	"github.com/imetool/gosmq/pkg/smq"
@@ -33,14 +34,10 @@ type optText struct {
 }
 
 type optDict struct {
-	Path string `json:"path"`
-	// Format     string `json:"format"`
+	Path   string `json:"path"`
 	Single bool   `json:"single"`
 	Space  string `json:"space"`
 	Greedy bool   `json:"greedy"`
-	// SelectKeys string `json:"selectkeys"`
-	// PushStart  int    `json:"pushstart"`
-	// Alg        string `json:"alg"`
 }
 
 func parseOptions(src []byte) Options {
@@ -96,11 +93,13 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	setHeader(&w)
 	defer r.Body.Close()
 	if r.Method == "POST" {
+		start := time.Now()
 		body, _ := io.ReadAll(r.Body)
-		fmt.Println("    post body: ", string(body))
+		// fmt.Println("    post body: ", string(body))
 		rjson := GetResultJson(body)
 		w.Write(rjson)
-		fmt.Println("    returned json: ", string(rjson))
+		// fmt.Println("    returned json: ", string(rjson))
+		fmt.Printf("比赛结束，耗时：%v\n\n", time.Since(start))
 	}
 }
 

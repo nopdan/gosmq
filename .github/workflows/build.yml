@@ -84,7 +84,7 @@ jobs:
       - name: Move Files
         run: |
           mv sample/* bin/
-          mv assets/* bin/
+          mv assets/ bin/
           mv README.md bin/
 
       # 上传到 Artifact

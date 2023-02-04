@@ -2,8 +2,12 @@ package cmd
 
 import (
 	"fmt"
+	"log"
+	"path/filepath"
 	"time"
 
+	"github.com/AlecAivazis/survey/v2"
+	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/imetool/gosmq/internal/dict"
 	"github.com/imetool/gosmq/pkg/smq"
 	"github.com/spf13/cobra"
@@ -33,12 +37,11 @@ func init() {
 	goCmd.PersistentFlags().BoolVarP(&conf.Greedy, "greedy", "g", false, "贪心匹配")
 	goCmd.PersistentFlags().StringVarP(&conf.PressSpaceBy, "space", "p", "both", "空格按键方式 left|right|both")
 	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出详细数据")
-
 }
 
 func goCli() {
 	if len(conf.Dict) == 0 {
-		fmt.Println("这点参数让我怎么算")
+		fmt.Println("输入有误")
 		return
 	}
 	// 初始化赛码器
@@ -72,6 +75,98 @@ func goCli() {
 
 	// 开始赛码
 	fmt.Printf("比赛开始，一共 %d 个码表\n", len(s.Inputs))
+	mid := time.Now()
+	res := s.Run()
+	fmt.Printf("比赛结束，耗时：%v\n", time.Since(mid))
+	fmt.Printf("总耗时：%v\n", time.Since(start))
+	if len(res) == 0 {
+		return
+	}
+	fmt.Println("----------------------")
+	Output(res, s.Name)
+}
+
+func goWithSurvey() {
+	handle := func(err error) {
+		if err != nil {
+			if err == terminal.InterruptErr {
+				log.Fatal("interrupted")
+			}
+		}
+	}
+
+	err := survey.AskOne(&survey.Input{
+		Message: "文本:",
+		Suggest: func(toComplete string) []string {
+			files, _ := filepath.Glob(toComplete + "*")
+			return files
+		},
+	}, &conf.Text, survey.WithValidator(survey.Required))
+	handle(err)
+
+	var tmp string
+	err = survey.AskOne(&survey.Input{
+		Message: "码表:",
+		Suggest: func(toComplete string) []string {
+			files, _ := filepath.Glob(toComplete + "*")
+			return files
+		},
+	}, &tmp, survey.WithValidator(survey.Required))
+	handle(err)
+
+	err = survey.AskOne(&survey.Select{
+		Message: "空格按键方式:",
+		Options: []string{"both", "left", "right"},
+	}, &conf.PressSpaceBy)
+	handle(err)
+
+	err = survey.AskOne(&survey.Confirm{
+		Message: "单字模式:",
+		Default: false,
+	}, &conf.Single)
+	handle(err)
+
+	err = survey.AskOne(&survey.Confirm{
+		Message: "贪心匹配:",
+		Default: false,
+	}, &conf.Greedy)
+	handle(err)
+
+	err = survey.AskOne(&survey.Confirm{
+		Message: "输出详细数据:",
+		Default: false,
+	}, &conf.Verbose)
+	handle(err)
+
+	fmt.Println("\n", conf)
+
+	conf.Dict = []string{tmp}
+
+	// 初始化赛码器
+	s := &smq.Smq{}
+	start := time.Now()
+	if conf.Text == "" {
+		fmt.Println("没有输入文本")
+		return
+	} else {
+		s.Load(conf.Text)
+	}
+	var algo string
+	if conf.Greedy {
+		algo = "trie"
+	} else {
+		algo = "strie"
+	}
+	d := &dict.Dict{
+		Single:       conf.Single,
+		Algorithm:    algo,
+		PressSpaceBy: conf.PressSpaceBy,
+		Verbose:      conf.Verbose,
+	}
+	d.Load(conf.Dict[0])
+	s.Add(d)
+	fmt.Printf("构建码表耗时：%v\n", time.Since(start))
+	// 开始赛码
 	mid := time.Now()
 	res := s.Run()
 	fmt.Printf("比赛结束，耗时：%v\n", time.Since(mid))

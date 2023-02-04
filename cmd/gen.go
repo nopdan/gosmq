@@ -19,7 +19,7 @@ var genCmd = &cobra.Command{
 		// fmt.Println(args, len(args))
 		if len(args) == 0 {
 			fmt.Println("交互模式")
-			GenWithSurvey()
+			genWithSurvey()
 			return
 		}
 
@@ -39,7 +39,7 @@ func init() {
 	genCmd.PersistentFlags().BoolVarP(&Config.SortByWordLen, "sort", "s", true, "按照词长重新排序")
 }
 
-func GenWithSurvey() {
+func genWithSurvey() {
 	var conf gen.Config
 	handle := func(err error) {
 		if err != nil {

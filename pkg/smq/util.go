@@ -32,7 +32,7 @@ func OutputDetail(textName string, res *Result) {
 	os.WriteFile(fmt.Sprintf("result/%s_%s_分词结果.txt", textName, res.Name), []byte(buf.String()), 0666)
 	// 输出词条数据
 	buf.Reset()
-	buf.WriteString("词条\t编码\t顺序\t次数\n")
+	buf.WriteString("词条\t编码\t选重\t次数\n")
 	type details struct {
 		CodePosCount
 		word string

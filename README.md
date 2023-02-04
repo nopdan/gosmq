@@ -15,7 +15,7 @@
 
 详细参数见 `.\smq.exe -h`。
 
-不指定参数或双击运行或执行`.\smq.exe serve`，启动`serve`模式，自动打开浏览器。
+执行`.\smq.exe serve`，启动`serve`模式，自动打开浏览器。
 
 `serve`模式只会读取 `text` 文件夹下的赛文和 `dict` 文件夹下的码表。
 

@@ -1,22 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"os"
-	"runtime"
+
+	"github.com/imetool/gosmq/cmd"
 )
 
 func main() {
-	if len(os.Args) <= 1 {
-		serve(false)
-	} else if os.Args[1] == "serve" {
-		serve(true)
-	} else {
-		cli()
-	}
-}
-
-func info() {
-	fmt.Printf("gosmq v1.0.0 %s/%s\n", runtime.GOOS, runtime.GOARCH)
-	fmt.Printf("https://github.com/cxcn/gosmq/\n")
+	os.MkdirAll("dict", os.ModePerm)
+	os.MkdirAll("text", os.ModePerm)
+	cmd.Execute()
 }

@@ -4,14 +4,14 @@ package matcher
 type trie struct {
 	children map[rune]*trie
 	code     string
-	order    int
+	pos      int
 }
 
 func NewTrie() *trie {
 	return new(trie)
 }
 
-func (t *trie) Insert(word, code string, order int) {
+func (t *trie) Insert(word, code string, pos int) {
 	for _, v := range word {
 		if t.children == nil {
 			t.children = make(map[rune]*trie)
@@ -23,7 +23,7 @@ func (t *trie) Insert(word, code string, order int) {
 	}
 	if t.code == "" || len(code) < len(t.code) {
 		t.code = code
-		t.order = order
+		t.pos = pos
 	}
 }
 
@@ -33,7 +33,7 @@ func (t *trie) Match(text []rune, p int) (int, string, int) {
 	i := 0 // 有编码的匹配
 	dict := t
 	code := "" // 编码
-	order := 0
+	pos := 0
 	for p+j < len(text) {
 		dict = dict.children[text[p+j]]
 		j++
@@ -43,8 +43,8 @@ func (t *trie) Match(text []rune, p int) (int, string, int) {
 		if dict.code != "" {
 			i = j
 			code = dict.code
-			order = dict.order
+			pos = dict.pos
 		}
 	}
-	return i, code, order
+	return i, code, pos
 }

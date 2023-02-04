@@ -5,10 +5,11 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"log"
 	"sync"
 
-	"github.com/cxcn/gosmq/pkg/dict"
-	"github.com/cxcn/gosmq/pkg/util"
+	"github.com/imetool/gosmq/internal/dict"
+	"github.com/imetool/goutil/util"
 )
 
 type Smq struct {
@@ -17,35 +18,29 @@ type Smq struct {
 	Inputs []*dict.Dict // 码表选项
 }
 
-// 初始化一个赛码器
-func New(name, path string) Smq {
+// 从文件添加文本
+func (s *Smq) Load(path string) {
 	rd, err := util.Read(path)
 	if err != nil {
-		panic("Error! 读取文件失败：" + path)
+		log.Panic("Error! 读取文件失败：", path)
 	}
-	if name == "" {
-		name = util.GetFileName(path)
-	}
-	text, _ := io.ReadAll(rd)
-	fmt.Println("从文件初始化赛码器...", name)
-	return Smq{name, text, []*dict.Dict{}}
+	s.Name = util.GetFileName(path)
+	s.Text, _ = io.ReadAll(rd)
+	fmt.Println("从文件初始化赛码器...", path)
 }
 
-func NewFromString(name, text string) Smq {
+func (s *Smq) LoadString(name, text string) {
 	if text != "" {
 		fmt.Println("从字符串初始化赛码器...", name)
 	}
-	return Smq{name, []byte(text), []*dict.Dict{}}
+	s.Name = name
+	s.Text = []byte(text)
 }
 
 // 添加一个码表
 func (smq *Smq) Add(dict *dict.Dict) {
-	// 合法输入
-	if dict.Legal {
-		dict.Init()
-		smq.Inputs = append(smq.Inputs, dict)
-		fmt.Println("添加了一个码表：", dict.Name)
-	}
+	smq.Inputs = append(smq.Inputs, dict)
+	fmt.Println("添加了一个码表：", dict.Name)
 }
 
 // 开始计算
@@ -72,7 +67,7 @@ func (smq *Smq) Run() []*Result {
 				}
 			}
 			res.stat(dict)
-			if dict.OutputDetail {
+			if dict.Verbose {
 				OutputDetail(smq.Name, res)
 			}
 			wg.Done()

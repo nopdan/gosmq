@@ -6,17 +6,17 @@ import "sort"
 type sTrie struct {
 	children map[rune]*sTrie
 	code     string
-	order    int
-	line     int
+	pos      int
+	line     uint32
 }
 
 func NewSTrie() *sTrie {
 	return new(sTrie)
 }
 
-var orderLine = 0
+var orderLine uint32 = 0
 
-func (t *sTrie) Insert(word, code string, order int) {
+func (t *sTrie) Insert(word, code string, pos int) {
 	for _, v := range word {
 		if t.children == nil {
 			t.children = make(map[rune]*sTrie)
@@ -28,7 +28,7 @@ func (t *sTrie) Insert(word, code string, order int) {
 	}
 	if t.code == "" {
 		t.code = code
-		t.order = order
+		t.pos = pos
 		orderLine++
 		t.line = orderLine
 	}
@@ -40,10 +40,10 @@ func (t *sTrie) Match(text []rune, p int) (int, string, int) {
 	i := 0 // 有编码的匹配
 	dict := t
 	type res_tmp struct {
-		i     int
-		code  string
-		order int
-		line  int
+		i    int
+		code string
+		pos  int
+		line uint32
 	}
 	res := make([]res_tmp, 0, 10)
 	for p+j < len(text) {
@@ -54,7 +54,7 @@ func (t *sTrie) Match(text []rune, p int) (int, string, int) {
 		}
 		if dict.code != "" {
 			i = j
-			res = append(res, res_tmp{i, dict.code, dict.order, dict.line})
+			res = append(res, res_tmp{i, dict.code, dict.pos, dict.line})
 		}
 	}
 	if len(res) == 0 {
@@ -63,5 +63,5 @@ func (t *sTrie) Match(text []rune, p int) (int, string, int) {
 	sort.Slice(res, func(i, j int) bool {
 		return res[i].line < res[j].line
 	})
-	return res[0].i, res[0].code, res[0].order
+	return res[0].i, res[0].code, res[0].pos
 }

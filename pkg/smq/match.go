@@ -4,7 +4,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/cxcn/gosmq/pkg/dict"
+	"github.com/imetool/gosmq/internal/dict"
 )
 
 func (res *Result) match(text []rune, dict *dict.Dict) string {
@@ -26,7 +26,7 @@ func (res *Result) match(text []rune, dict *dict.Dict) string {
 			res.mapNotHan[text[p]] = struct{}{}
 		}
 
-		i, code, order := dict.Matcher.Match(text, p)
+		i, code, pos := dict.Matcher.Match(text, p)
 		// 缺字
 		if i == 0 {
 			if isHan {
@@ -40,20 +40,20 @@ func (res *Result) match(text []rune, dict *dict.Dict) string {
 
 		sb.WriteString(code)
 		AddTo(&res.wordsDist, i) // 词长分布
-		if order != 1 {
+		if pos != 1 {
 			res.Collision.Chars.Count += i // 选重字数
 		} else if i != 1 {
 			res.Words.FirstCount++ // 首选词
 		}
-		AddTo(&res.collDist, order)     // 选重分布
+		AddTo(&res.collDist, pos)       // 选重分布
 		AddTo(&res.codeDist, len(code)) // 码长分布
 
-		if dict.OutputDetail {
+		if dict.Verbose {
 			word := string(text[p : p+i])
 			res.Data.WordSlice = append(res.Data.WordSlice, word)
 			res.Data.CodeSlice = append(res.Data.CodeSlice, code)
 			if _, ok := res.Data.Details[word]; !ok {
-				res.Data.Details[word] = &CoC{Code: code, Order: i}
+				res.Data.Details[word] = &CodePosCount{Code: code, Pos: i}
 			}
 			res.Data.Details[word].Count++
 		}

@@ -3,8 +3,7 @@
 
 build/*/
 build/smq*
-build/dev.ps1
-
-cmd/test*/
 
 *.zip
+
+internal/serve/dist

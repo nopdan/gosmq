@@ -23,7 +23,7 @@ func AddTo(sli *[]int, pos int) {
 
 func OutputDetail(textName string, res *Result) {
 	// 创建文件夹
-	os.Mkdir("result", 0666)
+	os.MkdirAll("result", os.ModePerm)
 	// 输出分词结果
 	var buf strings.Builder
 	for i := 0; i < len(res.Data.CodeSlice); i++ {
@@ -34,7 +34,7 @@ func OutputDetail(textName string, res *Result) {
 	buf.Reset()
 	buf.WriteString("词条\t编码\t顺序\t次数\n")
 	type details struct {
-		CoC
+		CodePosCount
 		word string
 	}
 	tmp := make([]details, 0, len(res.Data.Details))
@@ -49,7 +49,7 @@ func OutputDetail(textName string, res *Result) {
 		buf.WriteByte('\t')
 		buf.WriteString(v.Code)
 		buf.WriteByte('\t')
-		buf.WriteString(strconv.Itoa(v.Order))
+		buf.WriteString(strconv.Itoa(v.Pos))
 		buf.WriteByte('\t')
 		buf.WriteString(strconv.Itoa(v.Count))
 		buf.WriteByte('\n')
@@ -58,7 +58,7 @@ func OutputDetail(textName string, res *Result) {
 	// 输出 json 数据
 	res.Data.CodeSlice = []string{}
 	res.Data.WordSlice = []string{}
-	res.Data.Details = make(map[string]*CoC)
+	res.Data.Details = make(map[string]*CodePosCount)
 	tmp2, _ := json.MarshalIndent(res, "", "  ")
 	os.WriteFile(fmt.Sprintf("result/%s_%s.json", textName, res.Name), tmp2, 0666)
 	fmt.Println("已输出详细数据，请查看 result 文件夹")

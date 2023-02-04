@@ -3,7 +3,7 @@ package smq
 import (
 	"sort"
 
-	"github.com/cxcn/gosmq/pkg/dict"
+	"github.com/imetool/gosmq/internal/dict"
 )
 
 func (res *Result) stat(dict *dict.Dict) {
@@ -56,7 +56,7 @@ func (res *Result) stat(dict *dict.Dict) {
 	// keys
 	for k, v := range res.mapKeys {
 		if res.Keys[string(k)] == nil {
-			res.Keys[string(k)] = new(CaR)
+			res.Keys[string(k)] = new(CountRate)
 		}
 		res.Keys[string(k)].Count += v
 	}
@@ -82,10 +82,10 @@ func (res *Result) stat(dict *dict.Dict) {
 	res.Hands.Diff.Rate = div(res.Hands.Diff.Count, res.Combs.Count)
 	// fingers
 	for k, v := range res.mapKeys {
-		if _, ok := KEY_POS[k]; !ok {
+		if keyPos, ok := KeyPosMap[k]; !ok {
 			res.Fingers.Dist[10].Count += v
 		} else {
-			res.Fingers.Dist[KEY_POS[k].Fin].Count += v
+			res.Fingers.Dist[keyPos.Fin].Count += v
 		}
 	}
 	for _, v := range res.Fingers.Dist {

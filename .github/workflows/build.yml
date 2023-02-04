@@ -17,7 +17,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 16
+          node-version: latest
 
       # 装 pnpm
       - name: Install pnpm
@@ -42,7 +42,7 @@ jobs:
       # 安装 go
       - uses: actions/setup-go@v3
         with:
-          go-version: ">=1.18.0"
+          go-version: ">=1.19.0"
           check-latest: true
 
       - name: Setup go cache
@@ -61,20 +61,16 @@ jobs:
           pnpm i
           pnpm build
           cd ..
+          mv web/dist/ internal/serve/
 
       # 编译
       - name: Build
         run: |
           go mod tidy
           go env -w GOARCH=amd64
-          echo "正在编译 linux 版本"
-          go build -ldflags="-s -w" -o ./bin/smq-linux
-          echo "正在编译 windows 版本"
+          echo "编译 windows 版本"
           go env -w GOOS=windows
           go build -ldflags="-s -w" -o ./bin/smq.exe
-          echo "正在编译 mac 版本"
-          go env -w GOOS=darwin
-          go build -ldflags="-s -w" -o ./bin/smq-darwin
 
       # 使用 upx 压缩可执行文件
       - name: Run UPX
@@ -87,9 +83,9 @@ jobs:
 
       - name: Move Files
         run: |
-          mv ./example/text ./bin/text
-          mv ./example/dict ./bin/dict
-          mv README.md ./bin/README.md
+          mv sample/* bin/
+          mv assets/* bin/
+          mv README.md bin/
 
       # 上传到 Artifact
       - uses: actions/upload-artifact@v3

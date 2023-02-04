@@ -1,26 +1,26 @@
 package matcher
 
-type code_order struct {
-	code  string
-	order int
+type codePos struct {
+	code string
+	pos  int
 }
 
 // 最长匹配
-type longest []map[string]code_order
+type longest []map[string]codePos
 
 func NewLongest() *longest {
 	l := make(longest, 0, 20)
 	return &l
 }
 
-func (l *longest) Insert(word, code string, order int) {
+func (l *longest) Insert(word, code string, pos int) {
 	i := len([]rune(word)) // 词长
 	for i+1 > len(*l) {    // 扩容
-		*l = append(*l, make(map[string]code_order))
+		*l = append(*l, make(map[string]codePos))
 	}
 	// 不替换原有的
 	if co, ok := (*l)[i][word]; !ok || co.code == "" || len(code) < len(co.code) {
-		(*l)[i][word] = code_order{code, order}
+		(*l)[i][word] = codePos{code, pos}
 	}
 }
 
@@ -32,7 +32,7 @@ func (l longest) Match(text []rune, p int) (int, string, int) {
 	}
 	for i := max; i > 0; i-- {
 		if v, ok := l[i][string(text[p:p+i])]; ok {
-			return i, v.code, v.order
+			return i, v.code, v.pos
 		}
 	}
 	return 0, "", 1

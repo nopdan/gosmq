@@ -5,6 +5,7 @@ import (
 	"io"
 	"strings"
 
+	"github.com/imetool/dtool/pkg/table"
 	"github.com/imetool/gosmq/pkg/matcher"
 	"github.com/imetool/goutil/util"
 )
@@ -52,6 +53,11 @@ func (dict *Dict) initialize() {
 	// 读取
 	t := dict.read()
 	dict.Length = len(t)
+	// 添加符号
+	PUNCTS := GetPuncts()
+	for k, v := range PUNCTS {
+		t = append(t, table.Entry{string(k), v, 1})
+	}
 
 	// 匹配算法
 	if dict.Single {
@@ -61,12 +67,5 @@ func (dict *Dict) initialize() {
 		dict.Matcher = matcher.New(dict.Algorithm)
 	}
 	m := dict.Matcher
-	for i := range t {
-		m.Insert(t[i].Word, t[i].Code, t[i].Pos)
-	}
-	// 添加符号
-	PUNCTS := GetPuncts()
-	for k, v := range PUNCTS {
-		m.Insert(k, v, 1)
-	}
+	m.InsertAll(t)
 }

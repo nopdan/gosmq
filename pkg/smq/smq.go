@@ -46,13 +46,19 @@ func (smq *Smq) Add(dict *dict.Dict) {
 // 开始计算
 func (smq *Smq) Run() []*Result {
 	smqLen := len(smq.Inputs)
-	ret := make([]*Result, 0, smqLen)
-	for i := 0; i < len(smq.Inputs); i++ {
-		ret = append(ret, newResult())
+	ret := make([]*Result, smqLen)
+	for i := 0; i < smqLen; i++ {
+		ret[i] = newResult()
 		// fmt.Println(smq.Inputs[i])
 	}
 
 	var wg sync.WaitGroup
+	matchResults := make([]*matchRes, smqLen)
+	for j := 0; j < smqLen; j++ {
+		mr := newMatchRes(10)
+		matchResults[j] = mr
+	}
+
 	for i := range smq.Inputs {
 		wg.Add(1)
 		go func(j int) {
@@ -60,15 +66,20 @@ func (smq *Smq) Run() []*Result {
 			brd := bufio.NewReader(bytes.NewReader(smq.Text))
 			for {
 				line, err := brd.ReadString('\n')
-				codes := res.match([]rune(line), dict)
-				res.feel(codes, dict)
+				text := []rune(line)
+				mr := newMatchRes(len(text) / 3)
+				mr.match(text, dict.Matcher, dict.Verbose, res)
+				res.feel(mr.codes, dict)
+
+				matchResults[j].append(mr)
 				if err != nil {
 					break
 				}
 			}
-			res.stat(dict)
+			res.stat(matchResults[j], dict)
+			res.statFeel(dict)
 			if dict.Verbose {
-				OutputDetail(smq.Name, res)
+				OutputDetail(smq.Name, res, matchResults[j])
 			}
 			wg.Done()
 		}(i)

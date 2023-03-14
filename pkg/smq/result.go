@@ -1,29 +1,5 @@
 package smq
 
-type Result struct {
-	Name      string
-	Basic     basic
-	Words     words     // 打词
-	Collision collision // 选重
-	CodeLen   codeLen   // 码长
-
-	Keys    keys  // 按键统计
-	Combs   combs // 按键组合
-	Fingers fingers
-	Hands   hands
-
-	Data export
-
-	toTalEq10 int // 总当量*10
-	mapKeys   map[byte]int
-	mapNotHan map[rune]struct{}
-	mapLack   map[rune]struct{}
-	wordsDist []int
-	collDist  []int
-	codeDist  []int
-	// codes     string
-}
-
 // count and rate
 type CountRate struct {
 	Count int
@@ -36,11 +12,23 @@ type CodePosCount struct {
 	Count int
 }
 
-// 可能要导出的数据
-type export struct {
-	WordSlice []string // 分词
-	CodeSlice []string // 编码
-	Details   map[string]*CodePosCount
+type Result struct {
+	Name      string
+	Basic     basic
+	Words     words     // 打词
+	Collision collision // 选重
+	CodeLen   codeLen   // 码长
+
+	Keys    keys  // 按键统计
+	Combs   combs // 按键组合
+	Fingers fingers
+	Hands   hands
+
+	toTalEq10 int // 总当量*10
+	mapKeys   map[byte]int
+	notHanMap map[rune]struct{}
+	lackMap   map[rune]struct{}
+	// codes     string
 }
 
 // 基础
@@ -116,15 +104,12 @@ type hands struct {
 
 func newResult() *Result {
 	res := new(Result)
-	res.mapKeys = make(map[byte]int)
-	res.mapLack = make(map[rune]struct{})
-	res.mapNotHan = make(map[rune]struct{})
-	res.wordsDist = make([]int, 1)
-	res.collDist = make([]int, 1)
-	res.codeDist = make([]int, 1)
-	res.Data.WordSlice = make([]string, 0, 1024)
-	res.Data.CodeSlice = make([]string, 0, 1024)
-	res.Data.Details = make(map[string]*CodePosCount)
+	res.mapKeys = make(map[byte]int, 128)
+	res.notHanMap = make(map[rune]struct{}, 100)
+	res.lackMap = make(map[rune]struct{}, 10)
+	res.Words.Dist = make([]int, 1)
+	res.Collision.Dist = make([]int, 1)
+	res.CodeLen.Dist = make([]int, 1)
 	res.Keys = make(keys)
 	const ALL_KEYS = "1234567890qwertyuiopasdfghjkl;'zxcvbnm,./_+"
 	for i := 0; i < len(ALL_KEYS); i++ {

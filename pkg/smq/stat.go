@@ -6,49 +6,37 @@ import (
 	"github.com/imetool/gosmq/internal/dict"
 )
 
-func (res *Result) stat(dict *dict.Dict) {
-	// 内部数据
+func (res *Result) stat(mr *matchRes, dict *dict.Dict) {
 	res.Name = dict.Name
+	// Basic
 	res.Basic.DictLen = dict.Length
-	res.Words.Dist = res.wordsDist
-	res.Collision.Dist = res.collDist
-	res.CodeLen.Dist = res.codeDist
+
 	// 非汉字
-	tmp1 := make([]rune, 0, len(res.mapNotHan))
-	for k := range res.mapNotHan {
-		tmp1 = append(tmp1, k)
+	res.Basic.NotHans = len(res.notHanMap)
+	notHanList := make([]rune, 0, len(res.notHanMap))
+	for k := range res.notHanMap {
+		notHanList = append(notHanList, k)
 	}
-	sort.Slice(tmp1, func(i, j int) bool {
-		return tmp1[i] < tmp1[j]
+	sort.Slice(notHanList, func(i, j int) bool {
+		return notHanList[i] < notHanList[j]
 	})
-	res.Basic.NotHans = len(tmp1)
-	res.Basic.NotHan = string(tmp1)
+	res.Basic.NotHan = string(notHanList)
 
 	// 缺字
-	tmp2 := make([]rune, 0, len(res.mapLack))
-	for k := range res.mapLack {
-		tmp2 = append(tmp2, k)
+	res.Basic.Lacks = len(res.lackMap)
+	lackList := make([]rune, 0, len(res.lackMap))
+	for k := range res.lackMap {
+		lackList = append(lackList, k)
 	}
-	sort.Slice(tmp2, func(i, j int) bool {
-		return tmp2[i] < tmp2[j]
+	sort.Slice(lackList, func(i, j int) bool {
+		return lackList[i] < lackList[j]
 	})
-	res.Basic.Lacks = len(tmp2)
-	res.Basic.Lack = string(tmp2)
-	// 上屏数
-	for _, v := range res.Words.Dist {
-		res.Basic.Commits += v
-	}
-	// 打词数
-	res.Words.Commits.Count = res.Basic.Commits - res.Words.Dist[1]
-	res.Words.Commits.Rate = div(res.Words.Commits.Count, res.Basic.Commits)
+	res.Basic.Lack = string(lackList)
 
-	for i := 2; i < len(res.Words.Dist); i++ {
-		res.Words.Chars.Count += res.Words.Dist[i]
-	}
-	// res.Words.Chars.Count = res.Basic.TextLen - res.Words.Dist[1]
+	// 打词数
+	res.Words.Commits.Rate = div(res.Words.Commits.Count, res.Basic.Commits)
 	res.Words.Chars.Rate = div(res.Words.Chars.Count, res.Basic.TextLen)
 	// 选重数
-	res.Collision.Commits.Count = res.Basic.Commits - res.Collision.Dist[1]
 	res.Collision.Commits.Rate = div(res.Collision.Commits.Count, res.Basic.Commits)
 	res.Collision.Chars.Rate = div(res.Collision.Chars.Count, res.Basic.TextLen)
 	// 码长
@@ -56,7 +44,9 @@ func (res *Result) stat(dict *dict.Dict) {
 		res.CodeLen.Total += i * v
 	}
 	res.CodeLen.PerChar = div(res.CodeLen.Total, res.Basic.TextLen)
+}
 
+func (res *Result) statFeel(dict *dict.Dict) {
 	// keys
 	for k, v := range res.mapKeys {
 		if res.Keys[string(k)] == nil {

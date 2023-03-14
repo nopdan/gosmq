@@ -1,5 +1,7 @@
 package matcher
 
+import "github.com/imetool/dtool/pkg/table"
+
 // trie 树
 type trie struct {
 	children map[rune]*trie
@@ -11,8 +13,8 @@ func NewTrie() *trie {
 	return new(trie)
 }
 
-func (t *trie) Insert(word, code string, pos int) {
-	for _, v := range word {
+func (t *trie) Insert(e table.Entry) {
+	for _, v := range e.Word {
 		if t.children == nil {
 			t.children = make(map[rune]*trie)
 			t.children[v] = new(trie)
@@ -21,9 +23,15 @@ func (t *trie) Insert(word, code string, pos int) {
 		}
 		t = t.children[v]
 	}
-	if t.code == "" || len(code) < len(t.code) {
-		t.code = code
-		t.pos = pos
+	if t.code == "" || len(e.Code) < len(t.code) {
+		t.code = e.Code
+		t.pos = e.Pos
+	}
+}
+
+func (st *trie) InsertAll(t table.Table) {
+	for i := range t {
+		st.Insert(t[i])
 	}
 }
 

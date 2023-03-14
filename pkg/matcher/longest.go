@@ -1,5 +1,7 @@
 package matcher
 
+import "github.com/imetool/dtool/pkg/table"
+
 type codePos struct {
 	code string
 	pos  int
@@ -13,14 +15,20 @@ func NewLongest() *longest {
 	return &l
 }
 
-func (l *longest) Insert(word, code string, pos int) {
-	i := len([]rune(word)) // 词长
-	for i+1 > len(*l) {    // 扩容
+func (l *longest) Insert(e table.Entry) {
+	i := len([]rune(e.Word)) // 词长
+	for i+1 > len(*l) {      // 扩容
 		*l = append(*l, make(map[string]codePos))
 	}
 	// 不替换原有的
-	if co, ok := (*l)[i][word]; !ok || co.code == "" || len(code) < len(co.code) {
-		(*l)[i][word] = codePos{code, pos}
+	if co, ok := (*l)[i][e.Word]; !ok || co.code == "" || len(e.Code) < len(co.code) {
+		(*l)[i][e.Word] = codePos{e.Code, e.Pos}
+	}
+}
+
+func (l *longest) InsertAll(t table.Table) {
+	for i := range t {
+		l.Insert(t[i])
 	}
 }
 

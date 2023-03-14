@@ -1,6 +1,10 @@
 package matcher
 
-import "sort"
+import (
+	"sort"
+
+	"github.com/imetool/dtool/pkg/table"
+)
 
 // 稳定 trie 树
 type sTrie struct {
@@ -16,8 +20,8 @@ func NewSTrie() *sTrie {
 
 var orderLine uint32 = 0
 
-func (t *sTrie) Insert(word, code string, pos int) {
-	for _, v := range word {
+func (t *sTrie) Insert(e table.Entry) {
+	for _, v := range e.Word {
 		if t.children == nil {
 			t.children = make(map[rune]*sTrie)
 			t.children[v] = new(sTrie)
@@ -27,10 +31,16 @@ func (t *sTrie) Insert(word, code string, pos int) {
 		t = t.children[v]
 	}
 	if t.code == "" {
-		t.code = code
-		t.pos = pos
+		t.code = e.Code
+		t.pos = e.Pos
 		orderLine++
 		t.line = orderLine
+	}
+}
+
+func (st *sTrie) InsertAll(t table.Table) {
+	for i := range t {
+		st.Insert(t[i])
 	}
 }
 

@@ -16,13 +16,6 @@ var genCmd = &cobra.Command{
 	Use:   "gen",
 	Short: "转换赛码表",
 	Run: func(cmd *cobra.Command, args []string) {
-		// fmt.Println(args, len(args))
-		if len(args) == 0 {
-			fmt.Println("交互模式")
-			genWithSurvey()
-			return
-		}
-
 		table := Config.Gen()
 		path := "dict/" + util.GetFileName(Config.Path) + ".txt"
 		gen.Write(table, path)
@@ -36,7 +29,7 @@ func init() {
 	genCmd.PersistentFlags().StringVarP(&Config.Format, "format", "f", "jisu", "待转换码表的格式")
 	genCmd.PersistentFlags().StringVarP(&Config.SelectKeys, "select", "k", "_;'", "自定义选重键")
 	genCmd.PersistentFlags().IntVarP(&Config.PushStart, "push", "p", 4, "起顶码长")
-	genCmd.PersistentFlags().BoolVarP(&Config.SortByWordLen, "sort", "s", true, "按照词长重新排序")
+	genCmd.PersistentFlags().BoolVarP(&Config.SortByWordLen, "sort", "s", false, "按照词长重新排序")
 }
 
 func genWithSurvey() {
@@ -88,7 +81,7 @@ func genWithSurvey() {
 	if conf.Format != "jisu" {
 		err = survey.AskOne(&survey.Confirm{
 			Message: "按照词长重新排序",
-			Default: true,
+			Default: false,
 		}, &conf.SortByWordLen)
 		handle(err)
 	}

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/imetool/gosmq/internal/serve"
 	"github.com/spf13/cobra"
 )
 
@@ -24,6 +25,16 @@ func init() {
 }
 
 func Execute() {
+	if len(os.Args) <= 1 {
+		serve.Serve("7172", false)
+		return
+	}
+	if len(os.Args) == 2 && os.Args[1] == "gen" {
+		fmt.Println("交互模式")
+		genWithSurvey()
+		return
+	}
+
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

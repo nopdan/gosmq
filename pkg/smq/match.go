@@ -7,6 +7,8 @@ import (
 	"github.com/imetool/gosmq/internal/dict"
 )
 
+var PUNCTS = dict.GetPuncts()
+
 func (res *Result) match(text []rune, dict *dict.Dict) string {
 	var sb strings.Builder
 	sb.Grow(len(text))
@@ -39,7 +41,12 @@ func (res *Result) match(text []rune, dict *dict.Dict) string {
 		}
 
 		sb.WriteString(code)
-		AddTo(&res.wordsDist, i) // 词长分布
+		if i == 2 && PUNCTS[string(text[p:p+2])] != "" {
+			AddTo(&res.wordsDist, 1)
+		} else {
+			AddTo(&res.wordsDist, i) // 词长分布
+		}
+
 		if pos != 1 {
 			res.Collision.Chars.Count += i // 选重字数
 		} else if i != 1 {

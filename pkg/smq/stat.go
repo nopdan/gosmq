@@ -41,7 +41,11 @@ func (res *Result) stat(dict *dict.Dict) {
 	// 打词数
 	res.Words.Commits.Count = res.Basic.Commits - res.Words.Dist[1]
 	res.Words.Commits.Rate = div(res.Words.Commits.Count, res.Basic.Commits)
-	res.Words.Chars.Count = res.Basic.TextLen - res.Words.Dist[1]
+
+	for i := 2; i < len(res.Words.Dist); i++ {
+		res.Words.Chars.Count += res.Words.Dist[i]
+	}
+	// res.Words.Chars.Count = res.Basic.TextLen - res.Words.Dist[1]
 	res.Words.Chars.Rate = div(res.Words.Chars.Count, res.Basic.TextLen)
 	// 选重数
 	res.Collision.Commits.Count = res.Basic.Commits - res.Collision.Dist[1]

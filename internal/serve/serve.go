@@ -80,11 +80,13 @@ func GetResultJson(src []byte) []byte {
 		s.Load("text/" + opts.Text.Path)
 	}
 	textName = s.Name
+	dicts := make([]*dict.Dict, 0)
 	for _, v := range opts.Dicts {
-		opt := toSmqDict(v)
-		s.Add(opt)
+		// opt := toSmqDict(v)
+		dicts = append(dicts, toSmqDict(v))
+		// s.Add(opt)
 	}
-	smqRes = s.Run()
+	smqRes = s.EvalDicts(dicts)
 	result, _ := json.Marshal(smqRes)
 	return result
 }

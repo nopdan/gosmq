@@ -13,9 +13,9 @@ import (
 )
 
 type Smq struct {
-	Name   string       // 文本名
-	Text   []byte       // 文本
-	Inputs []*dict.Dict // 码表选项
+	Name string // 文本名
+	Text []byte // 文本
+	// Inputs []*dict.Dict // 码表选项
 }
 
 // 从文件添加文本
@@ -38,49 +38,44 @@ func (s *Smq) LoadString(name, text string) {
 }
 
 // 添加一个码表
-func (smq *Smq) Add(dict *dict.Dict) {
-	smq.Inputs = append(smq.Inputs, dict)
-	fmt.Println("添加了一个码表：", dict.Name)
+// func (smq *Smq) Add(dict *dict.Dict) {
+// 	smq.Inputs = append(smq.Inputs, dict)
+// 	fmt.Println("添加了一个码表：", dict.Name)
+// }
+
+func (smq *Smq) Eval(dict *dict.Dict) *Result {
+	res := newResult()
+	mRes := newMatchRes(10)
+	brd := bufio.NewReader(bytes.NewReader(smq.Text))
+	for {
+		line, err := brd.ReadString('\n')
+		text := []rune(line)
+		mr := newMatchRes(len(text) / 3)
+		mr.match(text, dict.Matcher, dict.Verbose, res)
+		res.feel(mr.codes, dict)
+
+		mRes.append(mr)
+		if err != nil {
+			break
+		}
+	}
+	res.stat(mRes, dict)
+	res.statFeel(dict)
+	if dict.Verbose {
+		OutputDetail(smq.Name, res, mRes)
+	}
+	return res
 }
 
 // 开始计算
-func (smq *Smq) Run() []*Result {
-	smqLen := len(smq.Inputs)
-	ret := make([]*Result, smqLen)
-	for i := 0; i < smqLen; i++ {
-		ret[i] = newResult()
-		// fmt.Println(smq.Inputs[i])
-	}
+func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
+	ret := make([]*Result, len(dicts))
 
 	var wg sync.WaitGroup
-	matchResults := make([]*matchRes, smqLen)
-	for j := 0; j < smqLen; j++ {
-		mr := newMatchRes(10)
-		matchResults[j] = mr
-	}
-
-	for i := range smq.Inputs {
+	for i := range dicts {
 		wg.Add(1)
 		go func(j int) {
-			res, dict := ret[j], smq.Inputs[j]
-			brd := bufio.NewReader(bytes.NewReader(smq.Text))
-			for {
-				line, err := brd.ReadString('\n')
-				text := []rune(line)
-				mr := newMatchRes(len(text) / 3)
-				mr.match(text, dict.Matcher, dict.Verbose, res)
-				res.feel(mr.codes, dict)
-
-				matchResults[j].append(mr)
-				if err != nil {
-					break
-				}
-			}
-			res.stat(matchResults[j], dict)
-			res.statFeel(dict)
-			if dict.Verbose {
-				OutputDetail(smq.Name, res, matchResults[j])
-			}
+			ret[j] = smq.Eval(dicts[j])
 			wg.Done()
 		}(i)
 	}

@@ -34,7 +34,7 @@ func init() {
 	goCmd.PersistentFlags().StringVarP(&conf.Text, "text", "t", "", "文本路径")
 	goCmd.PersistentFlags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表路径")
 	goCmd.PersistentFlags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
-	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "a", "strie", "匹配算法")
+	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "a", "strie", "匹配算法(strie|trie)")
 	goCmd.PersistentFlags().StringVarP(&conf.PressSpaceBy, "space", "p", "both", "空格按键方式 left|right|both")
 	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出详细数据")
 }
@@ -54,6 +54,7 @@ func goCli() {
 		s.Load(conf.Text)
 	}
 
+	dicts := make([]*dict.Dict, 0)
 	// 添加码表
 	for _, v := range conf.Dict {
 		dict := &dict.Dict{
@@ -63,14 +64,15 @@ func goCli() {
 			Verbose:      conf.Verbose,
 		}
 		dict.Load(v)
-		s.Add(dict)
+		dicts = append(dicts, dict)
+		// s.Add(dict)
 	}
 	fmt.Printf("构建码表耗时：%v\n", time.Since(start))
 
 	// 开始赛码
-	fmt.Printf("比赛开始，一共 %d 个码表\n", len(s.Inputs))
+	fmt.Printf("比赛开始，一共 %d 个码表\n", len(dicts))
 	mid := time.Now()
-	res := s.Run()
+	res := s.EvalDicts(dicts)
 	fmt.Printf("比赛结束，耗时：%v\n", time.Since(mid))
 	fmt.Printf("总耗时：%v\n", time.Since(start))
 	if len(res) == 0 {
@@ -158,16 +160,16 @@ func goWithSurvey() {
 		Verbose:      conf.Verbose,
 	}
 	d.Load(conf.Dict[0])
-	s.Add(d)
+	// s.Add(d)
 	fmt.Printf("构建码表耗时：%v\n", time.Since(start))
 	// 开始赛码
 	mid := time.Now()
-	res := s.Run()
+	res := s.Eval(d)
 	fmt.Printf("比赛结束，耗时：%v\n", time.Since(mid))
 	fmt.Printf("总耗时：%v\n", time.Since(start))
-	if len(res) == 0 {
-		return
-	}
+	// if len(res) == 0 {
+	// 	return
+	// }
 	fmt.Println("----------------------")
-	Output(res, s.Name)
+	Output([]*smq.Result{res}, s.Name)
 }

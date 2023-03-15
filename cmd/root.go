@@ -22,6 +22,7 @@ func init() {
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(serveCmd)
 	rootCmd.AddCommand(genCmd)
+	rootCmd.AddCommand(multiCmd)
 }
 
 func Execute() {

@@ -17,7 +17,7 @@ var conf = &struct {
 	Text         string   // 文本
 	Dict         []string // 码表
 	Single       bool     // 单字模式
-	Greedy       bool     // 贪心匹配
+	Algo         string   // 匹配算法
 	PressSpaceBy string   // 空格按键方式 left|right|both
 	Verbose      bool     // 输出详细数据
 }{}
@@ -34,7 +34,7 @@ func init() {
 	goCmd.PersistentFlags().StringVarP(&conf.Text, "text", "t", "", "文本路径")
 	goCmd.PersistentFlags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表路径")
 	goCmd.PersistentFlags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
-	goCmd.PersistentFlags().BoolVarP(&conf.Greedy, "greedy", "g", false, "贪心匹配")
+	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "a", "strie", "匹配算法")
 	goCmd.PersistentFlags().StringVarP(&conf.PressSpaceBy, "space", "p", "both", "空格按键方式 left|right|both")
 	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出详细数据")
 }
@@ -56,15 +56,9 @@ func goCli() {
 
 	// 添加码表
 	for _, v := range conf.Dict {
-		var algo string
-		if conf.Greedy {
-			algo = "trie"
-		} else {
-			algo = "strie"
-		}
 		dict := &dict.Dict{
 			Single:       conf.Single,
-			Algorithm:    algo,
+			Algorithm:    conf.Algo,
 			PressSpaceBy: conf.PressSpaceBy,
 			Verbose:      conf.Verbose,
 		}
@@ -126,10 +120,11 @@ func goWithSurvey() {
 	}, &conf.Single)
 	handle(err)
 
+	var greedy bool
 	err = survey.AskOne(&survey.Confirm{
 		Message: "贪心匹配:",
 		Default: false,
-	}, &conf.Greedy)
+	}, &greedy)
 	handle(err)
 
 	err = survey.AskOne(&survey.Confirm{
@@ -151,15 +146,14 @@ func goWithSurvey() {
 	} else {
 		s.Load(conf.Text)
 	}
-	var algo string
-	if conf.Greedy {
-		algo = "trie"
+	if greedy {
+		conf.Algo = "trie"
 	} else {
-		algo = "strie"
+		conf.Algo = "strie"
 	}
 	d := &dict.Dict{
 		Single:       conf.Single,
-		Algorithm:    algo,
+		Algorithm:    conf.Algo,
 		PressSpaceBy: conf.PressSpaceBy,
 		Verbose:      conf.Verbose,
 	}

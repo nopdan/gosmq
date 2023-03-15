@@ -45,19 +45,22 @@ func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Res
 			p++
 			continue
 		}
-
 		res.Basic.Commits++
-		// 非汉字
-		isHan := unicode.Is(unicode.Han, text[p])
-		if !isHan {
-			res.notHanMap[text[p]] = struct{}{}
-			res.Basic.NotHanCount++
-		}
 
 		i, code, pos := m.Match(text, p)
 
 		// 匹配到了
 		if i != 0 {
+			// 对每个字都进行判断
+			for j := 0; j < i; j++ {
+				// 非汉字
+				isHan := unicode.Is(unicode.Han, text[p+j])
+				if !isHan {
+					res.notHanMap[text[p+j]] = struct{}{}
+					res.Basic.NotHanCount++
+				}
+			}
+
 			// 打词
 			if i >= 2 {
 				res.Words.Commits.Count++
@@ -84,6 +87,12 @@ func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Res
 			}
 			p += i
 			continue
+		}
+
+		isHan := unicode.Is(unicode.Han, text[p])
+		if !isHan {
+			res.notHanMap[text[p]] = struct{}{}
+			res.Basic.NotHanCount++
 		}
 
 		// 匹配不到

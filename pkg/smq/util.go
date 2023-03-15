@@ -42,7 +42,7 @@ func OutputDetail(textName string, res *Result, mr *matchRes) {
 			tmp[mr.wordSlice[i]].Count++
 		}
 	}
-	os.WriteFile(fmt.Sprintf("result/%s_%s_分词结果.txt", textName, res.Name), []byte(buf.String()), 0666)
+	os.WriteFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.Name, textName), []byte(buf.String()), 0666)
 
 	// 输出词条数据
 	buf.Reset()
@@ -64,9 +64,9 @@ func OutputDetail(textName string, res *Result, mr *matchRes) {
 		buf.WriteString(strconv.Itoa(v.Count))
 		buf.WriteByte('\n')
 	}
-	os.WriteFile(fmt.Sprintf("result/%s_%s_词条数据.txt", textName, res.Name), []byte(buf.String()), 0666)
+	os.WriteFile(fmt.Sprintf("result/词条数据_%s_%s.txt", res.Name, textName), []byte(buf.String()), 0666)
 	// 输出 json 数据
 	tmp3, _ := json.MarshalIndent(res, "", "  ")
-	os.WriteFile(fmt.Sprintf("result/%s_%s.json", textName, res.Name), tmp3, 0666)
+	os.WriteFile(fmt.Sprintf("result/data_%s_%s.json", res.Name, textName), tmp3, 0666)
 	fmt.Println("已输出详细数据，请查看 result 文件夹")
 }

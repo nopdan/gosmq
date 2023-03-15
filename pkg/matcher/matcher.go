@@ -5,7 +5,7 @@ import "github.com/imetool/dtool/pkg/table"
 type Matcher interface {
 	// 插入一个词条 word code pos
 	// Insert(string, string, int)
-	InsertAll(table.Table)
+	Build(table.Table)
 	// 匹配下一个词
 	Match([]rune, int) (int, string, int)
 }
@@ -22,6 +22,8 @@ func New(alg string) Matcher {
 		m = NewTrie()
 	case "single":
 		m = NewSingle()
+	// case "mytrie":
+	// 	m = NewMyTrie()
 	default: // 默认稳定的 trie 算法
 		m = NewSTrie()
 	}

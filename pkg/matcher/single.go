@@ -1,6 +1,10 @@
 package matcher
 
-import "github.com/imetool/dtool/pkg/table"
+import (
+	"fmt"
+
+	"github.com/imetool/dtool/pkg/table"
+)
 
 type single map[rune]codePos
 
@@ -17,7 +21,8 @@ func (s *single) Insert(e table.Entry) {
 	}
 }
 
-func (s *single) InsertAll(t table.Table) {
+func (s *single) Build(t table.Table) {
+	fmt.Println("匹配算法：rune hashMap")
 	for i := range t {
 		s.Insert(t[i])
 	}

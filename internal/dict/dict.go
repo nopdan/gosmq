@@ -67,5 +67,7 @@ func (dict *Dict) initialize() {
 		dict.Matcher = matcher.New(dict.Algorithm)
 	}
 	m := dict.Matcher
-	m.InsertAll(t)
+
+	// fmt.Printf("%+v\n", dict)
+	m.Build(t)
 }

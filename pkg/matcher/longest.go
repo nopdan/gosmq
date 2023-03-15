@@ -1,6 +1,10 @@
 package matcher
 
-import "github.com/imetool/dtool/pkg/table"
+import (
+	"fmt"
+
+	"github.com/imetool/dtool/pkg/table"
+)
 
 type codePos struct {
 	code string
@@ -26,7 +30,8 @@ func (l *longest) Insert(e table.Entry) {
 	}
 }
 
-func (l *longest) InsertAll(t table.Table) {
+func (l *longest) Build(t table.Table) {
+	fmt.Println("匹配算法：最长匹配")
 	for i := range t {
 		l.Insert(t[i])
 	}

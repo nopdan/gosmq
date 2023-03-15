@@ -1,12 +1,16 @@
 package matcher
 
-import "github.com/imetool/dtool/pkg/table"
+import (
+	"fmt"
+
+	"github.com/imetool/dtool/pkg/table"
+)
 
 // trie 树
 type trie struct {
-	children map[rune]*trie
-	code     string
-	pos      int
+	ch   map[rune]*trie
+	code string
+	pos  int
 }
 
 func NewTrie() *trie {
@@ -15,43 +19,44 @@ func NewTrie() *trie {
 
 func (t *trie) Insert(e table.Entry) {
 	for _, v := range e.Word {
-		if t.children == nil {
-			t.children = make(map[rune]*trie)
-			t.children[v] = new(trie)
-		} else if t.children[v] == nil {
-			t.children[v] = new(trie)
+		if t.ch == nil {
+			t.ch = make(map[rune]*trie)
+			t.ch[v] = new(trie)
+		} else if t.ch[v] == nil {
+			t.ch[v] = new(trie)
 		}
-		t = t.children[v]
+		t = t.ch[v]
 	}
-	if t.code == "" || len(e.Code) < len(t.code) {
+	// 若已存在，保留原来的
+	if t.code == "" {
 		t.code = e.Code
 		t.pos = e.Pos
 	}
 }
 
-func (st *trie) InsertAll(t table.Table) {
-	for i := range t {
-		st.Insert(t[i])
+func (t *trie) Build(tb table.Table) {
+	fmt.Println("匹配算法：trie(hashMap impl)")
+	for i := range tb {
+		t.Insert(tb[i])
 	}
 }
 
 // 前缀树最长匹配
 func (t *trie) Match(text []rune, p int) (int, string, int) {
-	j := 0 // 已匹配的字数
-	i := 0 // 有编码的匹配
-	dict := t
+	j := 0     // 已匹配的字数
+	i := 0     // 有编码的匹配
 	code := "" // 编码
 	pos := 0
 	for p+j < len(text) {
-		dict = dict.children[text[p+j]]
+		t = t.ch[text[p+j]]
 		j++
-		if dict == nil {
+		if t == nil {
 			break
 		}
-		if dict.code != "" {
+		if t.code != "" {
 			i = j
-			code = dict.code
-			pos = dict.pos
+			code = t.code
+			pos = t.pos
 		}
 	}
 	return i, code, pos

@@ -1,6 +1,7 @@
 package matcher
 
 import (
+	"fmt"
 	"sort"
 
 	"github.com/imetool/dtool/pkg/table"
@@ -8,10 +9,10 @@ import (
 
 // 稳定 trie 树
 type sTrie struct {
-	children map[rune]*sTrie
-	code     string
-	pos      int
-	line     uint32
+	ch   map[rune]*sTrie
+	code string
+	pos  int
+	line uint32
 }
 
 func NewSTrie() *sTrie {
@@ -22,13 +23,13 @@ var orderLine uint32 = 0
 
 func (t *sTrie) Insert(e table.Entry) {
 	for _, v := range e.Word {
-		if t.children == nil {
-			t.children = make(map[rune]*sTrie)
-			t.children[v] = new(sTrie)
-		} else if t.children[v] == nil {
-			t.children[v] = new(sTrie)
+		if t.ch == nil {
+			t.ch = make(map[rune]*sTrie)
+			t.ch[v] = new(sTrie)
+		} else if t.ch[v] == nil {
+			t.ch[v] = new(sTrie)
 		}
-		t = t.children[v]
+		t = t.ch[v]
 	}
 	if t.code == "" {
 		t.code = e.Code
@@ -38,9 +39,10 @@ func (t *sTrie) Insert(e table.Entry) {
 	}
 }
 
-func (st *sTrie) InsertAll(t table.Table) {
-	for i := range t {
-		st.Insert(t[i])
+func (t *sTrie) Build(tb table.Table) {
+	fmt.Println("匹配算法：稳定的 trie(hashMap impl)")
+	for i := range tb {
+		t.Insert(tb[i])
 	}
 }
 
@@ -48,7 +50,6 @@ func (st *sTrie) InsertAll(t table.Table) {
 func (t *sTrie) Match(text []rune, p int) (int, string, int) {
 	j := 0 // 已匹配的字数
 	i := 0 // 有编码的匹配
-	dict := t
 	type res_tmp struct {
 		i    int
 		code string
@@ -57,14 +58,14 @@ func (t *sTrie) Match(text []rune, p int) (int, string, int) {
 	}
 	res := make([]res_tmp, 0, 10)
 	for p+j < len(text) {
-		dict = dict.children[text[p+j]]
+		t = t.ch[text[p+j]]
 		j++
-		if dict == nil {
+		if t == nil {
 			break
 		}
-		if dict.code != "" {
+		if t.code != "" {
 			i = j
-			res = append(res, res_tmp{i, dict.code, dict.pos, dict.line})
+			res = append(res, res_tmp{i, t.code, t.pos, t.line})
 		}
 	}
 	if len(res) == 0 {

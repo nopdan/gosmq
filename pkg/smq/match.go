@@ -101,13 +101,15 @@ func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Res
 			p += 2
 		}
 		// 单独处理这两个符号
-		switch string(text[p : p+2]) {
-		case "——":
-			fh("——", "=-")
-			continue
-		case "……":
-			fh("……", "=6")
-			continue
+		if p+2 < len(text) {
+			switch string(text[p : p+2]) {
+			case "——":
+				fh("——", "=-")
+				continue
+			case "……":
+				fh("……", "=6")
+				continue
+			}
 		}
 
 		// 缺汉字

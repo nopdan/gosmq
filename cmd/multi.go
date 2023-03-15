@@ -79,7 +79,11 @@ func multiCli() {
 	for _, text := range multi.Texts {
 		// 初始化赛码器
 		s := &smq.Smq{}
-		s.Load(text)
+		err := s.Load(text)
+		if err != nil {
+			fmt.Println("Error! 读取文件失败：", err)
+			continue
+		}
 		res := s.Eval(dict)
 		Output([]*smq.Result{res}, s.Name)
 	}

@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"log"
 	"sync"
 
 	"github.com/imetool/gosmq/internal/dict"
@@ -19,14 +18,15 @@ type Smq struct {
 }
 
 // 从文件添加文本
-func (s *Smq) Load(path string) {
+func (s *Smq) Load(path string) error {
 	rd, err := util.Read(path)
 	if err != nil {
-		log.Panic("Error! 读取文件失败：", path)
+		return err
 	}
 	s.Name = util.GetFileName(path)
 	s.Text, _ = io.ReadAll(rd)
 	fmt.Println("从文件初始化赛码器...", path)
+	return nil
 }
 
 func (s *Smq) LoadString(name, text string) {

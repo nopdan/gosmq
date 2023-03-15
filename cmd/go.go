@@ -146,7 +146,10 @@ func goWithSurvey() {
 		fmt.Println("没有输入文本")
 		return
 	} else {
-		s.Load(conf.Text)
+		err := s.Load(conf.Text)
+		if err != nil {
+			log.Panic("Error! 读取文件失败：", err)
+		}
 	}
 	if greedy {
 		conf.Algo = "trie"

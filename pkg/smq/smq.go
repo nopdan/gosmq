@@ -14,7 +14,6 @@ import (
 type Smq struct {
 	Name string // 文本名
 	Text []byte // 文本
-	// Inputs []*dict.Dict // 码表选项
 }
 
 // 从文件添加文本
@@ -37,12 +36,7 @@ func (s *Smq) LoadString(name, text string) {
 	s.Text = []byte(text)
 }
 
-// 添加一个码表
-// func (smq *Smq) Add(dict *dict.Dict) {
-// 	smq.Inputs = append(smq.Inputs, dict)
-// 	fmt.Println("添加了一个码表：", dict.Name)
-// }
-
+// 计算一个码表
 func (smq *Smq) Eval(dict *dict.Dict) *Result {
 	res := newResult()
 	mRes := newMatchRes(10)
@@ -67,7 +61,7 @@ func (smq *Smq) Eval(dict *dict.Dict) *Result {
 	return res
 }
 
-// 开始计算
+// 计算多个码表
 func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 	ret := make([]*Result, len(dicts))
 

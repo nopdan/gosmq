@@ -216,7 +216,6 @@ func Output(data []*smq.Result, textName string) {
 		t6_4.SetStyle(table.StyleColoredBright)
 		out += fmt.Sprintln(t6_4.Render())
 	}
-
-	out += "----------------------\n"
 	fmt.Print(out)
+	printSep()
 }

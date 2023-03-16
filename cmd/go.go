@@ -65,20 +65,16 @@ func goCli() {
 		}
 		dict.Load(v)
 		dicts = append(dicts, dict)
-		// s.Add(dict)
 	}
-	fmt.Printf("构建码表耗时：%v\n", time.Since(start))
 
 	// 开始赛码
 	fmt.Printf("比赛开始，一共 %d 个码表\n", len(dicts))
-	mid := time.Now()
 	res := s.EvalDicts(dicts)
-	fmt.Printf("比赛结束，耗时：%v\n", time.Since(mid))
 	fmt.Printf("总耗时：%v\n", time.Since(start))
 	if len(res) == 0 {
 		return
 	}
-	fmt.Println("----------------------")
+	printSep()
 	Output(res, s.Name)
 }
 
@@ -100,14 +96,14 @@ func goWithSurvey() {
 	}, &conf.Text, survey.WithValidator(survey.Required))
 	handle(err)
 
-	var tmp string
+	var dictText string
 	err = survey.AskOne(&survey.Input{
 		Message: "码表:",
 		Suggest: func(toComplete string) []string {
 			files, _ := filepath.Glob(toComplete + "*")
 			return files
 		},
-	}, &tmp, survey.WithValidator(survey.Required))
+	}, &dictText, survey.WithValidator(survey.Required))
 	handle(err)
 
 	err = survey.AskOne(&survey.Select{
@@ -137,11 +133,9 @@ func goWithSurvey() {
 
 	fmt.Println("\n", conf)
 
-	conf.Dict = []string{tmp}
-
+	start := time.Now()
 	// 初始化赛码器
 	s := &smq.Smq{}
-	start := time.Now()
 	if conf.Text == "" {
 		fmt.Println("没有输入文本")
 		return
@@ -162,17 +156,10 @@ func goWithSurvey() {
 		PressSpaceBy: conf.PressSpaceBy,
 		Verbose:      conf.Verbose,
 	}
-	d.Load(conf.Dict[0])
-	// s.Add(d)
-	fmt.Printf("构建码表耗时：%v\n", time.Since(start))
+	d.Load(dictText)
 	// 开始赛码
-	mid := time.Now()
 	res := s.Eval(d)
-	fmt.Printf("比赛结束，耗时：%v\n", time.Since(mid))
 	fmt.Printf("总耗时：%v\n", time.Since(start))
-	// if len(res) == 0 {
-	// 	return
-	// }
-	fmt.Println("----------------------")
+	printSep()
 	Output([]*smq.Result{res}, s.Name)
 }

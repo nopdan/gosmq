@@ -1,8 +1,6 @@
 package matcher
 
 import (
-	"fmt"
-
 	"github.com/imetool/dtool/pkg/table"
 )
 
@@ -31,7 +29,6 @@ func (l *longest) Insert(e table.Entry) {
 }
 
 func (l *longest) Build(t table.Table) {
-	fmt.Println("匹配算法：最长匹配")
 	for i := range t {
 		l.Insert(t[i])
 	}

@@ -1,7 +1,6 @@
 package matcher
 
 import (
-	"fmt"
 	"sort"
 
 	"github.com/imetool/dtool/pkg/table"
@@ -40,7 +39,6 @@ func (t *sTrie) Insert(e table.Entry) {
 }
 
 func (t *sTrie) Build(tb table.Table) {
-	fmt.Println("匹配算法：稳定的 trie(hashMap impl)")
 	for i := range tb {
 		t.Insert(tb[i])
 	}

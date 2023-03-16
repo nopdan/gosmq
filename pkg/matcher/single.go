@@ -1,8 +1,6 @@
 package matcher
 
 import (
-	"fmt"
-
 	"github.com/imetool/dtool/pkg/table"
 )
 
@@ -22,7 +20,6 @@ func (s *single) Insert(e table.Entry) {
 }
 
 func (s *single) Build(t table.Table) {
-	fmt.Println("匹配算法：单字专用 hashMap(with rune key)")
 	for i := range t {
 		s.Insert(t[i])
 	}

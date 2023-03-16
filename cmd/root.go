@@ -41,3 +41,7 @@ func Execute() {
 		os.Exit(1)
 	}
 }
+
+func printSep() {
+	fmt.Println("----------------------")
+}

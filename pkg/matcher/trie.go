@@ -1,8 +1,6 @@
 package matcher
 
 import (
-	"fmt"
-
 	"github.com/imetool/dtool/pkg/table"
 )
 
@@ -35,7 +33,6 @@ func (t *trie) Insert(e table.Entry) {
 }
 
 func (t *trie) Build(tb table.Table) {
-	fmt.Println("匹配算法：trie(hashMap impl)")
 	for i := range tb {
 		t.Insert(tb[i])
 	}

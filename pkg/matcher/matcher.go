@@ -14,17 +14,20 @@ type Matcher interface {
 func New(alg string) Matcher {
 	var m Matcher
 	switch alg {
-	case "strie", "s":
-		m = NewSTrie()
-	case "longest", "l":
-		m = NewLongest()
-	case "trie", "t":
-		m = NewTrie()
 	case "single":
+		// fmt.Println("匹配算法：单字专用 hashMap(with rune key)")
 		m = NewSingle()
-	// case "mytrie":
-	// 	m = NewMyTrie()
+	case "trie", "t":
+		// fmt.Println("匹配算法：trie(hashMap impl)")
+		m = NewTrie()
+	case "longest", "l":
+		// fmt.Println("匹配算法：最长匹配")
+		m = NewLongest()
+	case "strie", "s":
+		// fmt.Println("匹配算法：稳定的 trie(hashMap impl)")
+		m = NewSTrie()
 	default: // 默认稳定的 trie 算法
+		// fmt.Println("匹配算法：稳定的 trie(hashMap impl)")
 		m = NewSTrie()
 	}
 	return m

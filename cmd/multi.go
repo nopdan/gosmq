@@ -85,6 +85,7 @@ func multiCli() {
 			continue
 		}
 		res := s.Eval(dict)
+		fmt.Println("----------------------")
 		Output([]*smq.Result{res}, s.Name)
 	}
 }

@@ -6,12 +6,6 @@ type CountRate struct {
 	Rate  float64
 }
 
-type CodePosCount struct {
-	Code  string
-	Pos   int
-	Count int
-}
-
 type Result struct {
 	Name      string
 	Basic     basic

@@ -49,7 +49,7 @@ func (res *Result) stat(mr *matchRes, dict *dict.Dict) {
 func (res *Result) statFeel(dict *dict.Dict) {
 	// keys
 	for k, v := range res.mapKeys {
-		if res.Keys[string(k)] == nil {
+		if _, ok := res.Keys[string(k)]; !ok {
 			res.Keys[string(k)] = new(CountRate)
 		}
 		res.Keys[string(k)].Count += v

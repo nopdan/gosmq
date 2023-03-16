@@ -56,7 +56,7 @@ func (dict *Dict) initialize() {
 	// 添加符号
 	PUNCTS := GetPuncts()
 	for k, v := range PUNCTS {
-		t = append(t, table.Entry{string(k), v, 1})
+		t = append(t, table.Entry{k, v, 1})
 	}
 
 	// 匹配算法

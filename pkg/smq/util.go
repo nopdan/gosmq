@@ -22,39 +22,44 @@ func AddTo(sli *[]int, pos int) {
 }
 
 func OutputDetail(textName string, res *Result, mr *matchRes) {
-	// 创建文件夹
-	os.MkdirAll("result", os.ModePerm)
+
+	type CodePosCount struct {
+		Code  string
+		Pos   int
+		Count int
+	}
+	type detail struct {
+		word string
+		*CodePosCount
+	}
+	wordMap := make(map[string]*CodePosCount, len(mr.wordSlice)/5)
+
 	// 输出分词结果
 	var buf strings.Builder
+	for i, word := range mr.wordSlice {
+		buf.WriteString(fmt.Sprintf("%s\t%s\n", word, mr.codeSlice[i]))
 
-	type details struct {
-		CodePosCount
-		word string
-	}
-	tmp := make(map[string]*CodePosCount, len(mr.wordSlice)/5)
-
-	for i := range mr.wordSlice {
-		buf.WriteString(fmt.Sprintf("%s\t%s\n", mr.wordSlice[i], mr.codeSlice[i]))
-
-		if _, ok := tmp[mr.wordSlice[i]]; !ok {
-			tmp[mr.wordSlice[i]] = &CodePosCount{mr.codeSlice[i], mr.pos[i], 1}
+		if _, ok := wordMap[word]; !ok {
+			wordMap[word] = &CodePosCount{mr.codeSlice[i], mr.pos[i], 1}
 		} else {
-			tmp[mr.wordSlice[i]].Count++
+			wordMap[word].Count++
 		}
 	}
+	// 创建文件夹
+	os.MkdirAll("result", os.ModePerm)
 	os.WriteFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.Name, textName), []byte(buf.String()), 0666)
 
 	// 输出词条数据
 	buf.Reset()
 	buf.WriteString("词条\t编码\t选重\t次数\n")
-	tmp2 := make([]details, 0, len(tmp))
-	for k, v := range tmp {
-		tmp2 = append(tmp2, details{*v, k})
+	details := make([]detail, 0, len(wordMap))
+	for k, v := range wordMap {
+		details = append(details, detail{k, v})
 	}
-	sort.Slice(tmp2, func(i, j int) bool {
-		return tmp2[i].Count > tmp2[j].Count
+	sort.Slice(details, func(i, j int) bool {
+		return details[i].Count > details[j].Count
 	})
-	for _, v := range tmp2 {
+	for _, v := range details {
 		buf.WriteString(v.word)
 		buf.WriteByte('\t')
 		buf.WriteString(v.Code)
@@ -65,6 +70,7 @@ func OutputDetail(textName string, res *Result, mr *matchRes) {
 		buf.WriteByte('\n')
 	}
 	os.WriteFile(fmt.Sprintf("result/词条数据_%s_%s.txt", res.Name, textName), []byte(buf.String()), 0666)
+
 	// 输出 json 数据
 	tmp3, _ := json.MarshalIndent(res, "", "  ")
 	os.WriteFile(fmt.Sprintf("result/data_%s_%s.json", res.Name, textName), tmp3, 0666)

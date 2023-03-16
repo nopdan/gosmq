@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"os"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"time"
 
 	"github.com/imetool/gosmq/internal/dict"
@@ -79,22 +81,29 @@ func multiCli() {
 	dict.Load(multi.Dict)
 
 	printSep()
-	textTotalLen := 0
+	textTotalLen := int64(0)
+	var wg sync.WaitGroup
 	for _, text := range multi.Texts {
-		mid := time.Now()
-		// 初始化赛码器
-		s := &smq.Smq{}
-		err := s.Load(text)
-		if err != nil {
-			fmt.Println("Error! 读取文件失败：", err)
-			continue
-		}
-		res := s.Eval(dict)
-		textTotalLen += res.Basic.TextLen
-		fmt.Printf("该文本耗时：%v\n", time.Since(mid))
-		printSep()
-		Output([]*smq.Result{res}, s.Name)
+		wg.Add(1)
+		go func(text string) {
+			mid := time.Now()
+			// 初始化赛码器
+			s := &smq.Smq{}
+			err := s.Load(text)
+			if err != nil {
+				fmt.Println("Error! 读取文件失败：", err)
+				wg.Done()
+				return
+			}
+			res := s.Eval(dict)
+			atomic.AddInt64(&textTotalLen, int64(res.Basic.TextLen))
+			fmt.Printf("该文本耗时：%v\n", time.Since(mid))
+			printSep()
+			Output([]*smq.Result{res}, s.Name)
+			wg.Done()
+		}(text)
 	}
+	wg.Wait()
 
 	fmt.Printf("共载入 %d 个文本，总字数 %d，总耗时：%v\n", len(multi.Texts), textTotalLen, time.Since(start))
 }

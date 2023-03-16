@@ -76,8 +76,10 @@ func GetResultJson(src []byte) []byte {
 			opts.Text.Name = "赛文"
 		}
 		s.LoadString(opts.Text.Name, opts.Text.Plain)
+		fmt.Println("载入文本：", opts.Text.Name)
 	} else {
 		s.Load("text/" + opts.Text.Path)
+		fmt.Println("载入文本：", s.Name)
 	}
 	textName = s.Name
 	dicts := make([]*dict.Dict, 0)

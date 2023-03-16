@@ -57,7 +57,7 @@ func multiCli() {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Printf("载入 %s 下的文件: \n", multi.Folder)
+		fmt.Printf("载入 %s 下的文本: \n", multi.Folder)
 		if !strings.HasSuffix(multi.Folder, "\\") {
 			multi.Folder += "\\"
 		}
@@ -79,6 +79,7 @@ func multiCli() {
 		Split:        multi.Split,
 	}
 	dict.Load(multi.Dict)
+	fmt.Println("载入码表：", dict.Name)
 
 	printSep()
 	textTotalLen := int64(0)
@@ -100,7 +101,10 @@ func multiCli() {
 			}
 			res := s.Eval(dict)
 			atomic.AddInt64(&textTotalLen, int64(res.Basic.TextLen))
-			fmt.Printf("该文本耗时：%v\n", time.Since(mid))
+			if multi.Folder == "" {
+				fmt.Println("载入文本：", s.Name)
+			}
+			fmt.Printf("此文本耗时：%v\n", time.Since(mid))
 			printSep()
 			Output([]*smq.Result{res}, s.Name)
 			<-ch

@@ -58,6 +58,7 @@ func goCli() {
 		return
 	} else {
 		s.Load(conf.Text)
+		fmt.Println("载入文本：", s.Name)
 	}
 
 	dicts := make([]*dict.Dict, 0)
@@ -72,6 +73,7 @@ func goCli() {
 			Split:        conf.Split,
 		}
 		dict.Load(v)
+		fmt.Println("载入码表：", dict.Name)
 		dicts = append(dicts, dict)
 	}
 

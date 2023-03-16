@@ -2,7 +2,6 @@ package smq
 
 import (
 	"bufio"
-	"fmt"
 	"io"
 	"os"
 	"strings"
@@ -35,14 +34,10 @@ func (s *Smq) Load(path string) error {
 	}
 	// fmt.Println("buffer size", s.bufLen)
 	s.reader = util.NewReader(f)
-	fmt.Println("从文件初始化赛码器...", path)
 	return nil
 }
 
 func (s *Smq) LoadString(name, text string) {
-	if text != "" {
-		fmt.Println("从字符串初始化赛码器...", name)
-	}
 	s.Name = name
 	s.reader = strings.NewReader(text)
 	// s.Text = []byte(text)

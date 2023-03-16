@@ -2,9 +2,9 @@ package smq
 
 import (
 	"bufio"
-	"bytes"
 	"fmt"
 	"io"
+	"strings"
 	"sync"
 
 	"github.com/imetool/gosmq/internal/dict"
@@ -12,18 +12,20 @@ import (
 )
 
 type Smq struct {
-	Name string // 文本名
-	Text []byte // 文本
+	Name   string    // 文本名
+	Reader io.Reader // 文本
 }
 
 // 从文件添加文本
 func (s *Smq) Load(path string) error {
-	rd, err := util.Read(path)
+	s.Name = util.GetFileName(path)
+	var err error
+	s.Reader, err = util.Read(path)
 	if err != nil {
 		return err
 	}
-	s.Name = util.GetFileName(path)
-	s.Text, _ = io.ReadAll(rd)
+	// s.Text, _ = io.ReadAll(rd)
+
 	fmt.Println("从文件初始化赛码器...", path)
 	return nil
 }
@@ -33,14 +35,15 @@ func (s *Smq) LoadString(name, text string) {
 		fmt.Println("从字符串初始化赛码器...", name)
 	}
 	s.Name = name
-	s.Text = []byte(text)
+	s.Reader = strings.NewReader(text)
+	// s.Text = []byte(text)
 }
 
 // 计算一个码表
 func (smq *Smq) Eval(dict *dict.Dict) *Result {
 	res := newResult()
 	mRes := newMatchRes(10)
-	brd := bufio.NewReader(bytes.NewReader(smq.Text))
+	brd := bufio.NewReader(smq.Reader)
 	for {
 		line, err := brd.ReadString('\n')
 		text := []rune(line)
@@ -54,9 +57,8 @@ func (smq *Smq) Eval(dict *dict.Dict) *Result {
 	}
 	res.stat(mRes, dict)
 	res.statFeel(dict)
-	if dict.Verbose {
-		OutputDetail(smq.Name, res, mRes)
-	}
+
+	OutputDetail(dict, smq.Name, res, mRes)
 	return res
 }
 

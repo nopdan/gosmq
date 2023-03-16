@@ -105,16 +105,22 @@ func PostHandler(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// 读取目录中的所有文件
-func getFiles(path string) []string {
-	ret := make([]string, 0, 1)
-	files, err := os.ReadDir(path)
+// 递归遍历文件夹
+func getFiles(dirname string, pre string) []string {
+	ret := make([]string, 0)
+
+	fileInfos, err := os.ReadDir(dirname)
 	if err != nil {
-		fmt.Println("找不到：", path, err)
-		return ret
+		panic(err)
 	}
-	for _, file := range files {
-		ret = append(ret, file.Name())
+	for _, fi := range fileInfos {
+		if fi.IsDir() {
+			//继续遍历fi这个目录
+			tmp := getFiles(dirname+"/"+fi.Name(), fi.Name()+"/")
+			ret = append(ret, tmp...)
+		} else {
+			ret = append(ret, pre+fi.Name())
+		}
 	}
 	return ret
 }
@@ -131,12 +137,12 @@ func Serve(port string, silent bool) {
 	http.HandleFunc("/api", PostHandler)
 	http.HandleFunc("/texts", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
-		b, _ := json.Marshal(getFiles(`text/`))
+		b, _ := json.Marshal(getFiles(`text/`, ""))
 		w.Write(b)
 	})
 	http.HandleFunc("/dicts", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
-		b, _ := json.Marshal(getFiles(`dict/`))
+		b, _ := json.Marshal(getFiles(`dict/`, ""))
 		w.Write(b)
 	})
 

@@ -45,8 +45,7 @@ func (smq *Smq) Eval(dict *dict.Dict) *Result {
 		line, err := brd.ReadString('\n')
 		text := []rune(line)
 		mr := newMatchRes(len(text) / 3)
-		mr.match(text, dict.Matcher, dict.Verbose, res)
-		res.feel(mr.codes, dict)
+		mr.match(text, dict, res)
 
 		mRes.append(mr)
 		if err != nil {

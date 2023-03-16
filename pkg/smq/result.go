@@ -22,7 +22,6 @@ type Result struct {
 	mapKeys   map[byte]int
 	notHanMap map[rune]struct{}
 	lackMap   map[rune]struct{}
-	// codes     string
 }
 
 // 基础

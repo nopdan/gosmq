@@ -19,7 +19,7 @@ func TestComb(t *testing.T) {
 }
 
 func TestKeyPos(t *testing.T) {
-	fmt.Println(KeyPosMap['g'])
-	fmt.Println(KeyPosMap['m'])
-	fmt.Println(KeyPosMap['#'])
+	fmt.Println(KeyPosArr['g'])
+	fmt.Println(KeyPosArr['m'])
+	fmt.Println(KeyPosArr['#'])
 }

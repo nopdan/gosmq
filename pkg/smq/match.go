@@ -1,17 +1,12 @@
 package smq
 
 import (
-	"strings"
 	"unicode"
 
-	"github.com/imetool/gosmq/pkg/matcher"
+	"github.com/imetool/gosmq/internal/dict"
 )
 
-// var PUNCTS = dict.GetPuncts()
-
 type matchRes struct {
-	codes string
-
 	wordSlice []string
 	codeSlice []string
 	pos       []int // 选重
@@ -32,23 +27,33 @@ func (mr *matchRes) append(res *matchRes) {
 	mr.codeSlice = append(mr.codeSlice, res.codeSlice...)
 }
 
-func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Result) {
+func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 
-	var sb strings.Builder
-	sb.Grow(len(text))
 	res.Basic.TextLen += len(text)
+	// 前面的键
+	var last2Key, lastKey byte
+	var last KeyPos
+	codeHandler := func(code string) {
+		for i := 0; i < len(code); i++ {
+			tmpKey, tmp := res.newFeel(last2Key, lastKey, code[i], last, dict)
+			last2Key = lastKey
+			lastKey, last = tmpKey, tmp
+		}
+		AddTo(&res.CodeLen.Dist, len(code))
+	}
+
 	for p := 0; p < len(text); {
-		// 删掉空白字符
+		// 跳过空白字符
 		switch text[p] {
 		case 65533, '\n', '\r', '\t', ' ', '　':
 			res.Basic.TextLen--
+			// codeHandler(" ")
 			p++
 			continue
 		}
 		res.Basic.Commits++
 
-		i, code, pos := m.Match(text, p)
-
+		i, code, pos := dict.Matcher.Match(text, p)
 		// 匹配到了
 		if i != 0 {
 			// 对每个字都进行判断
@@ -75,11 +80,10 @@ func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Res
 				res.Collision.Chars.Count += i
 			}
 			AddTo(&res.Words.Dist, i)
-			AddTo(&res.CodeLen.Dist, len(code))
 			AddTo(&res.Collision.Dist, pos)
+			codeHandler(code)
 
-			sb.WriteString(code)
-			if verbose {
+			if dict.Verbose {
 				word := string(text[p : p+i])
 				mr.wordSlice = append(mr.wordSlice, word)
 				mr.codeSlice = append(mr.codeSlice, code)
@@ -99,10 +103,10 @@ func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Res
 
 		fh := func(w, c string) {
 			AddTo(&res.Words.Dist, 1) // 符号不作为打词
-			AddTo(&res.CodeLen.Dist, 2)
 			AddTo(&res.Collision.Dist, 1)
-			sb.WriteString(c)
-			if verbose {
+			codeHandler(c)
+
+			if dict.Verbose {
 				mr.wordSlice = append(mr.wordSlice, w)
 				mr.codeSlice = append(mr.codeSlice, c)
 				mr.pos = append(mr.pos, 1)
@@ -128,18 +132,17 @@ func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Res
 		}
 		// 找不到的符号，设为 "####"
 		AddTo(&res.Words.Dist, 1)
-		AddTo(&res.CodeLen.Dist, 4)
 		AddTo(&res.Collision.Dist, 1)
 
-		sb.WriteString("####")
-		if verbose {
+		code = "####"
+		codeHandler(code)
+
+		if dict.Verbose {
 			mr.wordSlice = append(mr.wordSlice, string(text[p]))
-			mr.codeSlice = append(mr.codeSlice, "####")
+			mr.codeSlice = append(mr.codeSlice, code)
 			mr.pos = append(mr.pos, 1)
 		}
 		p++
 		continue
 	}
-
-	mr.codes = sb.String()
 }

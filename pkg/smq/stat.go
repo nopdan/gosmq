@@ -52,7 +52,7 @@ func (res *Result) statFeel(dict *dict.Dict) {
 		if _, ok := res.Keys[string(k)]; !ok {
 			res.Keys[string(k)] = new(CountRate)
 		}
-		res.Keys[string(k)].Count += v
+		res.Keys[string(k)].Count = v
 	}
 	for _, v := range res.Keys {
 		v.Rate = div(v.Count, res.CodeLen.Total)
@@ -76,8 +76,10 @@ func (res *Result) statFeel(dict *dict.Dict) {
 	res.Hands.Diff.Rate = div(res.Hands.Diff.Count, res.Combs.Count)
 	// fingers
 	for k, v := range res.mapKeys {
-		if keyPos, ok := KeyPosMap[k]; !ok {
+		if keyPos := KeyPosArr[k]; keyPos.Fin == 0 {
 			res.Fingers.Dist[10].Count += v
+		} else if keyPos.Fin == 10 {
+			res.Fingers.Dist[0].Count += v
 		} else {
 			res.Fingers.Dist[keyPos.Fin].Count += v
 		}

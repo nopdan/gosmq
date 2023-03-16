@@ -11,6 +11,6 @@ var versionCmd = &cobra.Command{
 	Use:   "version",
 	Short: "输出版本信息",
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Printf("gosmq v1.2 %s/%s\n", runtime.GOOS, runtime.GOARCH)
+		fmt.Printf("gosmq v1.3 %s/%s\n", runtime.GOOS, runtime.GOARCH)
 	},
 }

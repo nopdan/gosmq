@@ -13,9 +13,9 @@ var KeyPosArr = feeling.KeyPosArr
 func (res *Result) newFeel(last2Key, lastKey, currKey byte, last KeyPos, dict *dict.Dict) (byte, KeyPos) {
 
 	// for key
-	// 转小写
+	// 利用或操作 | 和空格将英文字符转换为小写
 	if 'A' <= currKey && currKey <= 'Z' {
-		currKey += 22
+		currKey |= ' '
 	}
 	// 处理空格
 	// if currKey == ' ' {
@@ -45,15 +45,14 @@ func (res *Result) newFeel(last2Key, lastKey, currKey byte, last KeyPos, dict *d
 	}
 
 	// for comb
-	cb := []byte{lastKey, origin}
-	comb, ok := feeling.Comb[string(cb)]
+	comb := feeling.Comb[lastKey][origin]
 	// 当量表里找不到
-	if !ok {
+	if comb == 0 {
 		res.toTalEq10 += 15
 		res.Combs.Count++
 		return origin, curr
 	}
-	res.toTalEq10 += comb.DL10
+	res.toTalEq10 += int(comb >> 8)
 	res.Combs.Count++
 
 	// for finger
@@ -83,19 +82,19 @@ func (res *Result) newFeel(last2Key, lastKey, currKey byte, last KeyPos, dict *d
 		}
 	}
 	// 小跨排
-	if comb.IsXKP {
+	if comb&feeling.IsXKP != 0 {
 		res.Combs.SingleSpan.Count++
 	}
 	// 大跨排
-	if comb.IsDKP {
+	if comb&feeling.IsDKP != 0 {
 		res.Combs.MultiSpan.Count++
 	}
 	// 错手
-	if comb.IsCS {
+	if comb&feeling.IsCS != 0 {
 		res.Combs.LongFingersDisturb.Count++
 	}
 	// 小拇指干扰
-	if comb.IsXZGR {
+	if comb&feeling.IsXZGR != 0 {
 		res.Combs.LittleFingersDisturb.Count++
 	}
 

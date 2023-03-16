@@ -14,23 +14,20 @@ var equivalent string
 //go:embed assets/fingering.txt
 var fingering string
 
-type combData struct {
-	DL10   int
-	DL     float64
-	IsXKP  bool
-	IsDKP  bool
-	IsCS   bool
-	IsXZGR bool
-}
+const (
+	IsXKP = uint16(1) << iota
+	IsDKP
+	IsCS
+	IsXZGR
+)
 
-var Comb map[string]*combData
+// DL10<<8 + IsXKP|IsDKP|IsCS|IsXZGR
+var Comb [256][256]uint16
 
 func init() {
 
 	// equivalent = strings.ReplaceAll(equivalent, "\r\n", "\n")
 	// fingering = strings.ReplaceAll(fingering, "\r\n", "\n")
-
-	Comb = make(map[string]*combData)
 
 	// 当量
 	for _, v := range strings.Split(equivalent, "\n") {
@@ -38,10 +35,9 @@ func init() {
 		if len(tmp) != 2 {
 			continue
 		}
-		c := new(combData)
-		c.DL10, _ = strconv.Atoi(tmp[1])
-		c.DL = float64(c.DL10) / 10
-		Comb[tmp[0]] = c
+		DL10, _ := strconv.Atoi(tmp[1])
+		// 10 <=DL10 < 32 = 2^5
+		Comb[tmp[0][0]][tmp[0][1]] = uint16(DL10) << 8
 	}
 
 	// 指法
@@ -49,22 +45,22 @@ func init() {
 	// 小跨排
 	xkp := strings.Split(fg[0], " ")
 	for _, v := range xkp {
-		Comb[v].IsXKP = true
+		Comb[v[0]][v[1]] |= IsXKP
 	}
 	// 大跨排
 	dkp := strings.Split(fg[1], " ")
 	for _, v := range dkp {
-		Comb[v].IsDKP = true
+		Comb[v[0]][v[1]] |= IsDKP
 	}
 	// 错手
 	cs := strings.Split(fg[2], " ")
 	for _, v := range cs {
-		Comb[v].IsCS = true
+		Comb[v[0]][v[1]] |= IsCS
 	}
 	// 小指干扰
 	xzgr := strings.Split(fg[3], " ")
 	for _, v := range xzgr {
-		Comb[v].IsXZGR = true
+		Comb[v[0]][v[1]] |= IsXZGR
 	}
 }
 

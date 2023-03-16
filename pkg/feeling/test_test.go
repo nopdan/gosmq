@@ -6,16 +6,18 @@ import (
 )
 
 func TestComb(t *testing.T) {
-	a := Comb["cf"]
-	fmt.Println(a.DL)
-	a = Comb["fr"]
-	fmt.Println(a.IsXKP)
-	a = Comb["bt"]
-	fmt.Println(a.IsDKP)
-	a = Comb["xe"]
-	fmt.Println(a.IsCS)
-	a = Comb["aw"]
-	fmt.Println(a.IsXZGR)
+	a := Comb['c']['f']
+	fmt.Println(a & IsDKP)
+	a = Comb['f']['r']
+	fmt.Println(a & IsXKP)
+	a = Comb['b']['t']
+	fmt.Println(a & IsDKP)
+	a = Comb['x']['e']
+	fmt.Println(a & IsCS)
+	a = Comb['a']['w']
+	fmt.Println(a & IsXZGR)
+	a = Comb['c']['c']
+	fmt.Println(a & IsCS)
 }
 
 func TestKeyPos(t *testing.T) {

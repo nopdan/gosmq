@@ -126,15 +126,15 @@ func (mr *matchRes) match(text []rune, m matcher.Matcher, verbose bool, res *Res
 			res.lackMap[text[p]] = struct{}{}
 			res.Basic.LackCount++
 		}
-		// 找不到的符号
+		// 找不到的符号，设为 "####"
 		AddTo(&res.Words.Dist, 1)
-		AddTo(&res.CodeLen.Dist, 2)
+		AddTo(&res.CodeLen.Dist, 4)
 		AddTo(&res.Collision.Dist, 1)
 
-		sb.WriteString("##")
+		sb.WriteString("####")
 		if verbose {
 			mr.wordSlice = append(mr.wordSlice, string(text[p]))
-			mr.codeSlice = append(mr.codeSlice, "##")
+			mr.codeSlice = append(mr.codeSlice, "####")
 			mr.pos = append(mr.pos, 1)
 		}
 		p++

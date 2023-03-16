@@ -3,6 +3,8 @@ package cmd
 import (
 	"fmt"
 	"os"
+	"strings"
+	"time"
 
 	"github.com/imetool/gosmq/internal/dict"
 	"github.com/imetool/gosmq/pkg/smq"
@@ -38,6 +40,7 @@ func init() {
 
 func multiCli() {
 
+	start := time.Now()
 	if multi.Dict == "" {
 		fmt.Println("没有输入码表")
 		return
@@ -55,9 +58,13 @@ func multiCli() {
 			panic(err)
 		}
 		fmt.Printf("载入 %s 下的文件: \n", multi.Folder)
+		if !strings.HasSuffix(multi.Folder, "\\") {
+			multi.Folder += "\\"
+		}
+
 		for _, file := range files {
 			if !file.IsDir() {
-				multi.Texts = append(multi.Texts, file.Name())
+				multi.Texts = append(multi.Texts, multi.Folder+file.Name())
 				fmt.Printf("-> %s\n", file.Name())
 			}
 		}
@@ -71,7 +78,10 @@ func multiCli() {
 	}
 	dict.Load(multi.Dict)
 
+	printSep()
+	textTotalLen := 0
 	for _, text := range multi.Texts {
+		mid := time.Now()
 		// 初始化赛码器
 		s := &smq.Smq{}
 		err := s.Load(text)
@@ -80,7 +90,11 @@ func multiCli() {
 			continue
 		}
 		res := s.Eval(dict)
-		fmt.Println("----------------------")
+		textTotalLen += res.Basic.TextLen
+		fmt.Printf("该文本耗时：%v\n", time.Since(mid))
+		printSep()
 		Output([]*smq.Result{res}, s.Name)
 	}
+
+	fmt.Printf("共载入 %d 个文本，总字数 %d，总耗时：%v\n", len(multi.Texts), textTotalLen, time.Since(start))
 }

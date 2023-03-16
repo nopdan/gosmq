@@ -51,54 +51,7 @@ func (smq *Smq) Eval(dict *dict.Dict) *Result {
 
 	// for count := 0; ; count++ {
 	for {
-		var text []rune
-
-		buffer := make([]byte, smq.bufLen)
-		n, err := io.ReadFull(brd, buffer)
-		buffer = buffer[:n]
-
-		// 分割文本
-		for {
-			b, err := brd.ReadByte()
-			// 控制字符 直接切分
-			if b < 33 {
-				text = []rune(string(buffer))
-				break
-			}
-			// utf-8 前缀
-			if b >= 0b11000000 {
-				brd.UnreadByte()
-			} else {
-				buffer = append(buffer, b)
-			}
-			// EOF
-			if err != nil {
-				text = []rune(string(buffer))
-				break
-			}
-			// 读到合法字符，开始读 rune
-			if b < 128 || b >= 0b11000000 {
-				text = []rune(string(buffer))
-			OUT:
-				// 超过限制读不到分割符直接 break
-				for lim := int64(0); lim < smq.bufLen; lim++ {
-					rn, _, err := brd.ReadRune()
-					if rn < 33 {
-						break
-					}
-					text = append(text, rn)
-					if err != nil {
-						break
-					}
-					switch rn {
-					case '。', '？', '！', '》':
-						break OUT
-					}
-				}
-				break
-			}
-		}
-
+		text, err := SplitStep(brd, smq.bufLen)
 		// f, _ := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
 		// fmt.Fprintf(f, "\n-------------------------------- %d --------------------------------\n", count)
 		// f.WriteString(string(text))
@@ -120,16 +73,39 @@ func (smq *Smq) Eval(dict *dict.Dict) *Result {
 
 // 计算多个码表
 func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
-	ret := make([]*Result, len(dicts))
-
-	var wg sync.WaitGroup
+	resArr := make([]*Result, len(dicts))
+	mResArr := make([]*matchRes, len(dicts))
 	for i := range dicts {
-		wg.Add(1)
-		go func(j int) {
-			ret[j] = smq.Eval(dicts[j])
-			wg.Done()
-		}(i)
+		resArr[i] = newResult()
+		mResArr[i] = newMatchRes(10)
 	}
-	wg.Wait()
-	return ret
+
+	brd := bufio.NewReader(smq.reader)
+	var wg sync.WaitGroup
+	// var lock sync.Mutex
+	for {
+		text, err := SplitStep(brd, smq.bufLen)
+		for i := range dicts {
+			wg.Add(1)
+			go func(j int) {
+				mr := newMatchRes(len(text) / 3)
+				// lock.Lock()
+				mr.match(text, dicts[j], resArr[j])
+				mResArr[j].append(mr)
+				// lock.Unlock()
+				wg.Done()
+			}(i)
+		}
+		wg.Wait()
+		if err != nil {
+			break
+		}
+	}
+	for i, dict := range dicts {
+		resArr[i].stat(mResArr[i], dict)
+		resArr[i].statFeel(dict)
+		OutputDetail(dict, smq.Name, resArr[i], mResArr[i])
+	}
+
+	return resArr
 }

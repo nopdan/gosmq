@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"os"
 	"strings"
 	"sync"
 
@@ -13,19 +14,27 @@ import (
 
 type Smq struct {
 	Name   string    // 文本名
-	Reader io.Reader // 文本
+	reader io.Reader // 文本
+	bufLen int64
 }
 
 // 从文件添加文本
 func (s *Smq) Load(path string) error {
 	s.Name = util.GetFileName(path)
-	var err error
-	s.Reader, err = util.Read(path)
+	f, err := os.Open(path)
 	if err != nil {
 		return err
 	}
-	// s.Text, _ = io.ReadAll(rd)
-
+	fi, _ := f.Stat()
+	if fi.Size() < 4<<20 {
+		// 4MB 以下 64KB
+		s.bufLen = 64 << 10
+	} else {
+		// 其他 256KB
+		s.bufLen = 256 << 10
+	}
+	// fmt.Println("buffer size", s.bufLen)
+	s.reader = util.NewReader(f)
 	fmt.Println("从文件初始化赛码器...", path)
 	return nil
 }
@@ -35,7 +44,7 @@ func (s *Smq) LoadString(name, text string) {
 		fmt.Println("从字符串初始化赛码器...", name)
 	}
 	s.Name = name
-	s.Reader = strings.NewReader(text)
+	s.reader = strings.NewReader(text)
 	// s.Text = []byte(text)
 }
 
@@ -43,14 +52,66 @@ func (s *Smq) LoadString(name, text string) {
 func (smq *Smq) Eval(dict *dict.Dict) *Result {
 	res := newResult()
 	mRes := newMatchRes(10)
-	brd := bufio.NewReader(smq.Reader)
+	brd := bufio.NewReader(smq.reader)
+
+	// for count := 0; ; count++ {
 	for {
-		line, err := brd.ReadString('\n')
-		text := []rune(line)
+		var text []rune
+
+		buffer := make([]byte, smq.bufLen)
+		n, err := io.ReadFull(brd, buffer)
+		buffer = buffer[:n]
+
+		// 分割文本
+		for {
+			b, err := brd.ReadByte()
+			// 控制字符 直接切分
+			if b < 33 {
+				text = []rune(string(buffer))
+				break
+			}
+			// utf-8 前缀
+			if b >= 0b11000000 {
+				brd.UnreadByte()
+			} else {
+				buffer = append(buffer, b)
+			}
+			// EOF
+			if err != nil {
+				text = []rune(string(buffer))
+				break
+			}
+			// 读到合法字符，开始读 rune
+			if b < 128 || b >= 0b11000000 {
+				text = []rune(string(buffer))
+			OUT:
+				// 超过限制读不到分割符直接 break
+				for lim := int64(0); lim < smq.bufLen; lim++ {
+					rn, _, err := brd.ReadRune()
+					if rn < 33 {
+						break
+					}
+					text = append(text, rn)
+					if err != nil {
+						break
+					}
+					switch rn {
+					case '。', '？', '！', '》':
+						break OUT
+					}
+				}
+				break
+			}
+		}
+
+		// f, _ := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
+		// fmt.Fprintf(f, "\n-------------------------------- %d --------------------------------\n", count)
+		// f.WriteString(string(text))
+
 		mr := newMatchRes(len(text) / 3)
 		mr.match(text, dict, res)
-
 		mRes.append(mr)
+
 		if err != nil {
 			break
 		}

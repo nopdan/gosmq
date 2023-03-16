@@ -59,10 +59,14 @@ func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 
 	for p := 0; p < len(text); {
 		// 跳过空白字符
-		switch text[p] {
-		case 65533, '\n', '\r', '\t', ' ', '　':
+		if text[p] < 33 {
 			res.Basic.TextLen--
-			// codeHandler(" ")
+			p++
+			continue
+		}
+		switch text[p] {
+		case 65533, '　':
+			res.Basic.TextLen--
 			p++
 			continue
 		}

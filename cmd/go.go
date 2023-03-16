@@ -13,13 +13,18 @@ import (
 	"github.com/spf13/cobra"
 )
 
+type Basic struct {
+	Single       bool   // 单字模式
+	Algo         string // 匹配算法
+	PressSpaceBy string // 空格按键方式 left|right|both
+	Verbose      bool   // 输出详细数据
+	Split        bool   // 输出分词数据
+}
+
 var conf = &struct {
-	Text         string   // 文本
-	Dict         []string // 码表
-	Single       bool     // 单字模式
-	Algo         string   // 匹配算法
-	PressSpaceBy string   // 空格按键方式 left|right|both
-	Verbose      bool     // 输出详细数据
+	Text string   // 文本
+	Dict []string // 码表
+	Basic
 }{}
 
 var goCmd = &cobra.Command{
@@ -37,6 +42,7 @@ func init() {
 	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "a", "strie", "匹配算法(strie|trie)")
 	goCmd.PersistentFlags().StringVarP(&conf.PressSpaceBy, "space", "p", "both", "空格按键方式 left|right|both")
 	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出详细数据")
+	goCmd.PersistentFlags().BoolVarP(&conf.Split, "split", "", false, "输出分词数据")
 }
 
 func goCli() {
@@ -61,7 +67,9 @@ func goCli() {
 			Single:       conf.Single,
 			Algorithm:    conf.Algo,
 			PressSpaceBy: conf.PressSpaceBy,
-			Verbose:      conf.Verbose,
+			Stat:         conf.Verbose,
+			Json:         conf.Verbose,
+			Split:        conf.Split,
 		}
 		dict.Load(v)
 		dicts = append(dicts, dict)
@@ -125,12 +133,6 @@ func goWithSurvey() {
 	}, &greedy)
 	handle(err)
 
-	err = survey.AskOne(&survey.Confirm{
-		Message: "输出详细数据:",
-		Default: false,
-	}, &conf.Verbose)
-	handle(err)
-
 	fmt.Println("\n", conf)
 
 	start := time.Now()
@@ -154,7 +156,6 @@ func goWithSurvey() {
 		Single:       conf.Single,
 		Algorithm:    conf.Algo,
 		PressSpaceBy: conf.PressSpaceBy,
-		Verbose:      conf.Verbose,
 	}
 	d.Load(dictText)
 	// 开始赛码

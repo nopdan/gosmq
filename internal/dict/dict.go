@@ -14,7 +14,9 @@ type Dict struct {
 	Single       bool   // 单字模式
 	Algorithm    string // 匹配算法 trie:前缀树 order:顺序匹配（极速跟打器） longest:最长匹配
 	PressSpaceBy string // 空格按键方式 left|right|both
-	Verbose      bool   // 输出详细数据
+	Json         bool   // 输出 json 详细数据
+	Stat         bool   // 输出词条数据
+	Split        bool   // 输出分词数据
 
 	Name   string // 码表名
 	Length int    // 词条数

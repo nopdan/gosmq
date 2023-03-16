@@ -21,13 +21,10 @@ var multiCmd = &cobra.Command{
 	},
 }
 var multi = &struct {
-	Texts        []string // 文本
-	Folder       string   // 从文件夹读取文本
-	Dict         string   // 码表
-	Single       bool     // 单字模式
-	Algo         string   // 匹配算法
-	PressSpaceBy string   // 空格按键方式 left|right|both
-	Verbose      bool     // 输出详细数据
+	Texts  []string // 文本
+	Folder string   // 从文件夹读取文本
+	Dict   string   // 码表
+	Basic
 }{}
 
 func init() {
@@ -76,14 +73,18 @@ func multiCli() {
 		Single:       multi.Single,
 		Algorithm:    multi.Algo,
 		PressSpaceBy: multi.PressSpaceBy,
-		Verbose:      multi.Verbose,
+		Stat:         multi.Verbose,
+		Json:         multi.Verbose,
+		Split:        multi.Split,
 	}
 	dict.Load(multi.Dict)
 
 	printSep()
 	textTotalLen := int64(0)
 	var wg sync.WaitGroup
+	ch := make(chan struct{}, 8)
 	for _, text := range multi.Texts {
+		ch <- struct{}{}
 		wg.Add(1)
 		go func(text string) {
 			mid := time.Now()
@@ -92,6 +93,7 @@ func multiCli() {
 			err := s.Load(text)
 			if err != nil {
 				fmt.Println("Error! 读取文件失败：", err)
+				<-ch
 				wg.Done()
 				return
 			}
@@ -100,6 +102,7 @@ func multiCli() {
 			fmt.Printf("该文本耗时：%v\n", time.Since(mid))
 			printSep()
 			Output([]*smq.Result{res}, s.Name)
+			<-ch
 			wg.Done()
 		}(text)
 	}

@@ -59,7 +59,6 @@ func toSmqDict(opt optDict) *dict.Dict {
 		Single:       opt.Single,
 		Algorithm:    algo,
 		PressSpaceBy: opt.Space,
-		Verbose:      false,
 	}
 	dict.Load("dict/" + opt.Path)
 	fmt.Println("载入码表：", dict.Name)

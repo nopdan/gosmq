@@ -6,25 +6,40 @@ import (
 	"github.com/imetool/gosmq/internal/dict"
 )
 
+type CodePosCount struct {
+	Code  string
+	Pos   int
+	Count int
+}
+
 type matchRes struct {
 	wordSlice []string
 	codeSlice []string
-	pos       []int // 选重
+	statData  map[string]*CodePosCount
+	// pos       []int // 选重
 }
 
 func newMatchRes(cap int) *matchRes {
 	res := new(matchRes)
 	res.wordSlice = make([]string, 0, cap)
 	res.codeSlice = make([]string, 0, cap)
-	res.pos = make([]int, 0, cap)
+	// res.pos = make([]int, 0, cap)
+	res.statData = make(map[string]*CodePosCount)
 	return res
 }
 
 // 只对 pos 和两个 slice
 func (mr *matchRes) append(res *matchRes) {
-	mr.pos = append(mr.pos, res.pos...)
+	// mr.pos = append(mr.pos, res.pos...)
 	mr.wordSlice = append(mr.wordSlice, res.wordSlice...)
 	mr.codeSlice = append(mr.codeSlice, res.codeSlice...)
+	for k, v := range res.statData {
+		if _, ok := mr.statData[k]; !ok {
+			mr.statData[k] = v
+		} else {
+			mr.statData[k].Count++
+		}
+	}
 }
 
 func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
@@ -83,11 +98,19 @@ func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 			AddTo(&res.Collision.Dist, pos)
 			codeHandler(code)
 
-			if dict.Verbose {
+			if dict.Split {
 				word := string(text[p : p+i])
 				mr.wordSlice = append(mr.wordSlice, word)
 				mr.codeSlice = append(mr.codeSlice, code)
-				mr.pos = append(mr.pos, pos)
+				// mr.pos = append(mr.pos, pos)
+			}
+			if dict.Stat {
+				word := string(text[p : p+i])
+				if _, ok := mr.statData[word]; !ok {
+					mr.statData[word] = &CodePosCount{code, pos, 1}
+				} else {
+					mr.statData[word].Count++
+				}
 			}
 			p += i
 			continue
@@ -106,10 +129,17 @@ func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 			AddTo(&res.Collision.Dist, 1)
 			codeHandler(c)
 
-			if dict.Verbose {
+			if dict.Split {
 				mr.wordSlice = append(mr.wordSlice, w)
 				mr.codeSlice = append(mr.codeSlice, c)
-				mr.pos = append(mr.pos, 1)
+				// mr.pos = append(mr.pos, 1)
+			}
+			if dict.Stat {
+				if _, ok := mr.statData[w]; !ok {
+					mr.statData[w] = &CodePosCount{c, 1, 1}
+				} else {
+					mr.statData[w].Count++
+				}
 			}
 			p += 2
 		}
@@ -137,10 +167,18 @@ func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 		code = "####"
 		codeHandler(code)
 
-		if dict.Verbose {
+		if dict.Split {
 			mr.wordSlice = append(mr.wordSlice, string(text[p]))
 			mr.codeSlice = append(mr.codeSlice, code)
-			mr.pos = append(mr.pos, 1)
+			// mr.pos = append(mr.pos, 1)
+		}
+		if dict.Stat {
+			word := string(text[p])
+			if _, ok := mr.statData[word]; !ok {
+				mr.statData[word] = &CodePosCount{code, 1, 1}
+			} else {
+				mr.statData[word].Count++
+			}
 		}
 		p++
 		continue

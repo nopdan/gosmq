@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"github.com/imetool/gosmq/internal/dict"
 	"github.com/imetool/gosmq/pkg/smq"
@@ -50,21 +49,17 @@ func multiCli() {
 
 	if multi.Folder != "" {
 		multi.Texts = make([]string, 0)
-		err := filepath.Walk(multi.Folder, func(path string, info os.FileInfo, err error) error {
-			multi.Texts = append(multi.Texts, path)
-			return nil
-		})
-		multi.Texts = multi.Texts[1:]
-		if len(multi.Texts) == 0 {
-			fmt.Println(multi.Folder, "目录下没有文件！")
-			return
-		}
-		fmt.Printf("载入 %s 下的文件: \n", multi.Folder)
-		for _, v := range multi.Texts {
-			fmt.Printf("-> %s\n", v)
-		}
+
+		files, err := os.ReadDir(multi.Folder)
 		if err != nil {
 			panic(err)
+		}
+		fmt.Printf("载入 %s 下的文件: \n", multi.Folder)
+		for _, file := range files {
+			if !file.IsDir() {
+				multi.Texts = append(multi.Texts, file.Name())
+				fmt.Printf("-> %s\n", file.Name())
+			}
 		}
 	}
 

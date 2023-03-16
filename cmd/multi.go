@@ -35,6 +35,7 @@ func init() {
 	multiCmd.PersistentFlags().StringVarP(&multi.Algo, "algo", "a", "strie", "匹配算法(strie|trie)")
 	multiCmd.PersistentFlags().StringVarP(&multi.PressSpaceBy, "space", "p", "both", "空格按键方式 left|right|both")
 	multiCmd.PersistentFlags().BoolVarP(&multi.Verbose, "verbose", "v", false, "输出详细数据")
+	multiCmd.PersistentFlags().BoolVarP(&multi.Split, "split", "", false, "输出分词数据")
 }
 
 func multiCli() {

@@ -78,9 +78,9 @@ type combs struct {
 }
 
 type fingers struct {
-	Dist [11]*CountRate // 手指分布，按键盘上的列，第11个是41键以外的
-	Same CountRate      // 同指
-	Diff CountRate      // 异指（同手）
+	Dist [11]CountRate // 手指分布，按键盘上的列，第11个是41键以外的
+	Same CountRate     // 同指
+	Diff CountRate     // 异指（同手）
 }
 
 type hands struct {
@@ -108,9 +108,6 @@ func newResult() *Result {
 	for i := 0; i < len(ALL_KEYS); i++ {
 		res.Keys[string(ALL_KEYS[i])] = new(CountRate)
 		res.mapKeys[ALL_KEYS[i]] = 0
-	}
-	for i := 0; i < 11; i++ {
-		res.Fingers.Dist[i] = new(CountRate)
 	}
 	return res
 }

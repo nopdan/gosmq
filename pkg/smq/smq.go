@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"io"
 	"os"
+	"sort"
 	"strings"
 	"sync"
 
@@ -44,68 +45,136 @@ func (s *Smq) LoadString(name, text string) {
 }
 
 // 计算一个码表
-func (smq *Smq) Eval(dict *dict.Dict) *Result {
-	res := newResult()
-	mRes := newMatchRes(10)
-	brd := bufio.NewReader(smq.reader)
-
-	// for count := 0; ; count++ {
-	for {
-		text, err := SplitStep(brd, smq.bufLen)
-		// f, _ := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR|os.O_APPEND, 0666)
-		// fmt.Fprintf(f, "\n-------------------------------- %d --------------------------------\n", count)
-		// f.WriteString(string(text))
-
-		mr := newMatchRes(len(text) / 3)
-		mr.match(text, dict, res)
-		mRes.append(mr)
-
-		if err != nil {
-			break
-		}
-	}
-	res.stat(mRes, dict)
-	res.statFeel(dict)
-
-	OutputDetail(dict, smq.Name, res, mRes)
-	return res
+func (smq *Smq) Eval(di *dict.Dict) *Result {
+	resArr := smq.EvalDicts([]*dict.Dict{di})
+	return resArr[0]
 }
 
 // 计算多个码表
 func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 	resArr := make([]*Result, len(dicts))
-	mResArr := make([]*matchRes, len(dicts))
 	for i := range dicts {
 		resArr[i] = newResult()
-		mResArr[i] = newMatchRes(10)
+	}
+	brd := bufio.NewReader(smq.reader)
+
+	type sliIdx struct {
+		idx     int
+		wordSli []string
+		codeSli []string
+	}
+	wcIdxs := make([][]sliIdx, len(dicts))
+	for i := range wcIdxs {
+		wcIdxs[i] = make([]sliIdx, 0)
 	}
 
-	brd := bufio.NewReader(smq.reader)
 	var wg sync.WaitGroup
-	// var lock sync.Mutex
-	for {
+	var lock sync.Mutex
+	ch := make(chan struct{}, 16)
+	for idx := 0; ; idx++ {
 		text, err := SplitStep(brd, smq.bufLen)
 		for i := range dicts {
 			wg.Add(1)
-			go func(j int) {
-				mr := newMatchRes(len(text) / 3)
-				// lock.Lock()
-				mr.match(text, dicts[j], resArr[j])
-				mResArr[j].append(mr)
-				// lock.Unlock()
-				wg.Done()
-			}(i)
+			ch <- struct{}{}
+			go func(text []rune, i, j int) {
+				defer wg.Done()
+				mRes := match(text, dicts[i])
+				mRes.dictIdx = i
+				mRes.textIdx = j
+				// 加锁操作
+				lock.Lock()
+				if dicts[i].Split {
+					wcIdxs[i] = append(wcIdxs[i], sliIdx{mRes.textIdx, mRes.wordSlice, mRes.codeSlice})
+				}
+				resArr[i].append(mRes)
+				lock.Unlock()
+				<-ch
+			}(text, i, idx)
 		}
-		wg.Wait()
 		if err != nil {
 			break
 		}
 	}
+	wg.Wait()
+
+	for i, v := range dicts {
+		if v.Split {
+			sort.Slice(wcIdxs[i], func(j, k int) bool {
+				return wcIdxs[i][j].idx < wcIdxs[i][k].idx
+			})
+		}
+		for _, v := range wcIdxs[i] {
+			resArr[i].wordSlice = append(resArr[i].wordSlice, v.wordSli...)
+			resArr[i].codeSlice = append(resArr[i].codeSlice, v.codeSli...)
+		}
+	}
+
 	for i, dict := range dicts {
-		resArr[i].stat(mResArr[i], dict)
+		resArr[i].stat(dict)
 		resArr[i].statFeel(dict)
-		OutputDetail(dict, smq.Name, resArr[i], mResArr[i])
+		OutputDetail(dict, smq.Name, resArr[i])
 	}
 
 	return resArr
+}
+
+// 将每次匹配得到的信息追加到总结果
+func (res *Result) append(mRes *matchRes) {
+	res.wordSlice = append(res.wordSlice, mRes.wordSlice...)
+	res.codeSlice = append(res.codeSlice, mRes.codeSlice...)
+	for k, v := range res.statData {
+		if _, ok := mRes.statData[k]; !ok {
+			mRes.statData[k] = v
+		} else {
+			mRes.statData[k].Count += v.Count
+		}
+	}
+
+	res.Basic.TextLen += mRes.TextLen
+	res.Basic.Commits += mRes.Commits
+	res.Basic.NotHanCount += mRes.NotHanCount
+	res.Basic.LackCount += mRes.LackCount
+
+	res.Words.Commits.Count += mRes.WordsCommitsCount
+	res.Words.Chars.Count += mRes.WordsCharsCount
+	res.Words.FirstCount += mRes.WordsFirstCount
+	res.Collision.Commits.Count += mRes.CollisionCommitsCount
+	res.Collision.Chars.Count += mRes.CollisionCharsCount
+
+	res.toTalEq10 += mRes.toTalEq10
+	res.Combs.Count += mRes.CombsCount
+	res.Fingers.Same.Count += mRes.SameFingers
+
+	res.Hands.LL.Count += mRes.Hands.LL
+	res.Hands.LR.Count += mRes.Hands.LR
+	res.Hands.RL.Count += mRes.Hands.RL
+	res.Hands.RR.Count += mRes.Hands.RR
+
+	res.Combs.DoubleHit.Count += mRes.Combs.DoubleHit
+	res.Combs.TribleHit.Count += mRes.Combs.TribleHit
+	res.Combs.SingleSpan.Count += mRes.Combs.SingleSpan
+	res.Combs.MultiSpan.Count += mRes.Combs.MultiSpan
+	res.Combs.LongFingersDisturb.Count += mRes.Combs.LongFingersDisturb
+	res.Combs.LittleFingersDisturb.Count += mRes.Combs.LittleFingersDisturb
+
+	for k, v := range mRes.mapKeys {
+		res.mapKeys[k] += v
+	}
+	for k := range mRes.notHanMap {
+		res.notHanMap[k] = struct{}{}
+	}
+	for k := range mRes.lackMap {
+		res.lackMap[k] = struct{}{}
+	}
+
+	for i, v := range mRes.CodeLenDist {
+		AddToVal(&res.CodeLen.Dist, i, v)
+	}
+
+	for i, v := range mRes.WordsDist {
+		AddToVal(&res.Words.Dist, i, v)
+	}
+	for i, v := range mRes.CollisionDist {
+		AddToVal(&res.Collision.Dist, i, v)
+	}
 }

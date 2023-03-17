@@ -6,7 +6,7 @@ import (
 	"github.com/imetool/gosmq/internal/dict"
 )
 
-func (res *Result) stat(mr *matchRes, dict *dict.Dict) {
+func (res *Result) stat(dict *dict.Dict) {
 	res.Name = dict.Name
 	// Basic
 	res.Basic.DictLen = dict.Length

@@ -23,7 +23,14 @@ func AddTo(sli *[]int, pos int) {
 	(*sli)[pos]++
 }
 
-func OutputDetail(dict *dict.Dict, textName string, res *Result, mr *matchRes) {
+func AddToVal(sli *[]int, pos int, val int) {
+	for pos > len(*sli)-1 {
+		*sli = append(*sli, 0)
+	}
+	(*sli)[pos] += val
+}
+
+func OutputDetail(dict *dict.Dict, textName string, res *Result) {
 
 	// 创建文件夹
 	os.MkdirAll("result", os.ModePerm)
@@ -31,8 +38,8 @@ func OutputDetail(dict *dict.Dict, textName string, res *Result, mr *matchRes) {
 	// 输出分词结果
 	if dict.Split {
 		var buf strings.Builder
-		for i, word := range mr.wordSlice {
-			buf.WriteString(fmt.Sprintf("%s\t%s\n", word, mr.codeSlice[i]))
+		for i, word := range res.wordSlice {
+			buf.WriteString(fmt.Sprintf("%s\t%s\n", word, res.codeSlice[i]))
 		}
 		os.WriteFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.Name, textName), []byte(buf.String()), 0666)
 	}
@@ -45,8 +52,8 @@ func OutputDetail(dict *dict.Dict, textName string, res *Result, mr *matchRes) {
 		}
 		var buf strings.Builder
 		buf.WriteString("词条\t编码\t选重\t次数\n")
-		details := make([]detail, 0, len(mr.statData))
-		for k, v := range mr.statData {
+		details := make([]detail, 0, len(res.statData))
+		for k, v := range res.statData {
 			details = append(details, detail{k, v})
 		}
 		sort.Slice(details, func(i, j int) bool {

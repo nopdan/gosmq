@@ -12,65 +12,98 @@ type CodePosCount struct {
 	Count int
 }
 
+// 匹配一段文字得到的信息
 type matchRes struct {
+	dictIdx int // 码表索引
+	textIdx int // 文本段索引
+
 	wordSlice []string
 	codeSlice []string
 	statData  map[string]*CodePosCount
-	// pos       []int // 选重
-}
 
-func newMatchRes(cap int) *matchRes {
-	res := new(matchRes)
-	res.wordSlice = make([]string, 0, cap)
-	res.codeSlice = make([]string, 0, cap)
-	// res.pos = make([]int, 0, cap)
-	res.statData = make(map[string]*CodePosCount)
-	return res
-}
+	mapKeys   map[byte]int
+	notHanMap map[rune]struct{}
+	lackMap   map[rune]struct{}
 
-// 只对 pos 和两个 slice
-func (mr *matchRes) append(res *matchRes) {
-	// mr.pos = append(mr.pos, res.pos...)
-	mr.wordSlice = append(mr.wordSlice, res.wordSlice...)
-	mr.codeSlice = append(mr.codeSlice, res.codeSlice...)
-	for k, v := range res.statData {
-		if _, ok := mr.statData[k]; !ok {
-			mr.statData[k] = v
-		} else {
-			mr.statData[k].Count++
-		}
+	TextLen int
+	Commits int
+
+	NotHanCount int // 非汉字计数
+	LackCount   int
+
+	WordsCommitsCount int
+	WordsCharsCount   int
+	WordsFirstCount   int
+
+	CollisionCommitsCount int
+	CollisionCharsCount   int
+
+	CodeLenDist   []int
+	WordsDist     []int
+	CollisionDist []int
+
+	toTalEq10  int
+	CombsCount int
+
+	SameFingers int
+	Hands       struct {
+		LL int
+		LR int
+		RL int
+		RR int
+	}
+	Combs struct {
+		DoubleHit            int
+		TribleHit            int
+		SingleSpan           int
+		MultiSpan            int
+		LongFingersDisturb   int
+		LittleFingersDisturb int
 	}
 }
 
-func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
+func match(text []rune, dict *dict.Dict) *matchRes {
 
-	res.Basic.TextLen += len(text)
+	// 初始化
+	mRes := new(matchRes)
+	mRes.wordSlice = make([]string, 0, len(text)/3)
+	mRes.codeSlice = make([]string, 0, len(text)/3)
+	mRes.statData = make(map[string]*CodePosCount)
+
+	mRes.mapKeys = make(map[byte]int)
+	mRes.notHanMap = make(map[rune]struct{})
+	mRes.lackMap = make(map[rune]struct{})
+	mRes.CodeLenDist = make([]int, 0)
+	mRes.WordsDist = make([]int, 0)
+	mRes.CollisionDist = make([]int, 0)
+
+	mRes.TextLen = len(text)
 	// 前面的键
 	var last2Key, lastKey byte
 	var last KeyPos
 	codeHandler := func(code string) {
 		for i := 0; i < len(code); i++ {
-			tmpKey, tmp := res.newFeel(last2Key, lastKey, code[i], last, dict)
+			tmpKey, tmp := mRes.newFeel(last2Key, lastKey, code[i], last, dict)
 			last2Key = lastKey
 			lastKey, last = tmpKey, tmp
 		}
-		AddTo(&res.CodeLen.Dist, len(code))
+		AddTo(&mRes.CodeLenDist, len(code))
 	}
 
 	for p := 0; p < len(text); {
 		// 跳过空白字符
 		if text[p] < 33 {
-			res.Basic.TextLen--
+			mRes.TextLen--
 			p++
 			continue
 		}
 		switch text[p] {
 		case 65533, '　':
-			res.Basic.TextLen--
+			mRes.TextLen--
 			p++
 			continue
 		}
-		res.Basic.Commits++
+		mRes.Commits++
 
 		i, code, pos := dict.Matcher.Match(text, p)
 		// 匹配到了
@@ -80,40 +113,39 @@ func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 				// 非汉字
 				isHan := unicode.Is(unicode.Han, text[p+j])
 				if !isHan {
-					res.notHanMap[text[p+j]] = struct{}{}
-					res.Basic.NotHanCount++
+					mRes.notHanMap[text[p+j]] = struct{}{}
+					mRes.NotHanCount++
 				}
 			}
 
 			// 打词
 			if i >= 2 {
-				res.Words.Commits.Count++
-				res.Words.Chars.Count += i
+				mRes.WordsCommitsCount++
+				mRes.WordsCharsCount += i
 				if pos == 1 {
-					res.Words.FirstCount++
+					mRes.WordsFirstCount++
 				}
 			}
 			// 选重
 			if pos >= 2 {
-				res.Collision.Commits.Count++
-				res.Collision.Chars.Count += i
+				mRes.CollisionCommitsCount++
+				mRes.CollisionCharsCount += i
 			}
-			AddTo(&res.Words.Dist, i)
-			AddTo(&res.Collision.Dist, pos)
+			AddTo(&mRes.WordsDist, i)
+			AddTo(&mRes.CollisionDist, pos)
 			codeHandler(code)
 
 			if dict.Split {
 				word := string(text[p : p+i])
-				mr.wordSlice = append(mr.wordSlice, word)
-				mr.codeSlice = append(mr.codeSlice, code)
-				// mr.pos = append(mr.pos, pos)
+				mRes.wordSlice = append(mRes.wordSlice, word)
+				mRes.codeSlice = append(mRes.codeSlice, code)
 			}
 			if dict.Stat {
 				word := string(text[p : p+i])
-				if _, ok := mr.statData[word]; !ok {
-					mr.statData[word] = &CodePosCount{code, pos, 1}
+				if _, ok := mRes.statData[word]; !ok {
+					mRes.statData[word] = &CodePosCount{code, pos, 1}
 				} else {
-					mr.statData[word].Count++
+					mRes.statData[word].Count++
 				}
 			}
 			p += i
@@ -122,27 +154,26 @@ func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 
 		isHan := unicode.Is(unicode.Han, text[p])
 		if !isHan {
-			res.notHanMap[text[p]] = struct{}{}
-			res.Basic.NotHanCount++
+			mRes.notHanMap[text[p]] = struct{}{}
+			mRes.NotHanCount++
 		}
 
 		// 匹配不到
 
 		fh := func(w, c string) {
-			AddTo(&res.Words.Dist, 1) // 符号不作为打词
-			AddTo(&res.Collision.Dist, 1)
+			AddTo(&mRes.WordsDist, 1) // 符号不作为打词
+			AddTo(&mRes.CollisionDist, 1)
 			codeHandler(c)
 
 			if dict.Split {
-				mr.wordSlice = append(mr.wordSlice, w)
-				mr.codeSlice = append(mr.codeSlice, c)
-				// mr.pos = append(mr.pos, 1)
+				mRes.wordSlice = append(mRes.wordSlice, w)
+				mRes.codeSlice = append(mRes.codeSlice, c)
 			}
 			if dict.Stat {
-				if _, ok := mr.statData[w]; !ok {
-					mr.statData[w] = &CodePosCount{c, 1, 1}
+				if _, ok := mRes.statData[w]; !ok {
+					mRes.statData[w] = &CodePosCount{c, 1, 1}
 				} else {
-					mr.statData[w].Count++
+					mRes.statData[w].Count++
 				}
 			}
 			p += 2
@@ -161,30 +192,31 @@ func (mr *matchRes) match(text []rune, dict *dict.Dict, res *Result) {
 
 		// 缺汉字
 		if isHan {
-			res.lackMap[text[p]] = struct{}{}
-			res.Basic.LackCount++
+			mRes.lackMap[text[p]] = struct{}{}
+			mRes.LackCount++
 		}
 		// 找不到的符号，设为 "####"
-		AddTo(&res.Words.Dist, 1)
-		AddTo(&res.Collision.Dist, 1)
+		AddTo(&mRes.WordsDist, 1)
+		AddTo(&mRes.CollisionDist, 1)
 
 		code = "####"
 		codeHandler(code)
 
 		if dict.Split {
-			mr.wordSlice = append(mr.wordSlice, string(text[p]))
-			mr.codeSlice = append(mr.codeSlice, code)
-			// mr.pos = append(mr.pos, 1)
+			mRes.wordSlice = append(mRes.wordSlice, string(text[p]))
+			mRes.codeSlice = append(mRes.codeSlice, code)
+			// mRes.pos = append(mRes.pos, 1)
 		}
 		if dict.Stat {
 			word := string(text[p])
-			if _, ok := mr.statData[word]; !ok {
-				mr.statData[word] = &CodePosCount{code, 1, 1}
+			if _, ok := mRes.statData[word]; !ok {
+				mRes.statData[word] = &CodePosCount{code, 1, 1}
 			} else {
-				mr.statData[word].Count++
+				mRes.statData[word].Count++
 			}
 		}
 		p++
 		continue
 	}
+	return mRes
 }

@@ -10,7 +10,7 @@ type KeyPos = feeling.KeyPos
 var KeyPosArr = feeling.KeyPosArr
 
 // 上 两 键，当前键，前一键的状态 => 当前键，当前键的状态
-func (res *Result) newFeel(last2Key, lastKey, currKey byte, last KeyPos, dict *dict.Dict) (byte, KeyPos) {
+func (mRes *matchRes) newFeel(last2Key, lastKey, currKey byte, last KeyPos, dict *dict.Dict) (byte, KeyPos) {
 
 	// for key
 	// 利用或操作 | 和空格将英文字符转换为小写
@@ -33,14 +33,14 @@ func (res *Result) newFeel(last2Key, lastKey, currKey byte, last KeyPos, dict *d
 			}
 		}
 	}
-	res.mapKeys[currKey]++
+	mRes.mapKeys[currKey]++
 
 	// 如果当前键或者上一个键不合法(不在41键里)
 	// 当量增加1.5，继续下一个循环
 	curr := KeyPosArr[currKey]
 	if last.Fin == 0 || curr.Fin == 0 {
-		res.toTalEq10 += 15
-		res.Combs.Count++
+		mRes.toTalEq10 += 15
+		mRes.CombsCount++
 		return origin, curr
 	}
 
@@ -48,54 +48,54 @@ func (res *Result) newFeel(last2Key, lastKey, currKey byte, last KeyPos, dict *d
 	comb := feeling.Comb[lastKey][origin]
 	// 当量表里找不到
 	if comb == 0 {
-		res.toTalEq10 += 15
-		res.Combs.Count++
+		mRes.toTalEq10 += 15
+		mRes.CombsCount++
 		return origin, curr
 	}
-	res.toTalEq10 += int(comb >> 8)
-	res.Combs.Count++
+	mRes.toTalEq10 += int(comb >> 8)
+	mRes.CombsCount++
 
 	// for finger
 	if curr.Fin == last.Fin {
-		res.Fingers.Same.Count++
+		mRes.SameFingers++
 	}
 	// for hands
 	if last.IsLeft {
 		if curr.IsLeft {
-			res.Hands.LL.Count++
+			mRes.Hands.LL++
 		} else {
-			res.Hands.LR.Count++
+			mRes.Hands.LR++
 		}
 	} else {
 		if curr.IsLeft {
-			res.Hands.RL.Count++
+			mRes.Hands.RL++
 		} else {
-			res.Hands.RR.Count++
+			mRes.Hands.RR++
 		}
 	}
 
 	// 同键、三连击
 	if currKey == lastKey {
-		res.Combs.DoubleHit.Count++
+		mRes.Combs.DoubleHit++
 		if currKey == last2Key {
-			res.Combs.TribleHit.Count++
+			mRes.Combs.TribleHit++
 		}
 	}
 	// 小跨排
 	if comb&feeling.IsXKP != 0 {
-		res.Combs.SingleSpan.Count++
+		mRes.Combs.SingleSpan++
 	}
 	// 大跨排
 	if comb&feeling.IsDKP != 0 {
-		res.Combs.MultiSpan.Count++
+		mRes.Combs.MultiSpan++
 	}
 	// 错手
 	if comb&feeling.IsCS != 0 {
-		res.Combs.LongFingersDisturb.Count++
+		mRes.Combs.LongFingersDisturb++
 	}
 	// 小拇指干扰
 	if comb&feeling.IsXZGR != 0 {
-		res.Combs.LittleFingersDisturb.Count++
+		mRes.Combs.LittleFingersDisturb++
 	}
 
 	return origin, curr

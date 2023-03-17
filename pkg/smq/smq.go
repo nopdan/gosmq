@@ -15,7 +15,7 @@ import (
 type Smq struct {
 	Name   string    // 文本名
 	reader io.Reader // 文本
-	bufLen int64
+	bufLen int
 }
 
 // 从文件添加文本

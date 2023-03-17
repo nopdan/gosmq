@@ -106,9 +106,9 @@ func multiCli() {
 			if multi.Folder == "" {
 				fmt.Println("载入文本：", s.Name)
 			}
-			fmt.Printf("此文本耗时：%v\n", time.Since(mid))
-			printSep()
 			if multi.Cli {
+				fmt.Printf("此文本耗时：%v\n", time.Since(mid))
+				printSep()
 				Output([]*smq.Result{res}, s.Name)
 			}
 			<-ch

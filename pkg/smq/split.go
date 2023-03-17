@@ -6,7 +6,7 @@ import (
 )
 
 // 分割文本
-func SplitStep(brd *bufio.Reader, bufLen int64) ([]rune, error) {
+func SplitStep(brd *bufio.Reader, bufLen int) ([]rune, error) {
 	var text []rune
 
 	buffer := make([]byte, bufLen)
@@ -35,7 +35,7 @@ func SplitStep(brd *bufio.Reader, bufLen int64) ([]rune, error) {
 			text = []rune(string(buffer))
 		OUT:
 			// 超过限制读不到分割符直接 break
-			for lim := int64(0); lim < bufLen; lim++ {
+			for lim := 0; lim < bufLen; lim++ {
 				rn, _, err := brd.ReadRune()
 				if rn < 33 {
 					break

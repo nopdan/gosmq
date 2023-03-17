@@ -37,7 +37,7 @@ func (c Config) Gen() table.Table {
 		d[i].Code = c.addSuffix(d[i].Code, d[i].Pos)
 	}
 	if c.SortByWordLen {
-		sort.Slice(d, func(i, j int) bool {
+		sort.SliceStable(d, func(i, j int) bool {
 			return len([]rune(d[i].Word)) > len([]rune(d[j].Word))
 		})
 	}

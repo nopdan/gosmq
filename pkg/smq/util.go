@@ -37,11 +37,17 @@ func OutputDetail(dict *dict.Dict, textName string, res *Result) {
 
 	// 输出分词结果
 	if dict.Split {
-		var buf strings.Builder
-		for i, word := range res.wordSlice {
-			buf.WriteString(fmt.Sprintf("%s\t%s\n", word, res.codeSlice[i]))
+		f, _ := os.OpenFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.Name, textName), os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0666)
+		for i := range res.wcIdxs {
+			var buf strings.Builder
+			for j := range res.wcIdxs[i].wordSli {
+				buf.WriteString(res.wcIdxs[i].wordSli[j])
+				buf.Write([]byte{'\t'})
+				buf.WriteString(res.wcIdxs[i].codeSli[j])
+				buf.Write([]byte{'\n'})
+			}
+			f.WriteString(buf.String())
 		}
-		os.WriteFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.Name, textName), []byte(buf.String()), 0666)
 	}
 
 	// 输出词条数据

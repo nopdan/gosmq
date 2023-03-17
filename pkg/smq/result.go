@@ -23,9 +23,8 @@ type Result struct {
 	notHanMap map[rune]struct{}
 	lackMap   map[rune]struct{}
 
-	wordSlice []string
-	codeSlice []string
-	statData  map[string]*CodePosCount
+	wcIdxs   []wcIdx
+	statData map[string]*CodePosCount
 }
 
 // 基础
@@ -105,8 +104,7 @@ func newResult() *Result {
 	res.notHanMap = make(map[rune]struct{}, 100)
 	res.lackMap = make(map[rune]struct{}, 10)
 
-	res.wordSlice = make([]string, 0)
-	res.codeSlice = make([]string, 0)
+	res.wcIdxs = make([]wcIdx, 0)
 	res.statData = make(map[string]*CodePosCount)
 
 	res.Words.Dist = make([]int, 1)

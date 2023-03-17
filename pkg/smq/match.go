@@ -15,7 +15,6 @@ type CodePosCount struct {
 // 匹配一段文字得到的信息
 type matchRes struct {
 	dictIdx int // 码表索引
-	textIdx int // 文本段索引
 
 	wordSlice []string
 	codeSlice []string

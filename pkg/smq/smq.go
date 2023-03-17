@@ -50,6 +50,12 @@ func (smq *Smq) Eval(di *dict.Dict) *Result {
 	return resArr[0]
 }
 
+type wcIdx struct {
+	idx     int
+	wordSli []string
+	codeSli []string
+}
+
 // 计算多个码表
 func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 	resArr := make([]*Result, len(dicts))
@@ -57,16 +63,6 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 		resArr[i] = newResult()
 	}
 	brd := bufio.NewReader(smq.reader)
-
-	type sliIdx struct {
-		idx     int
-		wordSli []string
-		codeSli []string
-	}
-	wcIdxs := make([][]sliIdx, len(dicts))
-	for i := range wcIdxs {
-		wcIdxs[i] = make([]sliIdx, 0)
-	}
 
 	var wg sync.WaitGroup
 	var lock sync.Mutex
@@ -80,13 +76,12 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 				defer wg.Done()
 				mRes := match(text, dicts[i])
 				mRes.dictIdx = i
-				mRes.textIdx = idx
 				// 加锁操作
 				lock.Lock()
+				resArr[i].append(mRes, dicts[i])
 				if dicts[i].Split {
-					wcIdxs[i] = append(wcIdxs[i], sliIdx{mRes.textIdx, mRes.wordSlice, mRes.codeSlice})
+					resArr[i].wcIdxs = append(resArr[i].wcIdxs, wcIdx{idx, mRes.wordSlice, mRes.codeSlice})
 				}
-				resArr[i].append(mRes)
 				lock.Unlock()
 				<-ch
 			}(text, i, idx)
@@ -99,14 +94,9 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 
 	for i, dict := range dicts {
 		if dict.Split {
-			tmp := wcIdxs[i]
-			sort.Slice(tmp, func(j, k int) bool {
-				return tmp[j].idx < tmp[k].idx
+			sort.Slice(resArr[i].wcIdxs, func(j, k int) bool {
+				return resArr[i].wcIdxs[j].idx < resArr[i].wcIdxs[k].idx
 			})
-			for _, v := range tmp {
-				resArr[i].wordSlice = append(resArr[i].wordSlice, v.wordSli...)
-				resArr[i].codeSlice = append(resArr[i].codeSlice, v.codeSli...)
-			}
 		}
 	}
 
@@ -120,17 +110,16 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 }
 
 // 将每次匹配得到的信息追加到总结果
-func (res *Result) append(mRes *matchRes) {
-	res.wordSlice = append(res.wordSlice, mRes.wordSlice...)
-	res.codeSlice = append(res.codeSlice, mRes.codeSlice...)
-	for k, v := range mRes.statData {
-		if _, ok := res.statData[k]; !ok {
-			res.statData[k] = v
-		} else {
-			res.statData[k].Count += v.Count
+func (res *Result) append(mRes *matchRes, dict *dict.Dict) {
+	if dict.Stat {
+		for k, v := range mRes.statData {
+			if _, ok := res.statData[k]; !ok {
+				res.statData[k] = v
+			} else {
+				res.statData[k].Count += v.Count
+			}
 		}
 	}
-
 	res.Basic.TextLen += mRes.TextLen
 	res.Basic.Commits += mRes.Commits
 	res.Basic.NotHanCount += mRes.NotHanCount

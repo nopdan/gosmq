@@ -17,18 +17,17 @@ func New(alg string) Matcher {
 	case "single":
 		// fmt.Println("匹配算法：单字专用 hashMap(with rune key)")
 		m = NewSingle()
-	case "trie", "t":
-		// fmt.Println("匹配算法：trie(hashMap impl)")
-		m = NewTrie()
 	case "longest", "l":
 		// fmt.Println("匹配算法：最长匹配")
 		m = NewLongest()
 	case "strie", "s":
 		// fmt.Println("匹配算法：稳定的 trie(hashMap impl)")
 		m = NewSTrie()
-	default: // 默认稳定的 trie 算法
-		// fmt.Println("匹配算法：稳定的 trie(hashMap impl)")
-		m = NewSTrie()
+	case "trie", "t":
+		// fmt.Println("匹配算法：trie(hashMap impl)")
+		m = NewTrie()
+	default: // 默认 trie 算法
+		m = NewTrie()
 	}
 	return m
 }

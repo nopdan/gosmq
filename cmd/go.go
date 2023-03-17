@@ -39,7 +39,7 @@ func init() {
 	goCmd.PersistentFlags().StringVarP(&conf.Text, "text", "t", "", "文本路径")
 	goCmd.PersistentFlags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表路径")
 	goCmd.PersistentFlags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
-	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "a", "strie", "匹配算法(strie|trie)")
+	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "a", "trie", "匹配算法(trie|strie)")
 	goCmd.PersistentFlags().StringVarP(&conf.PressSpaceBy, "space", "p", "both", "空格按键方式 left|right|both")
 	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出详细数据")
 	goCmd.PersistentFlags().BoolVarP(&conf.Split, "split", "", false, "输出分词数据")
@@ -128,11 +128,11 @@ func goWithSurvey() {
 	}, &conf.Single)
 	handle(err)
 
-	var greedy bool
+	var stable bool
 	err = survey.AskOne(&survey.Confirm{
-		Message: "贪心匹配:",
+		Message: "按码表顺序:",
 		Default: false,
-	}, &greedy)
+	}, &stable)
 	handle(err)
 
 	fmt.Println("\n", conf)
@@ -149,10 +149,10 @@ func goWithSurvey() {
 			log.Panic("Error! 读取文件失败：", err)
 		}
 	}
-	if greedy {
-		conf.Algo = "trie"
-	} else {
+	if stable {
 		conf.Algo = "strie"
+	} else {
+		conf.Algo = "trie"
 	}
 	d := &dict.Dict{
 		Single:       conf.Single,

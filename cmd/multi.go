@@ -24,6 +24,7 @@ var multi = &struct {
 	Texts  []string // 文本
 	Folder string   // 从文件夹读取文本
 	Dict   string   // 码表
+	Cli    bool
 	Basic
 }{}
 
@@ -32,10 +33,11 @@ func init() {
 	multiCmd.PersistentFlags().StringVarP(&multi.Folder, "folder", "f", "", "从文件夹读取文本")
 	multiCmd.PersistentFlags().StringVarP(&multi.Dict, "dict", "i", "", "码表路径")
 	multiCmd.PersistentFlags().BoolVarP(&multi.Single, "single", "s", false, "启用单字模式")
-	multiCmd.PersistentFlags().StringVarP(&multi.Algo, "algo", "a", "strie", "匹配算法(strie|trie)")
+	multiCmd.PersistentFlags().StringVarP(&multi.Algo, "algo", "a", "trie", "匹配算法(trie|strie)")
 	multiCmd.PersistentFlags().StringVarP(&multi.PressSpaceBy, "space", "p", "both", "空格按键方式 left|right|both")
 	multiCmd.PersistentFlags().BoolVarP(&multi.Verbose, "verbose", "v", false, "输出详细数据")
 	multiCmd.PersistentFlags().BoolVarP(&multi.Split, "split", "", false, "输出分词数据")
+	multiCmd.PersistentFlags().BoolVarP(&multi.Cli, "cli", "", false, "cli 输出结果")
 }
 
 func multiCli() {
@@ -106,7 +108,9 @@ func multiCli() {
 			}
 			fmt.Printf("此文本耗时：%v\n", time.Since(mid))
 			printSep()
-			Output([]*smq.Result{res}, s.Name)
+			if multi.Cli {
+				Output([]*smq.Result{res}, s.Name)
+			}
 			<-ch
 			wg.Done()
 		}(text)

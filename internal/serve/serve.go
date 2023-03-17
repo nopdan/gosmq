@@ -37,7 +37,7 @@ type optDict struct {
 	Path   string `json:"path"`
 	Single bool   `json:"single"`
 	Space  string `json:"space"`
-	Greedy bool   `json:"greedy"`
+	Stable bool   `json:"stable"`
 }
 
 func parseOptions(src []byte) Options {
@@ -50,10 +50,10 @@ func parseOptions(src []byte) Options {
 
 func toSmqDict(opt optDict) *dict.Dict {
 	var algo string
-	if opt.Greedy {
-		algo = "trie"
-	} else {
+	if opt.Stable {
 		algo = "strie"
+	} else {
+		algo = "trie"
 	}
 	dict := &dict.Dict{
 		Single:       opt.Single,

@@ -122,11 +122,11 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 func (res *Result) append(mRes *matchRes) {
 	res.wordSlice = append(res.wordSlice, mRes.wordSlice...)
 	res.codeSlice = append(res.codeSlice, mRes.codeSlice...)
-	for k, v := range res.statData {
-		if _, ok := mRes.statData[k]; !ok {
-			mRes.statData[k] = v
+	for k, v := range mRes.statData {
+		if _, ok := res.statData[k]; !ok {
+			res.statData[k] = v
 		} else {
-			mRes.statData[k].Count += v.Count
+			res.statData[k].Count += v.Count
 		}
 	}
 

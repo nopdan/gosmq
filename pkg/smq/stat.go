@@ -84,7 +84,8 @@ func (res *Result) statFeel(dict *dict.Dict) {
 			res.Fingers.Dist[keyPos.Fin].Count += v
 		}
 	}
-	for _, v := range res.Fingers.Dist {
+	for i := range res.Fingers.Dist {
+		v := &res.Fingers.Dist[i]
 		v.Rate = div(v.Count, res.CodeLen.Total)
 	}
 	res.Fingers.Same.Rate = div(res.Fingers.Same.Count, res.Combs.Count)

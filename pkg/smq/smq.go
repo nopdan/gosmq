@@ -76,11 +76,11 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 		for i := range dicts {
 			wg.Add(1)
 			ch <- struct{}{}
-			go func(text []rune, i, j int) {
+			go func(text []rune, i, idx int) {
 				defer wg.Done()
 				mRes := match(text, dicts[i])
 				mRes.dictIdx = i
-				mRes.textIdx = j
+				mRes.textIdx = idx
 				// 加锁操作
 				lock.Lock()
 				if dicts[i].Split {
@@ -97,15 +97,16 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 	}
 	wg.Wait()
 
-	for i, v := range dicts {
-		if v.Split {
-			sort.Slice(wcIdxs[i], func(j, k int) bool {
-				return wcIdxs[i][j].idx < wcIdxs[i][k].idx
+	for i, dict := range dicts {
+		if dict.Split {
+			tmp := wcIdxs[i]
+			sort.Slice(tmp, func(j, k int) bool {
+				return tmp[j].idx < tmp[k].idx
 			})
-		}
-		for _, v := range wcIdxs[i] {
-			resArr[i].wordSlice = append(resArr[i].wordSlice, v.wordSli...)
-			resArr[i].codeSlice = append(resArr[i].codeSlice, v.codeSli...)
+			for _, v := range tmp {
+				resArr[i].wordSlice = append(resArr[i].wordSlice, v.wordSli...)
+				resArr[i].codeSlice = append(resArr[i].codeSlice, v.codeSli...)
+			}
 		}
 	}
 

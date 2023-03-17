@@ -105,8 +105,8 @@ func newResult() *Result {
 	res.notHanMap = make(map[rune]struct{}, 100)
 	res.lackMap = make(map[rune]struct{}, 10)
 
-	res.wordSlice = make([]string, 1)
-	res.codeSlice = make([]string, 1)
+	res.wordSlice = make([]string, 0)
+	res.codeSlice = make([]string, 0)
 	res.statData = make(map[string]*CodePosCount)
 
 	res.Words.Dist = make([]int, 1)

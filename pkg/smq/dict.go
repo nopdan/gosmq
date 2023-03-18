@@ -1,11 +1,12 @@
-package dict
+package smq
 
 import (
+	"bufio"
 	"fmt"
 	"io"
+	"strconv"
 	"strings"
 
-	"github.com/imetool/dtool/pkg/table"
 	"github.com/imetool/gosmq/pkg/matcher"
 	"github.com/imetool/goutil/util"
 )
@@ -20,9 +21,10 @@ type Dict struct {
 
 	Name   string // 码表名
 	Length int    // 词条数
-	// 初始化 Matcher
-	Matcher matcher.Matcher
-	Reader  io.Reader // 赛码表 io 流
+	Clean  bool   // 只统计词库中的词条
+
+	Matcher matcher.Matcher // 初始化 Matcher
+	Reader  io.Reader       // 赛码表 io 流
 }
 
 // 从文件加载码表
@@ -52,15 +54,6 @@ func (dict *Dict) LoadString(text, name string) {
 
 // 初始化 Dict
 func (dict *Dict) initialize() {
-	// 读取
-	t := dict.read()
-	dict.Length = len(t)
-	// 添加符号
-	PUNCTS := GetPuncts()
-	for k, v := range PUNCTS {
-		t = append(t, table.Entry{k, v, 1})
-	}
-
 	// 匹配算法
 	if dict.Single {
 		dict.Algorithm = "single"
@@ -70,6 +63,23 @@ func (dict *Dict) initialize() {
 	}
 	m := dict.Matcher
 
-	// fmt.Printf("%+v\n", dict)
-	m.Build(t)
+	// 读取码表，构建 matcher
+	scan := bufio.NewScanner(dict.Reader)
+	for scan.Scan() {
+		wc := strings.Split(scan.Text(), "\t")
+		pos := 1
+		if len(wc) == 3 {
+			pos, _ = strconv.Atoi(wc[2])
+		} else if len(wc) != 2 {
+			continue
+		}
+		if dict.Single {
+			if len([]rune(wc[0])) != 1 {
+				continue
+			}
+		}
+		dict.Length++
+		m.Insert(wc[0], wc[1], pos)
+	}
+	m.Build()
 }

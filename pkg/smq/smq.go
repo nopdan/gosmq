@@ -8,7 +8,6 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/imetool/gosmq/internal/dict"
 	"github.com/imetool/goutil/util"
 )
 
@@ -45,8 +44,8 @@ func (s *Smq) LoadString(name, text string) {
 }
 
 // 计算一个码表
-func (smq *Smq) Eval(di *dict.Dict) *Result {
-	resArr := smq.EvalDicts([]*dict.Dict{di})
+func (smq *Smq) Eval(di *Dict) *Result {
+	resArr := smq.EvalDicts([]*Dict{di})
 	return resArr[0]
 }
 
@@ -57,7 +56,7 @@ type wcIdx struct {
 }
 
 // 计算多个码表
-func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
+func (smq *Smq) EvalDicts(dicts []*Dict) []*Result {
 	resArr := make([]*Result, len(dicts))
 	for i := range dicts {
 		resArr[i] = newResult()
@@ -72,7 +71,7 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 		for i := range dicts {
 			wg.Add(1)
 			ch <- struct{}{}
-			go func(text []rune, i, idx int) {
+			go func(text []byte, i, idx int) {
 				defer wg.Done()
 				mRes := match(text, dicts[i])
 				mRes.dictIdx = i
@@ -102,7 +101,6 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 
 	for i, dict := range dicts {
 		resArr[i].stat(dict)
-		resArr[i].statFeel(dict)
 		OutputDetail(dict, smq.Name, resArr[i])
 	}
 
@@ -110,7 +108,7 @@ func (smq *Smq) EvalDicts(dicts []*dict.Dict) []*Result {
 }
 
 // 将每次匹配得到的信息追加到总结果
-func (res *Result) append(mRes *matchRes, dict *dict.Dict) {
+func (res *Result) append(mRes *matchRes, dict *Dict) {
 	if dict.Stat {
 		for k, v := range mRes.statData {
 			if _, ok := res.statData[k]; !ok {
@@ -120,7 +118,6 @@ func (res *Result) append(mRes *matchRes, dict *dict.Dict) {
 			}
 		}
 	}
-	res.Basic.TextLen += mRes.TextLen
 	res.Basic.Commits += mRes.Commits
 	res.Basic.NotHanCount += mRes.NotHanCount
 	res.Basic.LackCount += mRes.LackCount
@@ -147,8 +144,8 @@ func (res *Result) append(mRes *matchRes, dict *dict.Dict) {
 	res.Combs.LongFingersDisturb.Count += mRes.Combs.LongFingersDisturb
 	res.Combs.LittleFingersDisturb.Count += mRes.Combs.LittleFingersDisturb
 
-	for k, v := range mRes.mapKeys {
-		res.mapKeys[k] += v
+	for i := 33; i < 128; i++ {
+		res.keysDist[i] += mRes.keysDist[i]
 	}
 	for k := range mRes.notHanMap {
 		res.notHanMap[k] = struct{}{}

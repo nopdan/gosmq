@@ -7,8 +7,6 @@ import (
 	"sort"
 	"strconv"
 	"strings"
-
-	"github.com/imetool/gosmq/internal/dict"
 )
 
 func div(x, y int) float64 {
@@ -30,7 +28,7 @@ func AddToVal(sli *[]int, pos int, val int) {
 	(*sli)[pos] += val
 }
 
-func OutputDetail(dict *dict.Dict, textName string, res *Result) {
+func OutputDetail(dict *Dict, textName string, res *Result) {
 
 	// 创建文件夹
 	os.MkdirAll("result", os.ModePerm)

@@ -2,14 +2,15 @@ package smq
 
 import (
 	"sort"
-
-	"github.com/imetool/gosmq/internal/dict"
 )
 
-func (res *Result) stat(dict *dict.Dict) {
+func (res *Result) stat(dict *Dict) {
 	res.Name = dict.Name
 	// Basic
 	res.Basic.DictLen = dict.Length
+	for i, v := range res.Words.Dist {
+		res.Basic.TextLen += i * v
+	}
 
 	// 非汉字
 	res.Basic.NotHans = len(res.notHanMap)
@@ -44,15 +45,18 @@ func (res *Result) stat(dict *dict.Dict) {
 		res.CodeLen.Total += i * v
 	}
 	res.CodeLen.PerChar = div(res.CodeLen.Total, res.Basic.TextLen)
+
+	res.statFeel(dict)
 }
 
-func (res *Result) statFeel(dict *dict.Dict) {
+func (res *Result) statFeel(dict *Dict) {
 	// keys
-	for k, v := range res.mapKeys {
-		if _, ok := res.Keys[string(k)]; !ok {
-			res.Keys[string(k)] = new(CountRate)
+	for i := 33; i < 128; i++ {
+		key := string(byte(i))
+		if _, ok := res.Keys[key]; !ok {
+			res.Keys[key] = new(CountRate)
 		}
-		res.Keys[string(k)].Count = v
+		res.Keys[key].Count = res.keysDist[i]
 	}
 	for _, v := range res.Keys {
 		v.Rate = div(v.Count, res.CodeLen.Total)
@@ -75,13 +79,13 @@ func (res *Result) statFeel(dict *dict.Dict) {
 	res.Hands.Same.Rate = div(res.Hands.Same.Count, res.Combs.Count)
 	res.Hands.Diff.Rate = div(res.Hands.Diff.Count, res.Combs.Count)
 	// fingers
-	for k, v := range res.mapKeys {
-		if keyPos := KeyPosArr[k]; keyPos.Fin == 0 {
-			res.Fingers.Dist[10].Count += v
+	for i := 33; i < 128; i++ {
+		if keyPos := KeyPosArr[i]; keyPos.Fin == 0 {
+			res.Fingers.Dist[10].Count += res.keysDist[i]
 		} else if keyPos.Fin == 10 {
-			res.Fingers.Dist[0].Count += v
+			res.Fingers.Dist[0].Count += res.keysDist[i]
 		} else {
-			res.Fingers.Dist[keyPos.Fin].Count += v
+			res.Fingers.Dist[keyPos.Fin].Count += res.keysDist[i]
 		}
 	}
 	for i := range res.Fingers.Dist {

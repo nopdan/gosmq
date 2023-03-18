@@ -6,8 +6,8 @@ import (
 )
 
 // 分割文本
-func SplitStep(brd *bufio.Reader, bufLen int) ([]rune, error) {
-	var text []rune
+func SplitStep(brd *bufio.Reader, bufLen int) ([]byte, error) {
+	var text []byte
 
 	buffer := make([]byte, bufLen)
 	n, err := io.ReadFull(brd, buffer)
@@ -16,7 +16,7 @@ func SplitStep(brd *bufio.Reader, bufLen int) ([]rune, error) {
 		b, err := brd.ReadByte()
 		// 控制字符 直接切分
 		if b < 33 {
-			text = []rune(string(buffer))
+			text = buffer
 			break
 		}
 		// utf-8 前缀
@@ -27,12 +27,12 @@ func SplitStep(brd *bufio.Reader, bufLen int) ([]rune, error) {
 		}
 		// EOF
 		if err != nil {
-			text = []rune(string(buffer))
+			text = buffer
 			break
 		}
 		// 读到合法字符，开始读 rune
 		if b < 128 || b >= 0b11000000 {
-			text = []rune(string(buffer))
+			text = buffer
 		OUT:
 			// 超过限制读不到分割符直接 break
 			for lim := 0; lim < bufLen; lim++ {
@@ -40,7 +40,7 @@ func SplitStep(brd *bufio.Reader, bufLen int) ([]rune, error) {
 				if rn < 33 {
 					break
 				}
-				text = append(text, rn)
+				text = append(text, []byte(string(rn))...)
 				if err != nil {
 					break
 				}

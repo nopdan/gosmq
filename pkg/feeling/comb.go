@@ -22,7 +22,7 @@ const (
 )
 
 // DL10<<8 + IsXKP|IsDKP|IsCS|IsXZGR
-var Comb [256][256]uint16
+var Comb [128][128]uint16
 
 func init() {
 

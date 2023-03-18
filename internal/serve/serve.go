@@ -13,7 +13,6 @@ import (
 	"sync"
 	"time"
 
-	"github.com/imetool/gosmq/internal/dict"
 	"github.com/imetool/gosmq/pkg/smq"
 )
 
@@ -48,14 +47,14 @@ func parseOptions(src []byte) Options {
 	return opt
 }
 
-func toSmqDict(opt optDict) *dict.Dict {
+func toSmqDict(opt optDict) *smq.Dict {
 	var algo string
 	if opt.Stable {
 		algo = "strie"
 	} else {
 		algo = "trie"
 	}
-	dict := &dict.Dict{
+	dict := &smq.Dict{
 		Single:       opt.Single,
 		Algorithm:    algo,
 		PressSpaceBy: opt.Space,
@@ -82,7 +81,7 @@ func GetResultJson(src []byte) []byte {
 		fmt.Println("载入文本：", s.Name)
 	}
 	textName = s.Name
-	dicts := make([]*dict.Dict, 0)
+	dicts := make([]*smq.Dict, 0)
 	for _, v := range opts.Dicts {
 		// opt := toSmqDict(v)
 		dicts = append(dicts, toSmqDict(v))

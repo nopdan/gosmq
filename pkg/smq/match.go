@@ -2,8 +2,7 @@ package smq
 
 import (
 	"unicode"
-
-	"github.com/imetool/gosmq/internal/dict"
+	"unsafe"
 )
 
 type CodePosCount struct {
@@ -20,11 +19,10 @@ type matchRes struct {
 	codeSlice []string
 	statData  map[string]*CodePosCount
 
-	mapKeys   map[byte]int
+	keysDist  [128]int
 	notHanMap map[rune]struct{}
 	lackMap   map[rune]struct{}
 
-	TextLen int
 	Commits int
 
 	NotHanCount int // 非汉字计数
@@ -61,66 +59,84 @@ type matchRes struct {
 	}
 }
 
-func match(text []rune, dict *dict.Dict) *matchRes {
+func match(buffer []byte, dict *Dict) *matchRes {
 
 	// 初始化
 	mRes := new(matchRes)
-	mRes.wordSlice = make([]string, 0, len(text)/3)
-	mRes.codeSlice = make([]string, 0, len(text)/3)
+	mRes.wordSlice = make([]string, 0, len(buffer)/3)
+	mRes.codeSlice = make([]string, 0, len(buffer)/3)
 	mRes.statData = make(map[string]*CodePosCount)
 
-	mRes.mapKeys = make(map[byte]int)
 	mRes.notHanMap = make(map[rune]struct{})
 	mRes.lackMap = make(map[rune]struct{})
 	mRes.CodeLenDist = make([]int, 0)
 	mRes.WordsDist = make([]int, 0)
 	mRes.CollisionDist = make([]int, 0)
 
-	mRes.TextLen = len(text)
 	// 前面的键
 	var last2Key, lastKey byte
 	var last KeyPos
-	codeHandler := func(code string) {
+
+	Handler := func(word, code string, wordLen, pos int) {
+		AddTo(&mRes.WordsDist, wordLen)
+		AddTo(&mRes.CollisionDist, pos)
+		AddTo(&mRes.CodeLenDist, len(code))
+
 		for i := 0; i < len(code); i++ {
-			tmpKey, tmp := mRes.newFeel(last2Key, lastKey, code[i], last, dict)
+			tmpKey, tmp := mRes.feel(last2Key, lastKey, code[i], last, dict)
 			last2Key = lastKey
 			lastKey, last = tmpKey, tmp
 		}
-		AddTo(&mRes.CodeLenDist, len(code))
+
+		if dict.Split {
+			mRes.wordSlice = append(mRes.wordSlice, word)
+			mRes.codeSlice = append(mRes.codeSlice, code)
+		}
+		if dict.Stat {
+			if _, ok := mRes.statData[word]; !ok {
+				mRes.statData[word] = &CodePosCount{code, pos, 1}
+			} else {
+				mRes.statData[word].Count++
+			}
+		}
+	}
+	// 是否判断缺字
+	HanHandler := func(char rune, lack bool) {
+		isHan := unicode.Is(unicode.Han, char)
+		// 非汉字
+		if !isHan {
+			mRes.notHanMap[char] = struct{}{}
+			mRes.NotHanCount++
+		}
+		// 缺汉字
+		if lack && isHan {
+			mRes.lackMap[char] = struct{}{}
+			mRes.LackCount++
+		}
 	}
 
+	text := []rune(*(*string)(unsafe.Pointer(&buffer)))
 	for p := 0; p < len(text); {
 		// 跳过空白字符
 		if text[p] < 33 {
-			mRes.TextLen--
 			p++
 			continue
 		}
 		switch text[p] {
 		case 65533, '　':
-			mRes.TextLen--
 			p++
 			continue
 		}
 		mRes.Commits++
 
-		i, code, pos := dict.Matcher.Match(text, p)
+		wordLen, code, pos := dict.Matcher.Match(text[p:])
 		// 匹配到了
-		if i != 0 {
-			// 对每个字都进行判断
-			for j := 0; j < i; j++ {
-				// 非汉字
-				isHan := unicode.Is(unicode.Han, text[p+j])
-				if !isHan {
-					mRes.notHanMap[text[p+j]] = struct{}{}
-					mRes.NotHanCount++
-				}
-			}
-
+		if wordLen != 0 {
+			sWord := string(text[p : p+wordLen])
 			// 打词
-			if i >= 2 {
+			if wordLen >= 2 {
 				mRes.WordsCommitsCount++
-				mRes.WordsCharsCount += i
+				mRes.WordsCharsCount += wordLen
 				if pos == 1 {
 					mRes.WordsFirstCount++
 				}
@@ -128,94 +144,53 @@ func match(text []rune, dict *dict.Dict) *matchRes {
 			// 选重
 			if pos >= 2 {
 				mRes.CollisionCommitsCount++
-				mRes.CollisionCharsCount += i
+				mRes.CollisionCharsCount += wordLen
 			}
-			AddTo(&mRes.WordsDist, i)
-			AddTo(&mRes.CollisionDist, pos)
-			codeHandler(code)
-
-			if dict.Split {
-				word := string(text[p : p+i])
-				mRes.wordSlice = append(mRes.wordSlice, word)
-				mRes.codeSlice = append(mRes.codeSlice, code)
+			// 对每个字都进行判断
+			for i := 0; i < wordLen; i++ {
+				HanHandler(text[p+i], false)
 			}
-			if dict.Stat {
-				word := string(text[p : p+i])
-				if _, ok := mRes.statData[word]; !ok {
-					mRes.statData[word] = &CodePosCount{code, pos, 1}
-				} else {
-					mRes.statData[word].Count++
-				}
-			}
-			p += i
+			Handler(sWord, code, wordLen, pos)
+			p += wordLen
 			continue
 		}
 
-		isHan := unicode.Is(unicode.Han, text[p])
-		if !isHan {
-			mRes.notHanMap[text[p]] = struct{}{}
-			mRes.NotHanCount++
-		}
-
 		// 匹配不到
-
-		fh := func(w, c string) {
-			AddTo(&mRes.WordsDist, 1) // 符号不作为打词
-			AddTo(&mRes.CollisionDist, 1)
-			codeHandler(c)
-
-			if dict.Split {
-				mRes.wordSlice = append(mRes.wordSlice, w)
-				mRes.codeSlice = append(mRes.codeSlice, c)
-			}
-			if dict.Stat {
-				if _, ok := mRes.statData[w]; !ok {
-					mRes.statData[w] = &CodePosCount{c, 1, 1}
-				} else {
-					mRes.statData[w].Count++
-				}
-			}
-			p += 2
+		if dict.Clean {
+			mRes.Commits--
+			p++
+			continue
 		}
-		// 单独处理这两个符号
-		if p+2 < len(text) {
+
+		HanHandler(text[p], true)
+		sWord := string(text[p])
+		// 是否为符号
+		code = PunctToCode(text[p])
+		if code != "" {
+			Handler(sWord, code, 1, 1)
+			p++
+			continue
+		}
+		// 单独处理这两个符号，不作为打词
+		if p+1 < len(text) {
+			flag := false
 			switch string(text[p : p+2]) {
 			case "——":
-				fh("——", "=-")
-				continue
+				Handler("——", "=-", 1, 1)
+				flag = true
 			case "……":
-				fh("……", "=6")
+				Handler("……", "=6", 1, 1)
+				flag = true
+			}
+			if flag {
+				HanHandler(text[p+1], false)
+				p += 2
 				continue
 			}
-		}
-
-		// 缺汉字
-		if isHan {
-			mRes.lackMap[text[p]] = struct{}{}
-			mRes.LackCount++
 		}
 		// 找不到的符号，设为 "####"
-		AddTo(&mRes.WordsDist, 1)
-		AddTo(&mRes.CollisionDist, 1)
-
-		code = "####"
-		codeHandler(code)
-
-		if dict.Split {
-			mRes.wordSlice = append(mRes.wordSlice, string(text[p]))
-			mRes.codeSlice = append(mRes.codeSlice, code)
-			// mRes.pos = append(mRes.pos, 1)
-		}
-		if dict.Stat {
-			word := string(text[p])
-			if _, ok := mRes.statData[word]; !ok {
-				mRes.statData[word] = &CodePosCount{code, 1, 1}
-			} else {
-				mRes.statData[word].Count++
-			}
-		}
+		Handler(sWord, "####", 1, 1)
 		p++
-		continue
 	}
 	return mRes
 }

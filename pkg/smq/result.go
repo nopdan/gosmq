@@ -19,7 +19,7 @@ type Result struct {
 	Hands   hands
 
 	toTalEq10 int // 总当量*10
-	mapKeys   map[byte]int
+	keysDist  [128]int
 	notHanMap map[rune]struct{}
 	lackMap   map[rune]struct{}
 
@@ -100,21 +100,19 @@ type hands struct {
 
 func newResult() *Result {
 	res := new(Result)
-	res.mapKeys = make(map[byte]int, 128)
-	res.notHanMap = make(map[rune]struct{}, 100)
-	res.lackMap = make(map[rune]struct{}, 10)
+	res.notHanMap = make(map[rune]struct{}, 20)
+	res.lackMap = make(map[rune]struct{}, 20)
 
 	res.wcIdxs = make([]wcIdx, 0)
 	res.statData = make(map[string]*CodePosCount)
 
-	res.Words.Dist = make([]int, 1)
-	res.Collision.Dist = make([]int, 1)
-	res.CodeLen.Dist = make([]int, 1)
+	res.Words.Dist = make([]int, 0, 20)
+	res.Collision.Dist = make([]int, 0, 20)
+	res.CodeLen.Dist = make([]int, 0, 10)
 	res.Keys = make(keys)
 	const ALL_KEYS = "1234567890qwertyuiopasdfghjkl;'zxcvbnm,./_+"
 	for i := 0; i < len(ALL_KEYS); i++ {
 		res.Keys[string(ALL_KEYS[i])] = new(CountRate)
-		res.mapKeys[ALL_KEYS[i]] = 0
 	}
 	return res
 }

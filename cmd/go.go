@@ -12,7 +12,6 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
-	"github.com/imetool/gosmq/internal/dict"
 	"github.com/imetool/gosmq/pkg/smq"
 	"github.com/spf13/cobra"
 )
@@ -33,6 +32,7 @@ var conf = &struct {
 	Json         bool   // 输出json数据
 	Verbose      bool   // 输出全部数据
 	Hidden       bool   // 隐藏 cli 结果展示
+	Clean        bool   // 只统计词库中的词条
 
 	isFolder bool
 }{}
@@ -58,6 +58,7 @@ func init() {
 	goCmd.PersistentFlags().BoolVarP(&conf.Json, "json", "", false, "输出json数据")
 	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出全部数据")
 	goCmd.PersistentFlags().BoolVarP(&conf.Hidden, "hidden", "", false, "隐藏 cli 结果展示")
+	goCmd.PersistentFlags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
 }
 
 func goCli() {
@@ -103,21 +104,22 @@ func goCli() {
 		}
 	}
 
-	newDict := func() *dict.Dict {
-		return &dict.Dict{
+	newDict := func() *smq.Dict {
+		return &smq.Dict{
 			Single:       conf.Single,
 			Algorithm:    conf.Algo,
 			PressSpaceBy: conf.PressSpaceBy,
 			Split:        conf.Split,
 			Stat:         conf.Stat,
 			Json:         conf.Json,
+			Clean:        conf.Clean,
 		}
 	}
 
 	// 对多文本启用多协程
 	if len(conf.Text) > 1 {
 		start := time.Now()
-		dicts := make([]*dict.Dict, len(conf.Dict))
+		dicts := make([]*smq.Dict, len(conf.Dict))
 		for i := range dicts {
 			dicts[i] = newDict()
 			dicts[i].Load(conf.Dict[i])
@@ -168,7 +170,7 @@ func goCli() {
 	s := &smq.Smq{}
 	s.Load(conf.Text[0])
 
-	dicts := make([]*dict.Dict, 0)
+	dicts := make([]*smq.Dict, 0)
 	// 添加码表
 	for _, v := range conf.Dict {
 		dict := newDict()
@@ -264,7 +266,7 @@ func goWithSurvey() {
 		algo = "trie"
 	}
 
-	d := &dict.Dict{
+	d := &smq.Dict{
 		Single:       info.Single,
 		Algorithm:    algo,
 		PressSpaceBy: info.PressSpaceBy,

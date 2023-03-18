@@ -26,11 +26,11 @@ func Output(data []*smq.Result) {
 	}
 	t.AppendRow(tmpRow)
 	tmpRow = table.Row{"字数"}
-	tmpRow = append(tmpRow, data[0].Basic.TextLen)
+	tmpRow = append(tmpRow, data[0].TextLen)
 	tmpRow = append(tmpRow, "|")
 	tmpRow = append(tmpRow, "词条数 ")
 	for _, res := range data {
-		tmpRow = append(tmpRow, res.Basic.DictLen)
+		tmpRow = append(tmpRow, res.DictLen)
 	}
 	t.AppendRow(tmpRow)
 	t.SetStyle(noColor)
@@ -163,7 +163,7 @@ func Output(data []*smq.Result) {
 
 	for _, res := range data {
 		if len(data) != 1 {
-			out += res.Name + "：\n"
+			out += res.DictName + "：\n"
 		}
 		t6_1_header := []interface{}{}
 		t6_2_header := []interface{}{}

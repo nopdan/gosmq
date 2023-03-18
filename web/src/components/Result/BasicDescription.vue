@@ -2,11 +2,11 @@
   <n-descriptions bordered label-placement="top" size="small" :column="2">
     <n-descriptions-item>
       <template #label>方案名称</template>
-      {{ data.Name }}
+      {{ data.DictName }}
     </n-descriptions-item>
     <n-descriptions-item>
       <template #label>码表词条数量</template>
-      {{ data.Basic.DictLen }}
+      {{ data.DictLen }}
     </n-descriptions-item>
     <n-descriptions-item>
       <template #label>缺字总数</template>

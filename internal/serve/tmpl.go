@@ -31,20 +31,20 @@ type TmplData struct {
 }
 
 // 初始化，接收文本名
-func NewHTML(s string) *TmplData {
+func NewHTML() *TmplData {
 	ret := new(TmplData)
-	if strings.ContainsRune(s, '《') {
-		ret.TextName = s
-	} else {
-		ret.TextName = "《" + s + "》"
-	}
 	return ret
 }
 
 // 添加一个结果
 func (d *TmplData) AddResult(res *smq.Result) {
 
-	d.TextLen = res.Basic.TextLen
+	if strings.ContainsRune(res.TextName, '《') {
+		d.TextName = res.TextName
+	} else {
+		d.TextName = "《" + res.TextName + "》"
+	}
+	d.TextLen = res.TextLen
 	d.NotHanCount = res.Basic.NotHanCount
 
 	tmp := new(Result)

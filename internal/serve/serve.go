@@ -65,7 +65,6 @@ func toSmqDict(opt optDict) *smq.Dict {
 }
 
 var smqRes []*smq.Result
-var textName string
 
 func GetResultJson(src []byte) []byte {
 	var opts = parseOptions(src)
@@ -80,7 +79,6 @@ func GetResultJson(src []byte) []byte {
 		s.Load("text/" + opts.Text.Path)
 		fmt.Println("载入文本：", s.Name)
 	}
-	textName = s.Name
 	dicts := make([]*smq.Dict, 0)
 	for _, v := range opts.Dicts {
 		// opt := toSmqDict(v)
@@ -152,7 +150,7 @@ func Serve(port string, silent bool) {
 		if len(smqRes) == 0 {
 			return
 		}
-		h := NewHTML(textName)
+		h := NewHTML()
 		for _, v := range smqRes {
 			h.AddResult(v)
 		}

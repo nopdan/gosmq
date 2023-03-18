@@ -120,8 +120,12 @@ func goCli() {
 		d.Load(v)
 		dicts = append(dicts, d)
 		if !conf.Hidden {
-			fmt.Println("=> ", v, "\t耗时：", time.Since(mid))
-			mid = time.Now()
+			if len(dictNames) == 1 {
+				fmt.Println("=> ", v)
+			} else {
+				fmt.Println("=> ", v, "\t耗时：", time.Since(mid))
+				mid = time.Now()
+			}
 		}
 	}
 	fmt.Printf("载入码表耗时：%v\n\n", time.Since(dictStartTime))

@@ -8,11 +8,10 @@ type CountRate struct {
 
 type Result struct {
 	TextName string
-	TextLen  int
+	TextLen  int // 文本字数
 	DictName string
-	DictLen  int
+	DictLen  int // 词条数
 
-	Name      string
 	Basic     basic
 	Words     words     // 打词
 	Collision collision // 选重
@@ -34,8 +33,6 @@ type Result struct {
 
 // 基础
 type basic struct {
-	DictLen     int    // 词条数
-	TextLen     int    // 文本字数
 	NotHan      string // 非汉字
 	NotHans     int    // 非汉字数（去重）
 	NotHanCount int    // 非汉字计数

@@ -5,15 +5,10 @@ import (
 )
 
 func (res *Result) stat() {
+
 	for i, v := range res.Words.Dist {
-		res.Basic.TextLen += i * v
+		res.TextLen += i * v
 	}
-	res.TextLen = res.Basic.TextLen
-
-	res.Name = res.DictName         // 旧的
-	res.Basic.DictLen = res.DictLen // 旧的
-	// Basic
-
 	// 非汉字
 	res.Basic.NotHans = len(res.notHanMap)
 	notHanList := make([]rune, 0, len(res.notHanMap))
@@ -38,15 +33,15 @@ func (res *Result) stat() {
 
 	// 打词数
 	res.Words.Commits.Rate = div(res.Words.Commits.Count, res.Basic.Commits)
-	res.Words.Chars.Rate = div(res.Words.Chars.Count, res.Basic.TextLen)
+	res.Words.Chars.Rate = div(res.Words.Chars.Count, res.TextLen)
 	// 选重数
 	res.Collision.Commits.Rate = div(res.Collision.Commits.Count, res.Basic.Commits)
-	res.Collision.Chars.Rate = div(res.Collision.Chars.Count, res.Basic.TextLen)
+	res.Collision.Chars.Rate = div(res.Collision.Chars.Count, res.TextLen)
 	// 码长
 	for i, v := range res.CodeLen.Dist {
 		res.CodeLen.Total += i * v
 	}
-	res.CodeLen.PerChar = div(res.CodeLen.Total, res.Basic.TextLen)
+	res.CodeLen.PerChar = div(res.CodeLen.Total, res.TextLen)
 
 	res.statFeel()
 }

@@ -5,60 +5,6 @@ import (
 	"unsafe"
 )
 
-type CodePosCount struct {
-	Code  string
-	Pos   int
-	Count int
-}
-
-// 匹配一段文字得到的信息
-type matchRes struct {
-	dictIdx int // 码表索引
-
-	wordSlice []string
-	codeSlice []string
-	statData  map[string]*CodePosCount
-
-	keysDist  [128]int
-	notHanMap map[rune]struct{}
-	lackMap   map[rune]struct{}
-
-	Commits int
-
-	NotHanCount int // 非汉字计数
-	LackCount   int
-
-	WordsCommitsCount int
-	WordsCharsCount   int
-	WordsFirstCount   int
-
-	CollisionCommitsCount int
-	CollisionCharsCount   int
-
-	CodeLenDist   []int
-	WordsDist     []int
-	CollisionDist []int
-
-	toTalEq10  int
-	CombsCount int
-
-	SameFingers int
-	Hands       struct {
-		LL int
-		LR int
-		RL int
-		RR int
-	}
-	Combs struct {
-		DoubleHit            int
-		TribleHit            int
-		SingleSpan           int
-		MultiSpan            int
-		LongFingersDisturb   int
-		LittleFingersDisturb int
-	}
-}
-
 func match(buffer []byte, dict *Dict) *matchRes {
 
 	// 初始化
@@ -88,11 +34,9 @@ func match(buffer []byte, dict *Dict) *matchRes {
 			lastKey, last = tmpKey, tmp
 		}
 
-		if dict.Split {
+		if dict.Verbose {
 			mRes.wordSlice = append(mRes.wordSlice, word)
 			mRes.codeSlice = append(mRes.codeSlice, code)
-		}
-		if dict.Stat {
 			if _, ok := mRes.statData[word]; !ok {
 				mRes.statData[word] = &CodePosCount{code, pos, 1}
 			} else {
@@ -129,7 +73,7 @@ func match(buffer []byte, dict *Dict) *matchRes {
 		}
 		mRes.Commits++
 
-		wordLen, code, pos := dict.Matcher.Match(text[p:])
+		wordLen, code, pos := dict.matcher.Match(text[p:])
 		// 匹配到了
 		if wordLen != 0 {
 			sWord := string(text[p : p+wordLen])

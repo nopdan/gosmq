@@ -7,6 +7,11 @@ type CountRate struct {
 }
 
 type Result struct {
+	TextName string
+	TextLen  int
+	DictName string
+	DictLen  int
+
 	Name      string
 	Basic     basic
 	Words     words     // 打词

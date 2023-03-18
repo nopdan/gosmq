@@ -7,7 +7,7 @@ import (
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 
-func Output(data []*smq.Result, textName string) {
+func Output(data []*smq.Result) {
 	// r, _ := json.MarshalIndent(res, "", "  ")
 	// fmt.Printf(string(r))
 
@@ -18,11 +18,11 @@ func Output(data []*smq.Result, textName string) {
 
 	t := table.NewWriter()
 	tmpRow := table.Row{"文本名"}
-	tmpRow = append(tmpRow, textName)
+	tmpRow = append(tmpRow, data[0].TextName)
 	tmpRow = append(tmpRow, "|")
 	tmpRow = append(tmpRow, "方案名")
 	for _, res := range data {
-		tmpRow = append(tmpRow, res.Name)
+		tmpRow = append(tmpRow, res.DictName)
 	}
 	t.AppendRow(tmpRow)
 	tmpRow = table.Row{"字数"}

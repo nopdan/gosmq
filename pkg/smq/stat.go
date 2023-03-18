@@ -4,13 +4,15 @@ import (
 	"sort"
 )
 
-func (res *Result) stat(dict *Dict) {
-	res.Name = dict.Name
-	// Basic
-	res.Basic.DictLen = dict.Length
+func (res *Result) stat() {
 	for i, v := range res.Words.Dist {
 		res.Basic.TextLen += i * v
 	}
+	res.TextLen = res.Basic.TextLen
+
+	res.Name = res.DictName         // 旧的
+	res.Basic.DictLen = res.DictLen // 旧的
+	// Basic
 
 	// 非汉字
 	res.Basic.NotHans = len(res.notHanMap)
@@ -46,10 +48,10 @@ func (res *Result) stat(dict *Dict) {
 	}
 	res.CodeLen.PerChar = div(res.CodeLen.Total, res.Basic.TextLen)
 
-	res.statFeel(dict)
+	res.statFeel()
 }
 
-func (res *Result) statFeel(dict *Dict) {
+func (res *Result) statFeel() {
 	// keys
 	for i := 33; i < 128; i++ {
 		key := string(byte(i))

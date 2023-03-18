@@ -12,19 +12,16 @@ import (
 )
 
 type Dict struct {
+	Name         string // 码表名
 	Single       bool   // 单字模式
 	Algorithm    string // 匹配算法 trie:前缀树 order:顺序匹配（极速跟打器） longest:最长匹配
 	PressSpaceBy string // 空格按键方式 left|right|both
-	Json         bool   // 输出 json 详细数据
-	Stat         bool   // 输出词条数据
-	Split        bool   // 输出分词数据
+	Clean        bool   // 只统计词库中的词条
+	Verbose      bool   // 详细
 
-	Name   string // 码表名
-	Length int    // 词条数
-	Clean  bool   // 只统计词库中的词条
-
-	Matcher matcher.Matcher // 初始化 Matcher
-	Reader  io.Reader       // 赛码表 io 流
+	matcher matcher.Matcher // 初始化 Matcher
+	reader  io.Reader       // 赛码表 io 流
+	length  int             // 词条数
 }
 
 // 从文件加载码表
@@ -37,8 +34,8 @@ func (dict *Dict) Load(path string) {
 	if dict.Name == "" {
 		dict.Name = util.GetFileName(path)
 	}
-	dict.Reader = rd
-	dict.initialize()
+	dict.reader = rd
+	dict.init()
 }
 
 // 从字符串加载码表
@@ -48,23 +45,23 @@ func (dict *Dict) LoadString(text, name string) {
 		return
 	}
 	dict.Name = name
-	dict.Reader = strings.NewReader(text)
-	dict.initialize()
+	dict.reader = strings.NewReader(text)
+	dict.init()
 }
 
 // 初始化 Dict
-func (dict *Dict) initialize() {
+func (dict *Dict) init() {
 	// 匹配算法
 	if dict.Single {
 		dict.Algorithm = "single"
 	}
-	if dict.Matcher == nil {
-		dict.Matcher = matcher.New(dict.Algorithm)
+	if dict.matcher == nil {
+		dict.matcher = matcher.New(dict.Algorithm)
 	}
-	m := dict.Matcher
+	m := dict.matcher
 
 	// 读取码表，构建 matcher
-	scan := bufio.NewScanner(dict.Reader)
+	scan := bufio.NewScanner(dict.reader)
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
 		pos := 1
@@ -78,7 +75,7 @@ func (dict *Dict) initialize() {
 				continue
 			}
 		}
-		dict.Length++
+		dict.length++
 		m.Insert(wc[0], wc[1], pos)
 	}
 	m.Build()

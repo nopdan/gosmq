@@ -69,7 +69,7 @@ var textName string
 
 func GetResultJson(src []byte) []byte {
 	var opts = parseOptions(src)
-	s := &smq.Smq{}
+	s := &smq.Text{}
 	if opts.Text.Flag {
 		if opts.Text.Name == "" {
 			opts.Text.Name = "赛文"
@@ -87,7 +87,7 @@ func GetResultJson(src []byte) []byte {
 		dicts = append(dicts, toSmqDict(v))
 		// s.Add(opt)
 	}
-	smqRes = s.EvalDicts(dicts)
+	smqRes = s.Race(dicts)
 	result, _ := json.Marshal(smqRes)
 	return result
 }

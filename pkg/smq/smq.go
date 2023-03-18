@@ -11,15 +11,16 @@ import (
 	"github.com/imetool/goutil/util"
 )
 
-type Smq struct {
-	Name   string    // 文本名
+type Text struct {
+	Name string // 文本名
+
 	reader io.Reader // 文本
 	bufLen int
 }
 
 // 从文件添加文本
-func (s *Smq) Load(path string) error {
-	s.Name = util.GetFileName(path)
+func (t *Text) Load(path string) error {
+	t.Name = util.GetFileName(path)
 	f, err := os.Open(path)
 	if err != nil {
 		return err
@@ -27,25 +28,24 @@ func (s *Smq) Load(path string) error {
 	fi, _ := f.Stat()
 	if fi.Size() < 4<<20 {
 		// 4MB 以下 64KB
-		s.bufLen = 64 << 10
+		t.bufLen = 64 << 10
 	} else {
 		// 其他 256KB
-		s.bufLen = 256 << 10
+		t.bufLen = 256 << 10
 	}
 	// fmt.Println("buffer size", s.bufLen)
-	s.reader = util.NewReader(f)
+	t.reader = util.NewReader(f)
 	return nil
 }
 
-func (s *Smq) LoadString(name, text string) {
-	s.Name = name
-	s.reader = strings.NewReader(text)
-	// s.Text = []byte(text)
+func (t *Text) LoadString(name, text string) {
+	t.Name = name
+	t.reader = strings.NewReader(text)
 }
 
 // 计算一个码表
-func (smq *Smq) Eval(di *Dict) *Result {
-	resArr := smq.EvalDicts([]*Dict{di})
+func (t *Text) RaceOne(di *Dict) *Result {
+	resArr := t.Race([]*Dict{di})
 	return resArr[0]
 }
 
@@ -55,20 +55,26 @@ type wcIdx struct {
 	codeSli []string
 }
 
-// 计算多个码表
-func (smq *Smq) EvalDicts(dicts []*Dict) []*Result {
+// 一篇文章计算多个码表
+func (t *Text) Race(dicts []*Dict) []*Result {
 	resArr := make([]*Result, len(dicts))
 	for i := range dicts {
 		resArr[i] = newResult()
+		resArr[i].TextName = t.Name
+		resArr[i].DictName = dicts[i].Name
+		resArr[i].DictLen = dicts[i].length
 	}
-	brd := bufio.NewReader(smq.reader)
+	brd := bufio.NewReader(t.reader)
 
 	var wg sync.WaitGroup
 	var lock sync.Mutex
 	ch := make(chan struct{}, 16)
 	for idx := 0; ; idx++ {
-		text, err := SplitStep(brd, smq.bufLen)
+		text, err := SplitStep(brd, t.bufLen)
 		for i := range dicts {
+			if dicts[i].length < 100 {
+				continue
+			}
 			wg.Add(1)
 			ch <- struct{}{}
 			go func(text []byte, i, idx int) {
@@ -78,7 +84,7 @@ func (smq *Smq) EvalDicts(dicts []*Dict) []*Result {
 				// 加锁操作
 				lock.Lock()
 				resArr[i].append(mRes, dicts[i])
-				if dicts[i].Split {
+				if dicts[i].Verbose {
 					resArr[i].wcIdxs = append(resArr[i].wcIdxs, wcIdx{idx, mRes.wordSlice, mRes.codeSlice})
 				}
 				lock.Unlock()
@@ -92,76 +98,40 @@ func (smq *Smq) EvalDicts(dicts []*Dict) []*Result {
 	wg.Wait()
 
 	for i, dict := range dicts {
-		if dict.Split {
+		if dict.Verbose {
 			sort.Slice(resArr[i].wcIdxs, func(j, k int) bool {
 				return resArr[i].wcIdxs[j].idx < resArr[i].wcIdxs[k].idx
 			})
 		}
 	}
 
-	for i, dict := range dicts {
-		resArr[i].stat(dict)
-		OutputDetail(dict, smq.Name, resArr[i])
+	for i := range dicts {
+		resArr[i].stat()
 	}
-
 	return resArr
 }
 
-// 将每次匹配得到的信息追加到总结果
-func (res *Result) append(mRes *matchRes, dict *Dict) {
-	if dict.Stat {
-		for k, v := range mRes.statData {
-			if _, ok := res.statData[k]; !ok {
-				res.statData[k] = v
-			} else {
-				res.statData[k].Count += v.Count
-			}
-		}
-	}
-	res.Basic.Commits += mRes.Commits
-	res.Basic.NotHanCount += mRes.NotHanCount
-	res.Basic.LackCount += mRes.LackCount
+// 多篇文章计算多个码表
+func Parallel(texts []string, dicts []*Dict) [][]*Result {
+	resArr := make([][]*Result, len(texts))
 
-	res.Words.Commits.Count += mRes.WordsCommitsCount
-	res.Words.Chars.Count += mRes.WordsCharsCount
-	res.Words.FirstCount += mRes.WordsFirstCount
-	res.Collision.Commits.Count += mRes.CollisionCommitsCount
-	res.Collision.Chars.Count += mRes.CollisionCharsCount
-
-	res.toTalEq10 += mRes.toTalEq10
-	res.Combs.Count += mRes.CombsCount
-	res.Fingers.Same.Count += mRes.SameFingers
-
-	res.Hands.LL.Count += mRes.Hands.LL
-	res.Hands.LR.Count += mRes.Hands.LR
-	res.Hands.RL.Count += mRes.Hands.RL
-	res.Hands.RR.Count += mRes.Hands.RR
-
-	res.Combs.DoubleHit.Count += mRes.Combs.DoubleHit
-	res.Combs.TribleHit.Count += mRes.Combs.TribleHit
-	res.Combs.SingleSpan.Count += mRes.Combs.SingleSpan
-	res.Combs.MultiSpan.Count += mRes.Combs.MultiSpan
-	res.Combs.LongFingersDisturb.Count += mRes.Combs.LongFingersDisturb
-	res.Combs.LittleFingersDisturb.Count += mRes.Combs.LittleFingersDisturb
-
-	for i := 33; i < 128; i++ {
-		res.keysDist[i] += mRes.keysDist[i]
+	var wg sync.WaitGroup
+	var lock sync.Mutex
+	ch := make(chan struct{}, 16)
+	for i, text := range texts {
+		ch <- struct{}{}
+		wg.Add(1)
+		go func(text string, i int) {
+			t := &Text{}
+			t.Load(text)
+			res := t.Race(dicts)
+			lock.Lock()
+			resArr[i] = res
+			lock.Unlock()
+			<-ch
+			wg.Done()
+		}(text, i)
 	}
-	for k := range mRes.notHanMap {
-		res.notHanMap[k] = struct{}{}
-	}
-	for k := range mRes.lackMap {
-		res.lackMap[k] = struct{}{}
-	}
-
-	for i, v := range mRes.CodeLenDist {
-		AddToVal(&res.CodeLen.Dist, i, v)
-	}
-
-	for i, v := range mRes.WordsDist {
-		AddToVal(&res.Words.Dist, i, v)
-	}
-	for i, v := range mRes.CollisionDist {
-		AddToVal(&res.Collision.Dist, i, v)
-	}
+	wg.Wait()
+	return resArr
 }

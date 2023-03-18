@@ -3,11 +3,7 @@ package cmd
 import (
 	"fmt"
 	"log"
-	"os"
 	"path/filepath"
-	"strings"
-	"sync"
-	"sync/atomic"
 	"time"
 
 	"github.com/AlecAivazis/survey/v2"
@@ -33,6 +29,7 @@ var conf = &struct {
 	Verbose      bool   // 输出全部数据
 	Hidden       bool   // 隐藏 cli 结果展示
 	Clean        bool   // 只统计词库中的词条
+	Merge        bool   // 合并一码表多文本的结果
 
 	isFolder bool
 }{}
@@ -47,7 +44,7 @@ var goCmd = &cobra.Command{
 
 func init() {
 	goCmd.PersistentFlags().StringArrayVarP(&conf.Text, "text", "t", nil, "文本路径，可以为多个文件，或一个文件夹")
-	goCmd.PersistentFlags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表路径，可以为多个")
+	goCmd.PersistentFlags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表路径，可以为多个文件，或一个文件夹")
 
 	goCmd.PersistentFlags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
 	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "", "trie", "匹配算法(trie|strie)")
@@ -59,6 +56,7 @@ func init() {
 	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出全部数据")
 	goCmd.PersistentFlags().BoolVarP(&conf.Hidden, "hidden", "", false, "隐藏 cli 结果展示")
 	goCmd.PersistentFlags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
+	goCmd.PersistentFlags().BoolVarP(&conf.Merge, "merge", "m", false, "合并一码表多文本的结果")
 }
 
 func goCli() {
@@ -75,120 +73,92 @@ func goCli() {
 		conf.Json = true
 	}
 
-	// 判断是否为文件夹
-	if len(conf.Text) == 1 {
-		path := conf.Text[0]
-		fi, err := os.Stat(path)
-		if err != nil {
-			fmt.Println("找不到文件或文件夹", path)
-			panic(err)
-		}
-		if fi.IsDir() {
-			texts := make([]string, 0)
-			files, err := os.ReadDir(path)
-			if err != nil {
-				panic(err)
-			}
-			conf.isFolder = true
-			fmt.Printf("载入 %s 下的文本: \n", path)
-			if !strings.HasSuffix(path, "\\") {
-				path += "\\"
-			}
-			for _, file := range files {
-				if !file.IsDir() {
-					texts = append(texts, path+file.Name())
-					fmt.Printf("-> %s\n", file.Name())
-				}
-			}
-			conf.Text = texts
-		}
+	flag := 0
+	if conf.Split {
+		flag |= smq.S_SPLIT
+	}
+	if conf.Stat {
+		flag |= smq.S_STAT
+	}
+	if conf.Json {
+		flag |= smq.S_JSON
 	}
 
+	// 开始计时
+	start := time.Now()
+	texts := make([]string, 0, len(conf.Text))
+	for _, v := range conf.Text {
+		texts = append(texts, getFiles(v)...)
+	}
+	fmt.Println("载入文本：")
+	for _, v := range texts {
+		if !conf.Hidden {
+			fmt.Println("-> ", v)
+		}
+	}
+	fmt.Println()
+
+	dictNames := make([]string, 0, len(conf.Dict))
+	for _, v := range conf.Dict {
+		dictNames = append(dictNames, getFiles(v)...)
+	}
 	newDict := func() *smq.Dict {
 		return &smq.Dict{
 			Single:       conf.Single,
 			Algorithm:    conf.Algo,
 			PressSpaceBy: conf.PressSpaceBy,
-			Split:        conf.Split,
-			Stat:         conf.Stat,
-			Json:         conf.Json,
+			Verbose:      flag != 0,
 			Clean:        conf.Clean,
 		}
 	}
+	dicts := make([]*smq.Dict, 0, len(dictNames))
+	fmt.Println("载入码表：")
+	dictStartTime := time.Now()
+	mid := time.Now()
+	for _, v := range dictNames {
+		d := newDict()
+		d.Load(v)
+		dicts = append(dicts, d)
+		if !conf.Hidden {
+			fmt.Println("=> ", v, "\t耗时：", time.Since(mid))
+			mid = time.Now()
+		}
+	}
+	fmt.Printf("载入码表耗时：%v\n\n", time.Since(dictStartTime))
 
-	// 对多文本启用多协程
-	if len(conf.Text) > 1 {
-		start := time.Now()
-		dicts := make([]*smq.Dict, len(conf.Dict))
-		for i := range dicts {
-			dicts[i] = newDict()
-			dicts[i].Load(conf.Dict[i])
-			fmt.Println("载入码表：", dicts[i].Name)
+	// race
+	fmt.Println("比赛开始……")
+	textLenTotal := 0
+	resArr := smq.Parallel(texts, dicts)
+
+	if conf.Merge {
+		resArr2 := transpose(resArr)
+		for _, res := range resArr2 {
+			res2 := smq.MergeResults(res, conf.Stat)
+			printSep()
+			Output([]*smq.Result{res2})
+			res2.Output(flag)
+			textLenTotal = res2.TextLen
 		}
-		if len(conf.Dict) != 1 {
-			fmt.Printf("比赛开始，共 %d 个码表\n", len(dicts))
-		}
-		textTotalLen := int64(0)
-		var wg sync.WaitGroup
-		ch := make(chan struct{}, 8)
-		for _, text := range conf.Text {
-			ch <- struct{}{}
-			wg.Add(1)
-			go func(text string) {
-				mid := time.Now()
-				// 初始化赛码器
-				s := &smq.Smq{}
-				err := s.Load(text)
-				if err != nil {
-					fmt.Println("Error! 读取文件失败：", err)
-					<-ch
-					wg.Done()
-					return
-				}
-				res := s.EvalDicts(dicts)
-				atomic.AddInt64(&textTotalLen, int64(res[0].Basic.TextLen))
-				if !conf.isFolder {
-					fmt.Println("载入文本：", s.Name)
-				}
-				if !conf.Hidden {
-					fmt.Printf("此文本耗时：%v\n", time.Since(mid))
-					printSep()
-					Output(res, s.Name)
-				}
-				<-ch
-				wg.Done()
-			}(text)
-		}
-		wg.Wait()
-		fmt.Printf("共载入 %d 个文本，总字数 %d，总耗时：%v\n", len(conf.Text), textTotalLen, time.Since(start))
+		fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dicts), len(texts), textLenTotal, time.Since(start))
 		return
 	}
 
-	// 下面针对单文本
-	start := time.Now()
-	// 初始化赛码器
-	s := &smq.Smq{}
-	s.Load(conf.Text[0])
-
-	dicts := make([]*smq.Dict, 0)
-	// 添加码表
-	for _, v := range conf.Dict {
-		dict := newDict()
-		dict.Load(v)
-		fmt.Println("载入码表：", dict.Name)
-		dicts = append(dicts, dict)
+	for _, v := range resArr {
+		if len(v) == 0 {
+			break
+		}
+		textLenTotal += v[0].TextLen
+		if !conf.Hidden {
+			printSep()
+			Output(v)
+		}
+		for _, res := range v {
+			res.Output(flag)
+		}
 	}
 
-	// 开始赛码
-	if len(conf.Dict) != 1 {
-		fmt.Printf("比赛开始，共 %d 个码表\n", len(dicts))
-	}
-	res := s.EvalDicts(dicts)
-	fmt.Printf("总耗时：%v\n", time.Since(start))
-	if !conf.Hidden {
-		printSep()
-		Output(res, s.Name)
-	}
+	fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dicts), len(texts), textLenTotal, time.Since(start))
 }
 
 func goWithSurvey() {
@@ -248,12 +218,12 @@ func goWithSurvey() {
 
 	start := time.Now()
 	// 初始化赛码器
-	s := &smq.Smq{}
+	t := &smq.Text{}
 	if info.Text == "" {
 		fmt.Println("没有输入文本")
 		return
 	} else {
-		err := s.Load(info.Text)
+		err := t.Load(info.Text)
 		if err != nil {
 			log.Panic("Error! 读取文件失败：", err)
 		}
@@ -273,8 +243,8 @@ func goWithSurvey() {
 	}
 	d.Load(info.Dict)
 	// 开始赛码
-	res := s.Eval(d)
+	res := t.RaceOne(d)
 	fmt.Printf("耗时：%v\n", time.Since(start))
 	printSep()
-	Output([]*smq.Result{res}, s.Name)
+	Output([]*smq.Result{res})
 }

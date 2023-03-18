@@ -28,14 +28,20 @@ func AddToVal(sli *[]int, pos int, val int) {
 	(*sli)[pos] += val
 }
 
-func OutputDetail(dict *Dict, textName string, res *Result) {
+const (
+	S_SPLIT = 1 << iota
+	S_STAT
+	S_JSON
+)
+
+func (res *Result) Output(flag int) {
 
 	// 创建文件夹
 	os.MkdirAll("result", os.ModePerm)
 
 	// 输出分词结果
-	if dict.Split {
-		f, _ := os.OpenFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.Name, textName), os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0666)
+	if flag&S_SPLIT != 0 {
+		f, _ := os.OpenFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.DictName, res.TextName), os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0666)
 		for i := range res.wcIdxs {
 			var buf strings.Builder
 			for j := range res.wcIdxs[i].wordSli {
@@ -49,7 +55,7 @@ func OutputDetail(dict *Dict, textName string, res *Result) {
 	}
 
 	// 输出词条数据
-	if dict.Stat {
+	if flag&S_STAT != 0 {
 		type detail struct {
 			word string
 			*CodePosCount
@@ -73,13 +79,13 @@ func OutputDetail(dict *Dict, textName string, res *Result) {
 			buf.WriteString(strconv.Itoa(v.Count))
 			buf.WriteByte('\n')
 		}
-		os.WriteFile(fmt.Sprintf("result/词条数据_%s_%s.txt", res.Name, textName), []byte(buf.String()), 0666)
+		os.WriteFile(fmt.Sprintf("result/词条数据_%s_%s.txt", res.DictName, res.TextName), []byte(buf.String()), 0666)
 	}
 
 	// 输出 json 数据
-	if dict.Json {
+	if flag&S_JSON != 0 {
 		tmp3, _ := json.MarshalIndent(res, "", "  ")
-		os.WriteFile(fmt.Sprintf("result/data_%s_%s.json", res.Name, textName), tmp3, 0666)
+		os.WriteFile(fmt.Sprintf("result/data_%s_%s.json", res.DictName, res.TextName), tmp3, 0666)
 		fmt.Println("已输出详细数据，请查看 result 文件夹")
 	}
 }

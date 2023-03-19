@@ -80,9 +80,7 @@ func goCli() {
 	}
 	fmt.Println("载入文本：")
 	for _, v := range texts {
-		if !conf.Hidden {
-			fmt.Println("-> ", v)
-		}
+		fmt.Println("-> ", v)
 	}
 	fmt.Println()
 
@@ -107,13 +105,11 @@ func goCli() {
 		d := newDict()
 		d.Load(v)
 		dicts = append(dicts, d)
-		if !conf.Hidden {
-			if len(dictNames) == 1 {
-				fmt.Println("=> ", v)
-			} else {
-				fmt.Println("=> ", v, "\t耗时：", time.Since(mid))
-				mid = time.Now()
-			}
+		if len(dictNames) == 1 {
+			fmt.Println("=> ", v)
+		} else {
+			fmt.Println("=> ", v, "\t耗时：", time.Since(mid))
+			mid = time.Now()
 		}
 	}
 	fmt.Printf("载入码表耗时：%v\n\n", time.Since(dictStartTime))
@@ -127,8 +123,10 @@ func goCli() {
 		resArr2 := transpose(resArr)
 		for _, res := range resArr2 {
 			res2 := smq.MergeResults(res, conf.Stat)
-			printSep()
-			Output([]*smq.Result{res2})
+			if !conf.Hidden {
+				printSep()
+				Output([]*smq.Result{res2})
+			}
 			OutputHTML([]*smq.Result{res2}, conf.HTML)
 			res2.Output(flag)
 			textLenTotal = res2.TextLen
@@ -145,8 +143,8 @@ func goCli() {
 		if !conf.Hidden {
 			printSep()
 			Output(v)
-			OutputHTML(v, conf.HTML)
 		}
+		OutputHTML(v, conf.HTML)
 		for _, res := range v {
 			res.Output(flag)
 		}

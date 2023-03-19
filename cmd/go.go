@@ -24,7 +24,7 @@ var conf = &struct {
 	HTML    bool // 保存 html 结果
 
 	Hidden bool // 隐藏 cli 结果展示
-	Merge  bool // 合并一码表多文本的结果
+	Merge  bool // 合并多文本的结果
 }{}
 
 func init() {
@@ -43,7 +43,7 @@ func init() {
 	rootCmd.Flags().BoolVarP(&conf.HTML, "html", "", false, "保存 html 结果")
 
 	rootCmd.Flags().BoolVarP(&conf.Hidden, "hidden", "", false, "隐藏 cli 结果展示")
-	rootCmd.Flags().BoolVarP(&conf.Merge, "merge", "m", false, "合并一码表多文本的结果")
+	rootCmd.Flags().BoolVarP(&conf.Merge, "merge", "m", false, "合并多文本的结果")
 }
 
 func goCli() {

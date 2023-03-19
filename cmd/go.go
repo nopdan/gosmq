@@ -32,8 +32,7 @@ func init() {
 	rootCmd.Flags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表文件或文件夹，可以为多个")
 
 	rootCmd.Flags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
-	rootCmd.Flags().StringVarP(&conf.Algo, "algo", "", "trie", "匹配算法(trie|strie)")
-	rootCmd.Flags().BoolVarP(&conf.Stable, "stable", "", false, "按码表顺序(覆盖algo)")
+	rootCmd.Flags().BoolVarP(&conf.Stable, "stable", "", false, "按码表顺序")
 	rootCmd.Flags().StringVarP(&conf.PressSpaceBy, "space", "k", "both", "空格按键方式 left|right|both")
 	rootCmd.Flags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
 
@@ -59,6 +58,7 @@ func goCli() {
 		conf.Split = true
 		conf.Stat = true
 		conf.Json = true
+		conf.HTML = true
 	}
 
 	flag := 0

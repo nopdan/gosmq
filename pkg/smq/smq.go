@@ -63,6 +63,7 @@ func (t *Text) Race(dicts []*Dict) []*Result {
 		resArr[i].TextName = t.Name
 		resArr[i].DictName = dicts[i].Name
 		resArr[i].DictLen = dicts[i].length
+		resArr[i].Single = dicts[i].Single
 	}
 	brd := bufio.NewReader(t.reader)
 

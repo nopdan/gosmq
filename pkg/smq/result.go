@@ -10,7 +10,8 @@ type Result struct {
 	TextName string
 	TextLen  int // 文本字数
 	DictName string
-	DictLen  int // 词条数
+	DictLen  int  // 词条数
+	Single   bool // 是否为单字码表
 
 	Basic     basic
 	Words     words     // 打词

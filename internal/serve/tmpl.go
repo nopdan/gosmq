@@ -30,7 +30,7 @@ type TmplData struct {
 	Results     []*Result
 }
 
-// 初始化，接收文本名
+// 初始化
 func NewHTML() *TmplData {
 	ret := new(TmplData)
 	return ret

@@ -2,17 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"log"
-	"path/filepath"
 	"time"
 
-	"github.com/AlecAivazis/survey/v2"
-	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/imetool/gosmq/pkg/smq"
 )
-
-type Basic struct {
-}
 
 var conf = &struct {
 	Text []string // 文本
@@ -22,15 +15,16 @@ var conf = &struct {
 	Algo         string // 匹配算法
 	Stable       bool   // 按码表顺序(覆盖algo)
 	PressSpaceBy string // 空格按键方式 left|right|both
-	Split        bool   // 输出分词数据
-	Stat         bool   // 输出词条数据
-	Json         bool   // 输出json数据
-	Verbose      bool   // 输出全部数据
-	Hidden       bool   // 隐藏 cli 结果展示
 	Clean        bool   // 只统计词库中的词条
-	Merge        bool   // 合并一码表多文本的结果
 
-	isFolder bool
+	Verbose bool // 输出全部数据
+	Split   bool // 输出分词数据
+	Stat    bool // 输出词条数据
+	Json    bool // 输出json数据
+	HTML    bool // 保存 html 结果
+
+	Hidden bool // 隐藏 cli 结果展示
+	Merge  bool // 合并一码表多文本的结果
 }{}
 
 func init() {
@@ -41,12 +35,15 @@ func init() {
 	rootCmd.Flags().StringVarP(&conf.Algo, "algo", "", "trie", "匹配算法(trie|strie)")
 	rootCmd.Flags().BoolVarP(&conf.Stable, "stable", "", false, "按码表顺序(覆盖algo)")
 	rootCmd.Flags().StringVarP(&conf.PressSpaceBy, "space", "k", "both", "空格按键方式 left|right|both")
+	rootCmd.Flags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
+
+	rootCmd.Flags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出全部数据")
 	rootCmd.Flags().BoolVarP(&conf.Split, "split", "", false, "输出分词数据")
 	rootCmd.Flags().BoolVarP(&conf.Stat, "stat", "", false, "输出词条数据")
-	rootCmd.Flags().BoolVarP(&conf.Json, "json", "", false, "输出json数据")
-	rootCmd.Flags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出全部数据")
+	rootCmd.Flags().BoolVarP(&conf.Json, "json", "", false, "输出 json 数据")
+	rootCmd.Flags().BoolVarP(&conf.HTML, "html", "", false, "保存 html 结果")
+
 	rootCmd.Flags().BoolVarP(&conf.Hidden, "hidden", "", false, "隐藏 cli 结果展示")
-	rootCmd.Flags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
 	rootCmd.Flags().BoolVarP(&conf.Merge, "merge", "m", false, "合并一码表多文本的结果")
 }
 
@@ -122,7 +119,7 @@ func goCli() {
 	fmt.Printf("载入码表耗时：%v\n\n", time.Since(dictStartTime))
 
 	// race
-	fmt.Println("比赛开始……")
+	fmt.Println("比赛开始...")
 	textLenTotal := 0
 	resArr := smq.Parallel(texts, dicts)
 
@@ -132,6 +129,7 @@ func goCli() {
 			res2 := smq.MergeResults(res, conf.Stat)
 			printSep()
 			Output([]*smq.Result{res2})
+			OutputHTML([]*smq.Result{res2}, conf.HTML)
 			res2.Output(flag)
 			textLenTotal = res2.TextLen
 		}
@@ -147,6 +145,7 @@ func goCli() {
 		if !conf.Hidden {
 			printSep()
 			Output(v)
+			OutputHTML(v, conf.HTML)
 		}
 		for _, res := range v {
 			res.Output(flag)
@@ -154,93 +153,4 @@ func goCli() {
 	}
 
 	fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dicts), len(texts), textLenTotal, time.Since(start))
-}
-
-func goWithSurvey() {
-
-	handle := func(err error) {
-		if err != nil {
-			if err == terminal.InterruptErr {
-				log.Fatal("interrupted")
-			}
-		}
-	}
-
-	var info = &struct {
-		Text         string
-		Dict         string
-		PressSpaceBy string
-		Single       bool
-		Stable       bool
-	}{}
-
-	err := survey.AskOne(&survey.Input{
-		Message: "文本:",
-		Suggest: func(toComplete string) []string {
-			files, _ := filepath.Glob(toComplete + "*")
-			return files
-		},
-	}, &info.Text, survey.WithValidator(survey.Required))
-	handle(err)
-
-	err = survey.AskOne(&survey.Input{
-		Message: "码表:",
-		Suggest: func(toComplete string) []string {
-			files, _ := filepath.Glob(toComplete + "*")
-			return files
-		},
-	}, &info.Dict, survey.WithValidator(survey.Required))
-	handle(err)
-
-	err = survey.AskOne(&survey.Select{
-		Message: "空格按键方式:",
-		Options: []string{"both", "left", "right"},
-	}, &info.PressSpaceBy)
-	handle(err)
-
-	err = survey.AskOne(&survey.Confirm{
-		Message: "单字模式:",
-		Default: false,
-	}, &info.Single)
-	handle(err)
-
-	err = survey.AskOne(&survey.Confirm{
-		Message: "按码表顺序:",
-		Default: false,
-	}, &info.Stable)
-	handle(err)
-
-	fmt.Printf("\n\n")
-
-	start := time.Now()
-	// 初始化赛码器
-	t := &smq.Text{}
-	if info.Text == "" {
-		fmt.Println("没有输入文本")
-		return
-	} else {
-		err := t.Load(info.Text)
-		if err != nil {
-			log.Panic("Error! 读取文件失败：", err)
-		}
-	}
-
-	var algo string
-	if info.Stable {
-		algo = "strie"
-	} else {
-		algo = "trie"
-	}
-
-	d := &smq.Dict{
-		Single:       info.Single,
-		Algorithm:    algo,
-		PressSpaceBy: info.PressSpaceBy,
-	}
-	d.Load(info.Dict)
-	// 开始赛码
-	res := t.RaceOne(d)
-	fmt.Printf("耗时：%v\n", time.Since(start))
-	printSep()
-	Output([]*smq.Result{res})
 }

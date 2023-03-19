@@ -12,12 +12,6 @@ var rootCmd = &cobra.Command{
 	Short: "",
 	Long:  "这是一个超级快的赛码器\n用于对基于码表的输入法针对特定文章进行测评\nhttps://github.com/imetool/gosmq",
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) == 0 {
-			fmt.Println("这是一个简易的交互程序，完整功能")
-
-			goWithSurvey()
-			return
-		}
 		goCli()
 	},
 }

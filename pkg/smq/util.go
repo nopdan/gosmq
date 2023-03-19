@@ -36,12 +36,14 @@ const (
 
 func (res *Result) Output(flag int) {
 
-	// 创建文件夹
-	os.MkdirAll("result", os.ModePerm)
-
 	// 输出分词结果
-	if flag&S_SPLIT != 0 {
-		f, _ := os.OpenFile(fmt.Sprintf("result/分词结果_%s_%s_.txt", res.DictName, res.TextName), os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0666)
+	if flag&S_SPLIT != 0 && len(res.wcIdxs) == 0 {
+		// 创建文件夹
+		dir := "02-分词结果"
+		os.MkdirAll(dir, os.ModePerm)
+		fileName := fmt.Sprintf("%s/%s_%s_.txt", dir, res.DictName, res.TextName)
+		f, _ := os.OpenFile(fileName, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0666)
+
 		for i := range res.wcIdxs {
 			var buf strings.Builder
 			for j := range res.wcIdxs[i].wordSli {
@@ -52,10 +54,17 @@ func (res *Result) Output(flag int) {
 			}
 			f.WriteString(buf.String())
 		}
+		f.Close()
+		fmt.Println("已输出分词结果")
 	}
 
-	// 输出词条数据
+	// 输出词条统计数据
 	if flag&S_STAT != 0 {
+		// 创建文件夹
+		dir := "01-词条统计"
+		os.MkdirAll(dir, os.ModePerm)
+		fileName := fmt.Sprintf("%s/%s_%s.txt", dir, res.DictName, res.TextName)
+
 		type detail struct {
 			word string
 			*CodePosCount
@@ -79,13 +88,20 @@ func (res *Result) Output(flag int) {
 			buf.WriteString(strconv.Itoa(v.Count))
 			buf.WriteByte('\n')
 		}
-		os.WriteFile(fmt.Sprintf("result/词条数据_%s_%s.txt", res.DictName, res.TextName), []byte(buf.String()), 0666)
+		os.WriteFile(fileName, []byte(buf.String()), 0666)
+		fmt.Println("已输出词条统计数据")
 	}
 
 	// 输出 json 数据
 	if flag&S_JSON != 0 {
-		tmp3, _ := json.MarshalIndent(res, "", "  ")
-		os.WriteFile(fmt.Sprintf("result/data_%s_%s.json", res.DictName, res.TextName), tmp3, 0666)
-		fmt.Println("已输出详细数据，请查看 result 文件夹")
+		// 创建文件夹
+		dir := "00-data"
+		os.MkdirAll(dir, os.ModePerm)
+		fileName := fmt.Sprintf("%s/%s_%s.json", dir, res.DictName, res.TextName)
+
+		tmp, _ := json.MarshalIndent(res, "", "  ")
+		os.WriteFile(fileName, tmp, 0666)
+		fmt.Println("已输出 json 数据")
 	}
+
 }

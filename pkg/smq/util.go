@@ -44,6 +44,9 @@ func (res *Result) Output(flag int) {
 		fileName := fmt.Sprintf("%s/%s_%s_.txt", dir, res.DictName, res.TextName)
 		f, _ := os.OpenFile(fileName, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0666)
 
+		sort.Slice(res.wcIdxs, func(j, k int) bool {
+			return res.wcIdxs[j].idx < res.wcIdxs[k].idx
+		})
 		for i := range res.wcIdxs {
 			var buf strings.Builder
 			for j := range res.wcIdxs[i].wordSli {

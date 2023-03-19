@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"io"
 	"os"
-	"sort"
 	"strings"
 	"sync"
 
@@ -97,15 +96,6 @@ func (t *Text) Race(dicts []*Dict) []*Result {
 		}
 	}
 	wg.Wait()
-
-	for i, dict := range dicts {
-		if dict.Verbose {
-			sort.Slice(resArr[i].wcIdxs, func(j, k int) bool {
-				return resArr[i].wcIdxs[j].idx < resArr[i].wcIdxs[k].idx
-			})
-		}
-	}
-
 	for i := range dicts {
 		resArr[i].stat()
 	}

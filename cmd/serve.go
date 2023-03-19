@@ -17,6 +17,6 @@ var Port string
 var Silent bool
 
 func init() {
-	serveCmd.PersistentFlags().StringVarP(&Port, "port", "p", "7172", "指定端口")
-	serveCmd.PersistentFlags().BoolVarP(&Silent, "silent", "s", false, "静默启动")
+	serveCmd.Flags().StringVarP(&Port, "port", "p", "7172", "指定端口")
+	serveCmd.Flags().BoolVarP(&Silent, "silent", "s", false, "静默启动")
 }

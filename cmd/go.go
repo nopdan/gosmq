@@ -9,7 +9,6 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/imetool/gosmq/pkg/smq"
-	"github.com/spf13/cobra"
 )
 
 type Basic struct {
@@ -34,29 +33,21 @@ var conf = &struct {
 	isFolder bool
 }{}
 
-var goCmd = &cobra.Command{
-	Use:   "go",
-	Short: "命令行模式赛码",
-	Run: func(cmd *cobra.Command, args []string) {
-		goCli()
-	},
-}
-
 func init() {
-	goCmd.PersistentFlags().StringArrayVarP(&conf.Text, "text", "t", nil, "文本路径，可以为多个文件，或一个文件夹")
-	goCmd.PersistentFlags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表路径，可以为多个文件，或一个文件夹")
+	rootCmd.Flags().StringArrayVarP(&conf.Text, "text", "t", nil, "文本文件或文件夹，可以为多个")
+	rootCmd.Flags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表文件或文件夹，可以为多个")
 
-	goCmd.PersistentFlags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
-	goCmd.PersistentFlags().StringVarP(&conf.Algo, "algo", "", "trie", "匹配算法(trie|strie)")
-	goCmd.PersistentFlags().BoolVarP(&conf.Stable, "stable", "", false, "按码表顺序(覆盖algo)")
-	goCmd.PersistentFlags().StringVarP(&conf.PressSpaceBy, "space", "k", "both", "空格按键方式 left|right|both")
-	goCmd.PersistentFlags().BoolVarP(&conf.Split, "split", "", false, "输出分词数据")
-	goCmd.PersistentFlags().BoolVarP(&conf.Stat, "stat", "", false, "输出词条数据")
-	goCmd.PersistentFlags().BoolVarP(&conf.Json, "json", "", false, "输出json数据")
-	goCmd.PersistentFlags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出全部数据")
-	goCmd.PersistentFlags().BoolVarP(&conf.Hidden, "hidden", "", false, "隐藏 cli 结果展示")
-	goCmd.PersistentFlags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
-	goCmd.PersistentFlags().BoolVarP(&conf.Merge, "merge", "m", false, "合并一码表多文本的结果")
+	rootCmd.Flags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
+	rootCmd.Flags().StringVarP(&conf.Algo, "algo", "", "trie", "匹配算法(trie|strie)")
+	rootCmd.Flags().BoolVarP(&conf.Stable, "stable", "", false, "按码表顺序(覆盖algo)")
+	rootCmd.Flags().StringVarP(&conf.PressSpaceBy, "space", "k", "both", "空格按键方式 left|right|both")
+	rootCmd.Flags().BoolVarP(&conf.Split, "split", "", false, "输出分词数据")
+	rootCmd.Flags().BoolVarP(&conf.Stat, "stat", "", false, "输出词条数据")
+	rootCmd.Flags().BoolVarP(&conf.Json, "json", "", false, "输出json数据")
+	rootCmd.Flags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出全部数据")
+	rootCmd.Flags().BoolVarP(&conf.Hidden, "hidden", "", false, "隐藏 cli 结果展示")
+	rootCmd.Flags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
+	rootCmd.Flags().BoolVarP(&conf.Merge, "merge", "m", false, "合并一码表多文本的结果")
 }
 
 func goCli() {
@@ -166,6 +157,7 @@ func goCli() {
 }
 
 func goWithSurvey() {
+
 	handle := func(err error) {
 		if err != nil {
 			if err == terminal.InterruptErr {

@@ -4,44 +4,31 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/imetool/gosmq/internal/serve"
 	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
-	Use:   "smq",
-	Short: "gosmq 是一个非常快的赛码器。",
-	Long:  "对基于码表的输入法针对特定文章进行测评\nhttps://github.com/imetool/gosmq",
+	Use:   "",
+	Short: "",
+	Long:  "这是一个超级快的赛码器\n用于对基于码表的输入法针对特定文章进行测评\nhttps://github.com/imetool/gosmq",
 	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) == 0 {
+			fmt.Println("这是一个简易的交互程序，完整功能")
 
+			goWithSurvey()
+			return
+		}
+		goCli()
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(goCmd)
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(serveCmd)
 	rootCmd.AddCommand(genCmd)
 }
 
 func Execute() {
-	if len(os.Args) <= 1 {
-		serve.Serve("7172", false)
-		return
-	}
-	if len(os.Args) == 2 {
-		if os.Args[1] == "gen" {
-			fmt.Println("交互模式")
-			genWithSurvey()
-			return
-		}
-		if os.Args[1] == "go" {
-			fmt.Println("交互模式")
-			goWithSurvey()
-			return
-		}
-	}
-
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Fprintln(os.Stderr, err)
 		os.Exit(1)

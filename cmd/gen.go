@@ -16,6 +16,11 @@ var genCmd = &cobra.Command{
 	Use:   "gen",
 	Short: "转换赛码表",
 	Run: func(cmd *cobra.Command, args []string) {
+		if len(args) == 0 {
+			fmt.Println("交互模式转换赛码表")
+			genWithSurvey()
+			return
+		}
 		table := Config.Gen()
 		path := "dict/" + util.GetFileName(Config.Path) + ".txt"
 		gen.Write(table, path)
@@ -25,11 +30,11 @@ var genCmd = &cobra.Command{
 var Config gen.Config
 
 func init() {
-	genCmd.PersistentFlags().StringVarP(&Config.Path, "dict", "i", "", "待转换的码表")
-	genCmd.PersistentFlags().StringVarP(&Config.Format, "format", "f", "jisu", "待转换码表的格式")
-	genCmd.PersistentFlags().StringVarP(&Config.SelectKeys, "select", "k", "_;'", "自定义选重键")
-	genCmd.PersistentFlags().IntVarP(&Config.PushStart, "push", "p", 4, "起顶码长")
-	genCmd.PersistentFlags().BoolVarP(&Config.SortByWordLen, "sort", "s", false, "按照词长重新排序")
+	genCmd.Flags().StringVarP(&Config.Path, "dict", "i", "", "待转换的码表")
+	genCmd.Flags().StringVarP(&Config.Format, "format", "f", "jisu", "待转换码表的格式")
+	genCmd.Flags().StringVarP(&Config.SelectKeys, "select", "k", "_;'", "自定义选重键")
+	genCmd.Flags().IntVarP(&Config.PushStart, "push", "p", 4, "起顶码长")
+	genCmd.Flags().BoolVarP(&Config.SortByWordLen, "sort", "s", false, "按照词长重新排序")
 }
 
 func genWithSurvey() {
@@ -43,7 +48,7 @@ func genWithSurvey() {
 	}
 
 	err := survey.AskOne(&survey.Input{
-		Message: "待转换的码表路径:",
+		Message: "待转换的码表:",
 		Suggest: func(toComplete string) []string {
 			files, _ := filepath.Glob(toComplete + "*")
 			return files
@@ -52,7 +57,7 @@ func genWithSurvey() {
 	handle(err)
 
 	err = survey.AskOne(&survey.Select{
-		Message: "待转换码表的格式:",
+		Message: "码表格式:",
 		Options: []string{"极速赛码表", "多多(词在前)", "冰凌(编码在前)", "极点"},
 	}, &conf.Format)
 	handle(err)

@@ -29,7 +29,7 @@ func AddToVal(sli *[]int, pos int, val int) {
 
 func (res *Result) OutputSplit(dict *Dict) {
 	// 输出分词结果
-	if dict.Split && len(res.wcIdxs) == 0 {
+	if dict.Split && len(res.wcIdxs) != 0 {
 		// 创建文件夹
 		dir := "02-分词结果"
 		os.MkdirAll(dir, os.ModePerm)
@@ -50,7 +50,6 @@ func (res *Result) OutputSplit(dict *Dict) {
 			f.WriteString(buf.String())
 		}
 		f.Close()
-		fmt.Println("已输出分词结果")
 		// 清空 wcIdxs
 		res.wcIdxs = make([]wcIdx, 0)
 	}
@@ -88,7 +87,6 @@ func (res *Result) OutputStat(dict *Dict) {
 			buf.WriteByte('\n')
 		}
 		os.WriteFile(fileName, []byte(buf.String()), 0666)
-		fmt.Println("已输出词条统计数据")
 		res.statData = make(map[string]*CodePosCount)
 	}
 }

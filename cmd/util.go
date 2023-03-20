@@ -20,7 +20,6 @@ func OutPutJson(res *smq.Result, flag bool) {
 
 		tmp, _ := json.MarshalIndent(res, "", "  ")
 		os.WriteFile(fileName, tmp, 0666)
-		fmt.Println("已输出 json 数据")
 	}
 }
 
@@ -36,7 +35,6 @@ func OutputHTML(res []*smq.Result, flag bool) {
 			h.AddResult(v)
 		}
 		h.OutputHTMLFile(fileName)
-		fmt.Println("已保存 html 结果")
 	}
 }
 

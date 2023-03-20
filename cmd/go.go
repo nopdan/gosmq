@@ -60,9 +60,6 @@ func goCli() {
 		conf.Json = true
 		conf.HTML = true
 	}
-	if conf.Merge && conf.Split {
-		fmt.Println("--merge 不会输出分词结果。")
-	}
 	// 开始计时
 	start := time.Now()
 	texts := make([]string, 0, len(conf.Text))
@@ -109,6 +106,25 @@ func goCli() {
 	// race
 	fmt.Println("比赛开始...")
 	textLenTotal := 0
+	var printEnd = func() {
+		if conf.Split {
+			if conf.Merge {
+				fmt.Println("--merge 不会输出分词结果。")
+			} else {
+				fmt.Println("已输出分词结果")
+			}
+		}
+		if conf.Stat {
+			fmt.Println("已输出词条统计数据")
+		}
+		if conf.HTML {
+			fmt.Println("已保存 html 结果")
+		}
+		if conf.Json {
+			fmt.Println("已输出 json 数据")
+		}
+		fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dicts), len(texts), textLenTotal, time.Since(start))
+	}
 
 	if conf.Merge {
 		resArr := smq.ParallelMerge(texts, dicts)
@@ -121,14 +137,13 @@ func goCli() {
 			OutPutJson(res, conf.Json)
 			textLenTotal = res.TextLen
 		}
-		fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dicts), len(texts), textLenTotal, time.Since(start))
+		printEnd()
 		return
 	}
 
-	resArr := smq.Parallel(texts, dicts)
-	for _, v := range resArr {
+	smq.Parallel(texts, dicts, func(v []*smq.Result) {
 		if len(v) == 0 {
-			break
+			return
 		}
 		textLenTotal += v[0].TextLen
 		if !conf.Hidden {
@@ -139,7 +154,6 @@ func goCli() {
 		for _, res := range v {
 			OutPutJson(res, conf.Json)
 		}
-	}
-
-	fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dicts), len(texts), textLenTotal, time.Since(start))
+	})
+	printEnd()
 }

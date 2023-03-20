@@ -103,12 +103,9 @@ func (t *Text) Race(dicts []*Dict, output bool) []*Result {
 	return resArr
 }
 
-// 多篇文章计算多个码表
-func Parallel(texts []string, dicts []*Dict) [][]*Result {
-	resArr := make([][]*Result, len(texts))
-
+// 多篇文章计算多个码表，回调函数针对每篇文章生成的结果列表
+func Parallel(texts []string, dicts []*Dict, callback func([]*Result)) {
 	var wg sync.WaitGroup
-	var lock sync.Mutex
 	ch := make(chan struct{}, 16)
 	for i, text := range texts {
 		ch <- struct{}{}
@@ -117,15 +114,12 @@ func Parallel(texts []string, dicts []*Dict) [][]*Result {
 			t := &Text{}
 			t.Load(text)
 			res := t.Race(dicts, true)
-			lock.Lock()
-			resArr[i] = res
-			lock.Unlock()
+			callback(res)
 			<-ch
 			wg.Done()
 		}(text, i)
 	}
 	wg.Wait()
-	return resArr
 }
 
 // 多篇文章计算多个码表，合并同一个码表的多个结果

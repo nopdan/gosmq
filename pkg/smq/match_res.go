@@ -55,8 +55,8 @@ type matchRes struct {
 }
 
 // 将每次匹配得到的信息追加到总结果
-func (res *Result) append(mRes *matchRes, dict *Dict) {
-	if dict.Verbose {
+func (res *Result) append(mRes *matchRes, dict *Dict, idx int) {
+	if dict.Stat {
 		for k, v := range mRes.statData {
 			if _, ok := res.statData[k]; !ok {
 				res.statData[k] = v
@@ -64,6 +64,9 @@ func (res *Result) append(mRes *matchRes, dict *Dict) {
 				res.statData[k].Count += v.Count
 			}
 		}
+	}
+	if dict.Split {
+		res.wcIdxs = append(res.wcIdxs, wcIdx{idx, mRes.wordSlice, mRes.codeSlice})
 	}
 	res.Basic.Commits += mRes.Commits
 	res.Basic.NotHanCount += mRes.NotHanCount

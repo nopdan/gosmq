@@ -1,7 +1,6 @@
 package smq
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"sort"
@@ -28,16 +27,9 @@ func AddToVal(sli *[]int, pos int, val int) {
 	(*sli)[pos] += val
 }
 
-const (
-	S_SPLIT = 1 << iota
-	S_STAT
-	S_JSON
-)
-
-func (res *Result) Output(flag int) {
-
+func (res *Result) OutputSplit(dict *Dict) {
 	// 输出分词结果
-	if flag&S_SPLIT != 0 && len(res.wcIdxs) == 0 {
+	if dict.Split && len(res.wcIdxs) == 0 {
 		// 创建文件夹
 		dir := "02-分词结果"
 		os.MkdirAll(dir, os.ModePerm)
@@ -59,10 +51,14 @@ func (res *Result) Output(flag int) {
 		}
 		f.Close()
 		fmt.Println("已输出分词结果")
+		// 清空 wcIdxs
+		res.wcIdxs = make([]wcIdx, 0)
 	}
+}
 
+func (res *Result) OutputStat(dict *Dict) {
 	// 输出词条统计数据
-	if flag&S_STAT != 0 {
+	if dict.Stat {
 		// 创建文件夹
 		dir := "01-词条统计"
 		os.MkdirAll(dir, os.ModePerm)
@@ -93,18 +89,6 @@ func (res *Result) Output(flag int) {
 		}
 		os.WriteFile(fileName, []byte(buf.String()), 0666)
 		fmt.Println("已输出词条统计数据")
+		res.statData = make(map[string]*CodePosCount)
 	}
-
-	// 输出 json 数据
-	if flag&S_JSON != 0 {
-		// 创建文件夹
-		dir := "00-data"
-		os.MkdirAll(dir, os.ModePerm)
-		fileName := fmt.Sprintf("%s/%s_%s.json", dir, res.DictName, res.TextName)
-
-		tmp, _ := json.MarshalIndent(res, "", "  ")
-		os.WriteFile(fileName, tmp, 0666)
-		fmt.Println("已输出 json 数据")
-	}
-
 }

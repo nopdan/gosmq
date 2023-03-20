@@ -44,7 +44,7 @@ func (t *Text) LoadString(name, text string) {
 
 // 计算一个码表
 func (t *Text) RaceOne(di *Dict) *Result {
-	resArr := t.Race([]*Dict{di})
+	resArr := t.Race([]*Dict{di}, true)
 	return resArr[0]
 }
 
@@ -54,8 +54,8 @@ type wcIdx struct {
 	codeSli []string
 }
 
-// 一篇文章计算多个码表
-func (t *Text) Race(dicts []*Dict) []*Result {
+// 一篇文章计算多个码表，是否输出
+func (t *Text) Race(dicts []*Dict, output bool) []*Result {
 	resArr := make([]*Result, len(dicts))
 	for i := range dicts {
 		resArr[i] = newResult()
@@ -83,10 +83,7 @@ func (t *Text) Race(dicts []*Dict) []*Result {
 				mRes.dictIdx = i
 				// 加锁操作
 				lock.Lock()
-				resArr[i].append(mRes, dicts[i])
-				if dicts[i].Verbose {
-					resArr[i].wcIdxs = append(resArr[i].wcIdxs, wcIdx{idx, mRes.wordSlice, mRes.codeSlice})
-				}
+				resArr[i].append(mRes, dicts[i], i)
 				lock.Unlock()
 				<-ch
 			}(text, i, idx)
@@ -98,6 +95,10 @@ func (t *Text) Race(dicts []*Dict) []*Result {
 	wg.Wait()
 	for i := range dicts {
 		resArr[i].stat()
+		if output {
+			resArr[i].OutputSplit(dicts[i])
+			resArr[i].OutputStat(dicts[i])
+		}
 	}
 	return resArr
 }
@@ -115,7 +116,7 @@ func Parallel(texts []string, dicts []*Dict) [][]*Result {
 		go func(text string, i int) {
 			t := &Text{}
 			t.Load(text)
-			res := t.Race(dicts)
+			res := t.Race(dicts, true)
 			lock.Lock()
 			resArr[i] = res
 			lock.Unlock()
@@ -124,5 +125,42 @@ func Parallel(texts []string, dicts []*Dict) [][]*Result {
 		}(text, i)
 	}
 	wg.Wait()
+	return resArr
+}
+
+// 多篇文章计算多个码表，合并同一个码表的多个结果
+func ParallelMerge(texts []string, dicts []*Dict) []*Result {
+	resArr := make([]*Result, len(dicts))
+	// 合并结果不会输出分词
+	for i, dict := range dicts {
+		resArr[i] = newResult()
+		resArr[i].TextName = "总计"
+		resArr[i].DictName = dict.Name
+		resArr[i].DictLen = dict.length
+		resArr[i].Single = dict.Single
+		dict.Split = false
+	}
+	var wg sync.WaitGroup
+	var lock sync.Mutex
+	ch := make(chan struct{}, 16)
+	for i, text := range texts {
+		ch <- struct{}{}
+		wg.Add(1)
+		go func(text string, i int) {
+			t := &Text{}
+			t.Load(text)
+			res := t.Race(dicts, false)
+			lock.Lock()
+			mergeRes(resArr, res, dicts)
+			lock.Unlock()
+			<-ch
+			wg.Done()
+		}(text, i)
+	}
+	wg.Wait()
+	for i, res := range resArr {
+		res.stat()
+		res.OutputStat(dicts[i])
+	}
 	return resArr
 }

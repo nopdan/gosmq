@@ -34,9 +34,13 @@ func match(buffer []byte, dict *Dict) *matchRes {
 			lastKey, last = tmpKey, tmp
 		}
 
-		if dict.Verbose {
+		// 启用分词
+		if dict.Split {
 			mRes.wordSlice = append(mRes.wordSlice, word)
 			mRes.codeSlice = append(mRes.codeSlice, code)
+		}
+		// 启用统计
+		if dict.Stat {
 			if _, ok := mRes.statData[word]; !ok {
 				mRes.statData[word] = &CodePosCount{code, pos, 1}
 			} else {

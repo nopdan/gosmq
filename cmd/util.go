@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
@@ -8,6 +9,20 @@ import (
 	"github.com/imetool/gosmq/internal/serve"
 	"github.com/imetool/gosmq/pkg/smq"
 )
+
+// 输出 json 数据
+func OutPutJson(res *smq.Result, flag bool) {
+	if flag {
+		// 创建文件夹
+		dir := "00-data"
+		os.MkdirAll(dir, os.ModePerm)
+		fileName := fmt.Sprintf("%s/%s_%s.json", dir, res.DictName, res.TextName)
+
+		tmp, _ := json.MarshalIndent(res, "", "  ")
+		os.WriteFile(fileName, tmp, 0666)
+		fmt.Println("已输出 json 数据")
+	}
+}
 
 // 保存 html 结果
 func OutputHTML(res []*smq.Result, flag bool) {
@@ -53,15 +68,15 @@ func getFiles(fp string) []string {
 }
 
 // 交换行和列索引
-func transpose[T any](A [][]T) [][]T {
-	result := make([][]T, len(A[0]))
-	for i := range result {
-		result[i] = make([]T, len(A))
-	}
-	for i := 0; i < len(A); i++ {
-		for j := 0; j < len(A[0]); j++ {
-			result[j][i] = A[i][j]
-		}
-	}
-	return result
-}
+// func transpose[T any](A [][]T) [][]T {
+// 	result := make([][]T, len(A[0]))
+// 	for i := range result {
+// 		result[i] = make([]T, len(A))
+// 	}
+// 	for i := 0; i < len(A); i++ {
+// 		for j := 0; j < len(A[0]); j++ {
+// 			result[j][i] = A[i][j]
+// 		}
+// 	}
+// 	return result
+// }

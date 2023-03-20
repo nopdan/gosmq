@@ -17,7 +17,9 @@ type Dict struct {
 	Algorithm    string // 匹配算法 trie:前缀树 order:顺序匹配（极速跟打器） longest:最长匹配
 	PressSpaceBy string // 空格按键方式 left|right|both
 	Clean        bool   // 只统计词库中的词条
-	Verbose      bool   // 详细
+
+	Split bool // 统计分词数据并输出
+	Stat  bool // 统计词条数据并输出
 
 	matcher matcher.Matcher // 初始化 Matcher
 	reader  io.Reader       // 赛码表 io 流

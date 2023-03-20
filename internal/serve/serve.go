@@ -85,7 +85,7 @@ func GetResultJson(src []byte) []byte {
 		dicts = append(dicts, toSmqDict(v))
 		// s.Add(opt)
 	}
-	smqRes = s.Race(dicts)
+	smqRes = s.Race(dicts, false)
 	result, _ := json.Marshal(smqRes)
 	return result
 }

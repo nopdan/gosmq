@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/imetool/gosmq/cmd"
+	"github.com/flowerime/gosmq/cmd"
 )
 
 func main() {

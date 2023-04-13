@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/imetool/goutil/util"
+	util "github.com/flowerime/goutil"
 )
 
 type Text struct {

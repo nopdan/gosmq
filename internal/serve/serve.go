@@ -13,7 +13,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/imetool/gosmq/pkg/smq"
+	"github.com/flowerime/gosmq/pkg/smq"
 )
 
 //go:embed dist

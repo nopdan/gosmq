@@ -6,8 +6,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/imetool/gosmq/internal/serve"
-	"github.com/imetool/gosmq/pkg/smq"
+	"github.com/flowerime/gosmq/internal/serve"
+	"github.com/flowerime/gosmq/pkg/smq"
 )
 
 // 输出 json 数据

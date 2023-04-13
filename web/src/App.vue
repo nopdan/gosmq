@@ -6,7 +6,7 @@ import Input from "./components/Input.vue";
 
 <template>
   <div class="title">
-    <a href="https://github.com/imetool/gosmq">赛码器 GO!</a>
+    <a href="https://github.com/flowerime/gosmq">昙花赛码器</a>
   </div>
   <n-message-provider>
     <Input />

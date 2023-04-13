@@ -1,32 +1,50 @@
 package matcher
 
-// trie 树
 type trie struct {
-	ch   map[rune]*trie
-	code string
-	pos  int
+	tn    *node
+	code  []string
+	pos   []byte
+	count uint32
+}
+
+// trie 树
+type node struct {
+	ch  map[rune]*node
+	idx uint32
 }
 
 func NewTrie() *trie {
 	t := new(trie)
-	t.ch = make(map[rune]*trie, 1000)
+	t.tn = new(node)
+	t.tn.ch = make(map[rune]*node, 1000)
+	t.code = make([]string, 0, 10000)
+	t.pos = make([]byte, 0, 10000)
+
+	t.code = append(t.code, "")
+	t.pos = append(t.pos, 0)
 	return t
 }
 
 func (t *trie) Insert(word, code string, pos int) {
+	tn := t.tn
 	for _, v := range word {
-		if t.ch == nil {
-			t.ch = make(map[rune]*trie)
-			t.ch[v] = new(trie)
-		} else if t.ch[v] == nil {
-			t.ch[v] = new(trie)
+		if tn.ch == nil {
+			tn.ch = make(map[rune]*node)
+			tn.ch[v] = new(node)
+		} else if _, ok := tn.ch[v]; !ok {
+			tn.ch[v] = new(node)
 		}
-		t = t.ch[v]
+		tn = tn.ch[v]
 	}
 	// 同一个词取码长较短的
-	if t.code == "" || len(t.code) > len(code) {
-		t.code = code
-		t.pos = pos
+	if tn.idx == 0 {
+		t.code = append(t.code, code)
+		t.pos = append(t.pos, byte(pos))
+		t.count++
+		tn.idx = t.count
+	} else if len(t.code[tn.idx]) > len(code) {
+		t.code[tn.idx] = code
+		t.pos[tn.idx] = byte(pos)
 	}
 }
 
@@ -37,19 +55,20 @@ func (t *trie) Build() {
 func (t *trie) Match(text []rune) (int, string, int) {
 	var wordLen int
 	var code string
-	var pos int
+	var pos byte
 
+	tn := t.tn
 	for p := 0; p < len(text); {
-		t = t.ch[text[p]]
+		tn = tn.ch[text[p]]
 		p++
-		if t == nil {
+		if tn == nil {
 			break
 		}
-		if t.code != "" {
+		if tn.idx != 0 {
 			wordLen = p
-			code = t.code
-			pos = t.pos
+			code = t.code[tn.idx]
+			pos = t.pos[tn.idx]
 		}
 	}
-	return wordLen, code, pos
+	return wordLen, code, int(pos)
 }

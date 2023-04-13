@@ -7,8 +7,8 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
-	"github.com/imetool/gosmq/internal/gen"
-	"github.com/imetool/goutil/util"
+	"github.com/flowerime/gosmq/internal/gen"
+	util "github.com/flowerime/goutil"
 	"github.com/spf13/cobra"
 )
 

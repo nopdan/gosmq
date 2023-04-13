@@ -5,12 +5,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/imetool/dtool/pkg/table"
-	"github.com/imetool/goutil/util"
+	util "github.com/flowerime/goutil"
+	"github.com/flowerime/rose/pkg/rose"
 )
 
-func (c Config) ReadJisu() table.Table {
-	ret := make(table.Table, 0, 1e5)
+func (c *Config) ReadJisu() rose.Table {
+	ret := make(rose.Table, 0, 1e5)
 	rd, err := util.Read(c.Path)
 	if err != nil {
 		panic(err)
@@ -25,14 +25,14 @@ func (c Config) ReadJisu() table.Table {
 		code := wc[1]
 		// 带空格 a_ aa_
 		if len(code)-1 > 0 && code[len(code)-1] == '_' {
-			ret = append(ret, table.Entry{wc[0], code, 1})
+			ret = append(ret, &rose.TableEntry{wc[0], code, 1})
 			continue
 		}
 
 		code, suf := FindSuffixInteger(code)
 		// 不带数字 akdb ksdw
 		if suf == "" {
-			ret = append(ret, table.Entry{wc[0], code, 1})
+			ret = append(ret, &rose.TableEntry{wc[0], code, 1})
 			continue
 		}
 
@@ -45,7 +45,7 @@ func (c Config) ReadJisu() table.Table {
 			code += string(c.SelectKeys[pos-1])
 		}
 		// fmt.Println(wc[0], code, pos)
-		ret = append(ret, table.Entry{wc[0], code, pos})
+		ret = append(ret, &rose.TableEntry{wc[0], code, pos})
 	}
 	return ret
 }

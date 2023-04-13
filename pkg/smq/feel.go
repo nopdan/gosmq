@@ -1,7 +1,7 @@
 package smq
 
 import (
-	"github.com/imetool/gosmq/pkg/feeling"
+	"github.com/flowerime/gosmq/pkg/feeling"
 )
 
 type KeyPos = feeling.KeyPos

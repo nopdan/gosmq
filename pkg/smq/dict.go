@@ -7,8 +7,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/imetool/gosmq/pkg/matcher"
-	"github.com/imetool/goutil/util"
+	"github.com/flowerime/gosmq/pkg/matcher"
+	util "github.com/flowerime/goutil"
 )
 
 type Dict struct {

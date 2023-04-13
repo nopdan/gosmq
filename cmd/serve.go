@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/imetool/gosmq/internal/serve"
+	"github.com/flowerime/gosmq/internal/serve"
 	"github.com/spf13/cobra"
 )
 

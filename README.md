@@ -1,13 +1,17 @@
-# [最快的赛码器](https://github.com/imetool/gosmq)
+# 昙花赛码器
+
+最快的赛码器
+
+> https://github.com/flowerime/gosmq
 
 ![](assets/preview-serve.png)
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/imetool/gosmq)](https://github.com/imetool/gosmq/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/imetool/gosmq)](https://github.com/imetool/gosmq/network/members)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/imetool/gosmq)](https://github.com/imetool/gosmq/releases)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/imetool/gosmq/build.yml)](https://github.com/imetool/gosmq/actions/workflows/build.yml)
-![GitHub repo size](https://img.shields.io/github/repo-size/imetool/gosmq)
-![GitHub](https://img.shields.io/github/license/imetool/gosmq)
+[![GitHub Repo stars](https://img.shields.io/github/stars/flowerime/gosmq)](https://github.com/flowerime/gosmq/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/flowerime/gosmq)](https://github.com/flowerime/gosmq/network/members)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/flowerime/gosmq)](https://github.com/flowerime/gosmq/releases)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/flowerime/gosmq/build.yml)](https://github.com/flowerime/gosmq/actions/workflows/build.yml)
+![GitHub repo size](https://img.shields.io/github/repo-size/flowerime/gosmq)
+![GitHub](https://img.shields.io/github/license/flowerime/gosmq)
 
 在 [assets](./assets) 文件夹下查看更多预览图。
 
@@ -31,7 +35,7 @@
 
 使用 `.\smq.exe gen` 命令转换格式。
 
-支持格式：_极速赛码表(jisu)_ 和 [_其他_](https://github.com/imetool/dtool#%E5%AD%97%E8%AF%8D%E7%A0%81%E8%A1%A8%E8%BD%AC%E6%8D%A2)
+支持格式：_极速赛码表(jisu)_ 和 [_其他_](https://github.com/flowerime/rose)
 
 ### 主命令参数解释
 

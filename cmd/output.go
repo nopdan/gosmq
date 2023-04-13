@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/imetool/gosmq/pkg/smq"
+	"github.com/flowerime/gosmq/pkg/smq"
 	"github.com/jedib0t/go-pretty/v6/table"
 )
 

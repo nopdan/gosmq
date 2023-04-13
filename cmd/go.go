@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/imetool/gosmq/pkg/smq"
+	"github.com/flowerime/gosmq/pkg/smq"
 )
 
 var conf = &struct {

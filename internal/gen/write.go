@@ -6,11 +6,11 @@ import (
 	"os"
 	"strconv"
 
-	"github.com/imetool/dtool/pkg/table"
+	"github.com/flowerime/rose/pkg/rose"
 )
 
 // 输出赛码表
-func Write(t table.Table, path string) {
+func Write(t rose.Table, path string) {
 	var buf bytes.Buffer
 	buf.Grow(len(t))
 	for i := range t {

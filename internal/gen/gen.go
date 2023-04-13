@@ -4,7 +4,7 @@ import (
 	"sort"
 	"strconv"
 
-	"github.com/imetool/dtool/pkg/table"
+	"github.com/flowerime/rose/pkg/rose"
 )
 
 type Config struct {
@@ -16,33 +16,34 @@ type Config struct {
 	SortByWordLen bool   // 按照词长重新排序
 }
 
-func (c Config) Gen() table.Table {
-	var d table.Table
+func (c *Config) Gen() rose.Table {
+	var t rose.Table
 	// 极速赛码表格式
 	if c.Format == "jisu" {
-		d = c.ReadJisu()
-		return d
+		t = c.ReadJisu()
+		return t
 	}
 
-	d = table.Parse(c.Format, c.Path)
+	d := rose.Parse(c.Path, c.Format)
+	t = d.GetTable()
 	// 极点格式不需要处理候选位置
 	if c.Format != "jidian" {
 		d.GenPos()
 	}
 
-	for i := range d {
-		if d[i].Pos <= 0 {
-			d[i].Pos = 1
+	for i := range t {
+		if t[i].Pos <= 0 {
+			t[i].Pos = 1
 		}
-		d[i].Code = c.addSuffix(d[i].Code, d[i].Pos)
+		t[i].Code = c.addSuffix(t[i].Code, t[i].Pos)
 	}
 	if c.SortByWordLen {
-		sort.SliceStable(d, func(i, j int) bool {
-			return len([]rune(d[i].Word)) > len([]rune(d[j].Word))
+		sort.SliceStable(t, func(i, j int) bool {
+			return len([]rune(t[i].Word)) > len([]rune(t[j].Word))
 		})
 	}
 
-	return d
+	return t
 }
 
 // 加上选重键

@@ -58,7 +58,7 @@ provide("schema2", d2);
 
   <n-layout>
     <n-layout-header>
-      <n-h2>赛码器 Go 报告</n-h2>
+      <n-h2>赛码报告</n-h2>
       <n-p> {{ p.data1.DictName }} VS {{ p.data2.DictName }}</n-p>
       <n-p
         >本报告中的条形图是否使用对数坐标轴？<n-switch

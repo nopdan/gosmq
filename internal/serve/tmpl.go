@@ -9,7 +9,7 @@ import (
 
 	_ "embed"
 
-	"github.com/imetool/gosmq/pkg/smq"
+	"github.com/flowerime/gosmq/pkg/smq"
 )
 
 //go:embed assets/tmpl.html

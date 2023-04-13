@@ -86,6 +86,7 @@ jobs:
           mv sample/* bin/
           mv assets/ bin/
           mv README.md bin/
+          mv CHANGELOG.md bin/
 
       # 上传到 Artifact
       - uses: actions/upload-artifact@v3

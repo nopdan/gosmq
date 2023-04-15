@@ -1,10 +1,8 @@
-# 昙花赛码器
+<div align="center">
 
-最快的赛码器
+<img src="assets/logo.png" width=150></img>
 
-> https://github.com/flowerime/gosmq
-
-![](assets/preview-serve.png)
+### 昙花赛码器 - 最快的赛码器
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/flowerime/gosmq)](https://github.com/flowerime/gosmq/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/flowerime/gosmq)](https://github.com/flowerime/gosmq/network/members)
@@ -13,9 +11,12 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/flowerime/gosmq)
 ![GitHub](https://img.shields.io/github/license/flowerime/gosmq)
 
-在 [assets](./assets) 文件夹下查看更多预览图。
+![](assets/preview-serve.png)
 
-## ！请在命令行中运行本程序
+在 [assets](./assets) 文件夹下查看更多预览图。  
+<font color=#e86060>！请在命令行中运行本程序</font>
+
+</div>
 
 ## 本赛码器专用格式
 

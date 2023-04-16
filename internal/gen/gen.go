@@ -16,34 +16,32 @@ type Config struct {
 	SortByWordLen bool   // 按照词长重新排序
 }
 
-func (c *Config) Gen() rose.Table {
-	var t rose.Table
+func (c *Config) Gen() rose.WubiTable {
+	var wl rose.WordLibrary
+	var ct rose.CodeTable
+
 	// 极速赛码表格式
 	if c.Format == "jisu" {
-		t = c.ReadJisu()
-		return t
+		wl = c.ReadJisu()
+		ct = wl.ToCodeTable()
+	} else {
+		d := rose.Parse(c.Path, c.Format)
+		ct = d.ToCodeTable()
 	}
+	wt := ct.ToWubiTable()
 
-	d := rose.Parse(c.Path, c.Format)
-	t = d.GetTable()
-	// 极点格式不需要处理候选位置
-	if c.Format != "jidian" {
-		d.GenPos()
-	}
-
-	for i := range t {
-		if t[i].Pos <= 0 {
-			t[i].Pos = 1
+	for i := range wt {
+		if wt[i].Pos <= 0 {
+			wt[i].Pos = 1
 		}
-		t[i].Code = c.addSuffix(t[i].Code, t[i].Pos)
+		wt[i].Code = c.addSuffix(wt[i].Code, wt[i].Pos)
 	}
 	if c.SortByWordLen {
-		sort.SliceStable(t, func(i, j int) bool {
-			return len([]rune(t[i].Word)) > len([]rune(t[j].Word))
+		sort.SliceStable(wt, func(i, j int) bool {
+			return len([]rune(wt[i].Word)) > len([]rune(wt[j].Word))
 		})
 	}
-
-	return t
+	return wt
 }
 
 // 加上选重键

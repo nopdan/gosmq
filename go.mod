@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.6
 	github.com/flowerime/goutil v0.2.2
-	github.com/flowerime/rose v1.0.0
+	github.com/flowerime/rose v1.1.1-0.20230416092638-a709f57d8826
 	github.com/jedib0t/go-pretty/v6 v6.4.6
 	github.com/spf13/cobra v1.7.0
 )

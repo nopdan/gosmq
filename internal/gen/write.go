@@ -10,7 +10,7 @@ import (
 )
 
 // 输出赛码表
-func Write(t rose.Table, path string) {
+func Write(t rose.WubiTable, path string) {
 	var buf bytes.Buffer
 	buf.Grow(len(t))
 	for i := range t {

@@ -8,7 +8,7 @@ import (
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
 	"github.com/flowerime/gosmq/internal/gen"
-	util "github.com/flowerime/goutil"
+	"github.com/nopdan/ku"
 	"github.com/spf13/cobra"
 )
 
@@ -16,14 +16,7 @@ var genCmd = &cobra.Command{
 	Use:   "gen",
 	Short: "转换赛码表",
 	Run: func(cmd *cobra.Command, args []string) {
-		if len(args) == 0 {
-			fmt.Println("交互模式转换赛码表")
-			genWithSurvey()
-			return
-		}
-		table := Config.Gen()
-		path := "dict/" + util.GetFileName(Config.Path) + ".txt"
-		gen.Write(table, path)
+		_gen()
 	},
 }
 
@@ -37,7 +30,14 @@ func init() {
 	genCmd.Flags().BoolVarP(&Config.SortByWordLen, "sort", "s", false, "按照词长重新排序")
 }
 
-func genWithSurvey() {
+func _gen() {
+	// 命令行模式
+	if Config.Path != "" {
+		gen_write(Config)
+		return
+	}
+
+	// 交互模式
 	var conf gen.Config
 	handle := func(err error) {
 		if err != nil {
@@ -58,15 +58,14 @@ func genWithSurvey() {
 
 	err = survey.AskOne(&survey.Select{
 		Message: "码表格式:",
-		Options: []string{"极速赛码表", "多多(词在前)", "冰凌(编码在前)", "极点"},
+		Options: []string{"极速赛码表", "多多", "冰凌"},
 	}, &conf.Format)
 	handle(err)
 
 	mFormat := make(map[string]string)
 	mFormat["极速赛码表"] = "jisu"
-	mFormat["多多(词在前)"] = "duoduo"
-	mFormat["冰凌(编码在前)"] = "bingling"
-	mFormat["极点"] = "jidian"
+	mFormat["多多"] = "duoduo"
+	mFormat["冰凌"] = "bingling"
 	conf.Format = mFormat[conf.Format]
 
 	if conf.Format != "jisu" {
@@ -91,10 +90,12 @@ func genWithSurvey() {
 		handle(err)
 	}
 
-	fmt.Println()
-	fmt.Println(conf)
+	fmt.Printf("\nconf: %v\n", conf)
+	gen_write(conf)
+}
 
+func gen_write(conf gen.Config) {
 	table := conf.Gen()
-	path := "dict/" + util.GetFileName(conf.Path) + ".txt"
+	path := "dict/" + ku.GetFileName(conf.Path) + ".txt"
 	gen.Write(table, path)
 }

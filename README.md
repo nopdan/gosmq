@@ -36,7 +36,7 @@
 
 使用 `.\smq.exe gen` 命令转换格式。
 
-支持格式：_极速赛码表(jisu)_ 和 [_其他_](https://github.com/flowerime/rose)
+支持格式：_极速赛码表(jisu|js)_、_多多(duoduo|dd)_、_冰凌(bingling|bl)_
 
 ### 主命令参数解释
 

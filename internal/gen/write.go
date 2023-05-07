@@ -5,21 +5,19 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-
-	"github.com/flowerime/rose/pkg/rose"
 )
 
 // 输出赛码表
-func Write(t rose.WubiTable, path string) {
+func Write(dict []*Entry, path string) {
 	var buf bytes.Buffer
-	buf.Grow(len(t))
-	for i := range t {
-		buf.WriteString(t[i].Word)
+	buf.Grow(len(dict))
+	for _, entry := range dict {
+		buf.WriteString(entry.Word)
 		buf.WriteByte('\t')
-		buf.WriteString(t[i].Code)
-		if t[i].Pos != 1 {
+		buf.WriteString(entry.Code)
+		if entry.Pos != 1 {
 			buf.WriteByte('\t')
-			buf.WriteString(strconv.Itoa(t[i].Pos))
+			buf.WriteString(strconv.Itoa(entry.Pos))
 		}
 		buf.WriteByte('\n')
 	}

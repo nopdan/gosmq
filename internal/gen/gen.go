@@ -2,9 +2,6 @@ package gen
 
 import (
 	"sort"
-	"strconv"
-
-	"github.com/flowerime/rose/pkg/rose"
 )
 
 type Config struct {
@@ -16,44 +13,32 @@ type Config struct {
 	SortByWordLen bool   // 按照词长重新排序
 }
 
-func (c *Config) Gen() rose.WubiTable {
-	var wl rose.WordLibrary
-	var ct rose.CodeTable
-
-	// 极速赛码表格式
-	if c.Format == "jisu" {
-		wl = c.ReadJisu()
-		ct = wl.ToCodeTable()
-	} else {
-		d := rose.Parse(c.Path, c.Format)
-		ct = d.ToCodeTable()
-	}
-	wt := ct.ToWubiTable()
-
-	for i := range wt {
-		if wt[i].Pos <= 0 {
-			wt[i].Pos = 1
-		}
-		wt[i].Code = c.addSuffix(wt[i].Code, wt[i].Pos)
-	}
-	if c.SortByWordLen {
-		sort.SliceStable(wt, func(i, j int) bool {
-			return len([]rune(wt[i].Word)) > len([]rune(wt[j].Word))
-		})
-	}
-	return wt
+type Entry struct {
+	Word string
+	Code string
+	Pos  int
 }
 
-// 加上选重键
-func (c Config) addSuffix(s string, pos int) string {
-	if pos != 1 || len(s) < c.PushStart {
-		if int(pos) <= len(c.SelectKeys) {
-			s += string(c.SelectKeys[pos-1])
-		} else {
-			s += strconv.Itoa(pos)
-		}
+func (c *Config) Gen() []*Entry {
+	var dict []*Entry
+
+	switch c.Format {
+	case "jisu", "js":
+		dict = c.LoadJisu()
+	case "duoduo", "dd":
+		dict = c.LoadTSV(true)
+	case "bingling", "bl":
+		dict = c.LoadTSV(false)
+	default:
+		panic("不支持的格式: " + c.Format)
 	}
-	return s
+
+	if c.SortByWordLen {
+		sort.SliceStable(dict, func(i, j int) bool {
+			return len([]rune(dict[i].Word)) > len([]rune(dict[j].Word))
+		})
+	}
+	return dict
 }
 
 // 专用，两位正数 1~99 byte 转 string

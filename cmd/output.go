@@ -3,8 +3,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/flowerime/gosmq/pkg/smq"
 	"github.com/jedib0t/go-pretty/v6/table"
+	"github.com/nopdan/gosmq/pkg/smq"
 )
 
 func Output(data []*smq.Result) {

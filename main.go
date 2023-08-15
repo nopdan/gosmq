@@ -3,7 +3,7 @@ package main
 import (
 	"os"
 
-	"github.com/flowerime/gosmq/cmd"
+	"github.com/nopdan/gosmq/cmd"
 )
 
 func main() {

@@ -1,6 +1,6 @@
 
 <a name="v2.1"></a>
-## [v2.1](https://github.com/flowerime/gosmq/compare/v2.0...v2.1) (2023-04-13)
+## [v2.1](https://github.com/nopdan/gosmq/compare/v2.0...v2.1) (2023-04-13)
 
 ### Feat
 
@@ -8,7 +8,7 @@
 * ParallelMerge
 
 <a name="v2.0"></a>
-## [v2.0](https://github.com/flowerime/gosmq/compare/v1.4...v2.0) (2023-03-19)
+## [v2.0](https://github.com/nopdan/gosmq/compare/v1.4...v2.0) (2023-03-19)
 
 ### Feat
 
@@ -19,7 +19,7 @@
 - `--merge` 合并多文本的结果
 
 <a name="v1.4"></a>
-## [v1.4](https://github.com/flowerime/gosmq/compare/v1.3...v1.4) (2023-03-17)
+## [v1.4](https://github.com/nopdan/gosmq/compare/v1.3...v1.4) (2023-03-17)
 
 ### Feat
 
@@ -49,7 +49,7 @@
 - 拆分 verbose
 
 <a name="v1.3"></a>
-## [v1.3](https://github.com/flowerime/gosmq/compare/v1.2...v1.3) (2023-03-16)
+## [v1.3](https://github.com/nopdan/gosmq/compare/v1.2...v1.3) (2023-03-16)
 
 ### Feat
 
@@ -67,7 +67,7 @@
 - 优化文件夹遍历
 
 <a name="v1.2"></a>
-## [v1.2](https://github.com/flowerime/gosmq/compare/v1.1...v1.2) (2023-03-15)
+## [v1.2](https://github.com/nopdan/gosmq/compare/v1.1...v1.2) (2023-03-15)
 
 ### Fix
 
@@ -80,7 +80,7 @@
 - 优化性能
 
 <a name="v1.1"></a>
-## [v1.1](https://github.com/flowerime/gosmq/compare/v1.0...v1.1) (2023-03-14)
+## [v1.1](https://github.com/nopdan/gosmq/compare/v1.0...v1.1) (2023-03-14)
 
 ### Feat
 
@@ -93,14 +93,14 @@
 - 按字符数而不是字节数排序
 
 <a name="v1.0"></a>
-## [v1.0](https://github.com/flowerime/gosmq/compare/v0.30...v1.0) (2023-02-04)
+## [v1.0](https://github.com/nopdan/gosmq/compare/v0.30...v1.0) (2023-02-04)
 
 - 重构 cli 工具
 - 分离赛码表转换和赛码
 - 细节优化
 
 <a name="v0.30"></a>
-## [v0.30](https://github.com/flowerime/gosmq/compare/v0.28...v0.30) (2022-09-02)
+## [v0.30](https://github.com/nopdan/gosmq/compare/v0.28...v0.30) (2022-09-02)
 
 ### Fix
 
@@ -116,7 +116,7 @@
 - 修改背景色
 
 <a name="v0.28"></a>
-## [v0.28](https://github.com/flowerime/gosmq/compare/v0.27...v0.28) (2022-09-02)
+## [v0.28](https://github.com/nopdan/gosmq/compare/v0.27...v0.28) (2022-09-02)
 
 ### Perf
 
@@ -126,7 +126,7 @@
 - 完全整合两个前端
 
 <a name="v0.27"></a>
-## [v0.27](https://github.com/flowerime/gosmq/compare/v0.26...v0.27) (2022-08-29)
+## [v0.27](https://github.com/nopdan/gosmq/compare/v0.26...v0.27) (2022-08-29)
 
 ### Feat
 
@@ -142,14 +142,14 @@
 - 添加示例词库和文本
 
 <a name="v0.26"></a>
-## [v0.26](https://github.com/flowerime/gosmq/compare/v0.25...v0.26) (2022-08-28)
+## [v0.26](https://github.com/nopdan/gosmq/compare/v0.25...v0.26) (2022-08-28)
 
 - 码表里有相同词时取码长较短的
 - 整合了 cli 和 web 程序，可以双击直接启动
 - 前端开源 @yyb1rd
 
 <a name="v0.25"></a>
-## [v0.25](https://github.com/flowerime/gosmq/compare/v0.24...v0.25) (2022-05-31)
+## [v0.25](https://github.com/nopdan/gosmq/compare/v0.24...v0.25) (2022-05-31)
 
 ### Feat
 
@@ -163,7 +163,7 @@
 - 换行符错误
 
 <a name="v0.24"></a>
-## [v0.24](https://github.com/flowerime/gosmq/compare/v0.23...v0.24) (2022-04-30)
+## [v0.24](https://github.com/nopdan/gosmq/compare/v0.23...v0.24) (2022-04-30)
 
 - 增加 冰凌码表格式
 - 修复 极点格式转换错误
@@ -173,14 +173,14 @@
 - 优化 `go-pretty` 改到 v6 版本，体积减少大半
 
 <a name="v0.23"></a>
-## [v0.23](https://github.com/flowerime/gosmq/compare/v0.22...v0.23) (2022-04-29)
+## [v0.23](https://github.com/nopdan/gosmq/compare/v0.22...v0.23) (2022-04-29)
 
 - 使用 `embed` 初始化 `puncts` 数据
 - 优化 `longest`
 - 使用前缀树重写了 `order` ，速度提升了几个数量级
 
 <a name="v0.22"></a>
-## [v0.22](https://github.com/flowerime/gosmq/compare/v0.14...v0.22) (2022-04-29)
+## [v0.22](https://github.com/nopdan/gosmq/compare/v0.14...v0.22) (2022-04-29)
 
 几乎完全重写了
 
@@ -193,25 +193,25 @@
 - 可以使用专用赛码表格式，速度更快
 
 <a name="v0.14"></a>
-## [v0.14](https://github.com/flowerime/gosmq/compare/v0.13...v0.14) (2021-11-30)
+## [v0.14](https://github.com/nopdan/gosmq/compare/v0.13...v0.14) (2021-11-30)
 
 - 合并了 cli 和 web
 - 修复了读取文件的 bug
 
 <a name="v0.13"></a>
-## [v0.13](https://github.com/flowerime/gosmq/compare/v0.12...v0.13) (2021-11-30)
+## [v0.13](https://github.com/nopdan/gosmq/compare/v0.12...v0.13) (2021-11-30)
 
 - 添加了一个 web 前端
 - 添加了一个 web-server 前端
 
 <a name="v0.12"></a>
-## [v0.12](https://github.com/flowerime/gosmq/compare/v0.11...v0.12) (2021-11-28)
+## [v0.12](https://github.com/nopdan/gosmq/compare/v0.11...v0.12) (2021-11-28)
 
 - 支持更多文件编码格式（GBK，UTF-16 等，其它的自行测试）
 - 改变了输出结果的格式
 
 <a name="v0.11"></a>
-## [v0.11](https://github.com/flowerime/gosmq/compare/v0.10...v0.11) (2021-09-28)
+## [v0.11](https://github.com/nopdan/gosmq/compare/v0.10...v0.11) (2021-09-28)
 
 - 重写 html 模版
 - 修复 手指频率统计错误
@@ -219,47 +219,47 @@
 - 优化 按键统计
 
 <a name="v0.10"></a>
-## [v0.10](https://github.com/flowerime/gosmq/compare/v0.8...v0.10) (2021-09-23)
+## [v0.10](https://github.com/nopdan/gosmq/compare/v0.8...v0.10) (2021-09-23)
 
 - 添加 html 结果输出，感谢 @yyb1rd
 - 添加 多码表同时测试
 - 优化 性能
 
 <a name="v0.8"></a>
-## [v0.8](https://github.com/flowerime/gosmq/compare/v0.7...v0.8) (2021-08-14)
+## [v0.8](https://github.com/nopdan/gosmq/compare/v0.7...v0.8) (2021-08-14)
 
 添加 选重统计
 
 <a name="v0.7"></a>
-## [v0.7](https://github.com/flowerime/gosmq/compare/v0.6...v0.7) (2021-08-12)
+## [v0.7](https://github.com/nopdan/gosmq/compare/v0.6...v0.7) (2021-08-12)
 
 添加 按键频率统计
 
 <a name="v0.6"></a>
-## [v0.6](https://github.com/flowerime/gosmq/compare/v0.5...v0.6) (2021-08-10)
+## [v0.6](https://github.com/nopdan/gosmq/compare/v0.5...v0.6) (2021-08-10)
 
 - 添加 当量 大小跨排 小指干扰 错手
 - 添加 指法统计开关
 
 <a name="v0.5"></a>
-## [v0.5](https://github.com/flowerime/gosmq/compare/v0.4...v0.5) (2021-08-09)
+## [v0.5](https://github.com/nopdan/gosmq/compare/v0.4...v0.5) (2021-08-09)
 
 - 添加 赛码表输出
 - 添加 只跑单字
 - 美化输出结果
 
 <a name="v0.4"></a>
-## [v0.4](https://github.com/flowerime/gosmq/compare/v0.3...v0.4) (2021-08-07)
+## [v0.4](https://github.com/nopdan/gosmq/compare/v0.3...v0.4) (2021-08-07)
 
 添加指法统计
 
 <a name="v0.3"></a>
-## [v0.3](https://github.com/flowerime/gosmq/compare/v0.2...v0.3) (2021-08-05)
+## [v0.3](https://github.com/nopdan/gosmq/compare/v0.2...v0.3) (2021-08-05)
 
 采用 hash 字典树进行字符串匹配
 
 <a name="v0.2"></a>
-## [v0.2](https://github.com/flowerime/gosmq/compare/v0.1...v0.2) (2021-08-04)
+## [v0.2](https://github.com/nopdan/gosmq/compare/v0.1...v0.2) (2021-08-04)
 
 支持 rime 格式码表
 

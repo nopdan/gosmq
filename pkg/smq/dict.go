@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/flowerime/gosmq/pkg/matcher"
+	"github.com/nopdan/gosmq/pkg/matcher"
 	"github.com/nopdan/ku"
 )
 

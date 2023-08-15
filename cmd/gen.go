@@ -7,7 +7,7 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
-	"github.com/flowerime/gosmq/internal/gen"
+	"github.com/nopdan/gosmq/internal/gen"
 	"github.com/nopdan/ku"
 	"github.com/spf13/cobra"
 )

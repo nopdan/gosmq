@@ -2,7 +2,7 @@ style: github
 template: CHANGELOG.tpl.md
 info:
   title: CHANGELOG
-  repository_url: https://github.com/flowerime/gosmq
+  repository_url: https://github.com/nopdan/gosmq
 options:
   commits:
     # filters:

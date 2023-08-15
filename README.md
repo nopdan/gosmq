@@ -4,12 +4,12 @@
 
 ### 昙花赛码器 - 最快的赛码器
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/flowerime/gosmq)](https://github.com/flowerime/gosmq/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/flowerime/gosmq)](https://github.com/flowerime/gosmq/network/members)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/flowerime/gosmq)](https://github.com/flowerime/gosmq/releases)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/flowerime/gosmq/build.yml)](https://github.com/flowerime/gosmq/actions/workflows/build.yml)
-![GitHub repo size](https://img.shields.io/github/repo-size/flowerime/gosmq)
-![GitHub](https://img.shields.io/github/license/flowerime/gosmq)
+[![GitHub Repo stars](https://img.shields.io/github/stars/nopdan/gosmq)](https://github.com/nopdan/gosmq/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/nopdan/gosmq)](https://github.com/nopdan/gosmq/network/members)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/nopdan/gosmq)](https://github.com/nopdan/gosmq/releases)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/nopdan/gosmq/build.yml)](https://github.com/nopdan/gosmq/actions/workflows/build.yml)
+![GitHub repo size](https://img.shields.io/github/repo-size/nopdan/gosmq)
+![GitHub](https://img.shields.io/github/license/nopdan/gosmq)
 
 ![](assets/preview-serve.png)
 

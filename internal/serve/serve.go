@@ -48,15 +48,9 @@ func parseOptions(src []byte) Options {
 }
 
 func toSmqDict(opt optDict) *smq.Dict {
-	var algo string
-	if opt.Stable {
-		algo = "strie"
-	} else {
-		algo = "trie"
-	}
 	dict := &smq.Dict{
 		Single:       opt.Single,
-		Algorithm:    algo,
+		Stable:       opt.Stable,
 		PressSpaceBy: opt.Space,
 	}
 	dict.Load("dict/" + opt.Path)

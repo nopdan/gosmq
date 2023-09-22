@@ -8,18 +8,12 @@ import (
 )
 
 var conf = &struct {
-	Text []string // 文本
-	Dict []string // 码表
+	Texts []string // 文本
+	Dicts []string // 码表
 
-	Single       bool   // 单字模式
-	Algo         string // 匹配算法
-	Stable       bool   // 按码表顺序(覆盖algo)
-	PressSpaceBy string // 空格按键方式 left|right|both
-	Clean        bool   // 只统计词库中的词条
+	smq.Dict
 
 	Verbose bool // 输出全部数据
-	Split   bool // 输出分词数据
-	Stat    bool // 输出词条数据
 	Json    bool // 输出json数据
 	HTML    bool // 保存 html 结果
 
@@ -28,11 +22,12 @@ var conf = &struct {
 }{}
 
 func init() {
-	rootCmd.Flags().StringArrayVarP(&conf.Text, "text", "t", nil, "文本文件或文件夹，可以为多个")
-	rootCmd.Flags().StringArrayVarP(&conf.Dict, "dict", "i", nil, "码表文件或文件夹，可以为多个")
+	rootCmd.Flags().StringArrayVarP(&conf.Texts, "text", "t", nil, "文本文件或文件夹，可以为多个")
+	rootCmd.Flags().StringArrayVarP(&conf.Dicts, "dict", "i", nil, "码表文件或文件夹，可以为多个")
 
 	rootCmd.Flags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
 	rootCmd.Flags().BoolVarP(&conf.Stable, "stable", "", false, "按码表顺序")
+	rootCmd.Flags().BoolVarP(&conf.UseTail, "tail", "", false, "use tail")
 	rootCmd.Flags().StringVarP(&conf.PressSpaceBy, "space", "k", "both", "空格按键方式 left|right|both")
 	rootCmd.Flags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
 
@@ -47,12 +42,9 @@ func init() {
 }
 
 func _root() {
-	if len(conf.Dict) == 0 || len(conf.Text) == 0 {
+	if len(conf.Dicts) == 0 || len(conf.Texts) == 0 {
 		fmt.Println("输入有误")
 		return
-	}
-	if conf.Stable {
-		conf.Algo = "strie"
 	}
 	if conf.Verbose {
 		conf.Split = true
@@ -62,8 +54,8 @@ func _root() {
 	}
 	// 开始计时
 	start := time.Now()
-	texts := make([]string, 0, len(conf.Text))
-	for _, v := range conf.Text {
+	texts := make([]string, 0, len(conf.Texts))
+	for _, v := range conf.Texts {
 		texts = append(texts, getFiles(v)...)
 	}
 	fmt.Println("载入文本：")
@@ -72,28 +64,18 @@ func _root() {
 	}
 	fmt.Println()
 
-	dictNames := make([]string, 0, len(conf.Dict))
-	for _, v := range conf.Dict {
+	dictNames := make([]string, 0, len(conf.Dicts))
+	for _, v := range conf.Dicts {
 		dictNames = append(dictNames, getFiles(v)...)
-	}
-	newDict := func() *smq.Dict {
-		return &smq.Dict{
-			Single:       conf.Single,
-			Algorithm:    conf.Algo,
-			PressSpaceBy: conf.PressSpaceBy,
-			Clean:        conf.Clean,
-			Split:        conf.Split,
-			Stat:         conf.Stat,
-		}
 	}
 	dicts := make([]*smq.Dict, 0, len(dictNames))
 	fmt.Println("载入码表：")
 	dictStartTime := time.Now()
 	mid := time.Now()
 	for _, v := range dictNames {
-		d := newDict()
-		d.Load(v)
-		dicts = append(dicts, d)
+		dict := conf.Dict
+		dict.Load(v)
+		dicts = append(dicts, &dict)
 		if len(dictNames) == 1 {
 			fmt.Println("=> ", v)
 		} else {

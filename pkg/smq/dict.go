@@ -12,11 +12,14 @@ import (
 )
 
 type Dict struct {
-	Name         string // 码表名
-	Single       bool   // 单字模式
-	Algorithm    string // 匹配算法 trie:前缀树 order:顺序匹配（极速跟打器） longest:最长匹配
-	PressSpaceBy string // 空格按键方式 left|right|both
-	Clean        bool   // 只统计词库中的词条
+	Name    string // 码表名
+	Single  bool   // 单字模式
+	Stable  bool   // 按照码表顺序
+	UseTail bool   // 压缩 tail
+	Clean   bool   // 只统计词库中的词条
+
+	// 空格按键方式 left|right|both
+	PressSpaceBy string
 
 	Split bool // 统计分词数据并输出
 	Stat  bool // 统计词条数据并输出
@@ -55,10 +58,10 @@ func (dict *Dict) LoadString(text, name string) {
 func (dict *Dict) init() {
 	// 匹配算法
 	if dict.Single {
-		dict.Algorithm = "single"
+		dict.matcher = matcher.NewSingle()
 	}
 	if dict.matcher == nil {
-		dict.matcher = matcher.New(dict.Algorithm)
+		dict.matcher = matcher.NewTrie(dict.Stable, dict.UseTail)
 	}
 	m := dict.matcher
 

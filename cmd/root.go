@@ -58,11 +58,15 @@ func _root() {
 	for _, v := range conf.Texts {
 		texts = append(texts, getFiles(v)...)
 	}
-	fmt.Println("载入文本：")
-	for _, v := range texts {
-		fmt.Println("-> ", v)
+	if !conf.Hidden {
+		fmt.Println("载入文本：")
+		for _, v := range texts {
+			fmt.Println("-> ", v)
+		}
+		fmt.Println()
+	} else {
+		fmt.Printf("载入 %d 个文本\n", len(texts))
 	}
-	fmt.Println()
 
 	dictNames := make([]string, 0, len(conf.Dicts))
 	for _, v := range conf.Dicts {

@@ -1,3 +1,55 @@
+<script setup lang="ts">
+import { FormInst } from "naive-ui";
+
+export interface Dict {
+  path: string;
+  single: boolean;
+  stable: boolean;
+  space: string;
+  format: string;
+  selectKeys: string;
+  pushStart: number;
+}
+
+const formRef = ref<FormInst | null>();
+const result = reactive({
+  path: null,
+  single: false,
+  stable: false,
+  space: "both",
+  format: "default",
+  selectKeys: "_;'",
+  pushStart: 4,
+});
+
+const props = defineProps(["msg", "files", "idx"]);
+props.msg.dicts[props.idx] = result;
+
+const formats = [
+  ["default", "默认"],
+  ["js", "极速"],
+  ["dd", "多多"],
+  ["jd", "极点"],
+  ["bl", "冰凌"],
+];
+
+const spaceWays = [
+  ["both", "总是互击"],
+  ["left", "左手"],
+  ["right", "右手"],
+];
+
+const rules = {
+  path: {
+    required: true,
+    message: "请选择码表",
+    trigger: ["blur"],
+  },
+};
+
+onMounted(() => {});
+</script>
+
 <template>
   <n-space vertical>
     <n-form
@@ -16,7 +68,7 @@
           :options="props.files"
         />
       </n-form-item>
-      <!--
+
       <n-form-item label="码表格式" title="帮助程序分析文本数据。">
         <n-radio-group v-model:value="result.format">
           <n-radio-button v-for="i in formats" :key="i[0]" :value="i[0]">
@@ -42,7 +94,7 @@
           style="max-width: 50%"
         />
       </n-form-item>
-    -->
+
       <n-space>
         <n-form-item label="只打单字" title="只用码表里的单字输入赛文。">
           <n-switch v-model:value="result.single" />
@@ -62,54 +114,3 @@
     </n-form>
   </n-space>
 </template>
-<script setup lang="ts">
-import { FormInst } from "naive-ui";
-
-export interface Dict {
-  path: string;
-  single: boolean;
-  stable: boolean;
-  space: string;
-  // format: string;
-  // selectKeys: string;
-  // pushStart: number;
-}
-
-const formRef = ref<FormInst | null>();
-const result = reactive({
-  path: null,
-  single: false,
-  stable: false,
-  space: "both",
-  // format: "default",
-  // selectKeys: "_;'",
-  // pushStart: 4,
-});
-
-const props = defineProps(["msg", "files", "idx"]);
-props.msg.dicts[props.idx] = result;
-
-// const formats = [
-//   ["default", "默认"],
-//   ["js", "极速"],
-//   ["dd", "多多"],
-//   ["jd", "极点"],
-//   ["bl", "冰凌"],
-// ];
-
-const spaceWays = [
-  ["both", "总是互击"],
-  ["left", "左手"],
-  ["right", "右手"],
-];
-
-const rules = {
-  path: {
-    required: true,
-    message: "请选择码表",
-    trigger: ["blur"],
-  },
-};
-
-onMounted(() => {});
-</script>

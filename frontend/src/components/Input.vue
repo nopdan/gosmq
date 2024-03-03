@@ -1,46 +1,3 @@
-<template>
-  <div id="input">
-    <div class="card">
-      <Text :msg="options" :files="textList"></Text>
-    </div>
-    <div id="dicts">
-      <Dict class="card half" :msg="options" :files="dictList" :idx="0"></Dict>
-      <Dict class="card half" :msg="options" :files="dictList" :idx="1"></Dict>
-    </div>
-    <div id="buttons">
-      <n-space>
-        <n-button
-          :loading="loading1"
-          :disabled="illegel"
-          type="primary"
-          @click="start1"
-          ghost
-        >
-          开始比赛 by 单单
-        </n-button>
-        <n-button
-          :loading="loading2"
-          :disabled="illegel"
-          type="primary"
-          @click="start2"
-          ghost
-        >
-          开始比赛 by yyb
-        </n-button>
-      </n-space>
-    </div>
-  </div>
-  <div>
-    <div id="result" v-if="hasResult">
-      <result
-        :data1="data1"
-        :data2="data2"
-        style="min-width: 50em; max-width: 80em; margin: auto"
-      />
-    </div>
-  </div>
-</template>
-
 <script setup lang="ts">
 import Dict from "./Dict.vue";
 import Text from "./Text.vue";
@@ -125,6 +82,43 @@ const hasResult = ref(false);
 const data1 = ref(null);
 const data2 = ref(null);
 </script>
+
+<template>
+  <div id="input">
+
+    <n-tabs type="segment" animated>
+      <n-tab-pane name="chap1" tab="赛文">
+        <Main></Main>
+        <div class="card">
+          <Text :msg="options" :files="textList"></Text>
+        </div>
+      </n-tab-pane>
+      <n-tab-pane name="chap2" tab="码表">
+        <div id="dicts">
+          <Dict class="card half" :msg="options" :files="dictList" :idx="0"></Dict>
+          <Dict class="card half" :msg="options" :files="dictList" :idx="1"></Dict>
+        </div>
+
+      </n-tab-pane>
+    </n-tabs>
+
+    <div id="buttons">
+      <n-space>
+        <n-button :loading="loading1" :disabled="illegel" type="primary" @click="start1" ghost>
+          开始比赛 by 单单
+        </n-button>
+        <n-button :loading="loading2" :disabled="illegel" type="primary" @click="start2" ghost>
+          开始比赛 by yyb
+        </n-button>
+      </n-space>
+    </div>
+  </div>
+  <div>
+    <div id="result" v-if="hasResult">
+      <result :data1="data1" :data2="data2" style="min-width: 50em; max-width: 80em; margin: auto" />
+    </div>
+  </div>
+</template>
 <style scoped>
 #input {
   margin: auto;

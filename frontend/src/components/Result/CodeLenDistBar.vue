@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ComparedBars from "./comparedBars.vue";
-import { inject, computed } from "vue";
 const schema1: any = inject("schema1");
 const schema2: any = inject("schema2");
 function getData(schema: any) {

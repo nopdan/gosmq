@@ -5,12 +5,12 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nopdan/ku"
+	"github.com/nopdan/gosmq/pkg/util"
 )
 
 func (c *Config) LoadJisu() []*Entry {
 	ret := make([]*Entry, 0, 1e5)
-	rd, err := ku.Read(c.Path)
+	rd, err := util.Read(c.Path)
 	if err != nil {
 		panic(err)
 	}

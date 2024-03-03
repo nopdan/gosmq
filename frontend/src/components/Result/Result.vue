@@ -28,7 +28,6 @@ import CollisionDistBar from "./CollisionDistBar.vue";
 import CodeLenDistBar from "./CodeLenDistBar.vue";
 import CombsDistBar from "./CombsDistBar.vue";
 import KeyHeatSorted from "./KeyHeatSorted.vue";
-import { computed, provide, reactive, ref, watch } from "vue";
 
 const p = defineProps(["data1", "data2"]);
 const d1 = ref(p.data1);
@@ -161,8 +160,8 @@ provide("schema2", d2);
           <n-gi> <finger-pie :data="d1" /> </n-gi>
           <n-gi><finger-pie :data="d2" /></n-gi>
         </n-grid>
-   
-            
+
+
         <n-h3>双手使用量</n-h3>
         <n-grid :cols="2" :x-gap="16">
           <n-gi><hands-description :data="p.data1" /></n-gi>

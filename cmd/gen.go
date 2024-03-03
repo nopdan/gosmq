@@ -7,8 +7,8 @@ import (
 
 	"github.com/AlecAivazis/survey/v2"
 	"github.com/AlecAivazis/survey/v2/terminal"
+	"github.com/nopdan/gosmq/pkg/util"
 	"github.com/nopdan/gosmq/internal/gen"
-	"github.com/nopdan/ku"
 	"github.com/spf13/cobra"
 )
 
@@ -96,6 +96,6 @@ func _gen() {
 
 func gen_write(conf gen.Config) {
 	table := conf.Gen()
-	path := "dict/" + ku.GetFileName(conf.Path) + ".txt"
+	path := "dict/" + util.GetFileName(conf.Path) + ".txt"
 	gen.Write(table, path)
 }

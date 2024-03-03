@@ -6,10 +6,12 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
+	"log"
 	"net/http"
 	"os"
 	"os/exec"
 	"runtime"
+	"strconv"
 	"sync"
 	"time"
 
@@ -127,6 +129,9 @@ func setHeader(w *http.ResponseWriter) {
 func Serve(port string, silent bool) {
 	dist, _ := fs.Sub(dist, "dist")
 	http.Handle("/", http.FileServer(http.FS(dist)))
+	http.HandleFunc("/race", RaceHandler)
+	http.HandleFunc("/upload", UploadHandler)
+	http.HandleFunc("/file_index", IndexHandler)
 	http.HandleFunc("/api", PostHandler)
 	http.HandleFunc("/texts", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
@@ -164,7 +169,7 @@ func Serve(port string, silent bool) {
 		wg.Done()
 	}()
 	if !silent {
-		openBrowser(url)
+		// openBrowser(url)
 	}
 	wg.Wait()
 }
@@ -181,4 +186,44 @@ func openBrowser(url string) {
 	}
 	cmd := exec.Command(name, url)
 	cmd.Start()
+}
+
+func RaceHandler(w http.ResponseWriter, r *http.Request) {
+	setHeader(&w)
+	text := r.FormValue("text")
+	dict := r.FormValue("dict")
+	fmt.Printf("    text: %v\n    dict: %v\n", text, dict)
+	w.Write([]byte("{\"hello\": \"world\"}"))
+}
+
+var fileList = make([][]byte, 0, 1)
+
+func UploadHandler(w http.ResponseWriter, r *http.Request) {
+	setHeader(&w)
+	r.ParseMultipartForm(1024 * 1024 * 1024) // 最大 1GB
+	fmt.Println(r.Form)
+
+	file, handler, err := r.FormFile("file")
+	if err != nil {
+		log.Printf("err: %v\n", err)
+		return
+	}
+	defer file.Close()
+	log.Printf("POST:%v", handler.Header)
+
+	mbData, err := io.ReadAll(file)
+	if err != nil {
+		log.Printf("err: %v\n", err)
+		return
+	}
+	fileList = append(fileList, mbData)
+	// fmt.Println(string(mbData))
+	index := len(fileList) - 1
+	w.Write([]byte("{'index': " + strconv.Itoa(index) + "}"))
+}
+
+func IndexHandler(w http.ResponseWriter, r *http.Request) {
+	setHeader(&w)
+	index := len(fileList)
+	w.Write([]byte("{\"index\": " + strconv.Itoa(index) + "}"))
 }

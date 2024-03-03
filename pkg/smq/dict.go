@@ -8,7 +8,7 @@ import (
 	"strings"
 
 	"github.com/nopdan/gosmq/pkg/matcher"
-	"github.com/nopdan/ku"
+	"github.com/nopdan/gosmq/pkg/util"
 )
 
 type Dict struct {
@@ -31,13 +31,13 @@ type Dict struct {
 
 // 从文件加载码表
 func (dict *Dict) Load(path string) {
-	rd, err := ku.Read(path)
+	rd, err := util.Read(path)
 	if err != nil {
 		fmt.Println("Warning! 读取文件失败：", err)
 		return
 	}
 	if dict.Name == "" {
-		dict.Name = ku.GetFileName(path)
+		dict.Name = util.GetFileName(path)
 	}
 	dict.reader = rd
 	dict.init()

@@ -5,13 +5,13 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/nopdan/ku"
+	"github.com/nopdan/gosmq/pkg/util"
 )
 
 // 加载多多码表
 func (c *Config) LoadTSV(wordFirst bool) []*Entry {
 	ret := make([]*Entry, 0, 1e5)
-	rd, err := ku.Read(c.Path)
+	rd, err := util.Read(c.Path)
 	if err != nil {
 		panic(err)
 	}

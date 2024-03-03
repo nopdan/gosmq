@@ -7,7 +7,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/nopdan/ku"
+	"github.com/nopdan/gosmq/pkg/util"
 )
 
 type Text struct {
@@ -19,7 +19,7 @@ type Text struct {
 
 // 从文件添加文本
 func (t *Text) Load(path string) error {
-	t.Name = ku.GetFileName(path)
+	t.Name = util.GetFileName(path)
 	f, err := os.Open(path)
 	if err != nil {
 		return err
@@ -33,7 +33,7 @@ func (t *Text) Load(path string) error {
 		t.bufLen = 256 << 10
 	}
 	// fmt.Println("buffer size", s.bufLen)
-	t.reader = ku.NewReader(f)
+	t.reader = util.NewReader(f)
 	return nil
 }
 

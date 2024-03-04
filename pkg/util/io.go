@@ -11,7 +11,7 @@ import (
 )
 
 // 将字节流转换为 utf-8
-func NewReader(input io.Reader) io.Reader {
+func ConvertReader(input io.Reader) io.Reader {
 	brd := bufio.NewReader(input)
 	buf, _ := brd.Peek(1024)
 	detector := chardet.NewTextDetector()
@@ -42,5 +42,5 @@ func Read(path string) (io.Reader, error) {
 	if err != nil {
 		return f, err
 	}
-	return NewReader(f), nil
+	return ConvertReader(f), nil
 }

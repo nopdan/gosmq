@@ -3,6 +3,7 @@ package util
 import (
 	"path/filepath"
 	"strings"
+	"unsafe"
 
 	"golang.org/x/exp/constraints"
 )
@@ -28,4 +29,20 @@ func AddTo(val int, sli *[]int, idx int) {
 func GetFileName(fp string) string {
 	name := filepath.Base(fp)
 	return strings.TrimSuffix(name, filepath.Ext(name))
+}
+
+// unsafe 强制转换 []byte 为 string
+func UnsafeToString(b []byte) string {
+	return *(*string)(unsafe.Pointer(&b))
+}
+
+// unsafe 强制转换 string 为 []byte
+func UnsafeToBytes(s string) []byte {
+	return *(*[]byte)(unsafe.Pointer(
+		&struct {
+			string
+			Cap int
+			Len int
+		}{s, len(s), len(s)},
+	))
 }

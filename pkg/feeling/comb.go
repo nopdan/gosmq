@@ -1,69 +1,74 @@
 package feeling
 
 import (
-	"fmt"
+	"bytes"
 	"strconv"
-	"strings"
 
 	_ "embed"
+
+	"github.com/nopdan/gosmq/pkg/util"
 )
 
 //go:embed assets/equivalent.txt
-var equivalent string
+var equivalent []byte
 
 //go:embed assets/fingering.txt
-var fingering string
+var fingering []byte
 
-const (
-	IsXKP = uint16(1) << iota
-	IsDKP
-	IsCS
-	IsXZGR
-)
+// 两键分布
+type distrib struct {
+	Equivalent float64 // 当量
+	SingleSpan bool    // 小跨排
+	MultiSpan  bool    // 大跨排
+	Staggered  bool    // 错手
+	Disturb    bool    // 小指干扰
+}
 
-// DL10<<8 + IsXKP|IsDKP|IsCS|IsXZGR
-var Comb [128][128]uint16
+// 1MB
+var Comb [128][128]*distrib
 
 func init() {
 
-	// equivalent = strings.ReplaceAll(equivalent, "\r\n", "\n")
-	// fingering = strings.ReplaceAll(fingering, "\r\n", "\n")
+	rd := bytes.NewReader(equivalent)
+	tsv := util.NewTSV(rd)
 
 	// 当量
-	for _, v := range strings.Split(equivalent, "\n") {
-		tmp := strings.Split(v, "\t")
-		if len(tmp) != 2 {
+	for {
+		line, err := tsv.Read("\t")
+		if err != nil {
+			break
+		}
+		if len(line) != 2 {
 			continue
 		}
-		DL10, _ := strconv.Atoi(tmp[1])
-		// 10 <=DL10 < 32 = 2^5
-		Comb[tmp[0][0]][tmp[0][1]] = uint16(DL10) << 8
+		code := line[0]
+		dl, _ := strconv.ParseFloat(line[1], 64)
+		if Comb[code[0]][code[1]] == nil {
+			Comb[code[0]][code[1]] = new(distrib)
+		}
+		Comb[code[0]][code[1]].Equivalent = dl
 	}
 
-	// 指法
-	fg := strings.Split(fingering, "\n")
+	rd.Reset(fingering)
+	tsv = util.NewTSV(rd)
 	// 小跨排
-	xkp := strings.Split(fg[0], " ")
-	for _, v := range xkp {
-		Comb[v[0]][v[1]] |= IsXKP
+	line, _ := tsv.Read(" ")
+	for _, v := range line {
+		Comb[v[0]][v[1]].SingleSpan = true
 	}
 	// 大跨排
-	dkp := strings.Split(fg[1], " ")
-	for _, v := range dkp {
-		Comb[v[0]][v[1]] |= IsDKP
+	line, _ = tsv.Read(" ")
+	for _, v := range line {
+		Comb[v[0]][v[1]].MultiSpan = true
 	}
 	// 错手
-	cs := strings.Split(fg[2], " ")
-	for _, v := range cs {
-		Comb[v[0]][v[1]] |= IsCS
+	line, _ = tsv.Read(" ")
+	for _, v := range line {
+		Comb[v[0]][v[1]].Staggered = true
 	}
 	// 小指干扰
-	xzgr := strings.Split(fg[3], " ")
-	for _, v := range xzgr {
-		Comb[v[0]][v[1]] |= IsXZGR
+	line, _ = tsv.Read(" ")
+	for _, v := range line {
+		Comb[v[0]][v[1]].Disturb = true
 	}
-}
-
-func Debug() {
-	fmt.Println(Comb)
 }

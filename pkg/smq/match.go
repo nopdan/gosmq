@@ -3,48 +3,44 @@ package smq
 import (
 	"unicode"
 	"unsafe"
+
+	"github.com/nopdan/gosmq/pkg/dict"
+	"github.com/nopdan/gosmq/pkg/feeling"
+	"github.com/nopdan/gosmq/pkg/result"
+	"github.com/nopdan/gosmq/pkg/util"
 )
 
-func match(buffer []byte, dict *Dict) *matchRes {
+func (c *Config) match(buffer []byte, dict *dict.Dict) *result.MatchRes {
 
 	// 初始化
-	mRes := new(matchRes)
-	mRes.wordSlice = make([]string, 0, len(buffer)/3)
-	mRes.codeSlice = make([]string, 0, len(buffer)/3)
-	mRes.statData = make(map[string]*CodePosCount)
-
-	mRes.notHanMap = make(map[rune]struct{})
-	mRes.lackMap = make(map[rune]struct{})
-	mRes.CodeLenDist = make([]int, 0)
-	mRes.WordsDist = make([]int, 0)
-	mRes.CollisionDist = make([]int, 0)
-
-	// 前面的键
-	var last2Key, lastKey byte
-	var last KeyPos
+	mRes := result.NewMatchRes()
+	feel := feeling.New(mRes, dict.SpacePref)
 
 	Handler := func(word, code string, wordLen, pos int) {
-		AddTo(&mRes.WordsDist, wordLen)
-		AddTo(&mRes.CollisionDist, pos)
-		AddTo(&mRes.CodeLenDist, len(code))
+		util.Increase(&mRes.WordLenDist, wordLen)
+		util.Increase(&mRes.CollisionDist, pos)
+		util.Increase(&mRes.CodeLenDist, len(code))
 
 		for i := 0; i < len(code); i++ {
-			tmpKey, tmp := mRes.feel(last2Key, lastKey, code[i], last, dict)
-			last2Key = lastKey
-			lastKey, last = tmpKey, tmp
+			feel.Process(code[i])
 		}
 
 		// 启用分词
-		if dict.Split {
-			mRes.wordSlice = append(mRes.wordSlice, word)
-			mRes.codeSlice = append(mRes.codeSlice, code)
+		if c.Split {
+			mRes.Segment = append(mRes.Segment, result.WordCode{
+				Word: word,
+				Code: code,
+			})
 		}
 		// 启用统计
-		if dict.Stat {
-			if _, ok := mRes.statData[word]; !ok {
-				mRes.statData[word] = &CodePosCount{code, pos, 1}
+		if c.Stat {
+			if _, ok := mRes.StatData[word]; !ok {
+				mRes.StatData[word] = &result.CodePosCount{
+					Code:  code,
+					Pos:   pos,
+					Count: 1}
 			} else {
-				mRes.statData[word].Count++
+				mRes.StatData[word].Count++
 			}
 		}
 	}
@@ -53,13 +49,11 @@ func match(buffer []byte, dict *Dict) *matchRes {
 		isHan := unicode.Is(unicode.Han, char)
 		// 非汉字
 		if !isHan {
-			mRes.notHanMap[char] = struct{}{}
-			mRes.NotHanCount++
+			mRes.NotHanMap[char] = struct{}{}
 		}
 		// 缺汉字
 		if lack && isHan {
-			mRes.lackMap[char] = struct{}{}
-			mRes.LackCount++
+			mRes.LackMap[char] = struct{}{}
 		}
 	}
 
@@ -75,24 +69,24 @@ func match(buffer []byte, dict *Dict) *matchRes {
 			p++
 			continue
 		}
-		mRes.Commits++
+		mRes.Commit.Count++
 
-		wordLen, code, pos := dict.matcher.Match(text[p:])
+		wordLen, code, pos := dict.Matcher.Match(text[p:])
 		// 匹配到了
 		if wordLen != 0 {
 			sWord := string(text[p : p+wordLen])
 			// 打词
 			if wordLen >= 2 {
-				mRes.WordsCommitsCount++
-				mRes.WordsCharsCount += wordLen
+				mRes.Commit.Word++
+				mRes.Commit.WordChars += wordLen
 				if pos == 1 {
-					mRes.WordsFirstCount++
+					mRes.Commit.WordFirst++
 				}
 			}
 			// 选重
 			if pos >= 2 {
-				mRes.CollisionCommitsCount++
-				mRes.CollisionCharsCount += wordLen
+				mRes.Commit.Collision++
+				mRes.Commit.CollisionChars += wordLen
 			}
 			// 对每个字都进行判断
 			for i := 0; i < wordLen; i++ {
@@ -104,8 +98,8 @@ func match(buffer []byte, dict *Dict) *matchRes {
 		}
 
 		// 匹配不到
-		if dict.Clean {
-			mRes.Commits--
+		if c.Clean {
+			mRes.Commit.Count--
 			p++
 			continue
 		}
@@ -136,8 +130,8 @@ func match(buffer []byte, dict *Dict) *matchRes {
 				continue
 			}
 		}
-		// 找不到的符号，设为 "####"
-		Handler(sWord, "####", 1, 1)
+		// 找不到的符号，设为 "######"
+		Handler(sWord, "######", 1, 1)
 		p++
 	}
 	return mRes

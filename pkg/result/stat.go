@@ -1,8 +1,12 @@
-package smq
+package result
 
 import (
 	"sort"
+
+	"github.com/nopdan/gosmq/pkg/util"
 )
+
+var div = util.Div[int]
 
 func (res *Result) stat() {
 
@@ -76,15 +80,17 @@ func (res *Result) statFeel() {
 	res.Hands.Same.Rate = div(res.Hands.Same.Count, res.Combs.Count)
 	res.Hands.Diff.Rate = div(res.Hands.Diff.Count, res.Combs.Count)
 	// fingers
-	for i := 33; i < 128; i++ {
-		if keyPos := KeyPosArr[i]; keyPos.Fin == 0 {
-			res.Fingers.Dist[10].Count += res.keysDist[i]
-		} else if keyPos.Fin == 10 {
-			res.Fingers.Dist[0].Count += res.keysDist[i]
-		} else {
-			res.Fingers.Dist[keyPos.Fin].Count += res.keysDist[i]
-		}
-	}
+	// TODO
+	// for i := byte(33); i < 128; i++ {
+	// 	_, finger := feeling.KeyPos(i)
+	// 	if finger == 0 {
+	// 		res.Fingers.Dist[10].Count += res.keysDist[i]
+	// 	} else if finger == 10 {
+	// 		res.Fingers.Dist[0].Count += res.keysDist[i]
+	// 	} else {
+	// 		res.Fingers.Dist[finger].Count += res.keysDist[i]
+	// 	}
+	// }
 	for i := range res.Fingers.Dist {
 		v := &res.Fingers.Dist[i]
 		v.Rate = div(v.Count, res.CodeLen.Total)

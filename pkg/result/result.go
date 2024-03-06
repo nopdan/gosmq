@@ -1,9 +1,15 @@
-package smq
+package result
 
 // count and rate
 type CountRate struct {
 	Count int
 	Rate  float64
+}
+
+type wcIdx struct {
+	idx     int
+	wordSli []string
+	codeSli []string
 }
 
 type Result struct {
@@ -101,7 +107,7 @@ type hands struct {
 	RR CountRate `json:"RightToRight"` // 右右
 }
 
-func newResult() *Result {
+func NewResult() *Result {
 	res := new(Result)
 	res.notHanMap = make(map[rune]struct{}, 20)
 	res.lackMap = make(map[rune]struct{}, 20)

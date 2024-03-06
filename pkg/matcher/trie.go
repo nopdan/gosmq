@@ -13,8 +13,8 @@ type trie struct {
 	tails   []tail
 	useTail bool // 是否压缩 tail
 
-	count  uint32 // 插入词的数量
-	stable bool   // 是否按照码表的顺序
+	count   uint32 // 插入词的数量
+	ordered bool   // 是否按照码表的顺序
 }
 
 type trieNode struct {
@@ -36,11 +36,11 @@ type tail struct {
 	valueIdx int32
 }
 
-func NewTrie(stable bool, useTail bool) *trie {
+func NewTrie(ordered bool, useTail bool) *trie {
 	t := new(trie)
 	t.root = newTrieNode()
 	t.values = make([]value, 0, 1e4)
-	t.stable = stable
+	t.ordered = ordered
 	if useTail {
 		t.useTail = useTail
 		t.tails = make([]tail, 0, 1000)
@@ -76,7 +76,7 @@ func (t *trie) Insert(word, code string, pos int) {
 	}
 	// 已经存在的词
 	// 取排在前面的
-	if t.stable {
+	if t.ordered {
 		return
 	}
 	// 取码长较短的
@@ -155,7 +155,7 @@ func (t *trie) Match(text []rune) (int, string, int) {
 		if slices.Equal(_tail.runes, text[p:p+len(_tail.runes)]) {
 			val := &t.values[_tail.valueIdx]
 			// 跳过码表顺序在后面的词
-			if t.stable && res.order != 0 && val.order > res.order {
+			if t.ordered && res.order != 0 && val.order > res.order {
 				return
 			}
 			wordLen = p + len(_tail.runes)
@@ -172,7 +172,7 @@ func (t *trie) Match(text []rune) (int, string, int) {
 		if node.valueIdx != -1 {
 			val := &t.values[node.valueIdx]
 			// 跳过码表顺序在后面的词
-			if t.stable && res.order != 0 && val.order > res.order {
+			if t.ordered && res.order != 0 && val.order > res.order {
 			} else {
 				wordLen = p
 				res = val

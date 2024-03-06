@@ -25,6 +25,7 @@ type Text struct {
 	plainText string
 
 	Reader *bufio.Reader
+	Size   int // 文件大小
 }
 
 type TextOption func(*Text)
@@ -70,8 +71,9 @@ func WithText(text string) TextOption {
 }
 
 func (t *Text) init() error {
-	foo := func(rd io.Reader) {
+	foo := func(rd io.Reader, size int) {
 		t.Reader = bufio.NewReaderSize(rd, 32*1024)
+		t.Size = size
 	}
 	switch t.source {
 	case "local":
@@ -80,20 +82,22 @@ func (t *Text) init() error {
 		if err != nil {
 			return fmt.Errorf("text.New(): %w", err)
 		}
-		foo(f)
+		fi, _ := f.Stat()
+		rd := util.ConvertReader(f)
+		foo(rd, int(fi.Size()))
 	case "upload":
 		if len(t.data) == 0 {
 			return fmt.Errorf("text.New(): data is empty")
 		}
 		brd := bytes.NewReader(t.data)
 		rd := util.ConvertReader(brd)
-		foo(rd)
+		foo(rd, len(t.data))
 	case "clipboard":
 		if len(t.plainText) == 0 {
 			return fmt.Errorf("text.New(): plainText is empty")
 		}
 		rd := strings.NewReader(t.plainText)
-		foo(rd)
+		foo(rd, len(t.plainText))
 	}
 	return nil
 }

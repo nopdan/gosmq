@@ -1,4 +1,4 @@
-package gen
+package dict
 
 import (
 	"bufio"
@@ -8,14 +8,13 @@ import (
 	"github.com/nopdan/gosmq/pkg/util"
 )
 
-func (c *Config) LoadJisu() []*Entry {
-	ret := make([]*Entry, 0, 1e5)
-	rd, err := util.Read(c.Path)
-	if err != nil {
-		panic(err)
+func (d *Dict) loadJisu() []*Entry {
+	var cap int = 1e5
+	if d.Size > 0 {
+		cap = d.Size / 32
 	}
-
-	scan := bufio.NewScanner(rd)
+	ret := make([]*Entry, 0, cap)
+	scan := bufio.NewScanner(d.Reader)
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
 		if len(wc) != 2 {
@@ -29,7 +28,7 @@ func (c *Config) LoadJisu() []*Entry {
 			continue
 		}
 
-		pre, suf := FindSuffixInteger(code)
+		pre, suf := findSuffixInteger(code)
 		// 不带数字 akdb ksdw
 		if suf == "" {
 			ret = append(ret, &Entry{word, code, 1})
@@ -42,17 +41,19 @@ func (c *Config) LoadJisu() []*Entry {
 			pos = 10
 		}
 		// 添加自定义选重键
-		if pos <= len(c.SelectKeys) {
-			code = pre + string(c.SelectKeys[pos-1])
+		if pos <= len(d.selectKeys) {
+			tmp := util.UnsafeToBytes(pre)
+			tmp = append(tmp, d.getSelectKey(pos)...)
+			code = util.UnsafeToString(tmp)
 		}
-		// fmt.Println(wc[0], code, pos)
 		ret = append(ret, &Entry{wc[0], code, pos})
+		d.insert(word, code, pos)
 	}
 	return ret
 }
 
 // 查找末尾数字，返回前缀和后缀
-func FindSuffixInteger(s string) (string, string) {
+func findSuffixInteger(s string) (string, string) {
 	var prefix, suffix string
 	for i := len(s) - 1; i >= 0; i-- {
 		if s[i] >= '0' && s[i] <= '9' {
@@ -64,4 +65,16 @@ func FindSuffixInteger(s string) (string, string) {
 	}
 	// 全是数字
 	return s, ""
+}
+
+func (d *Dict) getSelectKey(num int) []byte {
+	if num < 1 {
+		return []byte{}
+	}
+	for num > len(d.selectKeys)-2 {
+		d.selectKeys = append(d.selectKeys,
+			util.UnsafeToBytes(strconv.Itoa(len(d.selectKeys)+1)),
+		)
+	}
+	return d.selectKeys[num-1]
 }

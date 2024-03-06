@@ -156,7 +156,7 @@
     <span class="name">匹配算法</span>
     <n-radio-group v-model:value="dictConfig.algo" name="dictAlgo" :disabled="dictConfig.single">
       <n-flex>
-        <n-radio v-for="algo in algoOptions" :key="algo.value" :value="algo.value">
+        <n-radio v-for="algo in algoOptions" :key="algo.value" :value="algo.value" :disabled="algo.disabled">
           {{ algo.label }}
         </n-radio>
       </n-flex>
@@ -327,10 +327,12 @@ enum DictFormat {
   Default = "default",
   /** 极速赛码表 */
   Jisu = "jisu",
-  /** 多多格式 */
+  /** 多多 */
   Duoduo = "duoduo",
-  /** 极点格式 */
-  Jidian = "jidian",
+  /** 冰凌 */
+  Bingling = "bingling",
+  /** 小小 */
+  Xiaoxiao = "xiaoxiao",
 }
 
 enum Algorithm {
@@ -376,12 +378,16 @@ const formatOptions = [
     value: DictFormat.Jisu,
   },
   {
-    label: "多多(Rime)",
+    label: "多多 | Rime",
     value: DictFormat.Duoduo,
   },
   {
-    label: "极点",
-    value: DictFormat.Jidian,
+    label: "冰凌",
+    value: DictFormat.Bingling,
+  },
+  {
+    label: "小小 | 极点",
+    value: DictFormat.Xiaoxiao,
   },
 ];
 
@@ -397,6 +403,7 @@ const algoOptions = [
   {
     label: "最短码长(慢)",
     value: Algorithm.Dynamic,
+    disabled: true
   },
 ];
 

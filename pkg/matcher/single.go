@@ -1,31 +1,56 @@
 package matcher
 
-type codePos struct {
-	code string
-	pos  int
+import (
+	"bytes"
+	"unicode/utf8"
+)
+
+type single struct {
+	dict map[rune]*struct {
+		code string
+		pos  int
+	}
 }
 
-type single map[rune]*codePos
-
 func NewSingle() *single {
-	t := make(single, 1024)
-	return &t
+	s := new(single)
+	s.dict = make(map[rune]*struct {
+		code string
+		pos  int
+	}, 1024)
+	return s
 }
 
 func (s *single) Insert(word, code string, pos int) {
-	char := []rune(word)[0]
-	// 同一个字取码长较短的
-	if cp, ok := (*s)[char]; !ok || len(cp.code) > len(code) {
-		(*s)[char] = &codePos{code, pos}
+	char, _ := utf8.DecodeRuneInString(word)
+	cp, ok := s.dict[char]
+	if ok {
+		if len(cp.code) < len(code) {
+			// 同一个字取码长较短的
+			s.dict[char].pos = pos
+		}
+		return
+	}
+	s.dict[char] = &struct {
+		code string
+		pos  int
+	}{
+		code: code,
+		pos:  pos,
 	}
 }
 
 func (s *single) Build() {
 }
 
-func (s *single) Match(text []rune) (int, string, int) {
-	if v, ok := (*s)[text[0]]; ok {
-		return 1, v.code, v.pos
+func (s *single) Match(brd *bytes.Reader, res *Result) {
+	res.Reset()
+	ch, size, _ := brd.ReadRune()
+	res.Char = ch
+	res.Size = size
+	res.Length = 1
+	if v, ok := s.dict[ch]; ok {
+		res.Code = v.code
+		res.Pos = v.pos
 	}
-	return 0, "", 1
 }

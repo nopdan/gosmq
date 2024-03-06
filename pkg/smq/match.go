@@ -1,138 +1,128 @@
 package smq
 
 import (
+	"bytes"
+	"io"
 	"unicode"
-	"unsafe"
 
 	"github.com/nopdan/gosmq/pkg/dict"
 	"github.com/nopdan/gosmq/pkg/feeling"
+	"github.com/nopdan/gosmq/pkg/matcher"
 	"github.com/nopdan/gosmq/pkg/result"
 	"github.com/nopdan/gosmq/pkg/util"
 )
 
 func (c *Config) match(buffer []byte, dict *dict.Dict) *result.MatchRes {
-
-	// 初始化
 	mRes := result.NewMatchRes()
 	feel := feeling.New(mRes, dict.SpacePref)
+	brd := bytes.NewReader(buffer)
+	res := new(matcher.Result)
 
-	Handler := func(word, code string, wordLen, pos int) {
-		util.Increase(&mRes.WordLenDist, wordLen)
-		util.Increase(&mRes.CollisionDist, pos)
-		util.Increase(&mRes.CodeLenDist, len(code))
-
-		for i := 0; i < len(code); i++ {
-			feel.Process(code[i])
+	process := func(res *matcher.Result) {
+		mRes.Commit.Count++
+		util.Increase(&mRes.WordLenDist, res.Length)
+		util.Increase(&mRes.CollisionDist, res.Pos)
+		util.Increase(&mRes.CodeLenDist, len(res.Code))
+		for i := range len(res.Code) {
+			feel.Process(res.Code[i])
+		}
+		// 匹配到词组
+		if res.Length >= 2 {
+			mRes.Commit.Word++
+			mRes.Commit.WordChars += res.Length
+			if res.Pos == 1 {
+				mRes.Commit.WordFirst++ // 首选词
+			}
+		}
+		if !c.Split && !c.Stat {
+			return
 		}
 
+		var word string
+		if res.Char > 32 {
+			word = string([]rune{res.Char})
+		} else {
+			brd.Seek(-1*int64(res.Size), io.SeekCurrent)
+			data := make([]byte, res.Size)
+			brd.Read(data)
+			word = util.UnsafeToString(data)
+		}
 		// 启用分词
 		if c.Split {
 			mRes.Segment = append(mRes.Segment, result.WordCode{
 				Word: word,
-				Code: code,
+				Code: res.Code,
 			})
 		}
 		// 启用统计
 		if c.Stat {
 			if _, ok := mRes.StatData[word]; !ok {
 				mRes.StatData[word] = &result.CodePosCount{
-					Code:  code,
-					Pos:   pos,
+					Code:  res.Code,
+					Pos:   res.Pos,
 					Count: 1}
 			} else {
 				mRes.StatData[word].Count++
 			}
 		}
 	}
-	// 是否判断缺字
-	HanHandler := func(char rune, lack bool) {
-		isHan := unicode.Is(unicode.Han, char)
-		// 非汉字
-		if !isHan {
-			mRes.NotHanMap[char] = struct{}{}
-		}
-		// 缺汉字
-		if lack && isHan {
-			mRes.LackMap[char] = struct{}{}
-		}
-	}
 
-	text := []rune(*(*string)(unsafe.Pointer(&buffer)))
-	for p := 0; p < len(text); {
+	for brd.Len() > 0 {
 		// 跳过空白字符
-		if text[p] < 33 {
-			p++
+		ch, _, _ := brd.ReadRune()
+		if ch < 33 || ch == 65533 || ch == '　' {
 			continue
 		}
-		switch text[p] {
-		case 65533, '　':
-			p++
-			continue
-		}
-		mRes.Commit.Count++
+		_ = brd.UnreadRune()
 
-		wordLen, code, pos := dict.Matcher.Match(text[p:])
-		// 匹配到了
-		if wordLen != 0 {
-			sWord := string(text[p : p+wordLen])
-			// 打词
-			if wordLen >= 2 {
-				mRes.Commit.Word++
-				mRes.Commit.WordChars += wordLen
-				if pos == 1 {
-					mRes.Commit.WordFirst++
+		// 开始匹配
+		dict.Matcher.Match(brd, res)
+
+		// 匹配成功
+		if res.Pos > 0 {
+			process(res)
+			continue
+		}
+
+		// 匹配失败了
+		if c.Clean {
+			continue
+		}
+		res.Pos = 1
+
+		// 两个字符的符号
+		if res.Char == '—' || res.Char == '…' {
+			ch2, _, err := brd.ReadRune()
+			if err != nil {
+				if res.Char == '—' && ch2 == '—' {
+					// 中文破折号 —— 占用 6 字节，不计打词
+					res.SetChar(0).SetCode("=-").SetSize(6)
+					process(res)
+					continue
+				} else if res.Char == '…' && ch2 == '…' {
+					// 中文省略号 …… 占用 6 字节，不计打词
+					res.SetChar(0).SetCode("=6").SetSize(6)
+					process(res)
+					continue
 				}
 			}
-			// 选重
-			if pos >= 2 {
-				mRes.Commit.Collision++
-				mRes.Commit.CollisionChars += wordLen
-			}
-			// 对每个字都进行判断
-			for i := 0; i < wordLen; i++ {
-				HanHandler(text[p+i], false)
-			}
-			Handler(sWord, code, wordLen, pos)
-			p += wordLen
+			_ = brd.UnreadRune()
+		}
+		// 单字符符号
+		punct := convertPunct(res.Char)
+		if punct != "" {
+			res.Code = punct
+			process(res)
 			continue
 		}
-
-		// 匹配不到
-		if c.Clean {
-			mRes.Commit.Count--
-			p++
-			continue
+		isHan := unicode.Is(unicode.Han, res.Char)
+		if isHan {
+			mRes.LackMap[ch] = struct{}{}
+		} else {
+			mRes.NotHanMap[ch] = struct{}{}
 		}
-
-		HanHandler(text[p], true)
-		sWord := string(text[p])
-		// 是否为符号
-		code = PunctToCode(text[p])
-		if code != "" {
-			Handler(sWord, code, 1, 1)
-			p++
-			continue
-		}
-		// 单独处理这两个符号，不作为打词
-		if p+1 < len(text) {
-			flag := false
-			switch string(text[p : p+2]) {
-			case "——":
-				Handler("——", "=-", 1, 1)
-				flag = true
-			case "……":
-				Handler("……", "=6", 1, 1)
-				flag = true
-			}
-			if flag {
-				HanHandler(text[p+1], false)
-				p += 2
-				continue
-			}
-		}
-		// 找不到的符号，设为 "######"
-		Handler(sWord, "######", 1, 1)
-		p++
+		res.Code = "######"
+		process(res)
 	}
 	return mRes
 }

@@ -1,6 +1,7 @@
 package smq
 
 import (
+	"fmt"
 	"runtime"
 	"sync"
 
@@ -65,26 +66,26 @@ func (c *Config) Race() [][]*result.Result {
 	var wg sync.WaitGroup
 	for i, text := range c.textList {
 		// 分段计算当前文章，pIdx 为每一段的索引
-		pIdx := 0
+		pIdx := -1
 		for {
 			text, err := text.Iter()
 			// fmt.Println(util.UnsafeToString(text))
 			if err != nil {
 				break
 			}
+			pIdx++
 			for j, dict := range c.dictList {
 				wg.Add(1)
-				// go 1.22 修复了 range 循环问题
-				go func() {
+				go func(i, j, pIdx int) {
 					defer wg.Done()
 					mRes := c.match(text, dict)
 					mRes.TextIdx = i
 					mRes.DictIdx = j
 					mRes.PartIdx = pIdx
+					fmt.Printf("text idx: %d dict idx: %d part idx: %d\n", i, j, pIdx)
 					ch <- mRes
-				}()
+				}(i, j, pIdx)
 			}
-			pIdx++
 		}
 	}
 
@@ -113,7 +114,7 @@ func (c *Config) Race() [][]*result.Result {
 		res[i] = make([]*result.Result, dNum)
 		for j := range dNum {
 			// TODO
-			mRes[i][j].Print(false)
+			// mRes[i][j].Print(false)
 			res[i][j] = mRes[i][j].ToResult()
 		}
 	}

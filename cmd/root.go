@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 
+	"github.com/nopdan/gosmq/pkg/data"
 	"github.com/nopdan/gosmq/pkg/smq"
 )
 
@@ -11,7 +12,12 @@ var conf = &struct {
 	Texts []string // 文本
 	Dicts []string // 码表
 
-	smq.Dict
+	Single    bool   // 单字模式
+	Stable    bool   // 按码表顺序
+	SpacePref string // 空格按键方式 left|right|both
+	Clean     bool   // 只统计词库中的词条
+	Split     bool   // 统计分词结果
+	Stat      bool   // 统计每个词条出现的次数
 
 	Verbose bool // 输出全部数据
 	Json    bool // 输出json数据
@@ -27,8 +33,7 @@ func init() {
 
 	rootCmd.Flags().BoolVarP(&conf.Single, "single", "s", false, "启用单字模式")
 	rootCmd.Flags().BoolVarP(&conf.Stable, "stable", "", false, "按码表顺序")
-	rootCmd.Flags().BoolVarP(&conf.UseTail, "tail", "", false, "use tail")
-	rootCmd.Flags().StringVarP(&conf.PressSpaceBy, "space", "k", "both", "空格按键方式 left|right|both")
+	rootCmd.Flags().StringVarP(&conf.SpacePref, "space", "k", "both", "空格按键方式 left|right|both")
 	rootCmd.Flags().BoolVarP(&conf.Clean, "clean", "c", false, "只统计词库中的词条")
 
 	rootCmd.Flags().BoolVarP(&conf.Verbose, "verbose", "v", false, "输出全部数据")
@@ -52,12 +57,24 @@ func _root() {
 		conf.Json = true
 		conf.HTML = true
 	}
+
+	smq := &smq.Config{
+		Merge: conf.Merge,
+		Clean: conf.Clean,
+		Split: conf.Split,
+		Stat:  conf.Stat,
+	}
+
 	// 开始计时
 	start := time.Now()
 	texts := make([]string, 0, len(conf.Texts))
 	for _, v := range conf.Texts {
-		texts = append(texts, getFiles(v)...)
+		for _, v := range getFiles(v) {
+			texts = append(texts, v)
+			smq.AddText(&data.Text{Path: v})
+		}
 	}
+
 	if !conf.Hidden {
 		fmt.Println("载入文本：")
 		for _, v := range texts {
@@ -72,14 +89,20 @@ func _root() {
 	for _, v := range conf.Dicts {
 		dictNames = append(dictNames, getFiles(v)...)
 	}
-	dicts := make([]*smq.Dict, 0, len(dictNames))
 	fmt.Println("载入码表：")
 	dictStartTime := time.Now()
 	mid := time.Now()
 	for _, v := range dictNames {
-		dict := conf.Dict
-		dict.Load(v)
-		dicts = append(dicts, &dict)
+		dict := &data.Dict{
+			Text:      &data.Text{Path: v},
+			Single:    conf.Single,
+			SpacePref: conf.SpacePref,
+		}
+		if conf.Stable {
+			dict.Algorithm = "ordered"
+		}
+		smq.AddDict(dict)
+
 		if len(dictNames) == 1 {
 			fmt.Println("=> ", v)
 		} else {
@@ -91,8 +114,7 @@ func _root() {
 
 	// race
 	fmt.Println("比赛开始...")
-	textLenTotal := 0
-	var printEnd = func() {
+	var printEnd = func(textLen int) {
 		if conf.Split {
 			if conf.Merge {
 				fmt.Println("--merge 不会输出分词结果。")
@@ -109,37 +131,17 @@ func _root() {
 		if conf.Json {
 			fmt.Println("已输出 json 数据")
 		}
-		fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dicts), len(texts), textLenTotal, time.Since(start))
+		fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dictNames), len(texts), textLen, time.Since(start))
 	}
 
-	if conf.Merge {
-		resArr := smq.ParallelMerge(texts, dicts)
-		for _, res := range resArr {
-			if !conf.Hidden {
-				printSep()
-				Output([]*smq.Result{res})
-			}
-			OutputHTML([]*smq.Result{res}, conf.HTML)
-			OutPutJson(res, conf.Json)
-			textLenTotal = res.TextLen
+	textLen := 0
+	res := smq.Race()
+	for _, v := range res {
+		Output(v)
+		for _, vv := range v {
+			textLen += vv.Info.TextLen
 		}
-		printEnd()
-		return
 	}
 
-	smq.Parallel(texts, dicts, func(v []*smq.Result) {
-		if len(v) == 0 {
-			return
-		}
-		textLenTotal += v[0].TextLen
-		if !conf.Hidden {
-			printSep()
-			Output(v)
-		}
-		OutputHTML(v, conf.HTML)
-		for _, res := range v {
-			OutPutJson(res, conf.Json)
-		}
-	})
-	printEnd()
+	printEnd(textLen)
 }

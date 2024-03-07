@@ -7,10 +7,7 @@ type CountRate struct {
 }
 
 type Result struct {
-	segments []struct {
-		PartIdx int
-		Segment []WordCode
-	}
+	segments []segment
 	statData map[string]*CodePosCount
 
 	Info   Info   // 文章和码表信息
@@ -30,8 +27,9 @@ type Result struct {
 		Total   int
 		PerChar float64
 	}
-	LeftHand  int // 左手按键数
-	RightHand int // 右手按键数
+	LeftHand   int     // 左手按键数
+	RightHand  int     // 右手按键数
+	Equivalent float64 // 总当量
 }
 
 type Info struct {
@@ -59,7 +57,7 @@ type codeLen struct {
 }
 
 // 按键 左空格_，右空格+
-type keys map[string]*CountRate
+type keys map[string]CountRate
 
 type hands struct {
 	Left  CountRate // 左手

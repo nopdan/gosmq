@@ -4,10 +4,10 @@ import (
 	"fmt"
 
 	"github.com/jedib0t/go-pretty/v6/table"
-	"github.com/nopdan/gosmq/pkg/smq"
+	"github.com/nopdan/gosmq/pkg/result"
 )
 
-func Output(data []*smq.Result) {
+func Output(data []*result.Result) {
 	// r, _ := json.MarshalIndent(res, "", "  ")
 	// fmt.Printf(string(r))
 
@@ -18,31 +18,31 @@ func Output(data []*smq.Result) {
 
 	t := table.NewWriter()
 	tmpRow := table.Row{"文本名"}
-	tmpRow = append(tmpRow, data[0].TextName)
+	tmpRow = append(tmpRow, data[0].Info.TextName)
 	tmpRow = append(tmpRow, "|")
 	tmpRow = append(tmpRow, "方案名")
 	for _, res := range data {
-		tmpRow = append(tmpRow, res.DictName)
+		tmpRow = append(tmpRow, res.Info.DictName)
 	}
 	t.AppendRow(tmpRow)
 	tmpRow = table.Row{"字数"}
-	tmpRow = append(tmpRow, data[0].TextLen)
+	tmpRow = append(tmpRow, data[0].Info.TextLen)
 	tmpRow = append(tmpRow, "|")
 	tmpRow = append(tmpRow, "词条数 ")
 	for _, res := range data {
-		tmpRow = append(tmpRow, res.DictLen)
+		tmpRow = append(tmpRow, res.Info.DictLen)
 	}
 	t.AppendRow(tmpRow)
 	t.SetStyle(noColor)
 	out += t.Render() + "\n\n"
 
-	out += fmt.Sprintf("非汉字：%v \n", data[0].Basic.NotHan)
+	out += fmt.Sprintf("非汉字：%v \n", data[0].Han.NotHan)
 	for i, res := range data {
 		if i == 0 && len(data) == 1 {
-			out += fmt.Sprintf("缺字：  %s \n", res.Basic.Lack)
+			out += fmt.Sprintf("缺字：  %s \n", res.Han.Lack)
 			break
 		}
-		out += fmt.Sprintf("%d 缺字：  %s \n", i+1, res.Basic.Lack)
+		out += fmt.Sprintf("%d 缺字：  %s \n", i+1, res.Han.Lack)
 	}
 	out += "\n"
 
@@ -52,9 +52,9 @@ func Output(data []*smq.Result) {
 		} else {
 			out += fmt.Sprintf("%d %s：", i+1, "码长")
 		}
-		for j := 1; j < len(res.CodeLen.Dist); j++ {
-			if res.CodeLen.Dist[j] != 0 {
-				out += fmt.Sprintf("%d:%d  ", j, res.CodeLen.Dist[j])
+		for j, v := range res.Dist.CodeLen {
+			if v != 0 {
+				out += fmt.Sprintf("%d:%d  ", j, v)
 			}
 		}
 		out += "\n"
@@ -63,9 +63,9 @@ func Output(data []*smq.Result) {
 		} else {
 			out += fmt.Sprintf("%d %s：", i+1, "词长")
 		}
-		for j := 1; j < len(res.Words.Dist); j++ {
-			if res.Words.Dist[j] != 0 {
-				out += fmt.Sprintf("%d:%d  ", j, res.Words.Dist[j])
+		for j, v := range res.Dist.WordLen {
+			if v != 0 {
+				out += fmt.Sprintf("%d:%d  ", j, v)
 			}
 		}
 		out += "\n"
@@ -74,9 +74,9 @@ func Output(data []*smq.Result) {
 		} else {
 			out += fmt.Sprintf("%d %s：", i+1, "选重")
 		}
-		for j := 1; j < len(res.Collision.Dist); j++ {
-			if res.Collision.Dist[j] != 0 {
-				out += fmt.Sprintf("%d:%d  ", j, res.Collision.Dist[j])
+		for j, v := range res.Dist.Collision {
+			if v != 0 {
+				out += fmt.Sprintf("%d:%d  ", j, v)
 			}
 		}
 		out += "\n\n"
@@ -89,8 +89,8 @@ func Output(data []*smq.Result) {
 			res.CodeLen.Total,
 			fmt.Sprintf("%.4f", res.CodeLen.PerChar),
 			fmt.Sprintf("%.2f", 600/res.CodeLen.PerChar),
-			res.Basic.NotHans, res.Basic.NotHanCount,
-			res.Basic.Lacks, res.Basic.LackCount,
+			res.Han.NotHans, res.Han.NotHanCount,
+			res.Han.Lacks, res.Han.LackCount,
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -99,16 +99,19 @@ func Output(data []*smq.Result) {
 	t = table.NewWriter()
 	t.AppendHeader(table.Row{"首选词", "打词", "--", "打词字数", "--", "选重", "--", "选重字数", "--"})
 	for _, res := range data {
+		commitRate := func(x int) float64 {
+			return div(x, res.Commit.Count)
+		}
 		t.AppendRow([]interface{}{
-			res.Words.FirstCount,
-			res.Words.Commits.Count,
-			fmt.Sprintf("%.2f%%", 100*res.Words.Commits.Rate),
-			res.Words.Chars.Count,
-			fmt.Sprintf("%.2f%%", 100*res.Words.Chars.Rate),
-			res.Collision.Commits.Count,
-			fmt.Sprintf("%.2f%%", 100*res.Collision.Commits.Rate),
-			res.Collision.Chars.Count,
-			fmt.Sprintf("%.2f%%", 100*res.Collision.Chars.Rate),
+			res.Commit.WordFirst,
+			res.Commit.Word,
+			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.Word)),
+			res.Commit.WordChars,
+			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.WordChars)),
+			res.Commit.Collision,
+			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.Collision)),
+			res.Commit.CollisionChars,
+			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.CollisionChars)),
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -118,12 +121,12 @@ func Output(data []*smq.Result) {
 	t.AppendHeader(table.Row{"左手", "右手", "左右", "右左", "左左", "右右"})
 	for _, res := range data {
 		t.AppendRow([]interface{}{
-			fmt.Sprintf("%.2f%%", 100*res.Hands.Left.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Hands.Right.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Hands.LL.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Hands.LR.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Hands.RL.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Hands.RR.Rate),
+			fmt.Sprintf("%.2f%%", 100*div(res.LeftHand, res.CodeLen.Total)),
+			fmt.Sprintf("%.2f%%", 100*div(res.RightHand, res.CodeLen.Total)),
+			fmt.Sprintf("%.2f%%", 100*div(res.Pair.LeftToRight, res.Pair.Count)),
+			fmt.Sprintf("%.2f%%", 100*div(res.Pair.RightToLeft, res.Pair.Count)),
+			fmt.Sprintf("%.2f%%", 100*div(res.Pair.LeftToLeft, res.Pair.Count)),
+			fmt.Sprintf("%.2f%%", 100*div(res.Pair.RightToRight, res.Pair.Count)),
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -132,17 +135,20 @@ func Output(data []*smq.Result) {
 	t = table.NewWriter()
 	t.AppendHeader(table.Row{"当量", "异手", "同指", "三连击", "两连击", "小跨排", "大跨排", "异指", "小指干扰", "错手"})
 	for _, res := range data {
+		pairRate := func(x int) float64 {
+			return div(x, res.Pair.Count)
+		}
 		t.AppendRow([]interface{}{
-			fmt.Sprintf("%.4f", res.Combs.Equivalent),
-			fmt.Sprintf("%.2f%%", 100*res.Hands.Diff.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Fingers.Same.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Combs.TribleHit.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Combs.DoubleHit.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Combs.SingleSpan.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Combs.MultiSpan.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Fingers.Diff.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Combs.LittleFingersDisturb.Rate),
-			fmt.Sprintf("%.2f%%", 100*res.Combs.LongFingersDisturb.Rate),
+			fmt.Sprintf("%.4f", pairRate(int(res.Equivalent))),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.DiffHand)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.SameFinger)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.TribleHit)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.DoubleHit)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.SingleSpan)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.MultiSpan)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.DiffFinger)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.Disturb)),
+			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.Staggered)),
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -152,10 +158,9 @@ func Output(data []*smq.Result) {
 	t.AppendHeader(table.Row{"小指", "无名指", "中指", "食指", "左拇指", "右拇指", "食指", "中指", "无名指", "小指"})
 	for _, res := range data {
 		newRow := []interface{}{}
-		for i := 1; i < 10; i++ {
-			newRow = append(newRow, fmt.Sprintf("%.2f%%", 100*res.Fingers.Dist[i].Rate))
+		for i := 1; i < 11; i++ {
+			newRow = append(newRow, fmt.Sprintf("%.2f%%", 100*div(res.Dist.Finger[i], res.CodeLen.Total)))
 		}
-		newRow = append(newRow, fmt.Sprintf("%.2f%%", 100*res.Fingers.Dist[0].Rate))
 		t.AppendRow(newRow)
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -163,7 +168,7 @@ func Output(data []*smq.Result) {
 
 	for _, res := range data {
 		if len(data) != 1 {
-			out += res.DictName + "：\n"
+			out += res.Info.DictName + "：\n"
 		}
 		t6_1_header := []interface{}{}
 		t6_2_header := []interface{}{}
@@ -218,4 +223,8 @@ func Output(data []*smq.Result) {
 	}
 	fmt.Print(out)
 	printSep()
+}
+
+func div(x, y int) float64 {
+	return float64(x) / float64(y)
 }

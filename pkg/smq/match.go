@@ -5,13 +5,13 @@ import (
 	"io"
 	"unicode"
 
-	"github.com/nopdan/gosmq/pkg/dict"
+	"github.com/nopdan/gosmq/pkg/data"
 	"github.com/nopdan/gosmq/pkg/matcher"
 	"github.com/nopdan/gosmq/pkg/result"
 	"github.com/nopdan/gosmq/pkg/util"
 )
 
-func (c *Config) match(buffer []byte, dict *dict.Dict) *result.MatchRes {
+func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 	mRes := result.NewMatchRes()
 	feel := NewFeeling(mRes, dict.SpacePref)
 	brd := bytes.NewReader(buffer)

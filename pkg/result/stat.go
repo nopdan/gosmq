@@ -15,12 +15,13 @@ func (m *MatchRes) Stat(info *Info) *Result {
 	res.segments = m.segments
 	res.statData = m.StatData
 	res.Info = *info
-	res.Keys = make(map[string]*CountRate)
+	res.Keys = make(map[string]CountRate)
 	res.Commit = m.Commit
 	res.Pair = m.Pair
 	res.Dist.CodeLen = m.Dist.CodeLen
 	res.Dist.WordLen = m.Dist.WordLen
 	res.Dist.Collision = m.Dist.Collision
+	res.Equivalent = m.Equivalent
 
 	// 文章字数
 	for i, v := range res.Dist.WordLen {
@@ -34,7 +35,7 @@ func (m *MatchRes) Stat(info *Info) *Result {
 	res.CodeLen.PerChar = div(res.CodeLen.Total, res.Info.TextLen)
 	// 按键分布
 	for i := byte(33); i < 128; i++ {
-		cr := new(CountRate)
+		cr := CountRate{}
 		cr.Count = m.Dist.Key[i]
 		if cr.Count == 0 {
 			continue

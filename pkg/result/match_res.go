@@ -15,6 +15,13 @@ type WordCode struct {
 	Code string
 }
 
+type segment struct {
+	// 分段索引
+	PartIdx int
+	// 每段的分词结果
+	Segment []WordCode
+}
+
 // 匹配一段文字得到的信息
 type MatchRes struct {
 	TextIdx int // 文章索引
@@ -22,12 +29,7 @@ type MatchRes struct {
 
 	PartIdx  int // 分段索引
 	Segment  []WordCode
-	segments []struct {
-		// 分段索引
-		PartIdx int
-		// 每段的分词结果
-		Segment []WordCode
-	}
+	segments []segment
 
 	// 每个词条对应的编码，以及出现的次数
 	StatData map[string]*CodePosCount
@@ -83,10 +85,7 @@ type pair struct {
 func NewMatchRes() *MatchRes {
 	mRes := new(MatchRes)
 	mRes.Segment = make([]WordCode, 0)
-	mRes.segments = make([]struct {
-		PartIdx int
-		Segment []WordCode
-	}, 0)
+	mRes.segments = make([]segment, 0)
 	mRes.StatData = make(map[string]*CodePosCount)
 
 	mRes.Dist.NotHan = make(map[rune]int)
@@ -101,16 +100,10 @@ func NewMatchRes() *MatchRes {
 func (m *MatchRes) Combine(mRes *MatchRes) {
 	// 第一个 MatchRes 为总结果
 	if len(m.segments) == 0 {
-		m.segments = append(m.segments, struct {
-			PartIdx int
-			Segment []WordCode
-		}{m.PartIdx, m.Segment})
+		m.segments = append(m.segments, segment{m.PartIdx, m.Segment})
 	}
 	if len(mRes.Segment) != 0 {
-		m.segments = append(m.segments, struct {
-			PartIdx int
-			Segment []WordCode
-		}{mRes.PartIdx, mRes.Segment})
+		m.segments = append(m.segments, segment{mRes.PartIdx, mRes.Segment})
 	}
 	for k, v := range mRes.StatData {
 		if _, ok := m.StatData[k]; !ok {

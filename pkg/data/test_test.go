@@ -1,4 +1,4 @@
-package dict
+package data
 
 import (
 	"fmt"
@@ -16,7 +16,11 @@ func TestFindSuffixInt(t *testing.T) {
 }
 
 func TestGetSelectKey(t *testing.T) {
-	d := New(nil, WithSelectKeys("_;'"))
+	d := Dict{
+		Text:       &Text{String: "test"},
+		SelectKeys: "_;'",
+	}
+	d.Init()
 	fmt.Println(string(d.getSelectKey(1)))
 	fmt.Println(string(d.getSelectKey(2)))
 	fmt.Println(string(d.getSelectKey(3)))

@@ -1,18 +1,14 @@
-package dict
+package data
 
 import (
 	"bufio"
 	"cmp"
 	"fmt"
 	"os"
-	"path/filepath"
 	"slices"
 	"strconv"
 	"strings"
-	"sync"
 	"unicode/utf8"
-
-	"github.com/nopdan/gosmq/pkg/matcher"
 )
 
 type Entry struct {
@@ -21,61 +17,9 @@ type Entry struct {
 	Pos  int
 }
 
-// 初始化 Dict
-func (d *Dict) init() {
-	// 匹配算法
-	if d.Single {
-		d.Matcher = matcher.NewSingle()
-	} else {
-		switch d.algorithm {
-		case "greedy", "":
-			d.Matcher = matcher.NewTrie(false)
-		case "ordered":
-			d.Matcher = matcher.NewTrie(true)
-		case "dynamic":
-			// TODO
-			fallthrough
-		default:
-			panic("不支持的匹配算法: " + d.algorithm)
-		}
-	}
-
-	var dict []*Entry
-	// 读取码表，构建 matcher
-	switch d.format {
-	case "default", "":
-		d.load()
-	case "jisu", "js":
-		dict = d.loadJisu()
-	case "duoduo", "dd", "rime":
-		dict = d.loadTSV(true)
-	case "bingling", "bl":
-		dict = d.loadTSV(false)
-	case "xiaoxiao", "xx", "jidian", "jd":
-		dict = d.loadXiao()
-	default:
-		panic("不支持的格式: " + d.format)
-	}
-	// 输出转换后的赛码表
-	var wg sync.WaitGroup
-	if dict != nil {
-		wg.Add(1)
-		go func() {
-			defer wg.Done()
-			Output(dict, filepath.Join("dict",
-				strings.TrimSuffix(d.Name, ".txt")+".txt"),
-			)
-		}()
-	}
-	d.Matcher.Build()
-	if dict != nil {
-		wg.Wait()
-	}
-}
-
 // 默认格式
 func (d *Dict) load() {
-	scan := bufio.NewScanner(d.Reader)
+	scan := bufio.NewScanner(d.Text.reader)
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
 		pos := 1
@@ -98,7 +42,7 @@ func (d *Dict) insert(word, code string, pos int) {
 }
 
 // 输出赛码表
-func Output(dict []*Entry, path string) {
+func output(dict []*Entry, path string) {
 	// 判断文件是否存在，若存在则直接退出
 	_, err := os.Stat(path)
 	if err == nil {
@@ -132,5 +76,6 @@ func Output(dict []*Entry, path string) {
 		}
 		buf.WriteByte('\n')
 	}
+	buf.Flush()
 	fmt.Println("输出赛码表成功：", path)
 }

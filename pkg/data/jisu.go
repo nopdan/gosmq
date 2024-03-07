@@ -1,4 +1,4 @@
-package dict
+package data
 
 import (
 	"bufio"
@@ -10,11 +10,11 @@ import (
 
 func (d *Dict) loadJisu() []*Entry {
 	var cap int = 1e5
-	if d.Size > 0 {
-		cap = d.Size / 32
+	if d.Text.size > 0 {
+		cap = d.Text.size / 32
 	}
 	ret := make([]*Entry, 0, cap)
-	scan := bufio.NewScanner(d.Reader)
+	scan := bufio.NewScanner(d.Text.reader)
 	for scan.Scan() {
 		wc := strings.Split(scan.Text(), "\t")
 		if len(wc) != 2 {
@@ -41,7 +41,7 @@ func (d *Dict) loadJisu() []*Entry {
 			pos = 10
 		}
 		// 添加自定义选重键
-		if pos <= len(d.selectKeys) {
+		if pos <= len(d.SelectKeys) {
 			tmp := util.UnsafeToBytes(pre)
 			tmp = append(tmp, d.getSelectKey(pos)...)
 			code = util.UnsafeToString(tmp)

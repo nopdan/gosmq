@@ -1,4 +1,4 @@
-package text
+package data
 
 import (
 	"io"
@@ -7,16 +7,18 @@ import (
 )
 
 // 从Text读取器中读取，直到达到一个控制字符、特定的UTF-8字符，或者超过缓冲区的容量。
+//
+// 最后一次读取返回 io.EOF
 func (t *Text) Iter() ([]byte, error) {
-	if t.Reader == nil {
+	if t.reader == nil {
 		return nil, io.EOF
 	}
 	buffer := make([]byte, 32*1024, 36*1024)
-	n, _ := io.ReadFull(t.Reader, buffer)
+	n, _ := io.ReadFull(t.reader, buffer)
 	buffer = buffer[:n]
 
 	for {
-		b, err := t.Reader.ReadByte()
+		b, err := t.reader.ReadByte()
 		// EOF
 		if err != nil {
 			return buffer, io.EOF
@@ -31,26 +33,26 @@ func (t *Text) Iter() ([]byte, error) {
 			continue
 		} else { // 0b11xxxxxx
 			// utf-8 前缀，回退，之后读取 rune
-			_ = t.Reader.UnreadByte()
+			_ = t.reader.UnreadByte()
 			break
 		}
 	}
 
 	for {
-		r, _, _ := t.Reader.ReadRune()
+		r, _, _ := t.reader.ReadRune()
 		// 控制字符 直接切分
 		if r < 33 {
 			return buffer, nil
 		}
 		switch r {
 		case '“', '‘', '：', '《':
-			_ = t.Reader.UnreadRune()
+			_ = t.reader.UnreadRune()
 			return buffer, nil
 		}
 		b := util.UnsafeToBytes(string(r))
 		// 超过 buffer 容量直接返回，减少切片扩容
 		if len(buffer)+len(b) > cap(buffer) {
-			_ = t.Reader.UnreadRune()
+			_ = t.reader.UnreadRune()
 			return buffer, nil
 		}
 		buffer = append(buffer, b...)

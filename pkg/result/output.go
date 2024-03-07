@@ -14,12 +14,10 @@ func (res *Result) OutputSplit() {
 	if len(res.segments) == 0 {
 		return
 	}
-	slices.SortFunc(res.segments, func(i, j struct {
-		PartIdx int
-		Segment []WordCode
-	}) int {
+	slices.SortFunc(res.segments, func(i, j segment) int {
 		return cmp.Compare(i.PartIdx, j.PartIdx)
 	})
+	// fmt.Printf("Segments: %+v\n", res.segments)
 	// 创建文件夹
 	dir := "02-分词结果"
 	os.MkdirAll(dir, os.ModePerm)
@@ -33,8 +31,11 @@ func (res *Result) OutputSplit() {
 			buf.WriteByte('\t')
 			buf.WriteString(res.segments[i].Segment[j].Code)
 			buf.WriteByte('\n')
+
+			// fmt.Printf("%s\t%s\n", res.segments[i].Segment[j].Word, res.segments[i].Segment[j].Code)
 		}
 	}
+	buf.Flush()
 }
 
 // 输出词条统计数据
@@ -77,4 +78,5 @@ func (res *Result) OutputStat() {
 		buf.WriteString(strconv.Itoa(v.Count))
 		buf.WriteByte('\n')
 	}
+	buf.Flush()
 }

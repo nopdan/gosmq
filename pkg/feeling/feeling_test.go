@@ -24,7 +24,7 @@ func TestKeyPos(t *testing.T) {
 	fmt.Println(KeyPos('A'))
 	fmt.Println(KeyPos('A'))
 	keys := "1qaz2wsx3edc4rfv5tgb_+6yhn7ujm8ik,9ol.0p;/'[]-="
-	for i := range keys {
+	for i := range len(keys) {
 		isLeft, finger := KeyPos(keys[i])
 		fmt.Printf("key: %v, IsLeft: %v, Finger: %d\n",
 			string(keys[i]), isLeft, finger)

@@ -4,16 +4,15 @@ package feeling
 var keyDistrib [128]byte
 
 func init() {
-	// 左手空格"_" 右手空格"+"
-	lk := "1qaz2wsx3edc4rfv5tgb_" // left keys
-	// _ = "+6yhn7ujm8ik,9ol.0p;/'[]-=" // right keys
-	for i := range lk {
-		keyDistrib[lk[i]] += 128
-	}
 	// 手指
-	keys := "1qaz2wsx3edc4rfv5tgb_+6yhn7ujm8ik,9ol.0p;/'[]-="
-	for i := range keys {
-		keyDistrib[keys[i]] += finger(keys[i])
+	keys := "12345qwertasdfgzxcvb_+67890-=yuiop[]hjkl;'nm,./"
+	for i := range len(keys) {
+		keyDistrib[keys[i]] = finger(keys[i])
+	}
+	// 左手空格"_" 右手空格"+"
+	lk := "12345qwertasdfgzxcvb_"
+	for i := range len(lk) {
+		keyDistrib[lk[i]] |= 0b10000000
 	}
 }
 
@@ -33,17 +32,13 @@ func finger(key byte) byte {
 		return 2
 	case '3', 'e', 'd', 'c':
 		return 3
-	case '4', 'r', 'f', 'v':
-		return 4
-	case '5', 't', 'g', 'b':
+	case '4', 'r', 'f', 'v', '5', 't', 'g', 'b':
 		return 4
 	case '_':
 		return 5
 	case '+':
 		return 6
-	case '6', 'y', 'h', 'n':
-		return 7
-	case '7', 'u', 'j', 'm':
+	case '6', 'y', 'h', 'n', '7', 'u', 'j', 'm':
 		return 7
 	case '8', 'i', 'k', ',':
 		return 8

@@ -18,14 +18,15 @@ type feel struct {
 	last2Key   byte
 }
 
+func NewFeeling(target *result.MatchRes, spacePref string) *feel {
+	return &feel{mRes: target, spacePref: spacePref}
+}
+
+// 匹配到非法字符时调用此函数
 func (f *feel) Invalid() {
 	f.lastKey = 0
 	f.lastIsLeft = false
 	f.lastFinger = 0
-}
-
-func NewFeeling(target *result.MatchRes, spacePref string) *feel {
-	return &feel{mRes: target, spacePref: spacePref}
 }
 
 // 处理当前按键，并更新状态。需要在 Process 退出前调用
@@ -35,14 +36,19 @@ func (f *feel) step() {
 		switch f.spacePref {
 		case "right":
 			currKey = '+'
-		case "both", "": // "both"
+			f.isLeft = false
+		case "both":
 			// 如果上一个键是左手
 			if f.lastFinger != 0 && f.lastIsLeft {
 				currKey = '+'
+				f.isLeft = false
 			}
 		}
 	}
 	f.mRes.Dist.Key[currKey]++
+}
+
+func (f *feel) update() {
 	f.last2Key, f.lastKey = f.lastKey, f.key
 	f.lastIsLeft, f.lastFinger = f.isLeft, f.finger
 }
@@ -66,6 +72,7 @@ func (f *feel) Process(key byte) {
 	// 如果当前键或者上一个键不合法(不在46键里)
 	if f.lastKey == 0 || f.finger == 0 {
 		f.step()
+		f.update()
 		return
 	}
 
@@ -75,8 +82,13 @@ func (f *feel) Process(key byte) {
 		mRes.Equivalent += 2.0
 		mRes.Pair.Count++
 		f.step()
+		f.update()
 		return
 	}
+
+	mRes.Equivalent += comb.Equivalent
+	mRes.Pair.Count++
+	f.step()
 
 	// 左右手分布
 	if f.lastIsLeft {
@@ -120,9 +132,5 @@ func (f *feel) Process(key byte) {
 	if comb.Disturb {
 		mRes.Pair.Disturb++
 	}
-
-	mRes.Equivalent += comb.Equivalent
-	mRes.Pair.Count++
-	f.step()
-	return
+	f.update()
 }

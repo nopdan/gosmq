@@ -2,7 +2,6 @@ package dict
 
 import (
 	"bufio"
-	"bytes"
 	"cmp"
 	"fmt"
 	"os"
@@ -113,8 +112,16 @@ func Output(dict []*Entry, path string) {
 			utf8.RuneCountInString(j.Word),
 		)
 	})
-	var buf bytes.Buffer
-	buf.Grow(len(dict))
+
+	// 创建文件
+	f, err := os.Create(path)
+	if err != nil {
+		fmt.Println("创建赛码表失败：", err)
+		return
+	}
+	defer f.Close()
+
+	buf := bufio.NewWriterSize(f, 1024*1024)
 	for _, entry := range dict {
 		buf.WriteString(entry.Word)
 		buf.WriteByte('\t')
@@ -125,11 +132,5 @@ func Output(dict []*Entry, path string) {
 		}
 		buf.WriteByte('\n')
 	}
-
-	err = os.WriteFile(path, buf.Bytes(), 0644)
-	if err != nil {
-		fmt.Println("输出赛码表失败：", err)
-	} else {
-		fmt.Println("输出赛码表成功：", path)
-	}
+	fmt.Println("输出赛码表成功：", path)
 }

@@ -6,7 +6,6 @@ import (
 	"unicode"
 
 	"github.com/nopdan/gosmq/pkg/dict"
-	"github.com/nopdan/gosmq/pkg/feeling"
 	"github.com/nopdan/gosmq/pkg/matcher"
 	"github.com/nopdan/gosmq/pkg/result"
 	"github.com/nopdan/gosmq/pkg/util"
@@ -14,17 +13,21 @@ import (
 
 func (c *Config) match(buffer []byte, dict *dict.Dict) *result.MatchRes {
 	mRes := result.NewMatchRes()
-	feel := feeling.New(mRes, dict.SpacePref)
+	feel := NewFeeling(mRes, dict.SpacePref)
 	brd := bytes.NewReader(buffer)
 	res := new(matcher.Result)
 
 	process := func(res *matcher.Result) {
 		mRes.Commit.Count++
-		util.Increase(&mRes.WordLenDist, res.Length)
-		util.Increase(&mRes.CollisionDist, res.Pos)
-		util.Increase(&mRes.CodeLenDist, len(res.Code))
+		util.Increase(&mRes.Dist.WordLen, res.Length)
+		util.Increase(&mRes.Dist.Collision, res.Pos)
+		util.Increase(&mRes.Dist.CodeLen, len(res.Code))
 		for i := range len(res.Code) {
 			feel.Process(res.Code[i])
+		}
+		if res.Pos >= 2 {
+			mRes.Commit.Collision++
+			mRes.Commit.CollisionChars += res.Length
 		}
 		// 匹配到词组
 		if res.Length >= 2 {
@@ -117,9 +120,9 @@ func (c *Config) match(buffer []byte, dict *dict.Dict) *result.MatchRes {
 		}
 		isHan := unicode.Is(unicode.Han, res.Char)
 		if isHan {
-			mRes.LackMap[ch] = struct{}{}
+			mRes.Dist.LackHan[ch]++
 		} else {
-			mRes.NotHanMap[ch] = struct{}{}
+			mRes.Dist.NotHan[ch]++
 		}
 		res.Code = "######"
 		process(res)

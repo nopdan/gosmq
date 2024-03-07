@@ -25,7 +25,7 @@ type distrib struct {
 }
 
 // 1MB
-var combination [128][128]*distrib
+var Combination [128][128]*distrib
 
 func init() {
 
@@ -39,10 +39,10 @@ func init() {
 		}
 		code := line[0]
 		dl, _ := strconv.ParseFloat(line[1], 64)
-		if combination[code[0]][code[1]] == nil {
-			combination[code[0]][code[1]] = new(distrib)
+		if Combination[code[0]][code[1]] == nil {
+			Combination[code[0]][code[1]] = new(distrib)
 		}
-		combination[code[0]][code[1]].Equivalent = dl
+		Combination[code[0]][code[1]].Equivalent = dl
 	}
 
 	rd.Reset(fingering)
@@ -51,24 +51,24 @@ func init() {
 	scan.Scan()
 	line := strings.Split(scan.Text(), " ")
 	for _, v := range line {
-		combination[v[0]][v[1]].SingleSpan = true
+		Combination[v[0]][v[1]].SingleSpan = true
 	}
 	// 大跨排
 	scan.Scan()
 	line = strings.Split(scan.Text(), " ")
 	for _, v := range line {
-		combination[v[0]][v[1]].MultiSpan = true
+		Combination[v[0]][v[1]].MultiSpan = true
 	}
 	// 错手
 	scan.Scan()
 	line = strings.Split(scan.Text(), " ")
 	for _, v := range line {
-		combination[v[0]][v[1]].Staggered = true
+		Combination[v[0]][v[1]].Staggered = true
 	}
 	// 小指干扰
 	scan.Scan()
 	line = strings.Split(scan.Text(), " ")
 	for _, v := range line {
-		combination[v[0]][v[1]].Disturb = true
+		Combination[v[0]][v[1]].Disturb = true
 	}
 }

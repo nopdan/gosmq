@@ -1,7 +1,6 @@
 package smq
 
 import (
-	"fmt"
 	"runtime"
 	"sync"
 
@@ -81,7 +80,6 @@ func (c *Config) Race() [][]*result.Result {
 					mRes.TextIdx = i
 					mRes.DictIdx = j
 					mRes.PartIdx = pIdx
-					fmt.Printf("text idx: %d dict idx: %d part idx: %d\n", i, j, pIdx)
 					ch <- mRes
 				}(i, j, pIdx)
 			}
@@ -112,9 +110,13 @@ func (c *Config) Race() [][]*result.Result {
 	for i := range tNum {
 		res[i] = make([]*result.Result, dNum)
 		for j := range dNum {
-			// TODO
-			// mRes[i][j].Print(false)
-			res[i][j] = mRes[i][j].ToResult()
+			info := &result.Info{
+				TextName: c.textList[i].Name,
+				DictName: c.dictList[j].Name,
+				DictLen:  c.dictList[j].Length,
+				Single:   c.dictList[j].Single,
+			}
+			res[i][j] = mRes[i][j].Stat(info)
 		}
 	}
 	return res

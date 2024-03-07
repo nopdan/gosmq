@@ -4,13 +4,7 @@ import (
 	"path/filepath"
 	"strings"
 	"unsafe"
-
-	"golang.org/x/exp/constraints"
 )
-
-func Div[T constraints.Integer | constraints.Float](x, y T) float64 {
-	return float64(x) / float64(y)
-}
 
 // 切片指定索引位置加1，若索引超出范围则扩容
 func Increase(sli *[]int, idx int) {

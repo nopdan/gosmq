@@ -1,10 +1,11 @@
-package feeling
+package smq
 
 import (
+	"github.com/nopdan/gosmq/pkg/feeling"
 	"github.com/nopdan/gosmq/pkg/result"
 )
 
-type feeling struct {
+type feel struct {
 	mRes      *result.MatchRes
 	spacePref string
 
@@ -17,12 +18,12 @@ type feeling struct {
 	last2Key   byte
 }
 
-func New(target *result.MatchRes, spacePref string) *feeling {
-	return &feeling{mRes: target, spacePref: spacePref}
+func NewFeeling(target *result.MatchRes, spacePref string) *feel {
+	return &feel{mRes: target, spacePref: spacePref}
 }
 
 // 处理当前按键，并更新状态。需要在 Process 退出前调用
-func (f *feeling) step() {
+func (f *feel) step() {
 	currKey := f.key
 	if currKey == '_' {
 		switch f.spacePref {
@@ -35,7 +36,7 @@ func (f *feeling) step() {
 			}
 		}
 	}
-	f.mRes.KeysDist[currKey]++
+	f.mRes.Dist.Key[currKey]++
 	f.last2Key, f.lastKey = f.lastKey, f.key
 	f.lastIsLeft, f.lastFinger = f.isLeft, f.finger
 }
@@ -43,7 +44,7 @@ func (f *feeling) step() {
 // 传入的 key 必须为 a-z0-9,./;'[]-= 中的一个
 //
 // 特别的，传入大写字母自动转为小写，传入空格_，处理右手击键为+
-func (f *feeling) Process(key byte) {
+func (f *feel) Process(key byte) {
 	mRes := f.mRes
 	// 跳过
 	if key >= 128 {
@@ -55,23 +56,23 @@ func (f *feeling) Process(key byte) {
 	}
 
 	f.key = key
-	f.isLeft, f.finger = KeyPos(f.key)
+	f.isLeft, f.finger = feeling.KeyPos(f.key)
 	// 如果当前键或者上一个键不合法(不在46键里)
 	if f.lastFinger == 0 || f.finger == 0 {
 		// 当前键不是第一个按键
 		if f.lastKey != 0 {
 			mRes.Equivalent += 2.0
-			mRes.Combs.Count++
+			mRes.Pair.Count++
 		}
 		f.step()
 		return
 	}
 
-	comb := combination[f.lastKey][f.key]
+	comb := feeling.Combination[f.lastKey][f.key]
 	// 当量表里找不到
 	if comb == nil {
 		mRes.Equivalent += 2.0
-		mRes.Combs.Count++
+		mRes.Pair.Count++
 		f.step()
 		return
 	}
@@ -79,48 +80,48 @@ func (f *feeling) Process(key byte) {
 	// 左右手分布
 	if f.lastIsLeft {
 		if f.isLeft {
-			mRes.Hands.LL++
+			mRes.Pair.LeftToLeft++
 		} else {
-			mRes.Hands.LR++
+			mRes.Pair.LeftToRight++
 		}
 	} else {
 		if f.isLeft {
-			mRes.Hands.RL++
+			mRes.Pair.RightToLeft++
 		} else {
-			mRes.Hands.RR++
+			mRes.Pair.RightToRight++
 		}
 	}
 
 	// 同指
 	if f.finger == f.lastFinger {
-		mRes.Combs.SameFingers++
+		mRes.Pair.SameFinger++
 	}
 	// 同键、三连击
 	if f.key == f.lastKey {
-		mRes.Combs.DoubleHit++
+		mRes.Pair.DoubleHit++
 		if f.key == f.last2Key {
-			mRes.Combs.TribleHit++
+			mRes.Pair.TribleHit++
 		}
 	}
 	// 小跨排
 	if comb.SingleSpan {
-		mRes.Combs.SingleSpan++
+		mRes.Pair.SingleSpan++
 	}
 	// 大跨排
 	if comb.MultiSpan {
-		mRes.Combs.MultiSpan++
+		mRes.Pair.MultiSpan++
 	}
 	// 错手
 	if comb.Staggered {
-		mRes.Combs.Staggered++
+		mRes.Pair.Staggered++
 	}
 	// 小拇指干扰
 	if comb.Disturb {
-		mRes.Combs.Disturb++
+		mRes.Pair.Disturb++
 	}
 
 	mRes.Equivalent += comb.Equivalent
-	mRes.Combs.Count++
+	mRes.Pair.Count++
 	f.step()
 	return
 }

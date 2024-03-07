@@ -6,17 +6,17 @@ import (
 )
 
 func TestComb(t *testing.T) {
-	a := combination['c']['f']
+	a := Combination['c']['f']
 	fmt.Println(a.Equivalent)
-	a = combination['f']['r']
+	a = Combination['f']['r']
 	fmt.Println(a.SingleSpan)
-	a = combination['b']['t']
+	a = Combination['b']['t']
 	fmt.Println(a.MultiSpan)
-	a = combination['x']['e']
+	a = Combination['x']['e']
 	fmt.Println(a.Staggered)
-	a = combination['a']['w']
+	a = Combination['a']['w']
 	fmt.Println(a.Disturb)
-	a = combination['c']['c']
+	a = Combination['c']['c']
 	fmt.Println(a.Staggered)
 }
 

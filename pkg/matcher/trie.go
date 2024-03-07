@@ -81,7 +81,7 @@ func (t *Trie) Match(brd *bytes.Reader, res *Result) {
 			break
 		}
 		if node.value != nil {
-			if !t.ordered || node.value.order > order {
+			if !t.ordered || order == 0 || node.value.order < order {
 				order = node.value.order
 				res.Size = Size
 				res.Length = Length

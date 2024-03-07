@@ -18,6 +18,12 @@ type feel struct {
 	last2Key   byte
 }
 
+func (f *feel) Invalid() {
+	f.lastKey = 0
+	f.lastIsLeft = false
+	f.lastFinger = 0
+}
+
 func NewFeeling(target *result.MatchRes, spacePref string) *feel {
 	return &feel{mRes: target, spacePref: spacePref}
 }
@@ -58,12 +64,7 @@ func (f *feel) Process(key byte) {
 	f.key = key
 	f.isLeft, f.finger = feeling.KeyPos(f.key)
 	// 如果当前键或者上一个键不合法(不在46键里)
-	if f.lastFinger == 0 || f.finger == 0 {
-		// 当前键不是第一个按键
-		if f.lastKey != 0 {
-			mRes.Equivalent += 2.0
-			mRes.Pair.Count++
-		}
+	if f.lastKey == 0 || f.finger == 0 {
 		f.step()
 		return
 	}

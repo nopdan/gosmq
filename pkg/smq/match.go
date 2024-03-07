@@ -22,8 +22,12 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 		util.Increase(&mRes.Dist.WordLen, res.Length)
 		util.Increase(&mRes.Dist.Collision, res.Pos)
 		util.Increase(&mRes.Dist.CodeLen, len(res.Code))
-		for i := range len(res.Code) {
-			feel.Process(res.Code[i])
+		if res.Code == "######" {
+			feel.Invalid()
+		} else {
+			for i := range len(res.Code) {
+				feel.Process(res.Code[i])
+			}
 		}
 		if res.Pos >= 2 {
 			mRes.Commit.Collision++
@@ -89,6 +93,7 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 
 		// 匹配失败了
 		if c.Clean {
+			feel.Invalid()
 			continue
 		}
 		res.Pos = 1
@@ -125,6 +130,7 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 			mRes.Dist.NotHan[ch]++
 		}
 		res.Code = "######"
+		res.Pos = 0
 		process(res)
 	}
 	return mRes

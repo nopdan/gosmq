@@ -35,10 +35,14 @@ func finger(key byte) byte {
 		return 3
 	case '4', 'r', 'f', 'v':
 		return 4
-	case '5', 't', 'g', 'b', '_':
+	case '5', 't', 'g', 'b':
+		return 4
+	case '_':
 		return 5
-	case '6', 'y', 'h', 'n', '+':
+	case '+':
 		return 6
+	case '6', 'y', 'h', 'n':
+		return 7
 	case '7', 'u', 'j', 'm':
 		return 7
 	case '8', 'i', 'k', ',':

@@ -102,11 +102,11 @@ func Output(data []*result.Result) {
 			res.Commit.Word,
 			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.Word)),
 			res.Commit.WordChars,
-			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.WordChars)),
+			fmt.Sprintf("%.2f%%", 100*div(res.Commit.WordChars, res.Info.TextLen)),
 			res.Commit.Collision,
 			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.Collision)),
 			res.Commit.CollisionChars,
-			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.CollisionChars)),
+			fmt.Sprintf("%.2f%%", 100*div(res.Commit.CollisionChars, res.Info.TextLen)),
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)

@@ -17,16 +17,16 @@ var zhKeysMap = map[rune]string{
 	'】': "]",
 	'·': "`",
 
-	'《': "=,",
-	'》': "=.",
-	'？': "=/",
-	'：': "=;",
-	'“': "='",
-	'”': "='",
-	'！': "=1",
-	'￥': "=4",
-	'（': "=9",
-	'）': "=0",
+	'《': "^,",
+	'》': "^.",
+	'？': "^/",
+	'：': "^;",
+	'“': "^'",
+	'”': "^'",
+	'！': "^1",
+	'￥': "^4",
+	'（': "^9",
+	'）': "^0",
 }
 
 var enKeysMap [128]string
@@ -38,20 +38,20 @@ func init() {
 	for b := byte(33); b < 128; b++ {
 		if 'A' <= b && b <= 'Z' {
 			// magic: 将英文字符转换为小写
-			enKeysMap[b] = string([]byte{'=', b | ' '})
+			enKeysMap[b] = string([]byte{'^', b | ' '})
 		} else if idx := strings.IndexByte(shiftKeys, b); idx != -1 {
 			// shift 符号
-			enKeysMap[b] = string([]byte{'=', baseKeys[idx]})
+			enKeysMap[b] = string([]byte{'^', baseKeys[idx]})
 		} else if idx = strings.IndexByte(numPuncts, b); idx != -1 {
 			// shift+数字 符号
-			enKeysMap[b] = "=" + strconv.Itoa(idx)
+			enKeysMap[b] = "^" + strconv.Itoa(idx)
 		} else {
 			enKeysMap[b] = string(b)
 		}
 	}
 }
 
-// = 作为 shift
+// ^  作为 shift
 func convertPunct(char rune) string {
 	// 中文标点符号
 	if char >= 128 {
@@ -65,7 +65,6 @@ func convertPunct(char rune) string {
 			return ""
 		}
 	}
-
 	// 英文标点
 	b := byte(char)
 	return enKeysMap[b]

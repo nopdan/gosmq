@@ -12,7 +12,7 @@ type Dict struct {
 	// 起顶码长
 	push int
 	// 选重键
-	selectKeys [][]byte
+	selectKeys []string
 	// 是否只用码表里的单字
 	Single bool
 	// 匹配算法 greedy|ordered|dynamic
@@ -54,9 +54,9 @@ func WithPush(push int) DictOption {
 
 func WithSelectKeys(keys string) DictOption {
 	return func(opt *Dict) {
-		res := make([][]byte, 0, 10)
+		res := make([]string, 0, 10)
 		for i := range len(keys) {
-			res = append(res, []byte{keys[i]})
+			res = append(res, string(keys[i]))
 		}
 		opt.selectKeys = res
 	}

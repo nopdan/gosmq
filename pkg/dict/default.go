@@ -30,9 +30,9 @@ func (d *Dict) init() {
 	} else {
 		switch d.algorithm {
 		case "greedy", "":
-			d.Matcher = matcher.NewTrie(false, false)
+			d.Matcher = matcher.NewTrie(false)
 		case "ordered":
-			d.Matcher = matcher.NewTrie(true, false)
+			d.Matcher = matcher.NewTrie(true)
 		case "dynamic":
 			// TODO
 			fallthrough

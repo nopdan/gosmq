@@ -69,7 +69,6 @@ func (c *Config) Race() [][]*result.Result {
 		pIdx := -1
 		for {
 			text, err := text.Iter()
-			// fmt.Println(util.UnsafeToString(text))
 			if err != nil {
 				break
 			}

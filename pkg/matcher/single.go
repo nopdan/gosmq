@@ -5,15 +5,15 @@ import (
 	"unicode/utf8"
 )
 
-type single struct {
+type Single struct {
 	dict map[rune]*struct {
 		code string
 		pos  int
 	}
 }
 
-func NewSingle() *single {
-	s := new(single)
+func NewSingle() *Single {
+	s := new(Single)
 	s.dict = make(map[rune]*struct {
 		code string
 		pos  int
@@ -21,7 +21,7 @@ func NewSingle() *single {
 	return s
 }
 
-func (s *single) Insert(word, code string, pos int) {
+func (s *Single) Insert(word, code string, pos int) {
 	char, _ := utf8.DecodeRuneInString(word)
 	cp, ok := s.dict[char]
 	if ok {
@@ -40,10 +40,10 @@ func (s *single) Insert(word, code string, pos int) {
 	}
 }
 
-func (s *single) Build() {
+func (s *Single) Build() {
 }
 
-func (s *single) Match(brd *bytes.Reader, res *Result) {
+func (s *Single) Match(brd *bytes.Reader, res *Result) {
 	res.Reset()
 	ch, size, _ := brd.ReadRune()
 	res.Char = ch

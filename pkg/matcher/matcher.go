@@ -15,7 +15,7 @@ type Matcher interface {
 type Result struct {
 	// 匹配到（或匹配失败）的单个字符
 	Char   rune
-	Size   int    // 字节数 >= 1
+	Size   int    // 字节数
 	Length int    // utf-8字符数 >= 1
 	Pos    int    // 候选位置
 	Code   string // 编码

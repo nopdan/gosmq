@@ -2,10 +2,7 @@ package dict
 
 import (
 	"bufio"
-	"slices"
 	"strings"
-
-	"github.com/nopdan/gosmq/pkg/util"
 )
 
 // 加载多多或者冰凌码表
@@ -46,7 +43,5 @@ func (d *Dict) addSuffix(code string, pos int) string {
 		return code
 	}
 	// 添加自定义选重键
-	tmp := util.UnsafeToBytes(code)
-	tmp = slices.Concat(tmp, d.getSelectKey(pos))
-	return util.UnsafeToString(tmp)
+	return code + d.getSelectKey(pos)
 }

@@ -67,14 +67,12 @@ func findSuffixInteger(s string) (string, string) {
 	return s, ""
 }
 
-func (d *Dict) getSelectKey(num int) []byte {
+func (d *Dict) getSelectKey(num int) string {
 	if num < 1 {
-		return []byte{}
+		return ""
 	}
 	for num > len(d.selectKeys)-2 {
-		d.selectKeys = append(d.selectKeys,
-			util.UnsafeToBytes(strconv.Itoa(len(d.selectKeys)+1)),
-		)
+		d.selectKeys = append(d.selectKeys, strconv.Itoa(len(d.selectKeys)+1))
 	}
 	return d.selectKeys[num-1]
 }

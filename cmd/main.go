@@ -18,8 +18,8 @@ var rootCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
-	rootCmd.AddCommand(serveCmd)
-	rootCmd.AddCommand(genCmd)
+	// rootCmd.AddCommand(serveCmd)
+	rootCmd.AddCommand(convertCmd)
 }
 
 func Execute() {

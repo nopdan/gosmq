@@ -5,6 +5,7 @@ import (
 	"cmp"
 	"fmt"
 	"os"
+	"path/filepath"
 	"slices"
 	"strconv"
 	"strings"
@@ -42,18 +43,20 @@ func (d *Dict) insert(word, code string, pos int) {
 }
 
 // 输出赛码表
-func output(dict []*Entry, path string) {
-	// 判断文件是否存在，若存在则直接退出
+func (d *Dict) output(dict []*Entry) {
+	path := filepath.Join("dict", d.Text.Name+".txt")
+	// 判断文件是否存在
 	_, err := os.Stat(path)
-	if err == nil {
+	// 存在且不覆盖
+	if err == nil && !d.Overwrite {
 		fmt.Printf("赛码表已经存在：%s\n", path)
 		return
 	}
 	// 按照词长排序
 	slices.SortStableFunc(dict, func(i, j *Entry) int {
 		return cmp.Compare(
-			utf8.RuneCountInString(i.Word),
 			utf8.RuneCountInString(j.Word),
+			utf8.RuneCountInString(i.Word),
 		)
 	})
 

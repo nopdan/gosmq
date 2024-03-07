@@ -2,8 +2,6 @@ package data
 
 import (
 	"fmt"
-	"path/filepath"
-	"strings"
 	"sync"
 
 	"github.com/nopdan/gosmq/pkg/matcher"
@@ -25,6 +23,8 @@ type Dict struct {
 	Algorithm string
 	// 空格按键方式 both|left|right
 	SpacePref string
+	// 转换码表是否覆盖
+	Overwrite bool
 
 	Matcher matcher.Matcher
 	Length  int  // 词条数
@@ -98,9 +98,7 @@ func (d *Dict) Init() error {
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
-		output(dict, filepath.Join("dict",
-			strings.TrimSuffix(d.Text.Name, ".txt")+".txt"),
-		)
+		d.output(dict)
 	}()
 	d.Matcher.Build()
 	wg.Wait()

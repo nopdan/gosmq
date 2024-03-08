@@ -1,11 +1,6 @@
 <template>
   <div style="width: 1000px; height: 280px; margin: auto; overflow: hidden">
-    <v-chart
-      class="chart"
-      :option="option"
-      autoresize
-      :update-options="updateoptions"
-    />
+    <v-chart class="chart" :option="option" autoresize :update-options="updateoptions" />
   </div>
 </template>
 
@@ -32,13 +27,7 @@ const clogy = computed(() => {
   }
 });
 
-const p = defineProps([
-  "data1",
-  "data2",
-  "names",
-  "schemaName1",
-  "schemaName2",
-]);
+const p = defineProps(["data1", "data2", "names", "schemaName1", "schemaName2"]);
 
 const data1 = computed(() => p.data1);
 const data2 = computed(() => p.data2);

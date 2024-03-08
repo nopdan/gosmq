@@ -32,13 +32,10 @@ import KeyHeatSorted from "./KeyHeatSorted.vue";
 const p = defineProps(["data1", "data2"]);
 const d1 = ref(p.data1);
 const d2 = ref(p.data2);
-watch(
-  p,
-  () => {
-    d1.value = p.data1;
-    d2.value = p.data2;
-  }
-);
+watch(p, () => {
+  d1.value = p.data1;
+  d2.value = p.data2;
+});
 
 function shiftEmptyItems(schema: any) {
   schema.Words.Dist.shift();
@@ -54,16 +51,11 @@ provide("schema1", d1);
 provide("schema2", d2);
 </script>
 <template>
-
   <n-layout>
     <n-layout-header>
       <n-h2>赛码报告</n-h2>
       <n-p> {{ p.data1.DictName }} VS {{ p.data2.DictName }}</n-p>
-      <n-p
-        >本报告中的条形图是否使用对数坐标轴？<n-switch
-          v-model:value="logYAxis"
-          size="small" /></n-p
-      ><br
+      <n-p>本报告中的条形图是否使用对数坐标轴？<n-switch v-model:value="logYAxis" size="small" /></n-p><br
     /></n-layout-header>
     <n-tabs animated type="line" :tabs-padding="100">
       <n-tab-pane name="basic" tab="基本">
@@ -123,23 +115,18 @@ provide("schema2", d2);
           v-model:value="isStraightKeyboard"
         /><br /><br />
 
-       <n-grid :cols="2" :x-gap="4">
+        <n-grid :cols="2" :x-gap="4">
           <n-gi style="overflow: hidden">
-            <result-key-heat-map
-              :is-straight-keyboard="isStraightKeyboard"
-              :data="p.data1"
+            <result-key-heat-map :is-straight-keyboard="isStraightKeyboard" :data="p.data1"
           /></n-gi>
           <n-gi style="overflow: hidden">
-            <result-key-heat-map
-              :is-straight-keyboard="isStraightKeyboard"
-              :data="p.data2"
-            />
+            <result-key-heat-map :is-straight-keyboard="isStraightKeyboard" :data="p.data2" />
           </n-gi>
           <n-gi style="overflow: hidden" :span="2">
-         <key-heat-sorted />
+            <key-heat-sorted />
           </n-gi>
         </n-grid>
-       <n-h3>手指组合</n-h3>
+        <n-h3>手指组合</n-h3>
 
         <n-grid :cols="2" :x-gap="16">
           <n-gi> <combs-description :data="p.data1" /></n-gi>
@@ -161,7 +148,6 @@ provide("schema2", d2);
           <n-gi><finger-pie :data="d2" /></n-gi>
         </n-grid>
 
-
         <n-h3>双手使用量</n-h3>
         <n-grid :cols="2" :x-gap="16">
           <n-gi><hands-description :data="p.data1" /></n-gi>
@@ -169,10 +155,8 @@ provide("schema2", d2);
           <n-gi><hand-comp :data="p.data1" /></n-gi>
           <n-gi><hand-comp :data="p.data2" /></n-gi>
         </n-grid>
-
       </n-tab-pane>
     </n-tabs>
-
 
     <n-layout-footer>
       <n-p> 以上数据仅供参考。方案的效率手感以实际打字体验为准。</n-p>

@@ -1,10 +1,5 @@
 <template>
-  <v-chart
-    class="chart"
-    :option="option"
-    autoresize
-    :update-options="updateoptions"
-  />
+  <v-chart class="chart" :option="option" autoresize :update-options="updateoptions" />
 </template>
 
 <script lang="ts" setup>
@@ -50,14 +45,7 @@ function getColorList(colorCount: number) {
     case 4:
       return [colors.orange, colors.red[1], colors.green[1], colors.lime];
     case 6:
-      return [
-        colors.orange,
-        colors.red[1],
-        colors.red[2],
-        colors.green[2],
-        colors.green[1],
-        colors.lime,
-      ];
+      return [colors.orange, colors.red[1], colors.red[2], colors.green[2], colors.green[1], colors.lime];
     case 8:
       return [
         colors.orange,

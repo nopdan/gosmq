@@ -22,10 +22,5 @@ const labalName = computed(() => {
 function getLabalName() {}
 </script>
 <template>
-  <compared-bars
-    :data1="d1"
-    :data2="d2"
-    :names="labalName"
-    :schema-names="[s1, s2]"
-  />
+  <compared-bars :data1="d1" :data2="d2" :names="labalName" :schema-names="[s1, s2]" />
 </template>

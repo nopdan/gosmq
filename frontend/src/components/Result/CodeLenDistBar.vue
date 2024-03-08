@@ -33,10 +33,5 @@ const names = computed(() => {
 });
 </script>
 <template>
-  <compared-bars
-    :data1="data1"
-    :data2="data2"
-    :names="names"
-    :schema-names="[name1, name2]"
-  />
+  <compared-bars :data1="data1" :data2="data2" :names="names" :schema-names="[name1, name2]" />
 </template>

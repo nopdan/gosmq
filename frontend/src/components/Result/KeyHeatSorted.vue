@@ -9,14 +9,10 @@ const data = computed(() => {
   let result = [];
   for (let k of Object.keys(schema1.value.Keys)) {
     if (k in schema2.value.Keys) {
-      result.push([
-        k,
-        schema1.value.Keys[k].Count,
-        schema2.value.Keys[k].Count,
-      ]);
+      result.push([k, schema1.value.Keys[k].Count, schema2.value.Keys[k].Count]);
     }
   }
-  return result
+  return result;
 });
 onMounted(() => {
   sortByAnother.value = false;
@@ -37,15 +33,6 @@ const n2 = computed(() => schema2.value.Name);
 const labalName = computed(() => sortedData.value.map((i) => i[0]));
 </script>
 <template>
-  两方案的各按键使用次数，可以按照方案２排序：<n-switch
-    v-model:value="sortByAnother"
-    size="small"
-  />
-  <auto-sort-line
-    :names="labalName"
-    :data1="d1"
-    :data2="d2"
-    :schemaName1="n1"
-    :schemaName2="n2"
-  /> 
+  两方案的各按键使用次数，可以按照方案２排序：<n-switch v-model:value="sortByAnother" size="small" />
+  <auto-sort-line :names="labalName" :data1="d1" :data2="d2" :schemaName1="n1" :schemaName2="n2" />
 </template>

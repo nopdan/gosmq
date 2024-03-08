@@ -9,9 +9,8 @@
       {{ data.Combs.Equivalent }}
     </n-descriptions-item>
     <n-descriptions-item v-for="i of items">
-      <template #label>{{i[0]}}</template>
-      {{ data.Combs?.[i[1]].Count }}<br />(
-      {{ ("" + data.Combs?.[i[1]].Rate * 100).substring(0,4) + "%" }})
+      <template #label>{{ i[0] }}</template>
+      {{ data.Combs?.[i[1]].Count }}<br />( {{ ("" + data.Combs?.[i[1]].Rate * 100).substring(0, 4) + "%" }})
     </n-descriptions-item>
   </n-descriptions>
 </template>

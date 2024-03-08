@@ -27,10 +27,5 @@ function getLabalName() {
 }
 </script>
 <template>
-  <compared-bars
-    :data1="d1"
-    :data2="d2"
-    :names="getLabalName()"
-    :schema-names="[n1, n2]"
-  />
+  <compared-bars :data1="d1" :data2="d2" :names="getLabalName()" :schema-names="[n1, n2]" />
 </template>

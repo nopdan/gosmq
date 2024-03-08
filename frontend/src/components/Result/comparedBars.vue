@@ -1,11 +1,6 @@
 <template>
   <div style="width: 700px; height: 280px; margin: auto; overflow: hidden">
-    <v-chart
-      class="chart"
-      :option="option"
-      autoresize
-      :update-options="updateoptions"
-    />
+    <v-chart class="chart" :option="option" autoresize :update-options="updateoptions" />
   </div>
 </template>
 

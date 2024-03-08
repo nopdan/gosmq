@@ -11,7 +11,7 @@
   </n-descriptions>
   <n-descriptions bordered label-placement="top" size="small" :column="8">
     <n-descriptions-item v-for="(v, i) of data.CodeLen.Dist">
-      <template #label>{{ i+1 }} 码</template>
+      <template #label>{{ i + 1 }} 码</template>
       {{ v }}
     </n-descriptions-item>
   </n-descriptions>

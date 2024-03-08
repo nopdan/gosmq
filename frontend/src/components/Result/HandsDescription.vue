@@ -20,7 +20,6 @@
       {{ data.Hands.Diff.Count }} <br />
       {{ ("" + data.Hands.Diff.Rate * 100).substring(0, 4) + "%" }}
     </n-descriptions-item>
-
   </n-descriptions>
 </template>
 <script setup lang="ts">

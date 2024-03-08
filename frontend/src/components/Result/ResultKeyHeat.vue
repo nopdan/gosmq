@@ -1,26 +1,14 @@
 <template>
   <div class="keyboard">
     <div class="keyrow" v-for="line of keys">
-      <div
-        v-if="!isStraightKeyboard"
-        :style="{ width: '' + line[1] + 'em' }"
-      ></div>
-      <div
-        class="key"
-        v-for="k of line[0]"
-        :style="{ backgroundColor: getBackgroundColor(k) }"
-        :title="getKeyTitle(k)"
-      >
+      <div v-if="!isStraightKeyboard" :style="{ width: '' + line[1] + 'em' }"></div>
+      <div class="key" v-for="k of line[0]" :style="{ backgroundColor: getBackgroundColor(k) }" :title="getKeyTitle(k)">
         <div class="keyname">{{ k.toUpperCase() }}</div>
         <div class="rate">{{ formatFloatToPercent(getRateFromData(k)) }}</div>
       </div>
     </div>
     <div class="keyrow">
-      <div
-        v-if="!isStraightKeyboard"
-        style="width: 7.5em"
-        :title="getKeyTitle('left_space')"
-      ></div>
+      <div v-if="!isStraightKeyboard" style="width: 7.5em" :title="getKeyTitle('left_space')"></div>
       <div
         class="spacekey"
         :style="{ backgroundColor: getBackgroundColor('left_space') }"
@@ -52,7 +40,7 @@ function getRateFromData(key: string) {
 }
 
 function getBackgroundColor(key: string) {
-  let rate = getRateFromData(key)??0;
+  let rate = getRateFromData(key) ?? 0;
   if (rate) {
     rate = rate * 10;
   }
@@ -107,7 +95,6 @@ const keys: Array<[string, number]> = [
 }
 
 .spacekey {
-
   min-width: 8.7em;
   height: 2.4em;
   margin: 4px 3px;

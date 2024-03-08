@@ -19,17 +19,17 @@
 </template>
 
 <script lang="ts" setup>
-import { watch,ref,computed } from "vue";
+import { watch, ref, computed } from "vue";
 import BicolorPie from "./BicolorPie.vue";
 const p = defineProps(["data"]);
 
-const d = ref(p.data)
-watch(p,()=>{
-  d.value = p.data
-})
-const reformData =computed(()=> {
-  const orders = [6,7,8,9,0,1,2,3,4,5];
+const d = ref(p.data);
+watch(p, () => {
+  d.value = p.data;
+});
+const reformData = computed(() => {
+  const orders = [6, 7, 8, 9, 0, 1, 2, 3, 4, 5];
   let fingers = d.value.Fingers.Dist;
   return orders.map((e) => fingers[e].Count);
-})
+});
 </script>

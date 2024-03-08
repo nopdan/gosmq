@@ -25,9 +25,6 @@ func init() {
 var logger = util.Logger
 
 func Execute() {
-	if len(os.Args) < 2 {
-		os.Args = append(os.Args, "server")
-	}
 	if err := rootCmd.Execute(); err != nil {
 		logger.Error(err)
 		os.Exit(1)

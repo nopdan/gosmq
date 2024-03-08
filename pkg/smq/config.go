@@ -37,8 +37,8 @@ func (c *Config) AddText(textList ...*data.Text) {
 		c.textList = make([]*data.Text, 0)
 	}
 	for _, text := range textList {
+		c.wg.Add(1)
 		go func(text *data.Text) {
-			c.wg.Add(1)
 			defer c.wg.Done()
 			text.Init()
 			if text.IsInit {
@@ -55,8 +55,8 @@ func (c *Config) AddDict(dictList ...*data.Dict) {
 		c.dictList = make([]*data.Dict, 0)
 	}
 	for _, dict := range dictList {
+		c.wg.Add(1)
 		go func(dict *data.Dict) {
-			c.wg.Add(1)
 			defer c.wg.Done()
 			dict.Init()
 			if dict.IsInit {

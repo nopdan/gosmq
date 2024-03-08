@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"io"
 	"io/fs"
-	"log"
 	"net/http"
 	"strconv"
 	"sync"
@@ -27,60 +26,63 @@ func Serve(port string, silent bool) {
 	mux.Handle("GET /", http.FileServer(http.FS(dist)))
 	mux.HandleFunc("GET /list", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
+		logger.Info("GET /list")
 		type Result struct {
-			Text []string
-			Dict []string
+			Text []string `json:"text"`
+			Dict []string `json:"dict"`
 		}
 		// text := util.WalkDirWithSuffix("./text/", ".txt")
 		// dict := util.WalkDirWithSuffix("./dict/", ".txt")
 		text := util.WalkDirWithSuffix(`D:\Code\go\gosmq\build\text`, ".txt")
 		dict := util.WalkDirWithSuffix(`D:\Code\go\gosmq\build\dict`, ".txt")
 		res := Result{Text: text, Dict: dict}
-		b, err := json.Marshal(res)
-		if err != nil {
-			fmt.Printf("GET /list error: %v\n", err)
-			return
-		}
-		_, _ = w.Write(b)
+
+		json.NewEncoder(w).Encode(res)
 	})
 	mux.HandleFunc("POST /upload", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
+		logger.Info("POST /upload")
 		// 获取上传的文件
 		err := r.ParseMultipartForm(1024 * 1024 * 1024) // 最大 1GB
 		if err != nil {
-			log.Printf("POST /upload err: %v\n", err)
+			logger.With("error", err).Error("POST /upload")
 			return
 		}
 		file, handler, err := r.FormFile("file")
 		if err != nil {
-			log.Printf("POST /upload err: %v\n", err)
+			logger.With("error", err).Error("POST /upload")
 			return
 		}
 		defer file.Close()
-		log.Printf("POST /upload:%v", handler.Header)
+		logger.Info("POST /upload", "header", handler.Header)
 
 		data, err := io.ReadAll(file)
 		if err != nil {
-			log.Printf("POST /upload err: %v\n", err)
+			logger.With("error", err).Error("POST /upload")
 			return
 		}
-		index := len(files)
 		files = append(files, data)
+	})
+	mux.HandleFunc("GET /file_index", func(w http.ResponseWriter, r *http.Request) {
+		setHeader(&w)
+		logger.Info("GET /file_index")
+		index := len(files) - 1
 		_, _ = w.Write([]byte("{\"index\": " + strconv.Itoa(index) + "}"))
 	})
 	mux.HandleFunc("POST /race", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
-		text := r.FormValue("text")
-		dict := r.FormValue("dict")
-		fmt.Printf("    text: %v\n    dict: %v\n", text, dict)
+		logger.Info("POST /race")
+		data := r.FormValue("data")
+		fmt.Printf("    data: %v\n", data)
 
-		rd := r.Body
-		b, err := io.ReadAll(rd)
+		d := &Data{}
+		err := json.Unmarshal([]byte(data), d)
 		if err != nil {
+			logger.With("error", err).Error("POST /race")
 			return
 		}
-		fmt.Printf("POST /race body: %v\n", string(b))
-		_, _ = w.Write([]byte("{\"hello\": \"world\"}"))
+		res := d.Race()
+		_, _ = w.Write(res)
 	})
 
 	var wg sync.WaitGroup

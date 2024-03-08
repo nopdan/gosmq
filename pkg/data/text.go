@@ -3,7 +3,6 @@ package data
 import (
 	"bufio"
 	"bytes"
-	"fmt"
 	"io"
 	"os"
 	"path/filepath"
@@ -24,14 +23,14 @@ type Text struct {
 
 	reader *bufio.Reader
 	size   int  // 文件大小
-	isInit bool // 是否已经初始化
+	IsInit bool // 是否已经初始化
 }
 
-func (t *Text) Init() error {
-	if t.isInit {
-		return nil
+func (t *Text) Init() {
+	if t.IsInit {
+		logger.Debug("文本已经初始化过了", "name", t.Name)
+		return
 	}
-	t.isInit = true
 	foo := func(rd io.Reader, size int) {
 		t.reader = bufio.NewReaderSize(rd, 32*1024)
 		t.size = size
@@ -39,8 +38,8 @@ func (t *Text) Init() error {
 	if len(t.Path) > 0 {
 		f, err := os.Open(t.Path)
 		if err != nil {
-			fmt.Printf("打开文件 %s 失败\n", t.Path)
-			return err
+			logger.Warn("文本初始化失败", "path", t.Path, "error", err)
+			return
 		}
 		fi, _ := f.Stat()
 		if len(t.Name) == 0 {
@@ -57,18 +56,20 @@ func (t *Text) Init() error {
 		rd := strings.NewReader(t.String)
 		foo(rd, len(t.String))
 	} else {
-		return fmt.Errorf("无法初始化 Text")
+		logger.Warn("文本初始化失败", "name", t.Name)
+		return
 	}
 	if len(t.Name) == 0 {
 		t.Name = "未命名"
 	}
-	return nil
+	t.IsInit = true
+	return
 }
 
 // 重新初始化文本
 func (t *Text) ReInit() {
 	t.reader = nil
 	t.size = 0
-	t.isInit = false
-	_ = t.Init()
+	t.IsInit = false
+	t.Init()
 }

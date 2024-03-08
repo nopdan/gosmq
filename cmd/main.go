@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"fmt"
 	"os"
 
+	"github.com/nopdan/gosmq/pkg/util"
 	"github.com/spf13/cobra"
 )
 
@@ -18,13 +18,18 @@ var rootCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(versionCmd)
-	// rootCmd.AddCommand(serveCmd)
+	rootCmd.AddCommand(serverCmd)
 	rootCmd.AddCommand(convertCmd)
 }
 
+var logger = util.Logger
+
 func Execute() {
+	if len(os.Args) < 2 {
+		os.Args = append(os.Args, "server")
+	}
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Fprintln(os.Stderr, err)
+		logger.Error(err)
 		os.Exit(1)
 	}
 }

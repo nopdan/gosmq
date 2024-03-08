@@ -1,6 +1,7 @@
 package util
 
 import (
+	"os"
 	"path/filepath"
 	"strings"
 	"unsafe"
@@ -19,12 +20,6 @@ func AddTo(val int, sli *[]int, idx int) {
 	(*sli)[idx] += val
 }
 
-// 获取文件名，不含路径和后缀
-func GetFileName(fp string) string {
-	name := filepath.Base(fp)
-	return strings.TrimSuffix(name, filepath.Ext(name))
-}
-
 // unsafe 强制转换 []byte 为 string
 func UnsafeToString(b []byte) string {
 	return *(*string)(unsafe.Pointer(&b))
@@ -39,4 +34,28 @@ func UnsafeToBytes(s string) []byte {
 			Len int
 		}{s, len(s), len(s)},
 	))
+}
+
+// 遍历文件夹
+func WalkDir(dir string) []string {
+	var files []string
+	_ = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() {
+			files = append(files, path)
+		}
+		return nil
+	})
+	return files
+}
+
+// 遍历文件夹 + 指定后缀
+func WalkDirWithSuffix(dir string, suffix string) []string {
+	var files []string
+	_ = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
+		if !info.IsDir() && strings.HasSuffix(path, suffix) {
+			files = append(files, path)
+		}
+		return nil
+	})
+	return files
 }

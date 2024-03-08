@@ -3,11 +3,16 @@ package result
 import (
 	"bufio"
 	"cmp"
+	"encoding/json"
 	"fmt"
 	"os"
 	"slices"
 	"strconv"
+
+	"github.com/nopdan/gosmq/pkg/util"
 )
+
+var logger = util.Logger
 
 // 输出分词结果
 func (res *Result) OutputSplit() {
@@ -17,12 +22,15 @@ func (res *Result) OutputSplit() {
 	slices.SortFunc(res.segments, func(i, j segment) int {
 		return cmp.Compare(i.PartIdx, j.PartIdx)
 	})
-	// fmt.Printf("Segments: %+v\n", res.segments)
 	// 创建文件夹
 	dir := "02-分词结果"
 	os.MkdirAll(dir, os.ModePerm)
 	fileName := fmt.Sprintf("%s/%s_%s_.txt", dir, res.Info.DictName, res.Info.TextName)
-	f, _ := os.Create(fileName)
+	f, err := os.Create(fileName)
+	if err != nil {
+		logger.Warn("保存分词结果失败", "error", err)
+		return
+	}
 	defer f.Close()
 	buf := bufio.NewWriterSize(f, 1024*1024)
 	for i := range res.segments {
@@ -31,11 +39,10 @@ func (res *Result) OutputSplit() {
 			buf.WriteByte('\t')
 			buf.WriteString(res.segments[i].Segment[j].Code)
 			buf.WriteByte('\n')
-
-			// fmt.Printf("%s\t%s\n", res.segments[i].Segment[j].Word, res.segments[i].Segment[j].Code)
 		}
 	}
 	buf.Flush()
+	logger.Info("保存分词结果成功", "path", fileName)
 }
 
 // 输出词条统计数据
@@ -62,7 +69,8 @@ func (res *Result) OutputStat() {
 	fileName := fmt.Sprintf("%s/%s_%s.txt", dir, res.Info.DictName, res.Info.TextName)
 	f, err := os.Create(fileName)
 	if err != nil {
-		fmt.Printf("create %s error: %v\n", fileName, err)
+		logger.Warn("保存词条统计数据失败", "error", err)
+		return
 	}
 	defer f.Close()
 	buf := bufio.NewWriterSize(f, 1024*1024)
@@ -79,4 +87,21 @@ func (res *Result) OutputStat() {
 		buf.WriteByte('\n')
 	}
 	buf.Flush()
+	logger.Info("保存词条统计数据成功", "path", fileName)
+}
+
+// 输出 json 数据
+func (res *Result) OutPutJson() {
+	// 创建文件夹
+	dir := "00-data"
+	_ = os.MkdirAll(dir, os.ModePerm)
+	fileName := fmt.Sprintf("%s/%s_%s.json", dir, res.Info.DictName, res.Info.TextName)
+
+	tmp, _ := json.MarshalIndent(res, "", "  ")
+	err := os.WriteFile(fileName, tmp, 0666)
+	if err != nil {
+		logger.Warn("保存 json 数据失败", "error", err)
+		return
+	}
+	logger.Info("保存 json 数据成功", "path", fileName)
 }

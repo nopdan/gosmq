@@ -1,13 +1,18 @@
 package smq
 
 import (
-	"fmt"
 	"runtime"
 	"sync"
+	"time"
 
 	"github.com/nopdan/gosmq/pkg/data"
 	"github.com/nopdan/gosmq/pkg/result"
+	"github.com/nopdan/gosmq/pkg/util"
 )
+
+// 逻辑 CPU 数量（线程数）
+var NUM_CPU = runtime.NumCPU()
+var logger = util.Logger
 
 type Config struct {
 	textList []*data.Text
@@ -17,10 +22,10 @@ type Config struct {
 	Clean bool // 只统计词库中的词条
 	Split bool // 统计分词结果
 	Stat  bool // 统计每个词条出现的次数
-}
 
-// 逻辑 CPU 数量（线程数）
-var NUM_CPU = runtime.NumCPU()
+	wg   sync.WaitGroup
+	lock sync.Mutex
+}
 
 func (c *Config) Reset() {
 	c.textList = c.textList[:0]
@@ -32,13 +37,17 @@ func (c *Config) AddText(textList ...*data.Text) {
 		c.textList = make([]*data.Text, 0)
 	}
 	for _, text := range textList {
-		err := text.Init()
-		if err != nil {
-			fmt.Printf("error: %s\n", err)
-			continue
-		}
+		go func(text *data.Text) {
+			c.wg.Add(1)
+			defer c.wg.Done()
+			text.Init()
+			if text.IsInit {
+				c.lock.Lock()
+				defer c.lock.Unlock()
+				c.textList = append(c.textList, text)
+			}
+		}(text)
 	}
-	c.textList = append(c.textList, textList...)
 }
 
 func (c *Config) AddDict(dictList ...*data.Dict) {
@@ -46,20 +55,27 @@ func (c *Config) AddDict(dictList ...*data.Dict) {
 		c.dictList = make([]*data.Dict, 0)
 	}
 	for _, dict := range dictList {
-		err := dict.Init()
-		if err != nil {
-			fmt.Printf("error: %s\n", err)
-			continue
-		}
+		go func(dict *data.Dict) {
+			c.wg.Add(1)
+			defer c.wg.Done()
+			dict.Init()
+			if dict.IsInit {
+				c.lock.Lock()
+				defer c.lock.Unlock()
+				c.dictList = append(c.dictList, dict)
+			}
+		}(dict)
 	}
-	c.dictList = append(c.dictList, dictList...)
 }
 
 func (c *Config) Race() [][]*result.Result {
+	c.wg.Wait()
 	if len(c.textList) == 0 || len(c.dictList) == 0 {
-		fmt.Printf("输入有误\n")
+		logger.Warn("文本或码表为空", "text", len(c.textList), "dict", len(c.dictList))
 		return nil
 	}
+	logger.Info("开始赛码", "文本", len(c.textList), "码表", len(c.dictList))
+	now := time.Now()
 	// 限制并发数量
 	ch := make(chan *result.MatchRes, NUM_CPU)
 	var wg sync.WaitGroup
@@ -123,13 +139,8 @@ func (c *Config) Race() [][]*result.Result {
 				Single:   c.dictList[j].Single,
 			}
 			res[j] = mRes[0][j].Stat(info)
-			if c.Split {
-				res[j].OutputSplit()
-			}
-			if c.Stat {
-				res[j].OutputStat()
-			}
 		}
+		logger.Info("赛码结束", "耗时", time.Since(now))
 		return [][]*result.Result{res}
 	}
 
@@ -144,13 +155,8 @@ func (c *Config) Race() [][]*result.Result {
 				Single:   c.dictList[j].Single,
 			}
 			res[i][j] = mRes[i][j].Stat(info)
-			if c.Split {
-				res[i][j].OutputSplit()
-			}
-			if c.Stat {
-				res[i][j].OutputStat()
-			}
 		}
 	}
+	logger.Info("赛码结束", "耗时", time.Since(now))
 	return res
 }

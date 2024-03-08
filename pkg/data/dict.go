@@ -1,11 +1,13 @@
 package data
 
 import (
-	"fmt"
 	"sync"
 
 	"github.com/nopdan/gosmq/pkg/matcher"
+	"github.com/nopdan/gosmq/pkg/util"
 )
+
+var logger = util.Logger
 
 type Dict struct {
 	// 码表文件
@@ -28,24 +30,26 @@ type Dict struct {
 
 	Matcher matcher.Matcher
 	Length  int  // 词条数
-	isInit  bool // 是否已经初始化
+	IsInit  bool // 是否已经初始化
 }
 
 // 初始化 Dict
-func (d *Dict) Init() error {
-	if d.isInit {
-		return nil
+func (d *Dict) Init() {
+	if d.IsInit {
+		logger.Debug("码表已经初始化过了", "name", d.Text.Name)
+		return
 	}
 	if d.Text == nil {
-		return fmt.Errorf("无法初始化 Dict，Text 为空")
+		logger.Warn("码表未指定", "name", d.Text.Name)
+		return
 	}
-	if !d.Text.isInit {
-		err := d.Text.Init()
-		if err != nil {
-			return err
+	if !d.Text.IsInit {
+		d.Text.Init()
+		if !d.Text.IsInit {
+			logger.Warn("码表初始化失败", "name", d.Text.Name)
+			return
 		}
 	}
-	d.isInit = true
 	// 选重键
 	d.selectKeys = make([]string, 0, 10)
 	for i := range len(d.SelectKeys) {
@@ -66,7 +70,8 @@ func (d *Dict) Init() error {
 			d.Matcher = matcher.NewTrie(true)
 		case "dynamic":
 			// TODO
-			panic("未实现")
+			logger.Warn("还未实现此算法")
+			fallthrough
 		default:
 			d.Matcher = matcher.NewTrie(false)
 		}
@@ -85,12 +90,17 @@ func (d *Dict) Init() error {
 	case "xiaoxiao", "xx", "jidian", "jd":
 		dict = d.loadXiao()
 	default:
-		panic("不支持的格式: " + d.Format)
+		logger.Fatal("码表格式不正确", "format", d.Format)
+	}
+	if d.Length == 0 {
+		logger.Warn("码表为空", "name", d.Text.Name, "path", d.Text.Path)
+		return
 	}
 
+	d.IsInit = true
 	if dict == nil || len(dict) == 0 {
 		d.Matcher.Build()
-		return nil
+		return
 	}
 
 	// 输出转换后的赛码表
@@ -102,5 +112,5 @@ func (d *Dict) Init() error {
 	}()
 	d.Matcher.Build()
 	wg.Wait()
-	return nil
+	return
 }

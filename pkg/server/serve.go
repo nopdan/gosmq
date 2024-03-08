@@ -1,7 +1,6 @@
-package serve
+package server
 
 import (
-	"embed"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -9,17 +8,10 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
-	"runtime"
 	"strconv"
 	"sync"
 	"time"
-
-	"github.com/nopdan/gosmq/pkg/smq"
 )
-
-//go:embed dist
-var dist embed.FS
 
 type Options struct {
 	Text  optText   `json:"text"`
@@ -49,52 +41,52 @@ func parseOptions(src []byte) Options {
 	return opt
 }
 
-func toSmqDict(opt optDict) *smq.Dict {
-	dict := &smq.Dict{
-		Single:       opt.Single,
-		Stable:       opt.Stable,
-		PressSpaceBy: opt.Space,
-	}
-	dict.Load("dict/" + opt.Path)
-	fmt.Println("载入码表：", dict.Name)
-	return dict
-}
+// func toSmqDict(opt optDict) *smq.Dict {
+// 	dict := &smq.Dict{
+// 		Single:       opt.Single,
+// 		Stable:       opt.Stable,
+// 		PressSpaceBy: opt.Space,
+// 	}
+// 	dict.Load("dict/" + opt.Path)
+// 	fmt.Println("载入码表：", dict.Name)
+// 	return dict
+// }
 
-var smqRes []*smq.Result
+// var smqRes []*smq.Result
 
-func GetResultJson(src []byte) []byte {
-	var opts = parseOptions(src)
-	s := &smq.Text{}
-	if opts.Text.Flag {
-		if opts.Text.Name == "" {
-			opts.Text.Name = "赛文"
-		}
-		s.LoadString(opts.Text.Name, opts.Text.Plain)
-		fmt.Println("载入文本：", opts.Text.Name)
-	} else {
-		s.Load("text/" + opts.Text.Path)
-		fmt.Println("载入文本：", s.Name)
-	}
-	dicts := make([]*smq.Dict, 0)
-	for _, v := range opts.Dicts {
-		// opt := toSmqDict(v)
-		dicts = append(dicts, toSmqDict(v))
-		// s.Add(opt)
-	}
-	smqRes = s.Race(dicts, false)
-	result, _ := json.Marshal(smqRes)
-	return result
-}
+// func GetResultJson(src []byte) []byte {
+// 	var opts = parseOptions(src)
+// 	s := &smq.Text{}
+// 	if opts.Text.Flag {
+// 		if opts.Text.Name == "" {
+// 			opts.Text.Name = "赛文"
+// 		}
+// 		s.LoadString(opts.Text.Name, opts.Text.Plain)
+// 		fmt.Println("载入文本：", opts.Text.Name)
+// 	} else {
+// 		s.Load("text/" + opts.Text.Path)
+// 		fmt.Println("载入文本：", s.Name)
+// 	}
+// 	dicts := make([]*smq.Dict, 0)
+// 	for _, v := range opts.Dicts {
+// 		// opt := toSmqDict(v)
+// 		dicts = append(dicts, toSmqDict(v))
+// 		// s.Add(opt)
+// 	}
+// 	smqRes = s.Race(dicts, false)
+// 	result, _ := json.Marshal(smqRes)
+// 	return result
+// }
 
 func PostHandler(w http.ResponseWriter, r *http.Request) {
 	setHeader(&w)
 	defer r.Body.Close()
 	if r.Method == "POST" {
 		start := time.Now()
-		body, _ := io.ReadAll(r.Body)
+		// body, _ := io.ReadAll(r.Body)
 		// fmt.Println("    post body: ", string(body))
-		rjson := GetResultJson(body)
-		w.Write(rjson)
+		// rjson := GetResultJson(body)
+		// w.Write(rjson)
 		// fmt.Println("    returned json: ", string(rjson))
 		fmt.Printf("比赛结束，耗时：%v\n\n", time.Since(start))
 	}
@@ -120,13 +112,7 @@ func getFiles(dirname string, pre string) []string {
 	return ret
 }
 
-func setHeader(w *http.ResponseWriter) {
-	(*w).Header().Set("Access-Control-Allow-Origin", "*")
-	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
-}
-
-func Serve(port string, silent bool) {
+func Serve2(port string, silent bool) {
 	dist, _ := fs.Sub(dist, "dist")
 	http.Handle("/", http.FileServer(http.FS(dist)))
 	http.HandleFunc("/race", RaceHandler)
@@ -146,14 +132,14 @@ func Serve(port string, silent bool) {
 
 	http.HandleFunc("/result", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
-		if len(smqRes) == 0 {
-			return
-		}
-		h := NewHTML()
-		for _, v := range smqRes {
-			h.AddResult(v)
-		}
-		h.OutputHTML(w)
+		// if len(smqRes) == 0 {
+		// 	return
+		// }
+		// h := NewHTML()
+		// for _, v := range smqRes {
+		// 	h.AddResult(v)
+		// }
+		// h.OutputHTML(w)
 	})
 
 	url := "http://localhost:" + port
@@ -172,20 +158,6 @@ func Serve(port string, silent bool) {
 		// openBrowser(url)
 	}
 	wg.Wait()
-}
-
-func openBrowser(url string) {
-	var name string
-	switch runtime.GOOS {
-	case "windows":
-		name = "explorer"
-	case "linux":
-		name = "xdg-open"
-	default:
-		name = "open"
-	}
-	cmd := exec.Command(name, url)
-	cmd.Start()
 }
 
 func RaceHandler(w http.ResponseWriter, r *http.Request) {

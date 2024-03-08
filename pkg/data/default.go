@@ -3,7 +3,6 @@ package data
 import (
 	"bufio"
 	"cmp"
-	"fmt"
 	"os"
 	"path/filepath"
 	"slices"
@@ -49,8 +48,10 @@ func (d *Dict) output(dict []*Entry) {
 	_, err := os.Stat(path)
 	// 存在且不覆盖
 	if err == nil && !d.Overwrite {
-		fmt.Printf("赛码表已经存在：%s\n", path)
+		logger.Warn("赛码表已经存在：%s\n", "path", path)
 		return
+	} else if d.Overwrite {
+		logger.Info("覆盖赛码表：%s\n", "path", path)
 	}
 	// 按照词长排序
 	slices.SortStableFunc(dict, func(i, j *Entry) int {
@@ -63,7 +64,7 @@ func (d *Dict) output(dict []*Entry) {
 	// 创建文件
 	f, err := os.Create(path)
 	if err != nil {
-		fmt.Println("创建赛码表失败：", err)
+		logger.Warn("创建文件失败", "path", path, "error", err)
 		return
 	}
 	defer f.Close()
@@ -80,5 +81,5 @@ func (d *Dict) output(dict []*Entry) {
 		buf.WriteByte('\n')
 	}
 	buf.Flush()
-	fmt.Println("输出赛码表成功：", path)
+	logger.Info("输出赛码表", "path", path)
 }

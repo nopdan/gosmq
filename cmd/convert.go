@@ -2,7 +2,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"path/filepath"
 
 	"github.com/AlecAivazis/survey/v2"
@@ -48,7 +47,7 @@ func convert() {
 	handle := func(err error) {
 		if err != nil {
 			if err == terminal.InterruptErr {
-				log.Fatal("interrupted")
+				logger.Fatal("interrupted")
 			}
 		}
 	}
@@ -91,7 +90,7 @@ func convert() {
 	handle(err)
 
 	fmt.Println()
-	fmt.Printf("config: %v\n", conf)
+	logger.Infof("config: %v\n", conf)
 	config.convert()
 }
 

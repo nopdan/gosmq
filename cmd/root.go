@@ -6,6 +6,7 @@ import (
 
 	"github.com/nopdan/gosmq/pkg/data"
 	"github.com/nopdan/gosmq/pkg/smq"
+	"github.com/nopdan/gosmq/pkg/util"
 )
 
 var conf = &struct {
@@ -48,7 +49,7 @@ func init() {
 
 func _root() {
 	if len(conf.Dicts) == 0 || len(conf.Texts) == 0 {
-		fmt.Println("输入有误")
+		logger.Errorf("请指定文本和码表")
 		return
 	}
 	if conf.Verbose {
@@ -56,6 +57,9 @@ func _root() {
 		conf.Stat = true
 		conf.Json = true
 		conf.HTML = true
+	}
+	if conf.Merge {
+		conf.Split = false
 	}
 
 	smq := &smq.Config{
@@ -69,29 +73,21 @@ func _root() {
 	start := time.Now()
 	texts := make([]string, 0, len(conf.Texts))
 	for _, v := range conf.Texts {
-		for _, v := range getFiles(v) {
-			texts = append(texts, v)
-			smq.AddText(&data.Text{Path: v})
-		}
+		texts = append(texts, util.WalkDirWithSuffix(v, ".txt")...)
 	}
-
-	if !conf.Hidden {
-		fmt.Println("载入文本：")
-		for _, v := range texts {
-			fmt.Println("-> ", v)
+	logger.Info("载入文本...")
+	for _, v := range texts {
+		smq.AddText(&data.Text{Path: v})
+		if !conf.Hidden {
+			fmt.Printf("  -> %s\n", v)
 		}
-		fmt.Println()
-	} else {
-		fmt.Printf("载入 %d 个文本\n", len(texts))
 	}
 
 	dictNames := make([]string, 0, len(conf.Dicts))
 	for _, v := range conf.Dicts {
-		dictNames = append(dictNames, getFiles(v)...)
+		dictNames = append(dictNames, util.WalkDirWithSuffix(v, ".txt")...)
 	}
-	fmt.Println("载入码表：")
-	dictStartTime := time.Now()
-	mid := time.Now()
+	logger.Info("载入码表...")
 	for _, v := range dictNames {
 		dict := &data.Dict{
 			Text:      &data.Text{Path: v},
@@ -102,46 +98,31 @@ func _root() {
 			dict.Algorithm = "ordered"
 		}
 		smq.AddDict(dict)
-
-		if len(dictNames) == 1 {
-			fmt.Println("=> ", v)
-		} else {
-			fmt.Println("=> ", v, "\t耗时：", time.Since(mid))
-			mid = time.Now()
-		}
+		fmt.Printf("  => %s\n", v)
 	}
-	fmt.Printf("载入码表耗时：%v\n\n", time.Since(dictStartTime))
 
 	// race
-	fmt.Println("比赛开始...")
-	var printEnd = func(textLen int) {
-		if conf.Split {
-			if conf.Merge {
-				fmt.Println("--merge 不会输出分词结果。")
-			} else {
-				fmt.Println("已输出分词结果")
-			}
-		}
-		if conf.Stat {
-			fmt.Println("已输出词条统计数据")
-		}
-		if conf.HTML {
-			fmt.Println("已保存 html 结果")
-		}
-		if conf.Json {
-			fmt.Println("已输出 json 数据")
-		}
-		fmt.Printf("共载入 %d 个码表，%d 个文本，总字数 %d，总耗时：%v\n", len(dictNames), len(texts), textLen, time.Since(start))
-	}
-
 	textLen := 0
 	res := smq.Race()
 	for _, v := range res {
+		fmt.Println()
 		Output(v)
+		textLen += v[0].Info.TextLen
 		for _, vv := range v {
-			textLen += vv.Info.TextLen
+			if conf.Split {
+				vv.OutputSplit()
+			}
+			if conf.Stat {
+				vv.OutputStat()
+			}
+			if conf.Json {
+				vv.OutPutJson()
+			}
 		}
 	}
-
-	printEnd(textLen)
+	if len(res[0]) == 1 {
+		logger.Infof("总字数 %d，总耗时：%v\n", textLen, time.Since(start))
+	} else {
+		logger.Infof("总字数 %d x%d，总耗时：%v\n", textLen, len(res[0]), time.Since(start))
+	}
 }

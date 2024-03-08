@@ -12,24 +12,31 @@ func Output(data []*result.Result) {
 	noColor.Color = table.ColorOptions{}
 
 	t := table.NewWriter()
-	tmpRow := table.Row{"文本名"}
-	tmpRow = append(tmpRow, data[0].Info.TextName)
-	tmpRow = append(tmpRow, "|")
-	tmpRow = append(tmpRow, "方案名")
-	for _, res := range data {
-		tmpRow = append(tmpRow, res.Info.DictName)
+	if len(data) == 1 {
+		t.AppendRow(table.Row{"文本", data[0].Info.TextName, "字数", data[0].Info.TextLen}, table.RowConfig{})
+		for _, res := range data {
+			t.AppendRow(table.Row{"码表", res.Info.DictName, "词条数", res.Info.DictLen})
+		}
+		t.SetStyle(noColor)
+		fmt.Printf("%s\n\n", t.Render())
+	} else {
+		tmpRow := table.Row{"文本"}
+		tmpRow = append(tmpRow, data[0].Info.TextName)
+		tmpRow = append(tmpRow, "|  码表")
+		for _, res := range data {
+			tmpRow = append(tmpRow, res.Info.DictName)
+		}
+		t.AppendRow(tmpRow)
+		tmpRow = table.Row{"字数"}
+		tmpRow = append(tmpRow, data[0].Info.TextLen)
+		tmpRow = append(tmpRow, "|  词条数 ")
+		for _, res := range data {
+			tmpRow = append(tmpRow, res.Info.DictLen)
+		}
+		t.AppendRow(tmpRow)
+		t.SetStyle(noColor)
+		fmt.Printf("%s\n\n", t.Render())
 	}
-	t.AppendRow(tmpRow)
-	tmpRow = table.Row{"字数"}
-	tmpRow = append(tmpRow, data[0].Info.TextLen)
-	tmpRow = append(tmpRow, "|")
-	tmpRow = append(tmpRow, "词条数 ")
-	for _, res := range data {
-		tmpRow = append(tmpRow, res.Info.DictLen)
-	}
-	t.AppendRow(tmpRow)
-	t.SetStyle(noColor)
-	fmt.Printf("%s\n\n", t.Render())
 
 	fmt.Printf("非汉字：%v \n", data[0].Han.NotHan)
 	for i, res := range data {
@@ -183,7 +190,7 @@ func Output(data []*result.Result) {
 		addKeys(res, "asdfghjkl;'")
 		addKeys(res, "zxcvbnm,./")
 	}
-	printSep()
+	fmt.Println("----------------------")
 }
 
 func div(x, y int) float64 {

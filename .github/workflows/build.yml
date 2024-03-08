@@ -13,36 +13,38 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      # 装 nodejs
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      # 安装 bun
+      - uses: oven-sh/setup-bun@v1
         with:
-          node-version: latest
+          bun-version: latest
 
-      # 装 pnpm
-      - name: Install pnpm
-        uses: pnpm/action-setup@v2.2.2
-        with:
-          version: 7
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
+      - name: Get bun store directory
+        id: bun-cache
         run: |
-          echo "::set-output name=pnpm_cache_dir::$(pnpm store path)"
+          cd frontend
+          echo bun_cache_dir=$(bun pm cache) >> $GITHUB_OUTPUT
+          cd ..
 
-      - name: Setup pnpm cache
+      - name: Setup bun cache
         uses: actions/cache@v3
         with:
-          path: ${{ steps.pnpm-cache.outputs.pnpm_cache_dir }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          path: ${{ steps.bun-cache.outputs.bun_cache_dir }}
+          key: ${{ runner.os }}-bun-store-${{ hashFiles('**/bun.lockb') }}
           restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+            ${{ runner.os }}-bun-store-
+
+      - name: Build frontend
+        run: |
+          cd frontend
+          bun install
+          bun run build
+          cd ..
+          mv frontend/dist/* pkg/server/dist/
 
       # 安装 go
       - uses: actions/setup-go@v3
         with:
-          go-version: ">=1.19.0"
+          go-version: ">=1.22.0"
           check-latest: true
 
       - name: Setup go cache
@@ -54,14 +56,6 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-
-      - name: Build frontend
-        run: |
-          cd web
-          pnpm i
-          pnpm build
-          cd ..
-          mv web/dist/ internal/serve/
 
       # 编译
       - name: Build
@@ -89,7 +83,7 @@ jobs:
           mv CHANGELOG.md bin/
 
       # 上传到 Artifact
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         with:
           name: gosmq
           path: ./bin/

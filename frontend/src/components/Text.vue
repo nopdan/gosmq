@@ -48,7 +48,7 @@ const _Type = computed(() => {
 function tidyPath(path: string) {
   const index = path.lastIndexOf(props._type);
   let name = path;
-  if (index > 0) {
+  if (index != -1) {
     name = path.substring(index + 5);
   }
   name = name.replace(".txt", "");

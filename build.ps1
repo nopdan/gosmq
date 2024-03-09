@@ -3,6 +3,7 @@ cd frontend
 bun install
 bun run build
 cd ..
+rm pkg/server/dist -r
 xcopy frontend\dist\ pkg\server\dist\ /E /Y
 
 go mod tidy

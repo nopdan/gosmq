@@ -48,7 +48,7 @@ func (d *Data) Race() []byte {
 		case "local":
 			t.Path = v.Path
 		case "upload":
-			t.Bytes = fileList[v.Index]
+			t.Bytes = files[v.Index]
 		case "clipboard":
 			t.String = v.Text
 		default:
@@ -64,7 +64,7 @@ func (d *Data) Race() []byte {
 		case "local":
 			t.Path = v.Path
 		case "upload":
-			t.Bytes = fileList[v.Index]
+			t.Bytes = files[v.Index]
 		case "clipboard":
 			t.String = v.Text
 		default:

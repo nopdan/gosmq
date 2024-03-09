@@ -1,10 +1,9 @@
 <script setup lang="ts">
+import { Data } from "./Data";
 import { TextConfig } from "./Text.vue";
 import Text from "./Text.vue";
 
-let route = "api/";
 const cleanMode = ref(false);
-
 const textList = reactive(new Array<TextConfig>());
 
 function addText(config: TextConfig): void {
@@ -155,7 +154,7 @@ const localFiles = ref({
   dict: [],
 });
 function fetchList() {
-  fetch(route + "list", {
+  fetch("/list", {
     method: "GET",
   })
     .then((response) => response.json())
@@ -170,7 +169,8 @@ function fetchList() {
 
 fetchList();
 
-const activeDrawer = ref(false);
+/** 总的结果 */
+const result = ref<Data[][]>([]);
 async function race() {
   // 生成 formData
   const formData = new FormData();
@@ -184,14 +184,15 @@ async function race() {
 
   // post 请求 url
   // fetch 发送 post 请求
-  await fetch(route + "race", {
+  await fetch("/race", {
     method: "POST",
     body: formData,
   })
     .then((response) => response.json())
     .then((data) => {
+      fetchList();
+      result.value = data as Data[][];
       console.log(data);
-      activeDrawer.value = !activeDrawer.value;
     })
     .catch((error) => {
       console.error("Error:", error);
@@ -276,27 +277,7 @@ async function race() {
       >开始比赛</n-button
     >
   </div>
-
-  <n-drawer v-model:show="activeDrawer" :width="502" placement="bottom" height="100vh">
-    <n-drawer-content :native-scrollbar="false" closable>
-      <template #header>
-        <div style="display: flex; align-items: center; justify-content: center">
-          <div style="width: 100%; margin-right: 10px">文章</div>
-          <!-- <n-select
-						v-model:value="textConfig.name"
-						:options="textOptions"
-						placeholder="请选择"
-						style="min-width: 500px"
-					/> -->
-        </div>
-      </template>
-      《斯通纳》是美国作家约翰·威廉姆斯在 1965 年出版的小说。
-
-      <template #footer>
-        <n-button>Footer</n-button>
-      </template>
-    </n-drawer-content>
-  </n-drawer>
+  <Show :result="result"></Show>
 </template>
 
 <style>

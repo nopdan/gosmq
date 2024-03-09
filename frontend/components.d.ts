@@ -16,15 +16,20 @@ declare module "@vue/runtime-core" {
     CollisionDistBar: (typeof import("./src/components/Result/CollisionDistBar.vue"))["default"];
     CombsDescription: (typeof import("./src/components/Result/CombsDescription.vue"))["default"];
     CombsDistBar: (typeof import("./src/components/Result/CombsDistBar.vue"))["default"];
+    Compare: (typeof import("./src/components/Compare.vue"))["default"];
     ComparedBars: (typeof import("./src/components/Result/comparedBars.vue"))["default"];
+    Data: (typeof import("./src/components/Data.vue"))["default"];
     FingerPie: (typeof import("./src/components/Result/FingerPie.vue"))["default"];
     FingersDescription: (typeof import("./src/components/Result/FingersDescription.vue"))["default"];
     HandComp: (typeof import("./src/components/Result/HandComp.vue"))["default"];
     HandsDescription: (typeof import("./src/components/Result/HandsDescription.vue"))["default"];
     KeyHeatSorted: (typeof import("./src/components/Result/KeyHeatSorted.vue"))["default"];
     Main: (typeof import("./src/components/Main.vue"))["default"];
+    MultiResult: (typeof import("./src/components/MultiResult.vue"))["default"];
     NButton: (typeof import("naive-ui"))["NButton"];
     NCard: (typeof import("naive-ui"))["NCard"];
+    NDescriptions: (typeof import("naive-ui"))["NDescriptions"];
+    NDescriptionsItem: (typeof import("naive-ui"))["NDescriptionsItem"];
     NDivider: (typeof import("naive-ui"))["NDivider"];
     NDrawer: (typeof import("naive-ui"))["NDrawer"];
     NDrawerContent: (typeof import("naive-ui"))["NDrawerContent"];
@@ -36,6 +41,7 @@ declare module "@vue/runtime-core" {
     NRadio: (typeof import("naive-ui"))["NRadio"];
     NRadioGroup: (typeof import("naive-ui"))["NRadioGroup"];
     NSelect: (typeof import("naive-ui"))["NSelect"];
+    NSpace: (typeof import("naive-ui"))["NSpace"];
     NSwitch: (typeof import("naive-ui"))["NSwitch"];
     NTag: (typeof import("naive-ui"))["NTag"];
     NText: (typeof import("naive-ui"))["NText"];
@@ -44,6 +50,7 @@ declare module "@vue/runtime-core" {
     Result: (typeof import("./src/components/Result/Result.vue"))["default"];
     ResultBasic: (typeof import("./src/components/Result/ResultBasic.vue"))["default"];
     ResultKeyHeat: (typeof import("./src/components/Result/ResultKeyHeat.vue"))["default"];
+    Show: (typeof import("./src/components/Show.vue"))["default"];
     Text: (typeof import("./src/components/Text.vue"))["default"];
     WordsDescription: (typeof import("./src/components/Result/WordsDescription.vue"))["default"];
     WordsDistBar: (typeof import("./src/components/Result/WordsDistBar.vue"))["default"];

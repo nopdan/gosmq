@@ -9,14 +9,16 @@ var serverCmd = &cobra.Command{
 	Use:   "server",
 	Short: "启动 web 服务",
 	Run: func(cmd *cobra.Command, args []string) {
-		server.Serve(Port, Silent)
+		server.Serve(port, silent, prefix)
 	},
 }
 
-var Port string
-var Silent bool
+var port int
+var silent bool
+var prefix string
 
 func init() {
-	serverCmd.Flags().StringVarP(&Port, "port", "p", "7172", "指定端口")
-	serverCmd.Flags().BoolVarP(&Silent, "silent", "s", false, "静默启动")
+	serverCmd.Flags().IntVarP(&port, "port", "p", 7007, "指定端口")
+	serverCmd.Flags().BoolVarP(&silent, "silent", "s", false, "静默启动")
+	serverCmd.Flags().StringVarP(&prefix, "prefix", "d", "", "工作目录")
 }

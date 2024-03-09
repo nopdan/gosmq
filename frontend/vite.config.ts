@@ -22,10 +22,9 @@ export default defineConfig({
   ],
   server: {
     proxy: {
-      "/api": {
+      "^/(list|upload|file_index|race)": {
         target: "http://127.0.0.1:7007",
         changeOrigin: true,
-        rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
   },

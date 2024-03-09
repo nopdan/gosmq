@@ -11,8 +11,11 @@ export interface TextConfig {
   index: number | null;
   text: string | null;
 }
-
-const props = defineProps(["_type", "configList", "files"]);
+const props = defineProps<{
+  _type: "text" | "dict";
+  configList: Array<TextConfig>;
+  files: { text: string[]; dict: string[] };
+}>();
 const emit = defineEmits<{
   (e: "remove", idx: number): void;
   (e: "add", value: TextConfig): void;
@@ -26,7 +29,6 @@ const srcOptions = [
   { label: "剪切板", value: "clipboard" },
 ];
 
-const route = "api/";
 const conf = reactive({ source: "local" } as TextConfig);
 watch(conf, () => {
   emit("update", conf);
@@ -35,7 +37,7 @@ watch(conf, () => {
 watch(
   () => conf.path,
   () => {
-    conf.name = conf.path?.replace(".txt", "") || "";
+    conf.name = tidyPath(conf.path || "");
   },
 );
 
@@ -43,12 +45,22 @@ const _Type = computed(() => {
   return props._type === "text" ? "文章" : "码表";
 });
 
+function tidyPath(path: string) {
+  const index = path.lastIndexOf(props._type);
+  let name = path;
+  if (index > 0) {
+    name = path.substring(index + 5);
+  }
+  name = name.replace(".txt", "");
+  return name;
+}
+
 const opts = computed(() => {
   const tmp = props.files[props._type] as string[];
-  return tmp.map((name: string) => {
+  return tmp.map((path: string) => {
     return {
-      label: name.replace(".txt", ""),
-      value: name,
+      label: tidyPath(path),
+      value: path,
     };
   });
 });
@@ -70,7 +82,7 @@ function upload(options: { file: UploadFileInfo; fileList: Array<UploadFileInfo>
     return;
   }
 
-  fetch(route + "file_index", {
+  fetch("/file_index", {
     method: "GET",
   })
     .then((res) => {
@@ -147,7 +159,7 @@ function add(value: TextConfig) {
   </div>
   <div class="line" v-if="conf.source === 'upload'" style="min-height: 150px">
     <span class="name"></span>
-    <n-upload :max="1" :action="route + 'upload'" @change="upload" v-model:file-list="fileList">
+    <n-upload :max="1" :action="'/upload'" @change="upload" v-model:file-list="fileList">
       <n-upload-dragger>
         <div style="margin-bottom: 12px">
           <n-icon size="48" :depth="3">

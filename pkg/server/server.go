@@ -8,6 +8,7 @@ import (
 	"io"
 	"io/fs"
 	"net/http"
+	"path/filepath"
 	"strconv"
 	"sync"
 
@@ -20,7 +21,7 @@ var dist embed.FS
 // 上传的文件列表
 var files [][]byte = make([][]byte, 0)
 
-func Serve(port string, silent bool) {
+func Serve(port int, silent bool, prefix string) {
 	mux := http.NewServeMux()
 	dist, _ := fs.Sub(dist, "dist")
 	mux.Handle("GET /", http.FileServer(http.FS(dist)))
@@ -31,10 +32,8 @@ func Serve(port string, silent bool) {
 			Text []string `json:"text"`
 			Dict []string `json:"dict"`
 		}
-		// text := util.WalkDirWithSuffix("./text/", ".txt")
-		// dict := util.WalkDirWithSuffix("./dict/", ".txt")
-		text := util.WalkDirWithSuffix(`D:\Code\go\gosmq\build\text`, ".txt")
-		dict := util.WalkDirWithSuffix(`D:\Code\go\gosmq\build\dict`, ".txt")
+		text := util.WalkDirWithSuffix(filepath.Join(prefix, "text"), ".txt")
+		dict := util.WalkDirWithSuffix(filepath.Join(prefix, "dict"), ".txt")
 		res := Result{Text: text, Dict: dict}
 
 		json.NewEncoder(w).Encode(res)
@@ -73,7 +72,6 @@ func Serve(port string, silent bool) {
 		setHeader(&w)
 		logger.Info("POST /race")
 		data := r.FormValue("data")
-		fmt.Printf("    data: %v\n", data)
 
 		d := &Data{}
 		err := json.Unmarshal([]byte(data), d)
@@ -87,11 +85,12 @@ func Serve(port string, silent bool) {
 
 	var wg sync.WaitGroup
 	wg.Add(1)
-	port = ":" + port
-	url := "http://localhost" + port
+
+	url := fmt.Sprintf("http://localhost:%d", port)
 	go func() {
 		fmt.Println("Listen and serve: ", url)
-		err := http.ListenAndServe(port, mux)
+		addr := ":" + strconv.Itoa(port)
+		err := http.ListenAndServe(addr, mux)
 		if err != nil {
 			fmt.Println(err)
 			panic("...Serve failed.")

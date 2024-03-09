@@ -28,22 +28,22 @@ import CollisionDistBar from "./CollisionDistBar.vue";
 import CodeLenDistBar from "./CodeLenDistBar.vue";
 import CombsDistBar from "./CombsDistBar.vue";
 import KeyHeatSorted from "./KeyHeatSorted.vue";
+import { Data } from "../Data";
 
-const p = defineProps(["data1", "data2"]);
-const d1 = ref(p.data1);
-const d2 = ref(p.data2);
-watch(p, () => {
-  d1.value = p.data1;
-  d2.value = p.data2;
-});
+const props = defineProps<{
+  data1: Data;
+  data2: Data;
+}>();
+const d1 = computed(() => props.data1);
+const d2 = computed(() => props.data2);
 
 function shiftEmptyItems(schema: any) {
   schema.Words.Dist.shift();
   schema.Collision.Dist.shift();
   schema.CodeLen.Dist.shift();
 }
-shiftEmptyItems(p.data1);
-shiftEmptyItems(p.data2);
+shiftEmptyItems(d1);
+shiftEmptyItems(d2);
 const isStraightKeyboard = ref(false);
 const logYAxis = ref(false);
 provide("logY", logYAxis);
@@ -54,7 +54,7 @@ provide("schema2", d2);
   <n-layout>
     <n-layout-header>
       <n-h2>赛码报告</n-h2>
-      <n-p> {{ p.data1.DictName }} VS {{ p.data2.DictName }}</n-p>
+      <n-p> {{ d1.Info.DictName }} VS {{ d1.Info.DictName }}</n-p>
       <n-p>本报告中的条形图是否使用对数坐标轴？<n-switch v-model:value="logYAxis" size="small" /></n-p><br
     /></n-layout-header>
     <n-tabs animated type="line" :tabs-padding="100">
@@ -62,9 +62,9 @@ provide("schema2", d2);
         <n-h3>码表基本信息</n-h3>
         <n-grid :cols="2" :x-gap="16">
           <n-gi>
-            <basic-description :data="p.data1" />
+            <basic-description :data="d1" />
           </n-gi>
-          <n-gi> <basic-description :data="p.data2" /> </n-gi
+          <n-gi> <basic-description :data="d2" /> </n-gi
         ></n-grid>
       </n-tab-pane>
       <n-tab-pane name="efficiency" tab="效率">
@@ -72,10 +72,10 @@ provide("schema2", d2);
 
         <n-grid :cols="2" :x-gap="16">
           <n-gi>
-            <code-len-description :data="p.data1" />
+            <code-len-description :data="d1" />
           </n-gi>
           <n-gi>
-            <code-len-description :data="p.data2" />
+            <code-len-description :data="d2" />
           </n-gi>
           <n-gi :span="2">
             <code-len-dist-bar />
@@ -85,9 +85,9 @@ provide("schema2", d2);
         <n-h3>打词</n-h3>
         <n-grid :cols="2" :x-gap="16">
           <n-gi>
-            <words-description :data="p.data1" />
+            <words-description :data="d1" />
           </n-gi>
-          <n-gi> <words-description :data="p.data2" /> </n-gi>
+          <n-gi> <words-description :data="d2" /> </n-gi>
           <n-gi :span="2">
             <word-dist-bar />
           </n-gi>
@@ -97,10 +97,10 @@ provide("schema2", d2);
 
         <n-grid :cols="2" :x-gap="16">
           <n-gi>
-            <collision-desciption :data="p.data1" />
+            <collision-desciption :data="d1" />
           </n-gi>
           <n-gi>
-            <collision-desciption :data="p.data2" />
+            <collision-desciption :data="d2" />
           </n-gi>
           <n-gi :span="2">
             <collision-dist-bar />
@@ -117,10 +117,10 @@ provide("schema2", d2);
 
         <n-grid :cols="2" :x-gap="4">
           <n-gi style="overflow: hidden">
-            <result-key-heat-map :is-straight-keyboard="isStraightKeyboard" :data="p.data1"
+            <result-key-heat-map :is-straight-keyboard="isStraightKeyboard" :data="d1"
           /></n-gi>
           <n-gi style="overflow: hidden">
-            <result-key-heat-map :is-straight-keyboard="isStraightKeyboard" :data="p.data2" />
+            <result-key-heat-map :is-straight-keyboard="isStraightKeyboard" :data="d2" />
           </n-gi>
           <n-gi style="overflow: hidden" :span="2">
             <key-heat-sorted />
@@ -129,8 +129,8 @@ provide("schema2", d2);
         <n-h3>手指组合</n-h3>
 
         <n-grid :cols="2" :x-gap="16">
-          <n-gi> <combs-description :data="p.data1" /></n-gi>
-          <n-gi> <combs-description :data="p.data2" /></n-gi>
+          <n-gi> <combs-description :data="d1" /></n-gi>
+          <n-gi> <combs-description :data="d2" /></n-gi>
           <n-gi :span="2">
             <combs-dist-bar />
           </n-gi>
@@ -139,10 +139,10 @@ provide("schema2", d2);
         <n-h3>手指使用量</n-h3>
         <n-grid :cols="2" :x-gap="16">
           <n-gi>
-            <fingers-description :data="p.data1" />
+            <fingers-description :data="d1" />
           </n-gi>
           <n-gi>
-            <fingers-description :data="p.data2" />
+            <fingers-description :data="d2" />
           </n-gi>
           <n-gi> <finger-pie :data="d1" /> </n-gi>
           <n-gi><finger-pie :data="d2" /></n-gi>
@@ -150,10 +150,10 @@ provide("schema2", d2);
 
         <n-h3>双手使用量</n-h3>
         <n-grid :cols="2" :x-gap="16">
-          <n-gi><hands-description :data="p.data1" /></n-gi>
-          <n-gi><hands-description :data="p.data2" /></n-gi>
-          <n-gi><hand-comp :data="p.data1" /></n-gi>
-          <n-gi><hand-comp :data="p.data2" /></n-gi>
+          <n-gi><hands-description :data="d1" /></n-gi>
+          <n-gi><hands-description :data="d2" /></n-gi>
+          <n-gi><hand-comp :data="d1" /></n-gi>
+          <n-gi><hand-comp :data="d2" /></n-gi>
         </n-grid>
       </n-tab-pane>
     </n-tabs>

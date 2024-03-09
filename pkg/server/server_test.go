@@ -3,5 +3,5 @@ package server
 import "testing"
 
 func TestServer(t *testing.T) {
-	Serve("7007", false)
+	Serve(7008, false, `D:\Code\go\gosmq\build`)
 }

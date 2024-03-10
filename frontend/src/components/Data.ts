@@ -2,29 +2,19 @@
 
 export interface Data {
   Info: Info;
-  Commit: Commit;
-  Pair: Pair;
-  Keys: { [key: string]: Key };
+  Commit: Char;
+  Char: Char;
   Han: Han;
+  Pair: Pair;
+  Keys: Keys;
   Dist: Dist;
-  CodeLen: CodeLen;
-  LeftHand: number;
-  RightHand: number;
-  Equivalent: number;
 }
 
-export interface CodeLen {
-  Total: number;
-  PerChar: number;
-}
-
-export interface Commit {
+export interface Char {
   Count: number;
   Word: number;
-  WordChars: number;
   WordFirst: number;
   Collision: number;
-  CollisionChars: number;
 }
 
 export interface Dist {
@@ -32,6 +22,7 @@ export interface Dist {
   WordLen: number[];
   Collision: number[];
   Finger: number[];
+  Key: { [key: string]: number };
 }
 
 export interface Han {
@@ -51,13 +42,16 @@ export interface Info {
   Single: boolean;
 }
 
-export interface Key {
+export interface Keys {
   Count: number;
-  Rate: number;
+  CodeLen: number;
+  LeftHand: number;
+  RightHand: number;
 }
 
 export interface Pair {
   Count: number;
+  Equivalent: number;
   SameFinger: number;
   DoubleHit: number;
   TribleHit: number;

@@ -55,10 +55,10 @@ const multi = ref(true);
   <n-drawer v-model:show="active" :width="502" placement="bottom" height="100vh">
     <n-drawer-content :native-scrollbar="false" closable>
       <template #header>
-        <div style="display: flex; align-items: center; justify-content: center">
-          <div style="width: 100%; margin-right: 10px">文章</div>
-          <n-select v-model:value="resIndex" :options="resOptions" placeholder="请选择" style="min-width: 500px" />
-        </div>
+        <span style="width: auto">
+          <!-- <n-select v-model:value="resIndex" :options="resOptions" placeholder="请选择" style="min-width: 500px" /> -->
+          <span>标题</span>
+        </span>
       </template>
       <div>
         <div v-if="multi" style="display: flex; width: 100%; margin: auto; justify-content: center">

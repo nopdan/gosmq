@@ -2,6 +2,7 @@ package matcher
 
 import (
 	"bytes"
+	"unicode"
 	"unicode/utf8"
 )
 
@@ -49,6 +50,9 @@ func (s *Single) Match(brd *bytes.Reader, res *Result) {
 	res.Char = ch
 	res.Size = size
 	res.Length = 1
+	if unicode.IsSpace(ch) {
+		return
+	}
 	if v, ok := s.dict[ch]; ok {
 		res.Code = v.code
 		res.Pos = v.pos

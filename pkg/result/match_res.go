@@ -34,11 +34,11 @@ type MatchRes struct {
 	// 每个词条对应的编码，以及出现的次数
 	StatData map[string]*CodePosCount
 
-	Equivalent float64 // 总当量
-
-	Dist   dist
-	Commit commit
-	Pair   pair
+	TextLen int // 文章总字数，不管有没有匹配到
+	Dist    dist
+	Commit  commit
+	Char    char
+	Pair    pair
 }
 
 type dist struct {
@@ -54,15 +54,20 @@ type dist struct {
 type commit struct {
 	Count     int // 上屏数
 	Word      int // 打词数
-	WordChars int // 打词字数
 	WordFirst int // 首选词
+	Collision int // 选重
+}
 
-	Collision      int // 选重
-	CollisionChars int // 选重字数
+type char struct {
+	Count     int // 总匹配字数
+	Word      int // 打词字数
+	WordFirst int // 首选词字数
+	Collision int // 选重字数
 }
 
 type pair struct {
-	Count int // 按键组合数
+	Count      int     // 按键组合数
+	Equivalent float64 // 总当量
 
 	SameFinger int // 同手同指
 	DoubleHit  int // 同键双击
@@ -130,16 +135,20 @@ func (m *MatchRes) Combine(mRes *MatchRes) {
 	for i := range mRes.Dist.Collision {
 		util.AddTo(mRes.Dist.Collision[i], &m.Dist.Collision, i)
 	}
-	m.Equivalent += mRes.Equivalent
 
+	m.TextLen += mRes.TextLen
 	m.Commit.Count += mRes.Commit.Count
 	m.Commit.Word += mRes.Commit.Word
-	m.Commit.WordChars += mRes.Commit.WordChars
 	m.Commit.WordFirst += mRes.Commit.WordFirst
 	m.Commit.Collision += mRes.Commit.Collision
-	m.Commit.CollisionChars += mRes.Commit.CollisionChars
+
+	m.Char.Count += mRes.Char.Count
+	m.Char.Word += mRes.Char.Word
+	m.Char.WordFirst += mRes.Char.WordFirst
+	m.Char.Collision += mRes.Char.Collision
 
 	m.Pair.Count += mRes.Pair.Count
+	m.Pair.Equivalent += mRes.Pair.Equivalent
 	m.Pair.SameFinger += mRes.Pair.SameFinger
 	m.Pair.DoubleHit += mRes.Pair.DoubleHit
 	m.Pair.TribleHit += mRes.Pair.TribleHit

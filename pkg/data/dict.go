@@ -1,7 +1,9 @@
 package data
 
 import (
+	"fmt"
 	"sync"
+	"time"
 
 	"github.com/nopdan/gosmq/pkg/matcher"
 	"github.com/nopdan/gosmq/pkg/util"
@@ -50,6 +52,7 @@ func (d *Dict) Init() {
 			return
 		}
 	}
+	now := time.Now()
 	// 选重键
 	d.selectKeys = make([]string, 0, 10)
 	for i := range len(d.SelectKeys) {
@@ -100,6 +103,7 @@ func (d *Dict) Init() {
 	d.IsInit = true
 	if dict == nil || len(dict) == 0 {
 		d.Matcher.Build()
+		logger.Info(fmt.Sprintf("已载入码表: %s", d.Text.Name), "耗时", time.Since(now))
 		return
 	}
 

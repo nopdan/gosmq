@@ -3,6 +3,7 @@ package matcher
 import (
 	"bytes"
 	"io"
+	"unicode"
 )
 
 type Trie struct {
@@ -65,18 +66,21 @@ func (t *Trie) Match(brd *bytes.Reader, res *Result) {
 	var Size, Length int
 	var order int
 	for {
-		char, size, err := brd.ReadRune()
+		ch, size, err := brd.ReadRune()
 		if err != nil {
 			break
 		}
 		if Char == 0 {
-			Char = char
+			Char = ch
 			CharSize = size
 		}
 		Size += size
 		Length++
 
-		node = node.ch[char]
+		if unicode.IsSpace(ch) {
+			break
+		}
+		node = node.ch[ch]
 		if node == nil {
 			break
 		}

@@ -1,35 +1,25 @@
 package result
 
-// count and rate
-type CountRate struct {
-	Count int
-	Rate  float64
-}
-
 type Result struct {
 	segments []segment
 	statData map[string]*CodePosCount
 
 	Info   Info   // 文章和码表信息
 	Commit commit // 上屏
+	Char   char   // 上屏字数
+	Han    han    // 非汉字以及缺字
 	Pair   pair   // 按键组合
 	Keys   keys   // 按键统计
-	Han    han    // 非汉字以及缺字
 	// 各种分布
 	Dist struct {
 		CodeLen   []int   // 码长
 		WordLen   []int   // 词长
 		Collision []int   // 选重
 		Finger    [11]int // 手指
+
+		// 按键 左空格_，右空格+
+		Key map[string]int
 	}
-	// 码长
-	CodeLen struct {
-		Total   int
-		PerChar float64
-	}
-	LeftHand   int     // 左手按键数
-	RightHand  int     // 右手按键数
-	Equivalent float64 // 总当量
 }
 
 type Info struct {
@@ -49,17 +39,9 @@ type han struct {
 	LackCount   int    // 缺字计数
 }
 
-// 码长
-type codeLen struct {
-	Total   int     // 全部码长
-	PerChar float64 // 字均码长
-	Dist    []int   // 码长分布统计
-}
-
-// 按键 左空格_，右空格+
-type keys map[string]CountRate
-
-type hands struct {
-	Left  CountRate // 左手
-	Right CountRate // 右手
+type keys struct {
+	Count     int     // 按键数
+	CodeLen   float64 // 字均码长
+	LeftHand  int     // 左手按键数
+	RightHand int     // 右手按键数
 }

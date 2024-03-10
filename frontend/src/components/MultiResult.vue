@@ -14,10 +14,10 @@ const res = computed(() => {
   let cp = JSON.parse(JSON.stringify(props.data));
   cp.Commit.Word = commitRate(cp.Commit.Word);
   cp.Commit.Collision = commitRate(cp.Commit.Collision);
-  cp.Commit.WordChars = charRate(cp.Commit.WordChars);
-  cp.Commit.CollisionChars = charRate(cp.Commit.CollisionChars);
-  cp.LeftHand = keyRate(cp.LeftHand);
-  cp.RightHand = keyRate(cp.RightHand);
+  cp.Char.Word = charRate(cp.Char.Word);
+  cp.Char.Collision = charRate(cp.Char.Collision);
+  cp.Keys.LeftHand = keyRate(cp.Keys.LeftHand);
+  cp.Keys.RightHand = keyRate(cp.Keys.RightHand);
   cp.Pair.SameHand = pairRate(cp.Pair.SameHand);
   cp.Pair.DiffHand = pairRate(cp.Pair.DiffHand);
   cp.Pair.SameFinger = pairRate(cp.Pair.SameFinger);
@@ -40,11 +40,11 @@ function commitRate(count: number): string {
 }
 
 function charRate(count: number): string {
-  return ((count / props.data.Info.TextLen) * 100).toFixed(2) + "%";
+  return ((count / props.data.Char.Count) * 100).toFixed(2) + "%";
 }
 
 function keyRate(count: number): string {
-  return ((count / props.data.CodeLen.Total) * 100).toFixed(2) + "%";
+  return ((count / props.data.Keys.Count) * 100).toFixed(2) + "%";
 }
 
 function pairRate(count: number): string {
@@ -82,8 +82,8 @@ function dist(dist: number[]) {
           <th>选重</th>
         </tr>
         <tr>
-          <td>{{ data.CodeLen.PerChar.toFixed(2) }}</td>
-          <td>{{ data.CodeLen.Total }}</td>
+          <td>{{ data.Keys.CodeLen.toFixed(4) }}</td>
+          <td>{{ data.Keys.Count }}</td>
           <td>{{ data.Commit.Count }}</td>
           <td>{{ res.Commit.Word }}</td>
           <td>{{ res.Commit.Collision }}</td>
@@ -100,8 +100,8 @@ function dist(dist: number[]) {
           <td>{{ data.Info.DictLen }}</td>
           <td>{{ data.Han.Lacks }}</td>
           <td>{{ data.Info.TextLen }}</td>
-          <td>{{ res.Commit.WordChars }}</td>
-          <td>{{ res.Commit.CollisionChars }}</td>
+          <td>{{ res.Char.Word }}</td>
+          <td>{{ res.Char.Collision }}</td>
         </tr>
       </table>
     </div>
@@ -116,7 +116,7 @@ function dist(dist: number[]) {
           <th>右右</th>
         </tr>
         <tr>
-          <td>{{ res.LeftHand }}</td>
+          <td>{{ res.Keys.LeftHand }}</td>
           <td>{{ res.Pair.LeftToLeft }}</td>
           <td>{{ res.Pair.LeftToRight }}</td>
           <td>{{ res.Pair.RightToLeft }}</td>
@@ -130,7 +130,7 @@ function dist(dist: number[]) {
           <th>大跨排</th>
         </tr>
         <tr>
-          <td>{{ res.RightHand }}</td>
+          <td>{{ res.Keys.RightHand }}</td>
           <td>{{ res.Pair.SameFinger }}</td>
           <td>{{ res.Pair.DoubleHit }}</td>
           <td>{{ res.Pair.SingleSpan }}</td>
@@ -144,7 +144,7 @@ function dist(dist: number[]) {
           <th>小指干扰</th>
         </tr>
         <tr>
-          <td>{{ (data.Equivalent / data.Pair.Count).toFixed(4) }}</td>
+          <td>{{ (data.Pair.Equivalent / data.Pair.Count).toFixed(4) }}</td>
           <td>{{ res.Pair.DiffHand }}</td>
           <td>{{ res.Pair.DiffFinger }}</td>
           <td>{{ res.Pair.Staggered }}</td>

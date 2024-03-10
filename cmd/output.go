@@ -88,9 +88,9 @@ func Output(data []*result.Result) {
 	t.AppendHeader(table.Row{"总键数", "码长", "十击速度", "非汉字数", "计数", "缺字数", "计数"})
 	for _, res := range data {
 		t.AppendRow([]any{
-			res.CodeLen.Total,
-			fmt.Sprintf("%.4f", res.CodeLen.PerChar),
-			fmt.Sprintf("%.2f", 600/res.CodeLen.PerChar),
+			res.Keys.Count,
+			fmt.Sprintf("%.4f", res.Keys.CodeLen),
+			fmt.Sprintf("%.2f", 600/res.Keys.CodeLen),
 			res.Han.NotHans, res.Han.NotHanCount,
 			res.Han.Lacks, res.Han.LackCount,
 		})
@@ -101,19 +101,16 @@ func Output(data []*result.Result) {
 	t = table.NewWriter()
 	t.AppendHeader(table.Row{"首选词", "打词", "--", "打词字数", "--", "选重", "--", "选重字数", "--"})
 	for _, res := range data {
-		commitRate := func(x int) float64 {
-			return div(x, res.Commit.Count)
-		}
 		t.AppendRow([]any{
 			res.Commit.WordFirst,
 			res.Commit.Word,
-			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.Word)),
-			res.Commit.WordChars,
-			fmt.Sprintf("%.2f%%", 100*div(res.Commit.WordChars, res.Info.TextLen)),
+			commitRate(res.Commit.Word, res),
+			res.Char.Word,
+			charRate(res.Char.Word, res),
 			res.Commit.Collision,
-			fmt.Sprintf("%.2f%%", 100*commitRate(res.Commit.Collision)),
-			res.Commit.CollisionChars,
-			fmt.Sprintf("%.2f%%", 100*div(res.Commit.CollisionChars, res.Info.TextLen)),
+			commitRate(res.Commit.Collision, res),
+			res.Char.Collision,
+			charRate(res.Char.Collision, res),
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -123,12 +120,12 @@ func Output(data []*result.Result) {
 	t.AppendHeader(table.Row{"左手", "右手", "左右", "右左", "左左", "右右"})
 	for _, res := range data {
 		t.AppendRow([]any{
-			fmt.Sprintf("%.2f%%", 100*div(res.LeftHand, res.CodeLen.Total)),
-			fmt.Sprintf("%.2f%%", 100*div(res.RightHand, res.CodeLen.Total)),
-			fmt.Sprintf("%.2f%%", 100*div(res.Pair.LeftToRight, res.Pair.Count)),
-			fmt.Sprintf("%.2f%%", 100*div(res.Pair.RightToLeft, res.Pair.Count)),
-			fmt.Sprintf("%.2f%%", 100*div(res.Pair.LeftToLeft, res.Pair.Count)),
-			fmt.Sprintf("%.2f%%", 100*div(res.Pair.RightToRight, res.Pair.Count)),
+			keyRate(res.Keys.LeftHand, res),
+			keyRate(res.Keys.RightHand, res),
+			pairRate(res.Pair.LeftToRight, res),
+			pairRate(res.Pair.RightToLeft, res),
+			pairRate(res.Pair.LeftToLeft, res),
+			pairRate(res.Pair.RightToRight, res),
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -137,20 +134,17 @@ func Output(data []*result.Result) {
 	t = table.NewWriter()
 	t.AppendHeader(table.Row{"当量", "异手", "同指", "三连击", "两连击", "小跨排", "大跨排", "异指", "小指干扰", "错手"})
 	for _, res := range data {
-		pairRate := func(x int) float64 {
-			return div(x, res.Pair.Count)
-		}
 		t.AppendRow([]any{
-			fmt.Sprintf("%.4f", pairRate(int(res.Equivalent))),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.DiffHand)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.SameFinger)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.TribleHit)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.DoubleHit)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.SingleSpan)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.MultiSpan)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.DiffFinger)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.Disturb)),
-			fmt.Sprintf("%.2f%%", 100*pairRate(res.Pair.Staggered)),
+			fmt.Sprintf("%.4f", float64(res.Pair.Equivalent)/float64(res.Pair.Count)),
+			pairRate(res.Pair.DiffHand, res),
+			pairRate(res.Pair.SameFinger, res),
+			pairRate(res.Pair.TribleHit, res),
+			pairRate(res.Pair.DoubleHit, res),
+			pairRate(res.Pair.SingleSpan, res),
+			pairRate(res.Pair.MultiSpan, res),
+			pairRate(res.Pair.DiffFinger, res),
+			pairRate(res.Pair.Disturb, res),
+			pairRate(res.Pair.Staggered, res),
 		})
 	}
 	t.SetStyle(table.StyleColoredBright)
@@ -161,7 +155,7 @@ func Output(data []*result.Result) {
 	for _, res := range data {
 		newRow := []any{}
 		for i := 1; i < 11; i++ {
-			newRow = append(newRow, fmt.Sprintf("%.2f%%", 100*div(res.Dist.Finger[i], res.CodeLen.Total)))
+			newRow = append(newRow, keyRate(res.Dist.Finger[i], res))
 		}
 		t.AppendRow(newRow)
 	}
@@ -173,7 +167,7 @@ func Output(data []*result.Result) {
 		row := []any{}
 		for i := range len(keys) {
 			header = append(header, string(keys[i]))
-			row = append(row, fmt.Sprintf("%.2f%%", 100*res.Keys[string(keys[i])].Rate))
+			row = append(row, keyRate(res.Dist.Key[string(keys[i])], res))
 		}
 		writer := table.NewWriter()
 		writer.AppendHeader(header)
@@ -193,6 +187,22 @@ func Output(data []*result.Result) {
 	fmt.Println("----------------------")
 }
 
-func div(x, y int) float64 {
-	return float64(x) / float64(y)
+func commitRate(count int, res *result.Result) string {
+	rate := float64(count) / float64(res.Commit.Count)
+	return fmt.Sprintf("%.2f%%", 100*rate)
+}
+
+func charRate(count int, res *result.Result) string {
+	rate := float64(count) / float64(res.Char.Count)
+	return fmt.Sprintf("%.2f%%", 100*rate)
+}
+
+func keyRate(count int, res *result.Result) string {
+	rate := float64(count) / float64(res.Keys.Count)
+	return fmt.Sprintf("%.2f%%", 100*rate)
+}
+
+func pairRate(count int, res *result.Result) string {
+	rate := float64(count) / float64(res.Pair.Count)
+	return fmt.Sprintf("%.2f%%", 100*rate)
 }

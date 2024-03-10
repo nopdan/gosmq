@@ -79,14 +79,14 @@ func (f *feel) Process(key byte) {
 	comb := feeling.Combination[f.lastKey][f.key]
 	// 当量表里找不到
 	if comb == nil {
-		mRes.Equivalent += 2.0
+		mRes.Pair.Equivalent += 2.0
 		mRes.Pair.Count++
 		f.step()
 		f.update()
 		return
 	}
 
-	mRes.Equivalent += comb.Equivalent
+	mRes.Pair.Equivalent += comb.Equivalent
 	mRes.Pair.Count++
 	f.step()
 

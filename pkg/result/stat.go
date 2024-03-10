@@ -15,42 +15,37 @@ func (m *MatchRes) Stat(info *Info) *Result {
 	res.segments = m.segments
 	res.statData = m.StatData
 	res.Info = *info
-	res.Keys = make(map[string]CountRate)
 	res.Commit = m.Commit
+	res.Char = m.Char
 	res.Pair = m.Pair
 	res.Dist.CodeLen = m.Dist.CodeLen
 	res.Dist.WordLen = m.Dist.WordLen
 	res.Dist.Collision = m.Dist.Collision
-	res.Equivalent = m.Equivalent
+	res.Dist.Key = make(map[string]int)
 
-	// 文章字数
-	for i, v := range res.Dist.WordLen {
-		res.Info.TextLen += i * v
-	}
-	// 总码长
+	res.Info.TextLen = m.TextLen
+	// 总码长 == 总按键数
 	for i, v := range res.Dist.CodeLen {
-		res.CodeLen.Total += i * v
+		res.Keys.Count += i * v
 	}
-	// 字均码长
-	res.CodeLen.PerChar = div(res.CodeLen.Total, res.Info.TextLen)
+	// 字均码长 = 总按键数 / 总字数
+	res.Keys.CodeLen = div(res.Keys.Count, res.Char.Count)
 	// 按键分布
 	for i := byte(33); i < 128; i++ {
-		cr := CountRate{}
-		cr.Count = m.Dist.Key[i]
-		if cr.Count == 0 {
+		count := m.Dist.Key[i]
+		if count == 0 {
 			continue
 		}
-		cr.Rate = div(cr.Count, res.CodeLen.Total)
-		res.Keys[string(i)] = cr
+		res.Dist.Key[string(i)] = count
 		// 左右手
 		isLeft, finger := feeling.KeyPos(i)
 		if isLeft {
-			res.LeftHand += cr.Count
+			res.Keys.LeftHand += count
 		} else {
-			res.RightHand += cr.Count
+			res.Keys.RightHand += count
 		}
 		// 指法
-		res.Dist.Finger[finger] += cr.Count
+		res.Dist.Finger[finger] += count
 	}
 	res.Pair.SameHand = res.Pair.LeftToLeft + res.Pair.RightToRight
 	res.Pair.DiffHand = res.Pair.Count - res.Pair.SameHand

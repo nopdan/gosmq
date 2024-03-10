@@ -74,7 +74,7 @@ func (c *Config) Race() [][]*result.Result {
 		logger.Warn("文本或码表为空", "text", len(c.textList), "dict", len(c.dictList))
 		return nil
 	}
-	logger.Info("开始赛码", "文本", len(c.textList), "码表", len(c.dictList))
+	logger.Info("开始赛码...", "文本", len(c.textList), "码表", len(c.dictList))
 	now := time.Now()
 	// 限制并发数量
 	ch := make(chan *result.MatchRes, NUM_CPU)

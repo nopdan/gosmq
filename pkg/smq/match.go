@@ -17,8 +17,18 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 	brd := bytes.NewReader(buffer)
 	res := new(matcher.Result)
 
+	hanHandler := func(ch rune) {
+		isHan := unicode.Is(unicode.Han, ch)
+		if isHan {
+			mRes.Dist.LackHan[ch]++
+		} else {
+			mRes.Dist.NotHan[ch]++
+		}
+	}
+
 	process := func(res *matcher.Result) {
 		mRes.Commit.Count++
+		mRes.Char.Count += res.Length
 		util.Increase(&mRes.Dist.WordLen, res.Length)
 		util.Increase(&mRes.Dist.Collision, res.Pos)
 		util.Increase(&mRes.Dist.CodeLen, len(res.Code))
@@ -31,14 +41,15 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 		}
 		if res.Pos >= 2 {
 			mRes.Commit.Collision++
-			mRes.Commit.CollisionChars += res.Length
+			mRes.Char.Collision += res.Length
 		}
 		// 匹配到词组
 		if res.Length >= 2 {
 			mRes.Commit.Word++
-			mRes.Commit.WordChars += res.Length
+			mRes.Char.Word += res.Length
 			if res.Pos == 1 {
 				mRes.Commit.WordFirst++ // 首选词
+				mRes.Char.WordFirst += res.Length
 			}
 		}
 		if !c.Split && !c.Stat {
@@ -74,16 +85,37 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 		}
 	}
 
-	for brd.Len() > 0 {
-		// 跳过空白字符
-		ch, _, _ := brd.ReadRune()
-		if ch < 33 || ch == 65533 || ch == '　' {
-			continue
+	// 处理两字宽标点符号 破折号 —— 省略号 ……
+	_2Width := func(res *matcher.Result, brd *bytes.Reader) bool {
+		if res.Char != '—' && res.Char != '…' {
+			return false
 		}
-		_ = brd.UnreadRune()
+		ch2, _, err := brd.ReadRune()
+		if err == nil || res.Char != ch2 {
+			return false
+		}
+		// 不计打词 Length 保持 1
+		if res.Char == '—' {
+			// 中文破折号 —— 占用 6 字节，不计打词
+			res.SetChar(0).SetSize(6).SetPos(1)
+			res.Code = "=-"
+			process(res)
+		} else if res.Char == '…' {
+			// 中文省略号 …… 占用 6 字节，不计打词
+			res.SetChar(0).SetSize(6).SetPos(1)
+			res.Code = "=6"
+			process(res)
+		} else {
+			_ = brd.UnreadRune()
+			return false
+		}
+		return true
+	}
 
+	for brd.Len() > 0 {
 		// 开始匹配
 		dict.Matcher.Match(brd, res)
+		mRes.TextLen += res.Length
 
 		// 匹配成功
 		if res.Pos > 0 {
@@ -96,39 +128,27 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 			feel.Invalid()
 			continue
 		}
-		res.Pos = 1
 
-		// 两个字符的符号
-		if res.Char == '—' || res.Char == '…' {
-			ch2, _, err := brd.ReadRune()
-			if err != nil {
-				if res.Char == '—' && ch2 == '—' {
-					// 中文破折号 —— 占用 6 字节，不计打词
-					res.SetChar(0).SetCode("=-").SetSize(6)
-					process(res)
-					continue
-				} else if res.Char == '…' && ch2 == '…' {
-					// 中文省略号 …… 占用 6 字节，不计打词
-					res.SetChar(0).SetCode("=6").SetSize(6)
-					process(res)
-					continue
-				}
-			}
-			_ = brd.UnreadRune()
+		// 跳过空白符
+		if unicode.IsSpace(res.Char) {
+			continue
 		}
+		hanHandler(res.Char)
+
 		// 单字符符号
 		punct := convertPunct(res.Char)
 		if punct != "" {
 			res.Code = punct
+			res.Pos = 1
 			process(res)
 			continue
 		}
-		isHan := unicode.Is(unicode.Han, res.Char)
-		if isHan {
-			mRes.Dist.LackHan[ch]++
-		} else {
-			mRes.Dist.NotHan[ch]++
+
+		// 两个字符的符号
+		if ok := _2Width(res, brd); ok {
+			continue
 		}
+
 		res.Code = "######"
 		res.Pos = 0
 		process(res)

@@ -1,6 +1,8 @@
 package result
 
 import (
+	"sync"
+
 	"github.com/nopdan/gosmq/pkg/util"
 )
 
@@ -24,9 +26,6 @@ type segment struct {
 
 // 匹配一段文字得到的信息
 type MatchRes struct {
-	TextIdx int // 文章索引
-	DictIdx int // 码表索引
-
 	PartIdx  int // 分段索引
 	Segment  []WordCode
 	segments []segment
@@ -39,6 +38,8 @@ type MatchRes struct {
 	Commit  commit
 	Char    char
 	Pair    pair
+
+	lock sync.Mutex
 }
 
 type dist struct {
@@ -103,6 +104,9 @@ func NewMatchRes() *MatchRes {
 
 // 将每次匹配得到的信息追加到总结果
 func (m *MatchRes) Combine(mRes *MatchRes) {
+	m.lock.Lock()
+	defer m.lock.Unlock()
+
 	// 第一个 MatchRes 为总结果
 	if len(m.segments) == 0 {
 		m.segments = append(m.segments, segment{m.PartIdx, m.Segment})

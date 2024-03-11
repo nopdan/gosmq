@@ -13,7 +13,10 @@ func (t *Text) Iter() ([]byte, error) {
 	if t.reader == nil {
 		return nil, io.EOF
 	}
-	buffer := make([]byte, 32*1024, 36*1024)
+	if t.size < t.bufSize {
+		return io.ReadAll(t.reader)
+	}
+	buffer := make([]byte, t.bufSize, t.bufSize+4*1024)
 	n, _ := io.ReadFull(t.reader, buffer)
 	buffer = buffer[:n]
 

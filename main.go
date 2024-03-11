@@ -8,6 +8,8 @@ import (
 )
 
 func main() {
+	// defer profile.Start(profile.MemProfile, profile.MemProfileRate(1)).Stop()
+	// defer profile.Start().Stop()
 	_ = os.MkdirAll("dict", os.ModePerm)
 	_ = os.MkdirAll("text", os.ModePerm)
 	if len(os.Args) < 2 {

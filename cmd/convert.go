@@ -104,4 +104,5 @@ func (c *Config) convert() {
 		Overwrite:  c.Overwrite,
 	}
 	smq.AddDict(dict)
+	smq.OnBeforeRace()
 }

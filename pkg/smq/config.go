@@ -68,8 +68,13 @@ func (c *Config) AddDict(dictList ...*data.Dict) {
 	}
 }
 
-func (c *Config) Race() [][]*result.Result {
+// 只转换码表时可以调用，正常赛码不需要
+func (c *Config) OnBeforeRace() {
 	c.wg.Wait()
+}
+
+func (c *Config) Race() [][]*result.Result {
+	c.OnBeforeRace()
 	if len(c.textList) == 0 || len(c.dictList) == 0 {
 		logger.Warn("文本或码表为空", "text", len(c.textList), "dict", len(c.dictList))
 		return nil
@@ -77,30 +82,8 @@ func (c *Config) Race() [][]*result.Result {
 	logger.Info("开始赛码...", "文本", len(c.textList), "码表", len(c.dictList))
 	now := time.Now()
 	// 限制并发数量
-	ch := make(chan *result.MatchRes, NUM_CPU)
+	ch := make(chan struct{}, NUM_CPU)
 	var wg sync.WaitGroup
-	for i, text := range c.textList {
-		// 分段计算当前文章，pIdx 为每一段的索引
-		pIdx := -1
-		for {
-			text, err := text.Iter()
-			pIdx++
-			for j, dict := range c.dictList {
-				wg.Add(1)
-				go func(i, j, pIdx int) {
-					defer wg.Done()
-					mRes := c.match(text, dict)
-					mRes.TextIdx = i
-					mRes.DictIdx = j
-					mRes.PartIdx = pIdx
-					ch <- mRes
-				}(i, j, pIdx)
-			}
-			if err != nil {
-				break
-			}
-		}
-	}
 
 	// 文章数量和码表数量
 	var tNum, dNum = len(c.textList), len(c.dictList)
@@ -111,16 +94,33 @@ func (c *Config) Race() [][]*result.Result {
 			mRes[i][j] = result.NewMatchRes()
 		}
 	}
-
-	go func() {
-		wg.Wait()
-		close(ch)
-	}()
-
-	// 循环从 ch 通道中接受值
-	for part := range ch {
-		mRes[part.TextIdx][part.DictIdx].Combine(part)
+	for i, text := range c.textList {
+		// 分段计算当前文章，pIdx 为每一段的索引
+		pIdx := -1
+		for {
+			text, err := text.Iter()
+			if len(text) == 0 {
+				break
+			}
+			pIdx++
+			for j, dict := range c.dictList {
+				wg.Add(1)
+				ch <- struct{}{}
+				go func(i, j, pIdx int) {
+					defer wg.Done()
+					m := c.match(text, dict)
+					m.PartIdx = pIdx
+					mRes[i][j].Combine(m)
+					<-ch
+				}(i, j, pIdx)
+			}
+			if err != nil {
+				break
+			}
+		}
 	}
+	wg.Wait()
+	close(ch)
 
 	if c.Merge {
 		for j := range dNum {

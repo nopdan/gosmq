@@ -21,6 +21,8 @@ var dist embed.FS
 // 上传的文件列表
 var files [][]byte = make([][]byte, 0)
 
+var textList = make([]string, 0)
+
 func Serve(port int, silent bool, prefix string) {
 	mux := http.NewServeMux()
 	dist, _ := fs.Sub(dist, "dist")
@@ -32,9 +34,9 @@ func Serve(port int, silent bool, prefix string) {
 			Text []string `json:"text"`
 			Dict []string `json:"dict"`
 		}
-		text := util.WalkDirWithSuffix(filepath.Join(prefix, "text"), ".txt")
+		textList = util.WalkDirWithSuffix(filepath.Join(prefix, "text"), ".txt")
 		dict := util.WalkDirWithSuffix(filepath.Join(prefix, "dict"), ".txt")
-		res := Result{Text: text, Dict: dict}
+		res := Result{Text: textList, Dict: dict}
 
 		json.NewEncoder(w).Encode(res)
 	})

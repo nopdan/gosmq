@@ -28,22 +28,46 @@ import CollisionDistBar from "./CollisionDistBar.vue";
 import CodeLenDistBar from "./CodeLenDistBar.vue";
 import CombsDistBar from "./CombsDistBar.vue";
 import KeyHeatSorted from "./KeyHeatSorted.vue";
-import { Data } from "../Data";
+import { Data, New2Old } from "../Data";
+import { OldData } from "../OldData";
 
 const props = defineProps<{
-  data1: Data;
-  data2: Data;
+  result: Data[];
 }>();
-const d1 = computed(() => props.data1);
-const d2 = computed(() => props.data2);
 
-function shiftEmptyItems(schema: any) {
+const idx1 = ref(0);
+const idx2 = ref(0);
+if (props.result.length > 1) {
+  idx2.value = 1;
+}
+
+const opts = computed(() => {
+  return props.result.map((d: Data, index: number) => {
+    return {
+      label: d.Info.DictName,
+      value: index,
+    };
+  });
+});
+
+const d1 = computed(() => {
+  let _old = New2Old(props.result[idx1.value]);
+  shiftEmptyItems(_old);
+  return _old;
+});
+
+const d2 = computed(() => {
+  let _old = New2Old(props.result[idx2.value]);
+  shiftEmptyItems(_old);
+  return _old;
+});
+
+function shiftEmptyItems(schema: OldData) {
   schema.Words.Dist.shift();
   schema.Collision.Dist.shift();
   schema.CodeLen.Dist.shift();
 }
-shiftEmptyItems(d1);
-shiftEmptyItems(d2);
+
 const isStraightKeyboard = ref(false);
 const logYAxis = ref(false);
 provide("logY", logYAxis);
@@ -54,7 +78,11 @@ provide("schema2", d2);
   <n-layout>
     <n-layout-header>
       <n-h2>赛码报告</n-h2>
-      <n-p> {{ d1.Info.DictName }} VS {{ d1.Info.DictName }}</n-p>
+      <n-p style="display: flex; align-items: center">
+        <n-select v-model:value="idx1" :options="opts" style="max-width: 16em" />
+        <span style="font: larger bold; padding: 0 20px"> VS </span>
+        <n-select v-model:value="idx2" :options="opts" style="max-width: 16em" />
+      </n-p>
       <n-p>本报告中的条形图是否使用对数坐标轴？<n-switch v-model:value="logYAxis" size="small" /></n-p><br
     /></n-layout-header>
     <n-tabs animated type="line" :tabs-padding="100">

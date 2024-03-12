@@ -26,6 +26,8 @@ declare module "@vue/runtime-core" {
     MultiResult: (typeof import("./src/components/MultiResult.vue"))["default"];
     NButton: (typeof import("naive-ui"))["NButton"];
     NCard: (typeof import("naive-ui"))["NCard"];
+    NDescriptions: (typeof import("naive-ui"))["NDescriptions"];
+    NDescriptionsItem: (typeof import("naive-ui"))["NDescriptionsItem"];
     NDivider: (typeof import("naive-ui"))["NDivider"];
     NDrawer: (typeof import("naive-ui"))["NDrawer"];
     NDrawerContent: (typeof import("naive-ui"))["NDrawerContent"];

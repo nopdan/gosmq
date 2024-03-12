@@ -8,18 +8,17 @@ import (
 )
 
 type Data struct {
-	Text  []Text `json:"text"`
-	Dict  []Dict `json:"dict"`
-	Clean bool   `json:"clean"`
+	Source string `json:"source"`
+	Path   string `json:"path"`
+	Text   string `json:"text"`
+	Merge  bool   `json:"merge"`
+	Clean  bool   `json:"clean"`
+
+	Dict []Dict `json:"dict"`
 }
 
 type Dict struct {
-	Source string `json:"source"`
-	Name   string `json:"name"`
 	Path   string `json:"path"`
-	Index  int    `json:"index"`
-	Text   string `json:"text"`
-
 	Format string `json:"format"`
 	Push   int    `json:"push"`
 	Keys   string `json:"keys"`
@@ -28,47 +27,35 @@ type Dict struct {
 	Space  string `json:"space"`
 }
 
-type Text struct {
-	Source string `json:"source"`
-	Name   string `json:"name"`
-	Path   string `json:"path"`
-	Index  int    `json:"index"`
-	Text   string `json:"text"`
-}
-
 func (d *Data) Race() []byte {
 	smq := &smq.Config{
+		Merge: d.Merge,
 		Clean: d.Clean,
 	}
-	for _, v := range d.Text {
-		t := &data.Text{
-			Name: v.Name,
+	if d.Merge {
+		for _, text := range textList {
+			t := &data.Text{
+				Path: text,
+			}
+			smq.AddText(t)
 		}
-		switch v.Source {
+	} else {
+		t := &data.Text{}
+		switch d.Source {
 		case "local":
-			t.Path = v.Path
-		case "upload":
-			t.Bytes = files[v.Index]
+			t.Path = d.Path
 		case "clipboard":
-			t.String = v.Text
+			t.String = d.Text
+			t.Name = "剪贴板"
 		default:
-			logger.Warn("不支持的数据源", "source", v.Source)
+			logger.Warn("不支持的数据源", "source", d.Source)
 		}
 		smq.AddText(t)
 	}
+
 	for _, v := range d.Dict {
 		t := &data.Text{
-			Name: v.Name,
-		}
-		switch v.Source {
-		case "local":
-			t.Path = v.Path
-		case "upload":
-			t.Bytes = files[v.Index]
-		case "clipboard":
-			t.String = v.Text
-		default:
-			logger.Warn("不支持的数据源", "source", v.Source)
+			Path: v.Path,
 		}
 		d := &data.Dict{
 			Text:       t,
@@ -82,7 +69,10 @@ func (d *Data) Race() []byte {
 		smq.AddDict(d)
 	}
 	res := smq.Race()
-	data, err := json.Marshal(res)
+	if len(res) < 1 {
+		return []byte{}
+	}
+	data, err := json.Marshal(res[0])
 	if err != nil {
 		logger.With("error", err).Error("json marshal")
 		return []byte{}

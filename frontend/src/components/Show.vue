@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { Data } from "./Data";
+import { Data, New2Old } from "./Data";
+import { Close as CloseIcon } from "@vicons/ionicons5";
 
 const props = defineProps<{
-  result: Data[][];
+  result: Data[];
 }>();
 
 const active = ref(false);
@@ -13,72 +14,36 @@ watch(
   },
 );
 
-const resOptions = computed(() => {
-  return props.result.map((item, index) => {
-    return {
-      label: item[0].Info.TextName,
-      value: index,
-    };
-  });
-});
-/** 某个文本的结果 */
-const resIndex = ref(0);
-const res = computed(() => {
-  return props.result[resIndex.value];
-});
-
-const idx1 = ref(0);
-const idx2 = ref(0);
-
-const opts = computed(() => {
-  return res.value.map((d: Data, index: number) => {
-    return {
-      label: d.Info.DictName,
-      value: index,
-    };
-  });
-});
-
-watch(
-  () => res,
-  () => {
-    if (res.value) {
-      idx1.value = 0;
-      idx2.value = Math.min(res.value.length - 1, 1);
-    }
-  },
-);
-
 const multi = ref(true);
 </script>
 <template>
   <n-drawer v-model:show="active" :width="502" placement="bottom" height="100vh">
-    <n-drawer-content :native-scrollbar="false" closable>
+    <n-drawer-content :native-scrollbar="false" header-style="padding: 0; display: flex; margin: auto">
       <template #header>
-        <span style="width: auto">
-          <!-- <n-select v-model:value="resIndex" :options="resOptions" placeholder="请选择" style="min-width: 500px" /> -->
-          <span>标题</span>
-        </span>
+        <n-flex justify="space-between" style="width: 80vw; align-items: center; padding: 10px">
+          <n-button @click="multi = !multi">风格</n-button>
+          <span class="title">{{ props.result[0].Info.TextName }}</span>
+          <n-button type="info" ghost @click="active = false">关闭</n-button>
+        </n-flex>
       </template>
       <div>
         <div v-if="multi" style="display: flex; width: 100%; margin: auto; justify-content: center">
-          <div v-for="data in res">
+          <div v-for="data in props.result">
             <MultiResult :data="data"></MultiResult>
           </div>
         </div>
         <div v-else>
-          <div style="display: flex; align-items: center; justify-content: center">
-            <n-select v-model:value="idx1" :options="opts" placeholder="请选择文件" style="max-width: 300px" />
-            <span style="font: larger bold; padding: 0 20px"> VS </span>
-            <n-select v-model:value="idx2" :options="opts" placeholder="请选择文件" style="max-width: 300px" />
-          </div>
-
-          <!-- <Result :data1="props.res[idx1]" :data2="props.res[idx2]"></Result> -->
-          {{ JSON.stringify(res[idx1]) }}
-          <p />
-          {{ JSON.stringify(res[idx2]) }}
+          <Result :result="props.result" style="min-width: 50em; max-width: 80em; margin: auto" />
         </div>
       </div>
     </n-drawer-content>
   </n-drawer>
 </template>
+<style scoped>
+.title {
+  font-size: 30px;
+  font-weight: bold;
+  font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK",
+    "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, DFKai-SB, "TW\-Kai", serif;
+}
+</style>

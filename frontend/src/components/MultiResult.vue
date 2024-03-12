@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Data } from "./Data";
+import { Data, DataUtils } from "./Data";
 
 const props = defineProps<{
   data: Data;
@@ -12,44 +12,30 @@ const res = computed(() => {
     return props.data;
   }
   let cp = JSON.parse(JSON.stringify(props.data));
-  cp.Commit.Word = commitRate(cp.Commit.Word);
-  cp.Commit.Collision = commitRate(cp.Commit.Collision);
-  cp.Char.Word = charRate(cp.Char.Word);
-  cp.Char.Collision = charRate(cp.Char.Collision);
-  cp.Keys.LeftHand = keyRate(cp.Keys.LeftHand);
-  cp.Keys.RightHand = keyRate(cp.Keys.RightHand);
-  cp.Pair.SameHand = pairRate(cp.Pair.SameHand);
-  cp.Pair.DiffHand = pairRate(cp.Pair.DiffHand);
-  cp.Pair.SameFinger = pairRate(cp.Pair.SameFinger);
-  cp.Pair.DiffFinger = pairRate(cp.Pair.DiffFinger);
-  cp.Pair.DoubleHit = pairRate(cp.Pair.DoubleHit);
-  cp.Pair.TribleHit = pairRate(cp.Pair.TribleHit);
-  cp.Pair.SingleSpan = pairRate(cp.Pair.SingleSpan);
-  cp.Pair.MultiSpan = pairRate(cp.Pair.MultiSpan);
-  cp.Pair.Staggered = pairRate(cp.Pair.Staggered);
-  cp.Pair.Disturb = pairRate(cp.Pair.Disturb);
-  cp.Pair.LeftToLeft = pairRate(cp.Pair.LeftToLeft);
-  cp.Pair.LeftToRight = pairRate(cp.Pair.LeftToRight);
-  cp.Pair.RightToLeft = pairRate(cp.Pair.RightToLeft);
-  cp.Pair.RightToRight = pairRate(cp.Pair.RightToRight);
+  cp.Commit.Word = util.commitRate(cp.Commit.Word);
+  cp.Commit.Collision = util.commitRate(cp.Commit.Collision);
+  cp.Char.Word = util.charRate(cp.Char.Word);
+  cp.Char.Collision = util.charRate(cp.Char.Collision);
+  cp.Keys.LeftHand = util.keyRate(cp.Keys.LeftHand);
+  cp.Keys.RightHand = util.keyRate(cp.Keys.RightHand);
+  cp.Pair.SameHand = util.pairRate(cp.Pair.SameHand);
+  cp.Pair.DiffHand = util.pairRate(cp.Pair.DiffHand);
+  cp.Pair.SameFinger = util.pairRate(cp.Pair.SameFinger);
+  cp.Pair.DiffFinger = util.pairRate(cp.Pair.DiffFinger);
+  cp.Pair.DoubleHit = util.pairRate(cp.Pair.DoubleHit);
+  cp.Pair.TribleHit = util.pairRate(cp.Pair.TribleHit);
+  cp.Pair.SingleSpan = util.pairRate(cp.Pair.SingleSpan);
+  cp.Pair.MultiSpan = util.pairRate(cp.Pair.MultiSpan);
+  cp.Pair.Staggered = util.pairRate(cp.Pair.Staggered);
+  cp.Pair.Disturb = util.pairRate(cp.Pair.Disturb);
+  cp.Pair.LeftToLeft = util.pairRate(cp.Pair.LeftToLeft);
+  cp.Pair.LeftToRight = util.pairRate(cp.Pair.LeftToRight);
+  cp.Pair.RightToLeft = util.pairRate(cp.Pair.RightToLeft);
+  cp.Pair.RightToRight = util.pairRate(cp.Pair.RightToRight);
   return cp;
 });
 
-function commitRate(count: number): string {
-  return ((count / props.data.Commit.Count) * 100).toFixed(2) + "%";
-}
-
-function charRate(count: number): string {
-  return ((count / props.data.Char.Count) * 100).toFixed(2) + "%";
-}
-
-function keyRate(count: number): string {
-  return ((count / props.data.Keys.Count) * 100).toFixed(2) + "%";
-}
-
-function pairRate(count: number): string {
-  return ((count / props.data.Pair.Count) * 100).toFixed(2) + "%";
-}
+const util = new DataUtils(props.data);
 
 function dist(dist: number[]) {
   let res = [] as any[];

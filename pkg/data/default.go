@@ -48,10 +48,10 @@ func (d *Dict) output(dict []*Entry) {
 	_, err := os.Stat(path)
 	// 存在且不覆盖
 	if err == nil && !d.Overwrite {
-		logger.Warn("赛码表已经存在：%s\n", "path", path)
+		logger.Warn("赛码表已经存在\n", "path", path)
 		return
 	} else if d.Overwrite {
-		logger.Info("覆盖赛码表：%s\n", "path", path)
+		logger.Info("覆盖赛码表\n", "path", path)
 	}
 	// 按照词长排序
 	slices.SortStableFunc(dict, func(i, j *Entry) int {

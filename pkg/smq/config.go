@@ -1,7 +1,9 @@
 package smq
 
 import (
+	"cmp"
 	"runtime"
+	"slices"
 	"sync"
 	"time"
 
@@ -32,11 +34,15 @@ func (c *Config) Reset() {
 	c.dictList = c.dictList[:0]
 }
 
+var textCount = 0
+
 func (c *Config) AddText(textList ...*data.Text) {
 	if c.textList == nil {
 		c.textList = make([]*data.Text, 0)
 	}
 	for _, text := range textList {
+		textCount++
+		text.Order = textCount
 		c.wg.Add(1)
 		go func(text *data.Text) {
 			defer c.wg.Done()
@@ -55,6 +61,8 @@ func (c *Config) AddDict(dictList ...*data.Dict) {
 		c.dictList = make([]*data.Dict, 0)
 	}
 	for _, dict := range dictList {
+		textCount++
+		dict.Text.Order = textCount
 		c.wg.Add(1)
 		go func(dict *data.Dict) {
 			defer c.wg.Done()
@@ -71,6 +79,12 @@ func (c *Config) AddDict(dictList ...*data.Dict) {
 // 只转换码表时可以调用，正常赛码不需要
 func (c *Config) OnBeforeRace() {
 	c.wg.Wait()
+	slices.SortFunc(c.textList, func(i, j *data.Text) int {
+		return cmp.Compare(i.Order, j.Order)
+	})
+	slices.SortFunc(c.dictList, func(i, j *data.Dict) int {
+		return cmp.Compare(i.Text.Order, j.Text.Order)
+	})
 }
 
 func (c *Config) Race() [][]*result.Result {

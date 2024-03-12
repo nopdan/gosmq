@@ -2,16 +2,17 @@
 import { ClipboardOutline as ClipboardIcon } from "@vicons/ionicons5";
 import { Data } from "./Data";
 
-interface Config {
-  // 文本
+// 文本
+interface TextConfig {
   source: string;
   path: string;
-  text: string;
-  /** 计算所有文本并合并结果 */
-  merge: boolean;
-  /** 忽略缺字和符号*/
-  clean: boolean;
+  name: string | null;
+  string: string | null;
 }
+/** 计算所有文本并合并结果 */
+const merge = ref(false);
+/** 忽略缺字和符号*/
+const clean = ref(false);
 
 /** 文本来源 */
 const srcOptions = [
@@ -19,17 +20,21 @@ const srcOptions = [
   { label: "剪贴板", value: "clipboard" },
 ];
 
-const conf = reactive({
+const text = reactive({
   source: "local",
-} as Config);
+} as TextConfig);
 
 const textOpts = ref([]);
 
-function paste() {
+function paste(type: string) {
   navigator.clipboard
     .readText()
-    .then((text) => {
-      conf.text = text;
+    .then((str) => {
+      if (type === "text") {
+        text.string = str;
+      } else if (type === "dict") {
+        dict.string = str;
+      }
     })
     .catch((err) => console.error("读取剪贴板内容失败：", err));
 }
@@ -74,8 +79,7 @@ enum SpacePreference {
   Right = "right",
 }
 
-interface Dict {
-  path: string;
+interface Dict extends TextConfig {
   /** 码表格式 */
   format: DictFormat;
   /** 起顶码长 */
@@ -145,6 +149,7 @@ const spaceOptions = [
 ];
 
 const dict = reactive({
+  source: "local",
   format: DictFormat.Default,
   push: 4,
   keys: "_;'",
@@ -155,8 +160,51 @@ const dict = reactive({
 
 const dictList = reactive(new Array<Dict>());
 const dictOpts = ref([]);
+watch(
+  () => text.source,
+  () => {
+    text.name = null;
+    text.string = null;
+  },
+);
+watch(
+  () => text.string,
+  () => {
+    if (text.string) {
+      text.name = clipText(text.string, 10);
+    }
+  },
+);
+
+const disableFormat = ref(true);
+
+watch(
+  () => dict.source,
+  () => {
+    dict.name = null;
+    dict.string = null;
+    if (dict.source === "local") {
+      dict.format = DictFormat.Default;
+      disableFormat.value = true;
+    } else {
+      disableFormat.value = false;
+    }
+  },
+);
+
+watch(
+  () => dict.string,
+  () => {
+    if (dict.string) {
+      dict.name = clipText(dict.string, 10);
+    }
+  },
+);
 
 function addDict(dict: Dict): void {
+  if (dict.source === "local") {
+    dict.name = tidyPath(dict.path, "dict");
+  }
   const d = Object.assign({}, dict);
   dictList.push(d);
   console.log("添加码表", d);
@@ -168,8 +216,8 @@ function removeDict(index: number): void {
   dictList.splice(index, 1);
 }
 
-function tidyPath(path: string, suffix: string) {
-  const index = path.lastIndexOf(suffix);
+function tidyPath(path: string, type: string) {
+  const index = path.lastIndexOf(type);
   let name = path;
   if (index != -1) {
     name = path.substring(index + 5);
@@ -190,8 +238,8 @@ function fetchList() {
           value: e,
         };
       });
-      if (conf.path == null) {
-        conf.path = data.text[0];
+      if (text.path == null) {
+        text.path = data.text[0];
       }
       dictOpts.value = data.dict.map((e: string) => {
         return {
@@ -218,7 +266,12 @@ async function race() {
   racing.value = true;
   // 生成 formData
   const formData = new FormData();
-  const data = JSON.stringify(Object.assign({}, conf, { dict: dictList }));
+  const data = JSON.stringify({
+    clean: clean.value,
+    merge: merge.value,
+    text: text,
+    dict: dictList,
+  });
   formData.append("data", data);
   console.log("data:", data);
 
@@ -243,39 +296,40 @@ async function race() {
 </script>
 
 <template>
-  <div class="line">
-    <span class="name">文本来源</span>
-    <n-radio-group v-model:value="conf.source" size="large">
-      <n-flex>
-        <n-radio v-for="src in srcOptions" :key="src.value" :value="src.value">
-          {{ src.label }}
-        </n-radio>
-      </n-flex>
-    </n-radio-group>
-  </div>
-  <div v-if="conf.source === 'local'">
+  <div>
     <div class="line">
-      <span class="name">选择文本</span>
-      <n-select v-model:value="conf.path" :options="textOpts" placeholder="请选择文件" :disabled="conf.merge" />
+      <span class="name">文本来源</span>
+      <n-radio-group v-model:value="text.source" size="large">
+        <n-flex>
+          <n-radio v-for="src in srcOptions" :key="src.value" :value="src.value">
+            {{ src.label }}
+          </n-radio>
+        </n-flex>
+      </n-radio-group>
     </div>
-    <div class="line">
-      <span class="name">全部文本</span>
-      <n-switch v-model:value="conf.merge"></n-switch>
+    <div v-if="text.source === 'local'">
+      <div class="line">
+        <span class="name">选择文本</span>
+        <n-select v-model:value="text.path" :options="textOpts" placeholder="请选择文本" :disabled="merge" />
+      </div>
+      <div class="line">
+        <span class="name">全部文本</span>
+        <n-switch v-model:value="merge"></n-switch>
+      </div>
     </div>
-  </div>
-  <div class="line" v-if="conf.source === 'clipboard'" style="min-height: 150px">
-    <span class="name"></span>
-    <div v-if="conf.text" class="text-preview">
-      {{ clipText(conf.text || "", 100) }}
-    </div>
-    <div class="clipboard" @click="paste">
-      <div class="empty">
-        <div style="margin-bottom: 12px">
-          <n-icon size="48" :depth="3">
-            <clipboard-icon />
-          </n-icon>
+    <div v-if="text.source === 'clipboard'">
+      <div class="line">
+        <span class="name">文本名</span>
+        <n-input v-model:value="text.name"></n-input>
+      </div>
+      <div class="line">
+        <span class="name"></span>
+        <div style="display: flex">
+          <n-button @click="paste('text')" style="margin-right: 10px">读取剪贴板</n-button>
         </div>
-        <n-text style="font-size: 16px"> 点击读取系统剪贴板 </n-text>
+        <div v-if="text.string" class="text-preview">
+          {{ clipText(text.string || "", 100) }}
+        </div>
       </div>
     </div>
   </div>
@@ -285,18 +339,45 @@ async function race() {
   <div>
     <n-flex justify="center">
       <n-tag type="success" closable v-for="(conf, idx) in dictList" @close="removeDict(idx)">
-        {{ tidyPath(conf.path, "dict") }}
+        {{ conf.name }}
       </n-tag>
     </n-flex>
     <div class="line">
-      <span class="name">选择码表</span>
-      <n-select v-model:value="dict.path" :options="dictOpts" placeholder="请选择文件" />
+      <span class="name">码表来源</span>
+      <n-radio-group v-model:value="dict.source" size="large">
+        <n-flex>
+          <n-radio v-for="src in srcOptions" :key="src.value" :value="src.value">
+            {{ src.label }}
+          </n-radio>
+        </n-flex>
+      </n-radio-group>
+    </div>
+    <div v-if="dict.source === 'local'">
+      <div class="line">
+        <span class="name">选择码表</span>
+        <n-select v-model:value="dict.path" :options="dictOpts" placeholder="请选择文件" />
+      </div>
+    </div>
+    <div v-if="dict.source === 'clipboard'">
+      <div class="line">
+        <span class="name">码表名</span>
+        <n-input v-model:value="dict.name"></n-input>
+      </div>
+      <div class="line">
+        <span class="name"></span>
+        <div style="display: flex">
+          <n-button @click="paste('dict')" style="margin-right: 10px">读取剪贴板</n-button>
+        </div>
+        <div v-if="dict.string" class="text-preview">
+          {{ clipText(dict.string || "", 100) }}
+        </div>
+      </div>
     </div>
     <div class="line">
       <span class="name">码表格式</span>
       <n-radio-group v-model:value="dict.format" size="large">
         <n-flex>
-          <n-radio v-for="format in formatOptions" :key="format.value" :value="format.value">
+          <n-radio v-for="format in formatOptions" :key="format.value" :value="format.value" :disabled="disableFormat">
             {{ format.label }}
           </n-radio>
         </n-flex>
@@ -346,7 +427,15 @@ async function race() {
       </n-radio-group>
     </div>
     <n-flex justify="center">
-      <n-button type="info" @click="addDict(dict)" style="width: 100px" ghost> 添加</n-button>
+      <n-button
+        type="info"
+        @click="addDict(dict)"
+        :disabled="dict.source === 'clipboard' && !dict.string"
+        style="width: 100px"
+        ghost
+      >
+        添加</n-button
+      >
     </n-flex>
   </div>
 
@@ -354,7 +443,7 @@ async function race() {
   <div class="line" style="justify-content: right">
     <span style="margin-right: 20px; display: flex; align-items: center">
       <span style="margin-right: 10px">忽略缺字和符号</span>
-      <n-switch v-model:value="conf.clean" />
+      <n-switch v-model:value="clean" />
     </span>
     <n-button type="primary" @click="race" :disabled="dictList.length === 0" :loading="racing">开始比赛</n-button>
   </div>
@@ -380,34 +469,8 @@ async function race() {
   }
 }
 
-.clipboard {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  min-height: 120px;
-  border: 1px dashed #e0e0e6;
-  border-radius: 3px;
-  padding: 14px;
-  background-color: #fafafc;
-  cursor: pointer;
-  align-items: center;
-
-  & .empty {
-    text-align: center;
-  }
-
-  &:hover {
-    border-color: #18a058;
-  }
-
-  &:active {
-    background-color: #f0f0f0;
-  }
-}
-
 .text-preview {
   color: #999;
-  width: 600px;
-  margin-right: 14px;
+  padding: 0 15px;
 }
 </style>

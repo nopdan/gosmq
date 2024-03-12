@@ -29,7 +29,7 @@ import CodeLenDistBar from "./CodeLenDistBar.vue";
 import CombsDistBar from "./CombsDistBar.vue";
 import KeyHeatSorted from "./KeyHeatSorted.vue";
 import { Data, New2Old } from "../Data";
-import { OldData } from "../OldData";
+import { DataOld } from "../DataOld";
 
 const props = defineProps<{
   result: Data[];
@@ -62,7 +62,7 @@ const d2 = computed(() => {
   return _old;
 });
 
-function shiftEmptyItems(schema: OldData) {
+function shiftEmptyItems(schema: DataOld) {
   schema.Words.Dist.shift();
   schema.Collision.Dist.shift();
   schema.CodeLen.Dist.shift();
@@ -191,3 +191,4 @@ provide("schema2", d2);
     </n-layout-footer>
   </n-layout>
 </template>
+../DataOld

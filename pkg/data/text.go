@@ -30,6 +30,8 @@ type Text struct {
 	size    int  // 文件大小
 	IsInit  bool // 是否已经初始化
 	bufSize int
+
+	Order int // 初始化文本或码表是并行的，此字段用于排序
 }
 
 func (t *Text) Init() {
@@ -37,13 +39,13 @@ func (t *Text) Init() {
 		logger.Debug("文本已经初始化过了", "name", t.Name)
 		return
 	}
-	if len(t.Path) > 0 {
+	if t.Path != "" {
 		t.loadFile()
-	} else if len(t.Bytes) > 0 {
-		t.loadBytes()
-	} else if len(t.String) > 0 {
+	} else if t.String != "" {
 		t.determineBufSize(len(t.String))
 		t.reader = bufio.NewReader(strings.NewReader(t.String))
+	} else if len(t.Bytes) > 0 {
+		t.loadBytes()
 	} else {
 		logger.Warn("文本初始化失败", "name", t.Name)
 		return

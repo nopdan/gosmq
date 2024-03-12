@@ -15,11 +15,10 @@ import Main from "./components/Main.vue";
 <style>
 .content {
   margin: auto;
-  max-width: 800px;
+  max-width: 700px;
   min-height: 90vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   font-family: -apple-system, "Noto Sans", "Helvetica Neue", Helvetica, "Nimbus Sans L", Arial, "Liberation Sans",
     "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC", "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei",
@@ -32,7 +31,7 @@ import Main from "./components/Main.vue";
   color: transparent;
   font-size: xx-large;
   font-weight: bold;
-  padding: 1em;
+  padding: 12px;
   font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK",
     "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, DFKai-SB, "TW\-Kai", serif;
 }

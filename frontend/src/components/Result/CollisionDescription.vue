@@ -14,15 +14,24 @@
     </n-descriptions-item>
   </n-descriptions>
   <n-descriptions bordered label-placement="top" size="small" :column="9">
-    <n-descriptions-item v-for="(v, i) of data.Collision.Dist">
-      <template #label>{{ i + 1 }} 重</template>
-      {{ v }}
+    <n-descriptions-item v-for="(v, i) in dist">
+      <template #label>{{ v.key }} 重</template>
+      {{ v.value }}
     </n-descriptions-item>
   </n-descriptions>
 </template>
 <script setup lang="ts">
 import { NDescriptions, NDescriptionsItem } from "naive-ui";
 const p = defineProps(["data"]);
+
+let dist = new Array();
+for (let i = 0; i < p.data.Collision.Dist.length; i++) {
+  if (p.data.Collision.Dist[i] === 0) continue;
+  dist.push({
+    key: i + 1,
+    value: p.data.Collision.Dist[i],
+  });
+}
 </script>
 
 <style>

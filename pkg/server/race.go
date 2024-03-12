@@ -8,23 +8,32 @@ import (
 )
 
 type Data struct {
-	Source string `json:"source"`
-	Path   string `json:"path"`
-	Text   string `json:"text"`
-	Merge  bool   `json:"merge"`
-	Clean  bool   `json:"clean"`
+	Merge bool `json:"merge"`
+	Clean bool `json:"clean"`
 
+	Text Text   `json:"text"`
 	Dict []Dict `json:"dict"`
 }
 
 type Dict struct {
+	Source string `json:"source"`
 	Path   string `json:"path"`
+	Name   string `json:"name"`
+	String string `json:"string"`
+
 	Format string `json:"format"`
 	Push   int    `json:"push"`
 	Keys   string `json:"keys"`
 	Single bool   `json:"single"`
 	Algo   string `json:"algo"`
 	Space  string `json:"space"`
+}
+
+type Text struct {
+	Source string `json:"source"`
+	Path   string `json:"path"`
+	Name   string `json:"name"`
+	String string `json:"string"`
 }
 
 func (d *Data) Race() []byte {
@@ -40,22 +49,32 @@ func (d *Data) Race() []byte {
 			smq.AddText(t)
 		}
 	} else {
-		t := &data.Text{}
-		switch d.Source {
+		t := &data.Text{
+			Name: d.Text.Name,
+		}
+		switch d.Text.Source {
 		case "local":
-			t.Path = d.Path
+			t.Path = d.Text.Path
 		case "clipboard":
-			t.String = d.Text
-			t.Name = "剪贴板"
+			t.String = d.Text.String
 		default:
-			logger.Warn("不支持的数据源", "source", d.Source)
+			logger.Warn("不支持的数据源", "source", d.Text.Source)
 		}
 		smq.AddText(t)
 	}
 
 	for _, v := range d.Dict {
 		t := &data.Text{
-			Path: v.Path,
+			Name: v.Name,
+		}
+		switch v.Source {
+		case "local":
+			t.Path = v.Path
+		case "clipboard":
+			t.String = v.String
+		default:
+			logger.Warn("不支持的数据源", "source", v.Source)
+			continue
 		}
 		d := &data.Dict{
 			Text:       t,

@@ -25,6 +25,7 @@ func (d *Dict) loadJisu() []*Entry {
 		// 带空格 a_ aa_
 		if len(code) > 1 && code[len(code)-1] == '_' {
 			ret = append(ret, &Entry{word, code, 1})
+			d.insert(word, code, 1)
 			continue
 		}
 
@@ -32,6 +33,7 @@ func (d *Dict) loadJisu() []*Entry {
 		// 不带数字 akdb ksdw
 		if suf == "" {
 			ret = append(ret, &Entry{word, code, 1})
+			d.insert(word, code, 1)
 			continue
 		}
 

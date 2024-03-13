@@ -217,7 +217,7 @@ function removeDict(index: number): void {
 }
 
 function tidyPath(path: string, dir: string) {
-  const index = path.lastIndexOf(dir);
+  const index = path.indexOf(dir);
   let name = path;
   if (index !== -1) {
     name = path.substring(index + dir.length + 1);

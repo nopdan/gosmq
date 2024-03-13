@@ -39,6 +39,7 @@ jobs:
           bun install
           bun run build
           cd ..
+          mkdir -p pkg/server/dist
           mv frontend/dist/* pkg/server/dist/
 
       # 安装 go

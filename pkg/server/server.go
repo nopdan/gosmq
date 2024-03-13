@@ -1,7 +1,6 @@
 package server
 
 import (
-	"embed"
 	_ "embed"
 	"encoding/json"
 	"fmt"
@@ -12,11 +11,9 @@ import (
 	"strconv"
 	"sync"
 
+	"github.com/nopdan/gosmq/frontend"
 	"github.com/nopdan/gosmq/pkg/util"
 )
-
-//go:embed dist
-var dist embed.FS
 
 // 上传的文件列表
 var files [][]byte = make([][]byte, 0)
@@ -25,7 +22,7 @@ var textList = make([]string, 0)
 
 func Serve(port int, silent bool, prefix string) {
 	mux := http.NewServeMux()
-	dist, _ := fs.Sub(dist, "dist")
+	dist, _ := fs.Sub(frontend.Dist, "dist")
 	mux.Handle("GET /", http.FileServer(http.FS(dist)))
 	mux.HandleFunc("GET /list", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)

@@ -53,94 +53,115 @@ function dist(dist: number[]) {
 
 <template>
   <div class="card">
-    <div class="cardBlock schemaInfo">
-      <div class="dictName">{{ data.Info.DictName }}</div>
-      <div class="isSingle" v-if="data.Info.Single">*单</div>
+    <div class="title">
+      <div class="name">
+        {{ data.Info.DictName }}<span style="color: red; margin-left: 10px" v-if="data.Info.Single">*单</span>
+      </div>
     </div>
 
-    <div class="cardBlock">
-      <table class="tableBasic">
+    <table class="pure-table">
+      <thead>
         <tr>
           <th>码长</th>
           <th>总键数</th>
           <th>上屏数</th>
-          <th>打词</th>
-          <th>选重</th>
+          <th>匹配字数</th>
+          <th>词条数</th>
         </tr>
+      </thead>
+      <tbody>
         <tr>
           <td>{{ data.Keys.CodeLen.toFixed(4) }}</td>
           <td>{{ data.Keys.Count }}</td>
           <td>{{ data.Commit.Count }}</td>
-          <td>{{ res.Commit.Word }}</td>
-          <td>{{ res.Commit.Collision }}</td>
-        </tr>
-
-        <tr>
-          <th>词条数</th>
-          <th>缺字</th>
-          <th>匹配字数</th>
-          <th>打词字数</th>
-          <th>选重字数</th>
-        </tr>
-        <tr>
+          <td>{{ data.Char.Count }}</td>
           <td>{{ data.Info.DictLen }}</td>
-          <td>{{ data.Han.Lacks }}</td>
-          <td>{{ data.Info.TextLen }}</td>
-          <td>{{ res.Char.Word }}</td>
-          <td>{{ res.Char.Collision }}</td>
         </tr>
-      </table>
-    </div>
+      </tbody>
 
-    <div class="cardBlock">
-      <table class="tableFeel">
+      <thead>
         <tr>
+          <th>打词</th>
+          <th>打词字数</th>
+          <th>选重</th>
+          <th>选重字数</th>
+          <th>缺字</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ data.Commit.Word }}</td>
+          <td>{{ data.Char.Word }}</td>
+          <td>{{ data.Commit.Collision }}</td>
+          <td>{{ data.Char.Collision }}</td>
+          <td>{{ data.Han.Lacks }}</td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td>{{ res.Commit.Word }}</td>
+          <td>{{ res.Char.Word }}</td>
+          <td>{{ res.Commit.Collision }}</td>
+          <td>{{ res.Char.Collision }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="pure-table">
+      <thead>
+        <tr>
+          <th>双击</th>
+          <th>三连击</th>
           <th>左手</th>
-          <th>左左</th>
           <th>左右</th>
+          <th>左左</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ res.Pair.DoubleHit }}</td>
+          <td>{{ res.Pair.TribleHit }}</td>
+          <td>{{ res.Keys.LeftHand }}</td>
+          <td>{{ res.Pair.LeftToRight }}</td>
+          <td>{{ res.Pair.LeftToLeft }}</td>
+        </tr>
+      </tbody>
+      <thead>
+        <tr>
+          <th>异手</th>
+          <th>同指</th>
+          <th>右手</th>
           <th>右左</th>
           <th>右右</th>
         </tr>
-        <tr>
-          <td>{{ res.Keys.LeftHand }}</td>
-          <td>{{ res.Pair.LeftToLeft }}</td>
-          <td>{{ res.Pair.LeftToRight }}</td>
-          <td>{{ res.Pair.RightToLeft }}</td>
-          <td>{{ res.Pair.RightToRight }}</td>
-        </tr>
-        <tr>
-          <th>右手</th>
-          <th>同指</th>
-          <th>同键</th>
-          <th>小跨排</th>
-          <th>大跨排</th>
-        </tr>
-        <tr>
-          <td>{{ res.Keys.RightHand }}</td>
-          <td>{{ res.Pair.SameFinger }}</td>
-          <td>{{ res.Pair.DoubleHit }}</td>
-          <td>{{ res.Pair.SingleSpan }}</td>
-          <td>{{ res.Pair.MultiSpan }}</td>
-        </tr>
+      </thead>
+      <tr>
+        <td>{{ res.Pair.DiffHand }}</td>
+        <td>{{ res.Pair.SameFinger }}</td>
+        <td>{{ res.Keys.RightHand }}</td>
+        <td>{{ res.Pair.RightToLeft }}</td>
+        <td>{{ res.Pair.RightToRight }}</td>
+      </tr>
+      <thead>
         <tr>
           <th>当量</th>
-          <th>异手</th>
-          <th>异指</th>
+          <th>小跨排</th>
+          <th>大跨排</th>
           <th>错手</th>
           <th>小指干扰</th>
         </tr>
-        <tr>
-          <td>{{ (data.Pair.Equivalent / data.Pair.Count).toFixed(4) }}</td>
-          <td>{{ res.Pair.DiffHand }}</td>
-          <td>{{ res.Pair.DiffFinger }}</td>
-          <td>{{ res.Pair.Staggered }}</td>
-          <td>{{ res.Pair.Disturb }}</td>
-        </tr>
-      </table>
-    </div>
+      </thead>
+      <tr>
+        <td>{{ (data.Pair.Equivalent / data.Pair.Count).toFixed(4) }}</td>
+        <td>{{ res.Pair.SingleSpan }}</td>
+        <td>{{ res.Pair.MultiSpan }}</td>
+        <td>{{ res.Pair.Staggered }}</td>
+        <td>{{ res.Pair.Disturb }}</td>
+      </tr>
+    </table>
 
-    <div class="cardBlock stat">
-      <table class="statHead">
+    <div class="dist">
+      <table class="dist-header">
         <tr>
           <th>码长</th>
         </tr>
@@ -151,8 +172,8 @@ function dist(dist: number[]) {
           <th>选重</th>
         </tr>
       </table>
-      <div class="statTable" style="white-space: nowrap; scrollbar-gutter: stable; overflow-x: auto">
-        <table>
+      <table class="dist-body">
+        <tbody>
           <tr>
             <td v-for="v in dist(data.Dist.CodeLen)">
               <span style="color: #ff9933">{{ v.len }} </span><span style="color: #555">: </span>
@@ -171,18 +192,30 @@ function dist(dist: number[]) {
               <span>{{ v.count }}</span>
             </td>
           </tr>
-        </table>
-      </div>
+        </tbody>
+      </table>
     </div>
 
-    <div class="cardBlock">
-      <div class="keyRateTitle">按键频率 %</div>
-      <table class="heatMap"></table>
-    </div>
-    <n-flex>
-      <span>%</span>
-      <n-switch v-model:value="rate"></n-switch
-    ></n-flex>
+    <n-flex justify="center" style="font-weight: bold; margin-bottom: 8px">按键频率 %</n-flex>
+    <n-grid :cols="12">
+      <n-gi v-for="v in '0123456789-='"><heat-map :data="data" :_key="v"></heat-map></n-gi>
+      <n-gi v-for="v in 'qwertyuiop[]'"><heat-map :data="data" :_key="v"></heat-map></n-gi>
+      <n-gi v-for="v in 'asdfghjkl;\''"><heat-map :data="data" :_key="v"></heat-map></n-gi>
+      <n-gi></n-gi>
+      <n-gi v-for="v in 'zxcvbnm,./'"><heat-map :data="data" :_key="v"></heat-map></n-gi>
+      <n-gi></n-gi>
+      <n-gi></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="2"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'无名'" :num="2"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'中指'" :num="3"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'食指'" :num="4"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'拇指'" :num="5"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'拇指'" :num="6"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'食指'" :num="7"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'中指'" :num="8"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'无名'" :num="9"></finger-heat-map></n-gi>
+      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="10"></finger-heat-map></n-gi
+    ></n-grid>
   </div>
 </template>
 
@@ -191,123 +224,75 @@ function dist(dist: number[]) {
   display: flex;
   font-size: medium;
   flex-direction: column;
-  transition: 0.2s;
-  width: 31rem;
-  max-width: 400px;
-  margin: 2px;
-  padding: 10px;
+  margin: 0.5em;
+  padding: 0.8em 1.5em;
   background-color: #fefefe;
   border: 1px solid #eee;
   border-radius: 10px;
-
-  &:hover {
-    box-shadow: 0 0 6px 0 #bbb;
-  }
+  width: 550px;
 }
 
-.dictName {
+.name {
+  font-family: Baskerville, "Times New Roman", "Liberation Serif", STFangsong, FangSong, FangSong_GB2312, "CWTEX\-F",
+    serif;
+  font-size: 23px;
+  font-weight: bold;
   overflow-x: auto;
   white-space: nowrap;
   scrollbar-gutter: stable;
 }
 
-.card .cardBlock.schemaInfo {
+div.dist {
   display: flex;
-  align-items: end;
-  justify-content: start;
-  font-size: larger;
-  font-weight: bold;
-  padding-left: 0.2rem;
+  margin-top: 5px;
+  max-width: 550px;
+  align-items: start;
+  height: 100px;
+
+  & table {
+    white-space: nowrap;
+  }
 }
 
-.dictLen {
-  padding-left: 1rem;
-  font-size: 0.8em;
-  color: lightslategray;
-  white-space: nowrap;
-}
-
-.dictLenValue {
-  font-size: 0.7em;
-  font-weight: normal;
-}
-
-.cardBlock {
-  padding: 0.5rem 0;
-}
-
-table {
+table.dist-body {
   table-layout: fixed;
-}
-
-th {
-  text-align: left;
-  color: lightslategray;
-}
-
-td {
-  white-space: nowrap;
-}
-
-.tableBasic {
-  width: 100%;
-}
-
-.keyRateTitle {
-  text-align: center;
-  font-weight: bold;
-  padding-bottom: 0.5rem;
-}
-
-.heatMap {
-  width: 100%;
-  border-spacing: 6px 6px;
-}
-
-.key {
-  padding: 0.1rem;
-  border-radius: 5px;
-  box-shadow: 0 0 2px 0 #bbb;
-}
-
-td.key {
-  text-align: center;
-}
-
-.heatMapRate {
-  text-align: center;
-  font-size: 0.5em;
-  color: rgb(0, 0, 4, 0.4);
-}
-
-.fin {
-  font-size: smaller;
-}
-
-.finHeatMap td {
-  white-space: nowrap;
-}
-
-.tableFeel {
-  width: 100%;
-}
-
-.cardBlock.stat {
-  display: flex;
-  align-items: flex-start;
-}
-
-.statHead th {
-  padding-right: 0.5rem;
-  white-space: nowrap;
-}
-
-.statTable {
   display: flex;
   overflow-x: auto;
+
+  & td {
+    padding-left: 10px;
+  }
 }
 
-.statTable > table td {
-  padding-right: 0.2rem;
+.pure-table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  empty-cells: show;
+  border: 1px solid #cbcbcb;
+  margin: 5px 0;
+
+  & td,
+  th {
+    border-left: 1px solid #cbcbcb;
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    padding: 2px 1em;
+    white-space: nowrap;
+  }
+}
+
+.pure-table caption {
+  color: #000;
+  padding: 1em 0;
+  text-align: center;
+}
+
+.pure-table thead {
+  background-color: rgb(224, 238, 225);
+  color: #000;
+  text-align: left;
+  vertical-align: bottom;
 }
 </style>

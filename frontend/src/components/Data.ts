@@ -108,6 +108,7 @@ export class DataUtils {
 export function New2Old(_new: Data): DataOld {
   const util = new DataUtils(_new);
   const _old: DataOld = {
+    Name: _new.Info.DictName,
     TextName: _new.Info.TextName,
     TextLen: _new.Info.TextLen,
     DictName: _new.Info.DictName,

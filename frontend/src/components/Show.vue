@@ -21,15 +21,17 @@ const multi = ref(true);
     <n-drawer-content :native-scrollbar="false" header-style="padding: 0; display: flex; margin: auto">
       <template #header>
         <n-flex justify="space-between" style="width: 80vw; align-items: center; padding: 10px">
-          <n-button @click="multi = !multi">风格</n-button>
+          <n-button @click="multi = !multi">切换风格</n-button>
           <span class="title">{{ props.result[0].Info.TextName }}</span>
           <n-button type="info" ghost @click="active = false">关闭</n-button>
         </n-flex>
       </template>
       <div>
-        <div v-if="multi" style="display: flex; width: 100%; margin: auto; justify-content: center">
-          <div v-for="data in props.result">
-            <MultiResult :data="data"></MultiResult>
+        <div v-if="multi" style="display: flex; justify-content: center">
+          <div style="display: flex; overflow-x: auto">
+            <div v-for="data in props.result">
+              <MultiResult :data="data"></MultiResult>
+            </div>
           </div>
         </div>
         <div v-else>

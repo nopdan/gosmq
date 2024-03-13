@@ -17,10 +17,12 @@ declare module "@vue/runtime-core" {
     CombsDescription: (typeof import("./src/components/Result/CombsDescription.vue"))["default"];
     CombsDistBar: (typeof import("./src/components/Result/CombsDistBar.vue"))["default"];
     ComparedBars: (typeof import("./src/components/Result/comparedBars.vue"))["default"];
+    FingerHeatMap: (typeof import("./src/components/FingerHeatMap.vue"))["default"];
     FingerPie: (typeof import("./src/components/Result/FingerPie.vue"))["default"];
     FingersDescription: (typeof import("./src/components/Result/FingersDescription.vue"))["default"];
     HandComp: (typeof import("./src/components/Result/HandComp.vue"))["default"];
     HandsDescription: (typeof import("./src/components/Result/HandsDescription.vue"))["default"];
+    HeatMap: (typeof import("./src/components/HeatMap.vue"))["default"];
     KeyHeatSorted: (typeof import("./src/components/Result/KeyHeatSorted.vue"))["default"];
     Main: (typeof import("./src/components/Main.vue"))["default"];
     MultiResult: (typeof import("./src/components/MultiResult.vue"))["default"];
@@ -32,7 +34,8 @@ declare module "@vue/runtime-core" {
     NDrawer: (typeof import("naive-ui"))["NDrawer"];
     NDrawerContent: (typeof import("naive-ui"))["NDrawerContent"];
     NFlex: (typeof import("naive-ui"))["NFlex"];
-    NIcon: (typeof import("naive-ui"))["NIcon"];
+    NGi: (typeof import("naive-ui"))["NGi"];
+    NGrid: (typeof import("naive-ui"))["NGrid"];
     NInput: (typeof import("naive-ui"))["NInput"];
     NInputNumber: (typeof import("naive-ui"))["NInputNumber"];
     NMessageProvider: (typeof import("naive-ui"))["NMessageProvider"];
@@ -41,9 +44,6 @@ declare module "@vue/runtime-core" {
     NSelect: (typeof import("naive-ui"))["NSelect"];
     NSwitch: (typeof import("naive-ui"))["NSwitch"];
     NTag: (typeof import("naive-ui"))["NTag"];
-    NText: (typeof import("naive-ui"))["NText"];
-    NUpload: (typeof import("naive-ui"))["NUpload"];
-    NUploadDragger: (typeof import("naive-ui"))["NUploadDragger"];
     Result: (typeof import("./src/components/Result/Result.vue"))["default"];
     ResultBasic: (typeof import("./src/components/Result/ResultBasic.vue"))["default"];
     ResultKeyHeat: (typeof import("./src/components/Result/ResultKeyHeat.vue"))["default"];

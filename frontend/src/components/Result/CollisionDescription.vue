@@ -14,7 +14,7 @@
     </n-descriptions-item>
   </n-descriptions>
   <n-descriptions bordered label-placement="top" size="small" :column="9">
-    <n-descriptions-item v-for="(v, i) in dist">
+    <n-descriptions-item v-for="v in dist">
       <template #label>{{ v.key }} 重</template>
       {{ v.value }}
     </n-descriptions-item>

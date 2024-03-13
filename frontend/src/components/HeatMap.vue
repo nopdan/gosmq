@@ -26,8 +26,7 @@ div.heat-key {
   flex-direction: column;
   align-items: center;
   border-radius: 5px;
-  box-shadow: 0 0 2px 0 #bbbbbb;
-  -webkit-box-shadow: 0 0 2px 0 #bbbbbb;
-  margin: 3px;
+  border: 1px solid #e0e0e0;
+  margin: 2px;
 }
 </style>

@@ -30,14 +30,17 @@ func Serve(port int, silent bool, prefix string) {
 	mux.HandleFunc("GET /list", func(w http.ResponseWriter, r *http.Request) {
 		setHeader(&w)
 		logger.Info("GET /list")
-		type Result struct {
-			Text []string `json:"text"`
-			Dict []string `json:"dict"`
+		res := struct {
+			Text    []string `json:"text"`
+			Dict    []string `json:"dict"`
+			TextDir string   `json:"textDir"`
+			DictDir string   `json:"dictDir"`
+		}{
+			TextDir: filepath.Join(prefix, "text"),
+			DictDir: filepath.Join(prefix, "dict"),
 		}
-		textList = util.WalkDirWithSuffix(filepath.Join(prefix, "text"), ".txt")
-		dict := util.WalkDirWithSuffix(filepath.Join(prefix, "dict"), ".txt")
-		res := Result{Text: textList, Dict: dict}
-
+		res.Text = util.WalkDirWithSuffix(res.TextDir, ".txt")
+		res.Dict = util.WalkDirWithSuffix(res.DictDir, ".txt")
 		json.NewEncoder(w).Encode(res)
 	})
 	mux.HandleFunc("POST /upload", func(w http.ResponseWriter, r *http.Request) {

@@ -203,7 +203,7 @@ watch(
 
 function addDict(dict: Dict): void {
   if (dict.source === "local") {
-    dict.name = tidyPath(dict.path, "dict");
+    dict.name = dict.path.replace(/(.+)(\\|\/)(.+)\.txt/g, "$3");
   }
   const d = Object.assign({}, dict);
   dictList.push(d);
@@ -216,25 +216,29 @@ function removeDict(index: number): void {
   dictList.splice(index, 1);
 }
 
-function tidyPath(path: string, type: string) {
-  const index = path.lastIndexOf(type);
+function tidyPath(path: string, dir: string) {
+  const index = path.lastIndexOf(dir);
   let name = path;
-  if (index != -1) {
-    name = path.substring(index + 5);
+  if (index !== -1) {
+    name = path.substring(index + dir.length + 1);
   }
   name = name.replace(".txt", "");
   return name;
 }
 
+const textDir = ref("text");
+const dictDir = ref("dict");
 function fetchList() {
   fetch("/list", {
     method: "GET",
   })
     .then((response) => response.json())
     .then((data) => {
+      textDir.value = data.textDir;
+      dictDir.value = data.dictDir;
       textOpts.value = data.text.map((e: string) => {
         return {
-          label: tidyPath(e, "text"),
+          label: tidyPath(e, textDir.value),
           value: e,
         };
       });
@@ -243,7 +247,7 @@ function fetchList() {
       }
       dictOpts.value = data.dict.map((e: string) => {
         return {
-          label: tidyPath(e, "dict"),
+          label: tidyPath(e, dictDir.value),
           value: e,
         };
       });

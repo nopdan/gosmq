@@ -11,10 +11,7 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/nopdan/gosmq)
 ![GitHub](https://img.shields.io/github/license/nopdan/gosmq)
 
-![](assets/preview-serve.png)
-
-在 [assets](./assets) 文件夹下查看更多预览图。  
-<font color=#e86060>！请在命令行中运行本程序</font>
+在 [assets](./assets) 文件夹下查看预览图。
 
 </div>
 
@@ -26,17 +23,17 @@
 
 ## **用法**
 
-### `serve` 命令
+### `server` 命令
 
-执行`.\smq.exe serve`，启动`serve`模式，自动打开浏览器。
+执行`.\smq.exe server`，启动`server`模式，自动打开浏览器。
 
-`serve`模式只会读取 `text` 文件夹下的文本和 `dict` 文件夹下的码表。
+`server`模式只会读取 `text` 文件夹下的文本和 `dict` 文件夹下的码表。
 
-### `gen` 格式转换
+### `convert` 格式转换
 
-使用 `.\smq.exe gen` 命令转换格式。
+使用 `.\smq.exe convert` 命令转换格式。
 
-支持格式：_极速赛码表(jisu|js)_、_多多(duoduo|dd)_、_冰凌(bingling|bl)_
+支持格式：_极速赛码表(jisu|js)_、_多多|rime(duoduo|dd|rime)_、_极点|小小(jidian|jd|xiaoxiao|xx)_、_冰凌(bingling|bl)_
 
 ### 主命令参数解释
 
@@ -65,7 +62,6 @@ examples:
 - `--split`: 输出分词数据
 - `--stat`: 输出词条数据
 - `--json`: 输出 json 数据
-- `--html`: 保存 html 结果
 
 `--verbose` 或 `-v` 输出所有数据，可以追加 `--json=false` 关闭其中某项。
 
@@ -83,7 +79,7 @@ examples:
 
 - 是标点符号
   - 根据内置的符号表继续匹配
-- 不是标点符号：编码设置为 `####`
+- 不是标点符号：编码设置为 `######`
   - 是汉字：记为缺字
 
 指定 `--clean` 或 `-c`: 跳过该字符
@@ -105,10 +101,10 @@ examples:
 | 文本               | 文本字数 |  耗时 |
 | ------------------ | -------: | ----: |
 | 心情决定事情       |    96253 | 120ms |
-| 红楼梦原著         |   872209 | 160ms |
-| 《庆余年》         |  3464055 | 250ms |
-| 那些热血飞扬的日子 | 16485176 | 630ms |
-| 极品全能高手       | 24910973 | 870ms |
+| 红楼梦原著         |   872209 | 130ms |
+| 《庆余年》         |  3464055 | 195ms |
+| 那些热血飞扬的日子 | 16485176 | 440ms |
+| 极品全能高手       | 24910973 | 610ms |
 
 > 以下采用码表《红辣椒五笔码表》，词条数 8896705
 
@@ -126,11 +122,11 @@ examples:
 > 多文件测试
 
 ```powershell
-# 使用 hidden 隐藏输出
-.\smq.exe -i .\dict\091点儿2023春.txt -t .\super\data\ --hidden
+# 使用 --merge 合并所有文本结果
+.\smq.exe -i .\dict\091点儿2023春.txt -t .\super\data\ --merge
 
 # 载入码表： 091点儿2023春
-# 共载入 26078 个文本，总字数 192108228，总耗时：10.006676s
+# 共载入 26078 个文本，总字数 192108228，总耗时：5.9521118s
 ```
 
 > 输出详情测试
@@ -138,5 +134,5 @@ examples:
 ```powershell
 .\smq.exe -i .\dict\091点儿2023春.txt -t .\text\极品全能高手_花都大少.txt -v
 
-# cost time: 1.35s
+# cost time: 1.2575731s
 ```

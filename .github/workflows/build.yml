@@ -11,7 +11,7 @@ jobs:
     steps:
       # 拉取代码
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # 安装 bun
       - uses: oven-sh/setup-bun@v1
@@ -26,7 +26,7 @@ jobs:
           cd ..
 
       - name: Setup bun cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.bun-cache.outputs.bun_cache_dir }}
           key: ${{ runner.os }}-bun-store-${{ hashFiles('**/bun.lockb') }}
@@ -43,13 +43,13 @@ jobs:
           mv frontend/dist/* pkg/server/dist/
 
       # 安装 go
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v5
         with:
           go-version: ">=1.22.0"
           check-latest: true
 
       - name: Setup go cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/go/pkg/mod
@@ -69,7 +69,7 @@ jobs:
 
       # 使用 upx 压缩可执行文件
       - name: Run UPX
-        uses: crazy-max/ghaction-upx@v1
+        uses: crazy-max/ghaction-upx@v3
         with:
           version: latest
           files: |

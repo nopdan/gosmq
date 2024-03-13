@@ -1,0 +1,30 @@
+name: Release CI
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # 拉取代码
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update CHANGELOG
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ github.token }}
+          tag: ${{ github.ref_name }}
+          writeToFile: false
+          includeInvalidCommits: true
+
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          body: |
+            ${{ steps.changelog.outputs.changes }}
+          token: ${{ secrets.GITHUB_TOKEN }}

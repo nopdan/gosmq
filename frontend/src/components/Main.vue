@@ -339,7 +339,7 @@ async function race() {
   </div>
 
   <!-- 下面是添加码表的部分 -->
-  <n-divider />
+  <n-divider style="margin: 10px auto" />
   <div>
     <n-flex justify="center">
       <n-tag type="success" closable v-for="(conf, idx) in dictList" @close="removeDict(idx)">
@@ -443,13 +443,17 @@ async function race() {
     </n-flex>
   </div>
 
-  <n-divider />
-  <div class="line" style="justify-content: right">
-    <span style="margin-right: 20px; display: flex; align-items: center">
-      <span style="margin-right: 10px">忽略缺字和符号</span>
-      <n-switch v-model:value="clean" />
-    </span>
-    <n-button type="primary" @click="race" :disabled="dictList.length === 0" :loading="racing">开始比赛</n-button>
+  <n-divider style="margin: 15px auto 0" />
+  <div>
+    <n-flex justify="space-between">
+      <div class="line">
+        <span class="name">忽略缺字和符号</span>
+        <n-switch v-model:value="clean" />
+      </div>
+      <div class="line">
+        <n-button type="primary" @click="race" :disabled="dictList.length === 0" :loading="racing">开始比赛</n-button>
+      </div>
+    </n-flex>
   </div>
   <Show :result="result"></Show>
 </template>
@@ -459,7 +463,7 @@ async function race() {
   display: flex;
   align-items: center;
   min-height: 30px;
-  margin: 20px 0;
+  margin: 15px 0;
 
   & > .name {
     min-width: 80px;

@@ -24,8 +24,7 @@ var conf = &struct {
 	Json    bool // 输出json数据
 	HTML    bool // 保存 html 结果
 
-	Hidden bool // 隐藏 cli 结果展示
-	Merge  bool // 合并多文本的结果
+	Merge bool // 合并多文本的结果
 }{}
 
 func init() {
@@ -43,7 +42,6 @@ func init() {
 	rootCmd.Flags().BoolVarP(&conf.Json, "json", "", false, "输出 json 数据")
 	rootCmd.Flags().BoolVarP(&conf.HTML, "html", "", false, "保存 html 结果")
 
-	rootCmd.Flags().BoolVarP(&conf.Hidden, "hidden", "", false, "隐藏 cli 结果展示")
 	rootCmd.Flags().BoolVarP(&conf.Merge, "merge", "m", false, "合并多文本的结果")
 }
 
@@ -78,7 +76,7 @@ func _root() {
 	logger.Info("载入文本...")
 	for _, v := range texts {
 		smq.AddText(&data.Text{Path: v})
-		if !conf.Hidden {
+		if len(texts) < 16 {
 			fmt.Printf("  -> %s\n", v)
 		}
 	}

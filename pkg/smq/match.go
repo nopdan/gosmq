@@ -3,6 +3,7 @@ package smq
 import (
 	"bytes"
 	"io"
+	"strings"
 	"unicode"
 
 	"github.com/nopdan/gosmq/pkg/data"
@@ -11,8 +12,10 @@ import (
 	"github.com/nopdan/gosmq/pkg/util"
 )
 
-func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
+func (c *Config) match(buffer []byte, partIdx int, dict *data.Dict) *result.MatchRes {
 	mRes := result.NewMatchRes()
+	mRes.Segment.PartIdx = partIdx
+
 	feel := NewFeeling(mRes, dict.SpacePref)
 	brd := bytes.NewReader(buffer)
 	res := new(matcher.Result)
@@ -67,10 +70,14 @@ func (c *Config) match(buffer []byte, dict *data.Dict) *result.MatchRes {
 		}
 		// 启用分词
 		if c.Split {
-			mRes.Segment = append(mRes.Segment, result.WordCode{
-				Word: word,
-				Code: res.Code,
-			})
+			if mRes.Segment.Builder == nil {
+				mRes.Segment.Builder = new(strings.Builder)
+			}
+			sb := mRes.Segment.Builder
+			sb.WriteString(word)
+			sb.WriteByte('\t')
+			sb.WriteString(res.Code)
+			sb.WriteByte('\n')
 		}
 		// 启用统计
 		if c.Stat {

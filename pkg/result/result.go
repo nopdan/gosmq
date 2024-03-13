@@ -1,7 +1,7 @@
 package result
 
 type Result struct {
-	segments []segment
+	segments []Segment
 	statData map[string]*CodePosCount
 
 	Info   Info   // 文章和码表信息

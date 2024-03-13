@@ -1,6 +1,7 @@
 package result
 
 import (
+	"strings"
 	"sync"
 
 	"github.com/nopdan/gosmq/pkg/util"
@@ -12,23 +13,18 @@ type CodePosCount struct {
 	Count int
 }
 
-type WordCode struct {
-	Word string
-	Code string
-}
-
-type segment struct {
+type Segment struct {
 	// 分段索引
 	PartIdx int
 	// 每段的分词结果
-	Segment []WordCode
+	Builder *strings.Builder
 }
 
 // 匹配一段文字得到的信息
 type MatchRes struct {
 	PartIdx  int // 分段索引
-	Segment  []WordCode
-	segments []segment
+	Segment  Segment
+	segments []Segment
 
 	// 每个词条对应的编码，以及出现的次数
 	StatData map[string]*CodePosCount
@@ -90,8 +86,7 @@ type pair struct {
 
 func NewMatchRes() *MatchRes {
 	mRes := new(MatchRes)
-	mRes.Segment = make([]WordCode, 0)
-	mRes.segments = make([]segment, 0)
+	mRes.segments = make([]Segment, 0)
 	mRes.StatData = make(map[string]*CodePosCount)
 
 	mRes.Dist.NotHan = make(map[rune]int)
@@ -107,12 +102,8 @@ func (m *MatchRes) Combine(mRes *MatchRes) {
 	m.lock.Lock()
 	defer m.lock.Unlock()
 
-	// 第一个 MatchRes 为总结果
-	if len(m.segments) == 0 {
-		m.segments = append(m.segments, segment{m.PartIdx, m.Segment})
-	}
-	if len(mRes.Segment) != 0 {
-		m.segments = append(m.segments, segment{mRes.PartIdx, mRes.Segment})
+	if mRes.Segment.Builder != nil {
+		m.segments = append(m.segments, mRes.Segment)
 	}
 	for k, v := range mRes.StatData {
 		if _, ok := m.StatData[k]; !ok {

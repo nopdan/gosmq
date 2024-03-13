@@ -122,8 +122,7 @@ func (c *Config) Race() [][]*result.Result {
 				ch <- struct{}{}
 				go func(i, j, pIdx int) {
 					defer wg.Done()
-					m := c.match(text, dict)
-					m.PartIdx = pIdx
+					m := c.match(text, pIdx, dict)
 					mRes[i][j].Combine(m)
 					<-ch
 				}(i, j, pIdx)

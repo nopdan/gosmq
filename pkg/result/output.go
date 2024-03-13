@@ -19,7 +19,7 @@ func (res *Result) OutputSplit() {
 	if len(res.segments) == 0 {
 		return
 	}
-	slices.SortFunc(res.segments, func(i, j segment) int {
+	slices.SortFunc(res.segments, func(i, j Segment) int {
 		return cmp.Compare(i.PartIdx, j.PartIdx)
 	})
 	// 创建文件夹
@@ -32,16 +32,9 @@ func (res *Result) OutputSplit() {
 		return
 	}
 	defer f.Close()
-	buf := bufio.NewWriterSize(f, 1024*1024)
 	for i := range res.segments {
-		for j := range res.segments[i].Segment {
-			buf.WriteString(res.segments[i].Segment[j].Word)
-			buf.WriteByte('\t')
-			buf.WriteString(res.segments[i].Segment[j].Code)
-			buf.WriteByte('\n')
-		}
+		f.WriteString(res.segments[i].Builder.String())
 	}
-	buf.Flush()
 	logger.Info("保存分词结果成功", "path", fileName)
 }
 

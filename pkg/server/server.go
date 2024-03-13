@@ -40,6 +40,7 @@ func Serve(port int, silent bool, prefix string) {
 			DictDir: filepath.Join(prefix, "dict"),
 		}
 		res.Text = util.WalkDirWithSuffix(res.TextDir, ".txt")
+		textList = res.Text
 		res.Dict = util.WalkDirWithSuffix(res.DictDir, ".txt")
 		json.NewEncoder(w).Encode(res)
 	})

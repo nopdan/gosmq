@@ -6,38 +6,28 @@ import (
 	"unicode/utf8"
 )
 
+type codePos struct {
+	code string
+	pos  int
+}
+
 type Single struct {
-	dict map[rune]*struct {
-		code string
-		pos  int
-	}
+	dict map[rune]*codePos
 }
 
 func NewSingle() *Single {
 	s := new(Single)
-	s.dict = make(map[rune]*struct {
-		code string
-		pos  int
-	}, 1024)
+	s.dict = make(map[rune]*codePos, 1024)
 	return s
 }
 
 func (s *Single) Insert(word, code string, pos int) {
 	char, _ := utf8.DecodeRuneInString(word)
-	cp, ok := s.dict[char]
-	if ok {
-		if len(cp.code) < len(code) {
-			// 同一个字取码长较短的
-			s.dict[char].pos = pos
+	if _, ok := s.dict[char]; !ok {
+		s.dict[char] = &codePos{
+			code: code,
+			pos:  pos,
 		}
-		return
-	}
-	s.dict[char] = &struct {
-		code string
-		pos  int
-	}{
-		code: code,
-		pos:  pos,
 	}
 }
 

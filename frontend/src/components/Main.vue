@@ -201,6 +201,15 @@ watch(
   },
 );
 
+watch(
+  () => dict.single,
+  () => {
+    if (dict.single) {
+      dict.algo = Algorithm.Ordered;
+    }
+  },
+);
+
 function addDict(dict: Dict): void {
   if (dict.source === "local") {
     dict.name = dict.path.replace(/(.+)(\\|\/)(.+)\.txt/g, "$3");

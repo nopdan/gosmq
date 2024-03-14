@@ -34,8 +34,6 @@ declare module '@vue/runtime-core' {
     NDrawer: typeof import('naive-ui')['NDrawer']
     NDrawerContent: typeof import('naive-ui')['NDrawerContent']
     NFlex: typeof import('naive-ui')['NFlex']
-    NGi: typeof import('naive-ui')['NGi']
-    NGrid: typeof import('naive-ui')['NGrid']
     NInput: typeof import('naive-ui')['NInput']
     NInputNumber: typeof import('naive-ui')['NInputNumber']
     NMessageProvider: typeof import('naive-ui')['NMessageProvider']
@@ -48,7 +46,6 @@ declare module '@vue/runtime-core' {
     ResultBasic: typeof import('./src/components/Result/ResultBasic.vue')['default']
     ResultKeyHeat: typeof import('./src/components/Result/ResultKeyHeat.vue')['default']
     Show: typeof import('./src/components/Show.vue')['default']
-    Text: typeof import('./src/components/Text.vue')['default']
     WordsDescription: typeof import('./src/components/Result/WordsDescription.vue')['default']
     WordsDistBar: typeof import('./src/components/Result/WordsDistBar.vue')['default']
   }

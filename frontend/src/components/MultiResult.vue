@@ -197,45 +197,59 @@ function dist(dist: number[]) {
     </div>
 
     <n-flex justify="center" style="font-weight: bold; margin-bottom: 8px">按键频率 %</n-flex>
-    <n-grid :cols="12">
-      <n-gi v-for="v in '0123456789-='"><heat-map :data="data" :_key="v"></heat-map></n-gi>
-      <n-gi v-for="v in 'qwertyuiop[]'"><heat-map :data="data" :_key="v"></heat-map></n-gi>
-      <n-gi v-for="v in 'asdfghjkl;\''"><heat-map :data="data" :_key="v"></heat-map></n-gi>
-      <n-gi></n-gi>
-      <n-gi v-for="v in 'zxcvbnm,./'"><heat-map :data="data" :_key="v"></heat-map></n-gi>
-      <n-gi></n-gi>
-      <n-gi></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="2"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'无名'" :num="2"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'中指'" :num="3"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'食指'" :num="4"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'拇指'" :num="5"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'拇指'" :num="6"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'食指'" :num="7"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'中指'" :num="8"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'无名'" :num="9"></finger-heat-map></n-gi>
-      <n-gi><finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="10"></finger-heat-map></n-gi
-    ></n-grid>
+    <div class="heat-map">
+      <div class="heat-line">
+        <div v-for="v in '0123456789-='"><heat-map :data="data" :_key="v"></heat-map></div>
+      </div>
+      <div class="heat-line">
+        <div v-for="v in 'qwertyuiop[]'"><heat-map :data="data" :_key="v"></heat-map></div>
+      </div>
+      <div class="heat-line">
+        <div v-for="v in 'asdfghjkl;\''"><heat-map :data="data" :_key="v"></heat-map></div>
+      </div>
+      <div class="heat-line">
+        <div v-for="v in 'zxcvbnm,./'"><heat-map :data="data" :_key="v"></heat-map></div>
+      </div>
+      <div class="heat-line">
+        <finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="2"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'无名'" :num="2"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'中指'" :num="3"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'食指'" :num="4"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'拇指'" :num="5"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'拇指'" :num="6"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'食指'" :num="7"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'中指'" :num="8"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'无名'" :num="9"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="10"></finger-heat-map>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+div.heat-map {
+  & .heat-line {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
 .card {
+  font-size: 1rem;
   display: flex;
-  font-size: medium;
   flex-direction: column;
-  margin: 0.5em;
-  padding: 0.8em 1.5em;
+  margin: 1rem 0.5rem;
+  padding: 0.8rem 1.5rem 1.5rem;
   background-color: #fefefe;
   border: 1px solid #eee;
   border-radius: 10px;
-  width: 550px;
+  width: 33em;
 }
 
 .name {
   font-family: Baskerville, "Times New Roman", "Liberation Serif", STFangsong, FangSong, FangSong_GB2312, "CWTEX\-F",
     serif;
-  font-size: 23px;
+  font-size: 1.3rem;
   font-weight: bold;
   overflow-x: auto;
   white-space: nowrap;
@@ -247,7 +261,7 @@ div.dist {
   margin-top: 5px;
   max-width: 550px;
   align-items: start;
-  height: 100px;
+  height: 105px;
 
   & table {
     white-space: nowrap;
@@ -278,14 +292,14 @@ table.dist-body {
     font-size: inherit;
     margin: 0;
     overflow: visible;
-    padding: 2px 1em;
+    padding: 3px 1rem;
     white-space: nowrap;
   }
 }
 
 .pure-table caption {
   color: #000;
-  padding: 1em 0;
+  padding: 1rem 0;
   text-align: center;
 }
 

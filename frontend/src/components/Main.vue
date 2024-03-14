@@ -458,7 +458,7 @@ async function race() {
   <Show :result="result"></Show>
 </template>
 
-<style>
+<style scoped>
 .line {
   display: flex;
   align-items: center;
@@ -470,7 +470,7 @@ async function race() {
     text-align: right;
     padding-right: 30px;
     color: #111;
-    font-size: 125%;
+    font-size: 1.1rem;
     font-weight: bold;
     font-family: Baskerville, "Times New Roman", "Liberation Serif", STFangsong, FangSong, FangSong_GB2312, "CWTEX\-F",
       serif;

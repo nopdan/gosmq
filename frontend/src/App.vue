@@ -12,11 +12,10 @@ import Main from "./components/Main.vue";
     </div>
   </n-message-provider>
 </template>
-<style>
+<style scoped>
 .content {
   margin: auto;
   max-width: 700px;
-  min-height: 90vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,9 +28,9 @@ import Main from "./components/Main.vue";
   background-image: linear-gradient(to right, orange, rgb(197, 4, 245));
   background-clip: text;
   color: transparent;
-  font-size: xx-large;
+  font-size: 2rem;
   font-weight: bold;
-  padding: 12px;
+  padding: 12px 0;
   font-family: Baskerville, Georgia, "Liberation Serif", "Kaiti SC", STKaiti, "AR PL UKai CN", "AR PL UKai HK",
     "AR PL UKai TW", "AR PL UKai TW MBE", "AR PL KaitiM GB", KaiTi, KaiTi_GB2312, DFKai-SB, "TW\-Kai", serif;
 }

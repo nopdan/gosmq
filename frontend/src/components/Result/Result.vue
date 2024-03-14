@@ -75,7 +75,7 @@ provide("schema1", d1);
 provide("schema2", d2);
 </script>
 <template>
-  <n-layout>
+  <n-layout class="result">
     <n-layout-header>
       <n-h2>赛码报告</n-h2>
       <n-p style="display: flex; align-items: center">
@@ -191,4 +191,11 @@ provide("schema2", d2);
     </n-layout-footer>
   </n-layout>
 </template>
-../DataOld
+<style scoped>
+.result {
+  min-width: 60rem;
+  max-width: 80rem;
+  margin: 1rem auto 0;
+  padding: 0.8rem;
+}
+</style>

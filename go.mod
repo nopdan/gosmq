@@ -4,11 +4,11 @@ go 1.22.0
 
 require (
 	github.com/AlecAivazis/survey/v2 v2.3.7
-	github.com/charmbracelet/log v0.3.1
+	github.com/charmbracelet/log v0.4.0
 	github.com/gogs/chardet v0.0.0-20211120154057-b7413eaefb8f
-	github.com/jedib0t/go-pretty/v6 v6.5.4
+	github.com/jedib0t/go-pretty/v6 v6.5.8
 	github.com/spf13/cobra v1.8.0
-	golang.org/x/net v0.22.0
+	golang.org/x/net v0.24.0
 )
 
 require (
@@ -26,8 +26,8 @@ require (
 	github.com/muesli/termenv v0.15.2 // indirect
 	github.com/rivo/uniseg v0.4.7 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/exp v0.0.0-20240222234643-814bf88cf225 // indirect
-	golang.org/x/sys v0.18.0 // indirect
-	golang.org/x/term v0.18.0 // indirect
+	golang.org/x/exp v0.0.0-20240416160154-fe59bbe5cc7f // indirect
+	golang.org/x/sys v0.19.0 // indirect
+	golang.org/x/term v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect
 )

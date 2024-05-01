@@ -11,8 +11,6 @@
   },
   "dependencies": {
     "echarts": "^5.5.0",
-    "monaco-editor": "0.46.0",
-    "monaco-editor-nls": "^3.1.0",
     "vue": "^3.4.21",
     "vue-echarts": "^6.6.9"
   },

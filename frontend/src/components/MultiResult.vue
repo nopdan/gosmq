@@ -211,7 +211,7 @@ function dist(dist: number[]) {
         <div v-for="v in 'zxcvbnm,./'"><heat-map :data="data" :_key="v"></heat-map></div>
       </div>
       <div class="heat-line">
-        <finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="2"></finger-heat-map>
+        <finger-heat-map :data="data" :colspan="1" :name="'小指'" :num="1"></finger-heat-map>
         <finger-heat-map :data="data" :colspan="1" :name="'无名'" :num="2"></finger-heat-map>
         <finger-heat-map :data="data" :colspan="1" :name="'中指'" :num="3"></finger-heat-map>
         <finger-heat-map :data="data" :colspan="1" :name="'食指'" :num="4"></finger-heat-map>

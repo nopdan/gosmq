@@ -59,6 +59,8 @@ enum DictFormat {
   Bingling = "bingling",
   /** 小小 */
   Xiaoxiao = "xiaoxiao",
+  /** chai */
+  Chai = "chai",
 }
 
 enum Algorithm {
@@ -104,7 +106,7 @@ const formatOptions = [
     value: DictFormat.Jisu,
   },
   {
-    label: "多多 | Rime",
+    label: "多多",
     value: DictFormat.Duoduo,
   },
   {
@@ -114,6 +116,10 @@ const formatOptions = [
   {
     label: "冰凌",
     value: DictFormat.Bingling,
+  },
+  {
+    label: "chai",
+    value: DictFormat.Chai,
   },
 ];
 

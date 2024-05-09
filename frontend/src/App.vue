@@ -15,7 +15,7 @@ import Main from "./components/Main.vue";
 <style scoped>
 .content {
   margin: auto;
-  max-width: 700px;
+  max-width: 720px;
   display: flex;
   flex-direction: column;
   align-items: center;

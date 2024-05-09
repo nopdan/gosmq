@@ -92,6 +92,8 @@ func (d *Dict) Init() {
 		dict = d.loadTSV(false)
 	case "xiaoxiao", "xx", "jidian", "jd":
 		dict = d.loadXiao()
+	case "chai":
+		dict = d.loadChai()
 	default:
 		logger.Fatal("码表格式不正确", "format", d.Format)
 	}

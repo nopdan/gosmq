@@ -15,17 +15,17 @@ func TestFindSuffixInt(t *testing.T) {
 	fmt.Println(findSuffixInteger("aaa"))
 }
 
-func TestGetSelectKey(t *testing.T) {
+func TestAddSuffix(t *testing.T) {
 	d := Dict{
 		Text:       &Text{String: "test"},
 		SelectKeys: "_;'",
 	}
 	d.Init()
-	fmt.Println(string(d.getSelectKey(1)))
-	fmt.Println(string(d.getSelectKey(2)))
-	fmt.Println(string(d.getSelectKey(3)))
-	fmt.Println(string(d.getSelectKey(4)))
-	fmt.Println(string(d.getSelectKey(10)))
+	fmt.Println(string(d.addSuffix("test", 1)))
+	fmt.Println(string(d.addSuffix("test", 2)))
+	fmt.Println(string(d.addSuffix("test", 3)))
+	fmt.Println(string(d.addSuffix("test", 4)))
+	fmt.Println(string(d.addSuffix("test", 10)))
 }
 
 func TestSlice(t *testing.T) {

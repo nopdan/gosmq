@@ -21,12 +21,12 @@ type Dict struct {
 	Name   string `json:"name"`
 	String string `json:"string"`
 
-	Format string `json:"format"`
-	Push   int    `json:"push"`
-	Keys   string `json:"keys"`
-	Single bool   `json:"single"`
-	Algo   string `json:"algo"`
-	Space  string `json:"space"`
+	Format  string `json:"format"`
+	Pattern string `json:"pattern"`
+	Keys    string `json:"keys"`
+	Single  bool   `json:"single"`
+	Algo    string `json:"algo"`
+	Space   string `json:"space"`
 }
 
 type Text struct {
@@ -79,7 +79,7 @@ func (d *Data) Race() []byte {
 		d := &data.Dict{
 			Text:       t,
 			Format:     v.Format,
-			Push:       v.Push,
+			Pattern:    v.Pattern,
 			SelectKeys: v.Keys,
 			Single:     v.Single,
 			Algorithm:  v.Algo,

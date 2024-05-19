@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ClipboardOutline as ClipboardIcon } from "@vicons/ionicons5";
 import { Data } from "./Data";
 
 // 文本
@@ -84,8 +83,8 @@ enum SpacePreference {
 interface Dict extends TextConfig {
   /** 码表格式 */
   format: DictFormat;
-  /** 起顶码长 */
-  push: number;
+  /** 顶屏模式 */
+  pattern: string;
   /** 选重键 */
   keys: string;
   /** 是否只用码表里的单字 */
@@ -110,16 +109,16 @@ const formatOptions = [
     value: DictFormat.Duoduo,
   },
   {
-    label: "小小 | 极点",
-    value: DictFormat.Xiaoxiao,
-  },
-  {
     label: "冰凌",
     value: DictFormat.Bingling,
   },
   {
     label: "chai",
     value: DictFormat.Chai,
+  },
+  {
+    label: "小小 | 极点",
+    value: DictFormat.Xiaoxiao,
   },
 ];
 
@@ -131,12 +130,13 @@ const algoOptions = [
   {
     label: "贪心匹配",
     value: Algorithm.Greedy,
+    disabled: false,
   },
-  {
-    label: "最短码长(慢)",
-    value: Algorithm.Dynamic,
-    disabled: true,
-  },
+  // {
+  //   label: "最短码长(慢)",
+  //   value: Algorithm.Dynamic,
+  //   disabled: true,
+  // },
 ];
 
 const spaceOptions = [
@@ -157,7 +157,7 @@ const spaceOptions = [
 const dict = reactive({
   source: "local",
   format: DictFormat.Default,
-  push: 4,
+  pattern: "^.{4,}$",
   keys: "_;'",
   single: false,
   algo: Algorithm.Ordered,
@@ -403,9 +403,9 @@ async function race() {
       </n-radio-group>
     </div>
     <div class="line">
-      <span class="name">起顶码长</span>
-      <n-input-number
-        v-model:value="dict.push"
+      <span class="name">顶屏模式</span>
+      <n-input
+        v-model:value="dict.pattern"
         :min="0"
         style="width: 230px"
         :disabled="dict.format === DictFormat.Default || dict.format === DictFormat.Jisu"

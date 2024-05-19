@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { Data, New2Old } from "./Data";
-import { Close as CloseIcon } from "@vicons/ionicons5";
+import { Data } from "./Data";
 
 const props = defineProps<{
   result: Data[];

@@ -2,6 +2,7 @@ package data
 
 import (
 	"fmt"
+	"regexp"
 	"sync"
 	"time"
 
@@ -16,8 +17,9 @@ type Dict struct {
 	Text *Text
 	// default, jisu, duoduo|bingling, jidian
 	Format string
-	// 起顶码长
-	Push int
+	// 顶屏模式
+	Pattern string
+	pattern *regexp.Regexp
 	// 选重键
 	SelectKeys string
 	selectKeys []string
@@ -53,6 +55,12 @@ func (d *Dict) Init() {
 		}
 	}
 	now := time.Now()
+	// 顶屏模式
+	var err error
+	d.pattern, err = regexp.Compile(d.Pattern)
+	if err != nil {
+		d.pattern, _ = regexp.Compile("^.{4,}$")
+	}
 	// 选重键
 	d.selectKeys = make([]string, 0, 10)
 	for i := range len(d.SelectKeys) {
@@ -84,16 +92,16 @@ func (d *Dict) Init() {
 	switch d.Format {
 	case "default", "":
 		d.load()
-	case "jisu", "js":
-		dict = d.loadJisu()
 	case "duoduo", "dd", "rime":
-		dict = d.loadTSV(true)
+		dict = d.read1("duoduo")
 	case "bingling", "bl":
-		dict = d.loadTSV(false)
-	case "xiaoxiao", "xx", "jidian", "jd":
-		dict = d.loadXiao()
+		dict = d.read1("bingling")
 	case "chai":
-		dict = d.loadChai()
+		dict = d.read1("chai")
+	case "jisu", "js":
+		dict = d.read1("jisu")
+	case "xiaoxiao", "xx", "jidian", "jd":
+		dict = d.read2()
 	default:
 		logger.Fatal("码表格式不正确", "format", d.Format)
 	}

@@ -100,7 +100,7 @@ func (c *Config) convert() {
 		Text:       &data.Text{Path: c.Path},
 		Format:     c.Format,
 		SelectKeys: c.SelectKeys,
-		Push:       c.PushStart,
+		Pattern:    fmt.Sprintf("^.{%d,}$", c.PushStart),
 		Overwrite:  c.Overwrite,
 	}
 	smq.AddDict(dict)

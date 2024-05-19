@@ -5,8 +5,8 @@ import (
 	"strings"
 )
 
-// 小小|极点
-func (d *Dict) loadXiao() []*Entry {
+// 读取一行有多个词条的码表
+func (d *Dict) read2() []*Entry {
 	var cap int = 1e5
 	if d.Text.size > 0 {
 		cap = d.Text.size / 32

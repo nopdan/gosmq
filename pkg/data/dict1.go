@@ -26,12 +26,13 @@ func (d *Dict) read1(format string) []*Entry {
 		case "bingling":
 			word, code = values[1], values[0]
 		case "chai":
-			if len(values) < 5 {
+			if len(values) < 3 {
 				continue
 			}
-			word, code = values[0], values[3]
-			pos, _ = strconv.Atoi(values[4])
-			code = d.addSuffix(code, pos)
+			word, code = values[0], values[2]
+			if code == "" {
+				code = values[1]
+			}
 		case "jisu":
 			word, code = values[0], values[1]
 			// 带空格 a_ aa_
@@ -48,7 +49,7 @@ func (d *Dict) read1(format string) []*Entry {
 			code = d.addSuffix(code, pos)
 		}
 		switch format {
-		case "duoduo", "bingling":
+		case "duoduo", "bingling", "chai":
 			stat[code]++
 			pos = stat[code]
 			code = d.addSuffix(code, pos)

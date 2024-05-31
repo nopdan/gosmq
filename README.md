@@ -146,3 +146,22 @@ examples:
 
 # cost time: 1.2575731s
 ```
+
+## 编译
+
+> 用到的工具链：`bun`, `go 1.22.0+`
+
+### 编译前端
+
+```sh
+cd frontend
+bun install
+bun run build
+cd ..
+```
+### 编译主程序
+
+```sh
+go mod tidy
+go build
+```
